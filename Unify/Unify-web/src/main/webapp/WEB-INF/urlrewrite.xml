@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!DOCTYPE urlrewrite
+    PUBLIC "-//tuckey.org//DTD UrlRewrite 4.0//EN"
+    "http://www.tuckey.org/res/dtds/urlrewrite4.0.dtd">
+
+<urlrewrite>
+
+    <rule>
+        <name>Homepage Controller</name>
+        <note>
+            
+        </note>
+        <from>^/$</from>
+        <!--<run class="com.aptechfpt.controller.HomeController" method="doGet"/>-->
+        <to>/HomeController</to>
+    </rule>
+
+    <rule>
+        <name>to Login Page</name>
+        <condition type="method">GET</condition>
+        <from>^/login$</from>
+        <to>/AuthenticateController?action=login</to>
+    </rule>
+
+    <rule>
+        <name>to Register Page</name>
+        <condition type="method">GET</condition>
+        <from>^/register$</from>
+        <to>/AuthenticateController?action=register</to>
+    </rule>
+
+    <rule>
+        <name>to Product Grid Page</name>
+        <condition type="method">GET</condition>
+        <from>^/product$</from>
+        <set type="parameter" name="testvalue">Hello World</set>
+        <to>/ProductController?action=grid</to>
+    </rule>
+
+    <rule>
+        <name>to Product Detail Page</name>
+        <condition type="method">GET</condition>
+        <from>^/product/([0-9]+)$</from>
+        <!--<to last="true">/ProductController?action=detail&amp;id=$1</to>-->
+        <to>/WEB-INF/productdetail.jsp</to>
+    </rule>
+
+    <rule>
+        <name>Check Out Page</name>
+        <condition type="method">GET</condition>
+        <from>^/checkout$</from>
+        <to>/WEB-INF/shoppingcart.jsp</to>
+    </rule>
+
+    <rule>
+        <name>Admin Page</name>
+        <condition type="method">GET</condition>
+        <from>^/administrator$</from>
+        <to>/WEB-INF/admin/index.jsp</to>
+    </rule>
+
+</urlrewrite>

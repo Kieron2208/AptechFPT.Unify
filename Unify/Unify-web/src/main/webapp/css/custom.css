@@ -1,0 +1,6 @@
+/* Add here all your css styles (customizations) */
+@media screen and (min-width: 1200px){
+    .filter {
+        height: 50px;
+    }
+}
