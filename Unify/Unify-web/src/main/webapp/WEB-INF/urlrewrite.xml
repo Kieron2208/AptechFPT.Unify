@@ -12,7 +12,6 @@
             
         </note>
         <from>^/$</from>
-        <!--<run class="com.aptechfpt.controller.HomeController" method="doGet"/>-->
         <to>/HomeController</to>
     </rule>
 
@@ -28,6 +27,13 @@
         <condition type="method">GET</condition>
         <from>^/register$</from>
         <to>/AuthenticateController?action=register</to>
+    </rule>
+
+    <rule>
+        <name>Profile Page</name>
+        <condition type="method">GET</condition>
+        <from>^/profile$</from>
+        <to>/WEB-INF/profile.jsp</to>
     </rule>
 
     <rule>
@@ -58,6 +64,20 @@
         <condition type="method">GET</condition>
         <from>^/administrator$</from>
         <to>/WEB-INF/admin/index.jsp</to>
+    </rule>
+
+    <rule>
+        <name>Admin Login Page</name>
+        <condition type="method">GET</condition>
+        <from>^/administrator/login$</from>
+        <to>/WEB-INF/admin/login.jsp</to>
+    </rule>
+
+    <rule>
+        <name>Admin User Management</name>
+        <condition type="method">GET</condition>
+        <from>^/administrator/user$</from>
+        <to>/WEB-INF/admin/users.jsp</to>
     </rule>
 
 </urlrewrite>

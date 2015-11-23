@@ -48,4 +48,28 @@ public class AdminRoutingTest {
         assertThat(page.getWebResponse().getStatusCode()).isEqualTo(200);
         assertThat(title).isEqualTo("Shop UI - AdminPage");
     }
+
+    @Test
+    public void should_go_to_Admin_Login() throws Exception{
+        //Arrange
+        System.out.println("Testing Admin Login Routing.");
+        //Act
+        HtmlPage page = webClient.getPage(base + "/login");
+        String title = page.getTitleText();
+        //Assert
+        assertThat(page.getWebResponse().getStatusCode()).isEqualTo(200);
+        assertThat(title).isEqualTo("Shop UI - Admin Login");
+    }
+
+    @Test
+    public void should_go_to_Admin_User() throws Exception{
+        //Arrange
+        System.out.println("Testing Admin User Routing.");
+        //Act
+        HtmlPage page = webClient.getPage(base + "/user");
+        String title = page.getTitleText();
+        //Assert
+        assertThat(page.getWebResponse().getStatusCode()).isEqualTo(200);
+        assertThat(title).isEqualTo("Shop UI - AdminPage - User Management");
+    }
 }

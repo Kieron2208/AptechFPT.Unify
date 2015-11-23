@@ -67,7 +67,19 @@ public class RoutingTest {
         assertThat(page.getWebResponse().getStatusCode()).isEqualTo(200);
         assertThat(title).isEqualTo("Shop-UI Register");
     }
-    
+
+    @Test
+    public void should_go_to_Profile_Page()throws Exception{
+        //Arrange
+        System.out.println("Testing ProfilePage Routing.");
+        //Act
+        HtmlPage page = webClient.getPage(base + "/profile");
+        String title = page.getTitleText();
+        //Assert
+        assertThat(page.getWebResponse().getStatusCode()).isEqualTo(200);
+        assertThat(title).isEqualTo("Shop UI - Profile");
+    }
+
     @Test
     public void should_go_to_ProductGrid()throws Exception{
         //Arrange
