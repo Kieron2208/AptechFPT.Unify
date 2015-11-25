@@ -5,20 +5,27 @@
     <jsp:attribute name="pagecss">
         <link href="<c:url value="/plugins/bootstrap-datepicker/dist/css/bootstrap-datepicker3.min.css"/>" rel="stylesheet" type="text/css"/>
         <link href="<c:url value="/plugins/bootstrap-fileinput/css/fileinput.min.css"/>" rel="stylesheet" type="text/css"/>
+        <link href="<c:url value="/plugins/iCheck/skins/square/square.css"/>" rel="stylesheet" type="text/css"/>
     </jsp:attribute>
     <jsp:attribute name="pagejs">
         <script src="<c:url value="/plugins/bootstrap-fileinput/js/fileinput.min.js"/>" type="text/javascript"></script>
         <script src="<c:url value="/plugins/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"/>" type="text/javascript"></script>
+        <script src="<c:url value="/plugins/iCheck/icheck.min.js"/>" type="text/javascript"></script>
         <script>
             (function ($) {
                 'use strict';
-                $('#txtDateOfBirth').datepicker();
-                $("#avatar-upload").fileinput({
-                    uploadUrl: "/file-upload-batch/",
-                    autoReplace: true,
-                    maxFileCount: 1,
-                    showPreview: true,
-                    allowedFileExtensions: ["jpg", "png", "gif"]
+                $(document).ready(function () {
+                    $('#txtDateOfBirth').datepicker();
+                    $("#avatar-upload").fileinput({
+                        uploadUrl: "/file-upload-batch/",
+                        autoReplace: true,
+                        maxFileCount: 1,
+                        showPreview: true,
+                        allowedFileExtensions: ["jpg", "png", "gif"]
+                    });
+                    $('input[type="radio"]').iCheck({
+                        radioClass: 'iradio_square'
+                    });
                 });
             })(jQuery);
         </script>
@@ -65,15 +72,18 @@
                         </div>
                         <div class="form-group">
                             <label>Address: </label>
-                            <textarea class="form-control" name="txtAddress"></textarea>
+                            <div class="input-group">
+                                <div class="input-group-addon"><i class="fa fa-map-marker"></i></div>
+                                <input class="form-control" type="text" name="txtAddress"/>
+                            </div>
                         </div>
                         <div class="form-group">
                             <label>Gender: </label>
-                            <select class="form-control" name="txtGender">
-                                <option>Male</option>
-                                <option>Female</option>
-                                <option>Other</option>
-                            </select>
+                            <input id="genderM" type="radio" class="flat-red" name="cbGender" checked/>
+                            <label for="genderM">Male</label>
+                            <label>
+                                <input type="radio" class="flat-red"  name="cbGender"/>Female
+                            </label>
                         </div>
                         <div class="form-group">
                             <label for="txtDateOfBirth">Day Of Birth: </label>
