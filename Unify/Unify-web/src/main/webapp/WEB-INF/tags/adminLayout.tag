@@ -9,7 +9,10 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>${title}</title>
+    <title>${title}</title
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="admin.ico">
+
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.5 -->
@@ -25,6 +28,9 @@
     <link rel="stylesheet" href="<c:url value="/admin/css/skins/skin-blue.min.css"/>">
 
     <jsp:invoke fragment="pagecss"/>
+
+    <link href="<c:url value="/plugins/PACE/themes/purple/pace-theme-minimal.css"/>" rel="stylesheet" type="text/css"/>
+    <script src="<c:url value="/plugins/PACE/pace.min.js"/>" type="text/javascript"></script>
 
   </head>
   <body class="hold-transition skin-blue sidebar-mini">
