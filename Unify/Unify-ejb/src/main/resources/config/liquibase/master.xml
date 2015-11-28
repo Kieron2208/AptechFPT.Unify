@@ -6,5 +6,6 @@
 
     <include file="config/liquibase/changelog/initial-schema.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20151028142219-changelog.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/201511250958-changelog.xml" relativeToChangelogFile="false"/>
 
 </databaseChangeLog>

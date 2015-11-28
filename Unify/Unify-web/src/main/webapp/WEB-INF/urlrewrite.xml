@@ -80,4 +80,10 @@
         <to>/WEB-INF/admin/users.jsp</to>
     </rule>
 
+    <rule>
+        <name>Admin Create New User</name>
+        <condition type="method">GET</condition>
+        <from>^/administrator/user/new$</from>
+        <to>/WEB-INF/admin/createUser.jsp</to>
+    </rule>
 </urlrewrite>

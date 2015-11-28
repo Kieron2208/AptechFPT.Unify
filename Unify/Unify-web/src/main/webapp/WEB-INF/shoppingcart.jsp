@@ -8,7 +8,8 @@
     </jsp:attribute>
     <jsp:attribute name="pagejs">
         <script src="<c:url value="/plugins/sky-forms-pro/skyforms/js/jquery.validate.min.js"/>"></script>
-        <script src="<c:url value="/plugins/jquery-steps/build/jquery.steps.js"/>"></script>
+        <!--<script src="<c:url value="/plugins/jquery-steps/build/jquery.steps.js"/>"></script>-->
+        <script src="<c:url value="/plugins/jquery-steps/build/jquery.steps.min.js"/>" type="text/javascript"></script>
         <script src="<c:url value="/js/forms/page_login.js"/>"></script>
         <script src="<c:url value="/js/plugins/stepWizard.js"/>"></script>
         <script src="<c:url value="/js/forms/product-quantity.js"/>"></script>
