@@ -62,6 +62,9 @@ public class AcountBeanTest {
     public void should_bean_be_injected() throws Exception{
         List<Account> findAll = accountFacadeLocal.findAll();
         System.out.println(findAll.size());
+        for (Account account : findAll) {
+            System.out.println("Email: " + account.getEmail());
+        }
         assertThat(findAll).isNotNull();
     }
     
