@@ -215,10 +215,11 @@
                 <artifactId>liquibase-maven-plugin</artifactId>
                 <version>3.4.1</version>
                 <configuration>
+                    <changeLogFile>src/main/resources/config/liquibase/changelog/201511250958-changelog.xml</changeLogFile>
                     <propertyFileWillOverride>true</propertyFileWillOverride>
                     <propertyFile>src/main/resources/config/liquibase/liquibase.properties</propertyFile>
                     <migrationSqlOutputFile>src/main/resources/config/liquibase/Unify.sql</migrationSqlOutputFile>
-                    <dropFirst>true</dropFirst>
+                    <!--<dropFirst>true</dropFirst>-->
                     <rollbackCount>1</rollbackCount>
                     <outputChangeLogFile>src/main/resources/config/liquibase/changelog/${maven.build.timestamp}-changelog.xml</outputChangeLogFile>
                 </configuration>
