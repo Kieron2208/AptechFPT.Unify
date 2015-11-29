@@ -51,14 +51,14 @@ public class AccountDTOTest {
         System.out.println(war.toString(true));
         return war;
     }
+    
     @Test
     public void lastNameNullAndBirthdayInFuture() {
         try {
             new AccountDTO.Builder(null)
                 .build();
             Assert.fail("Expected ConstraintViolationException wasn't thrown.");
-        }
-        catch (ConstraintViolationException e) {
+        } catch (ConstraintViolationException e) {
             for (ConstraintViolation<?> ex : e.getConstraintViolations()) {
                 System.out.println("Exception message: "+ ex.getMessage());
             }

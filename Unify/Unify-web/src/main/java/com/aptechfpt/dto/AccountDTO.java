@@ -2,7 +2,6 @@ package com.aptechfpt.dto;
 
 import com.aptechfpt.entity.Account;
 import com.aptechfpt.entity.Role;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.HashSet;
@@ -12,7 +11,6 @@ import javax.validation.ConstraintViolationException;
 import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Past;
 
 /**
  *
