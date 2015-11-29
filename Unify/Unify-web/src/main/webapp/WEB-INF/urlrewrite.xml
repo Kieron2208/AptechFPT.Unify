@@ -59,6 +59,14 @@
         <to>/WEB-INF/shoppingcart.jsp</to>
     </rule>
 
+    <rule match-type="wildcard">
+        <condition operator="notequal" type="user-in-role">ADMINISTRATOR</condition>
+        <condition type="user-in-role" operator="notequal">SALEPERSON</condition>
+        <from>/adminstrator/*</from>
+        <set type="method">GET</set>    
+        <to type="redirect">%{context-path}/administrator/login</to>    
+    </rule>
+
     <rule>
         <name>Admin Page</name>
         <condition type="method">GET</condition>

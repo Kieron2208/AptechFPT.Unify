@@ -5,22 +5,17 @@
  */
 package com.aptechfpt.dto;
 
-import com.aptechfpt.controller.HomeController;
 import com.aptechfpt.entity.Account;
 import com.aptechfpt.entity.Role;
-import java.io.File;
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import static org.assertj.core.api.Assertions.*;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.shrinkwrap.api.Archive;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.spec.JavaArchive;
-import org.jboss.shrinkwrap.api.spec.WebArchive;
-import org.jboss.shrinkwrap.resolver.api.maven.Maven;
 import org.junit.Assert;
 import org.junit.runner.RunWith;
 /**
@@ -66,4 +61,5 @@ public class AccountDTOTest {
             assertEquals(1, e.getConstraintViolations().size());
         }
     }
+    
 }

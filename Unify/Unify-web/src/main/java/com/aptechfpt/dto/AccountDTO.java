@@ -11,6 +11,8 @@ import javax.validation.ConstraintViolationException;
 import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.constraints.NotNull;
+import org.joda.time.DateTime;
+import org.joda.time.DateTimeZone;
 
 /**
  *
@@ -18,24 +20,24 @@ import javax.validation.constraints.NotNull;
  */
 public class AccountDTO {
 
-    private int id;
-    private String email;
-    private String password;
-    private String imageLink;
-    private String firstName;
-    private String lastName;
-    private String phone;
-    private String address;
-    private Gender gender;
-    private Date dateOfBirth;
-    private Collection<Role> roles;
-    private Date modifiedDate;
+    private final int id;
+    private final String email;
+    private final String password;
+    private final ImageDTO image;
+    private final String firstName;
+    private final String lastName;
+    private final String phone;
+    private final String address;
+    private final Gender gender;
+    private final Date dateOfBirth;
+    private final Collection<Role> roles;
+    private final DateTime modifiedDate;
 
     private AccountDTO(Builder builder) {
         this.id = builder.id;
         this.email = builder.email;
         this.password = builder.password;
-        this.imageLink = builder.imageLink;
+        this.image = builder.image;
         this.firstName = builder.firstName;
         this.lastName = builder.lastName;
         this.phone = builder.phone;
@@ -48,12 +50,12 @@ public class AccountDTO {
 
     public static class Builder {
 
-        private Validator validator;
+        private static Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
 
         private int id;
         private String email;
         private String password;
-        private String imageLink;
+        private ImageDTO image;
         private String firstName;
         private String lastName;
         private String phone;
@@ -61,7 +63,7 @@ public class AccountDTO {
         private Gender gender;
         private Date dateOfBirth;
         private Collection<Role> roles;
-        private Date modifiedDate;
+        private DateTime modifiedDate;
 
         public Builder(String email) {
             this(0,email);
@@ -71,9 +73,9 @@ public class AccountDTO {
             this.id = id;
             this.email = email;
             dateOfBirth = new Date();
-            modifiedDate = new Date();
+            modifiedDate = new DateTime(DateTimeZone.UTC);
             roles = new HashSet<>();
-            validator = Validation.buildDefaultValidatorFactory().getValidator();
+            
         }
 
         public Builder Password(String password) {
@@ -81,8 +83,8 @@ public class AccountDTO {
             return this;
         }
 
-        public Builder ImageLink(String imageLink) {
-            this.imageLink = imageLink;
+        public Builder Image(ImageDTO image) {
+            this.image = image;
             return this;
         }
 
@@ -121,7 +123,12 @@ public class AccountDTO {
             return this;
         }
 
-        public Builder ModifiedDate(Date modifiedDate) {
+        public Builder Role(Role role) {
+            this.roles.add(role);
+            return this;
+        }
+
+        public Builder ModifiedDate(DateTime modifiedDate) {
             this.modifiedDate = modifiedDate;
             return this;
         }
@@ -155,8 +162,8 @@ public class AccountDTO {
         return password;
     }
 
-    public String getImageLink() {
-        return imageLink;
+    public ImageDTO getImage() {
+        return image;
     }
 
     public String getFirstName() {
@@ -187,14 +194,14 @@ public class AccountDTO {
         return roles;
     }
 
-    public Date getModifiedDate() {
+    public DateTime getModifiedDate() {
         return modifiedDate;
     }
 
     //TODO: Refactor Account to correct MODIFIDATE,ROLE, AND GENDER
     //TODO: Validation to correct value type
     public Account toAccount(){
-        return new Account(id, email, password, imageLink, firstName);
+        return new Account(id, email, password, "", firstName);
     }
 
     public static AccountDTO buildFromAccount(Account account){
@@ -204,7 +211,6 @@ public class AccountDTO {
                 .Phone(account.getPhone())
                 .DateOfBirth(account.getDayOfBirth())
                 .Roles(account.getRoleCollection())
-                .ImageLink(account.getImageLink())
                 .Gender(Gender.valueOf(account.getGender()))
                 .Address(account.getAddress())
                 .build();

@@ -33,19 +33,14 @@ import javax.xml.bind.annotation.XmlTransient;
 @Entity
 @Table(name = "Account", catalog = "Unify", schema = "dbo", uniqueConstraints = {
     @UniqueConstraint(columnNames = {"Email"})})
-@XmlRootElement
+//@XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Account.findAll", query = "SELECT a FROM Account a"),
     @NamedQuery(name = "Account.findByAccountId", query = "SELECT a FROM Account a WHERE a.accountId = :accountId"),
     @NamedQuery(name = "Account.findByEmail", query = "SELECT a FROM Account a WHERE a.email = :email"),
     @NamedQuery(name = "Account.findByPassword", query = "SELECT a FROM Account a WHERE a.password = :password")})
 public class Account implements Serializable {
-    @JoinTable(name = "AccountRole", joinColumns = {
-        @JoinColumn(name = "AccountId", referencedColumnName = "AccountId", nullable = false)}, 
-            inverseJoinColumns = {
-        @JoinColumn(name = "RoleId", referencedColumnName = "RoleId", nullable = false)})
-    @ManyToMany
-    private Collection<Role> roleCollection;
+    
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -91,7 +86,15 @@ public class Account implements Serializable {
     @NotNull
     @Size(min = 1, max = 27)
     @Column(name = "ModifiedDate", nullable = false, length = 27)
+    //TODO: Intergrate SQL UTC DATETIME2(7) with java JPA
     private String modifiedDate;
+
+    @JoinTable(name = "AccountRole", joinColumns = {
+        @JoinColumn(name = "AccountId", referencedColumnName = "AccountId", nullable = false)}, 
+            inverseJoinColumns = {
+        @JoinColumn(name = "RoleId", referencedColumnName = "RoleId", nullable = false)})
+    @ManyToMany
+    private Collection<Role> roleCollection;
 
     public Account() {
     }
@@ -106,6 +109,21 @@ public class Account implements Serializable {
         this.password = password;
         this.imageLink = imageLink;
         this.modifiedDate = modifiedDate;
+    }
+
+    public Account(Integer accountId, String email, String password, String imageLink, String firstName, String lastName, String phone, String address, String gender, Date dayOfBirth, String modifiedDate, Collection<Role> roleCollection) {
+        this.accountId = accountId;
+        this.email = email;
+        this.password = password;
+        this.imageLink = imageLink;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.phone = phone;
+        this.address = address;
+        this.gender = gender;
+        this.dayOfBirth = dayOfBirth;
+        this.modifiedDate = modifiedDate;
+        this.roleCollection = roleCollection;
     }
 
     public Integer getAccountId() {
