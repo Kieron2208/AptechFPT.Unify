@@ -30,4 +30,11 @@ public class AccountFacade extends AbstractFacade<Account> implements AccountFac
         TypedQuery<Account> q = getEntityManager().createNamedQuery("Account.findAll", Account.class);
         return q.getResultList();
     }
+
+    @Override
+    public Account findById(int id) {
+        return super.find(id);
+    }
+    
+    
 }
