@@ -85,13 +85,6 @@ public class Account implements Serializable {
     @Column(name = "Role", length = 20, nullable = false)
     private Set<Role> roles;
 
-    @JoinTable(name = "AccountRole", joinColumns = {
-        @JoinColumn(name = "AccountId", referencedColumnName = "AccountId", nullable = false)}, 
-            inverseJoinColumns = {
-        @JoinColumn(name = "RoleId", referencedColumnName = "RoleId", nullable = false)})
-    @ManyToMany
-    private Collection<Role> roleCollection;
-
     public Account() {
     }
     
