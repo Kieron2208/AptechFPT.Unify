@@ -57,4 +57,17 @@
             <name>SESSIONID</name>
         </cookie-config>
     </session-config>
+    <login-config>
+        <auth-method>FORM</auth-method>
+        <realm-name>UnifyRealm</realm-name>
+    </login-config>
+    <security-role>
+        <role-name>ADMINISTRATOR</role-name>
+    </security-role>
+    <security-role>
+        <role-name>SALEPERSON</role-name>
+    </security-role>
+    <security-role>
+        <role-name>USER</role-name>
+    </security-role>
 </web-app>

@@ -20,7 +20,6 @@ import org.joda.time.DateTime;
 @NamedQueries({
     @NamedQuery(name = "Account.findAll", query = "SELECT a FROM Account a")})
 public class Account implements Serializable {
-
     private static final long serialVersionUID = 1L;
 
     @Id
@@ -86,6 +85,13 @@ public class Account implements Serializable {
     @Column(name = "Role", length = 20, nullable = false)
     private Set<Role> roles;
 
+    @JoinTable(name = "AccountRole", joinColumns = {
+        @JoinColumn(name = "AccountId", referencedColumnName = "AccountId", nullable = false)}, 
+            inverseJoinColumns = {
+        @JoinColumn(name = "RoleId", referencedColumnName = "RoleId", nullable = false)})
+    @ManyToMany
+    private Collection<Role> roleCollection;
+
     public Account() {
     }
     
@@ -117,13 +123,6 @@ public class Account implements Serializable {
         this.dayOfBirth = dayOfBirth;
         this.createdDate = createdDate;
         this.roles = roles;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (accountId != null ? accountId.hashCode() : 0);
-        return hash;
     }
 
     @Override
