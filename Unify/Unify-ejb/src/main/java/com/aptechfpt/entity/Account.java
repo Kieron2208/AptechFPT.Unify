@@ -1,206 +1,124 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.aptechfpt.entity;
 
+import com.aptechfpt.enumtype.Role;
+import com.aptechfpt.enumtype.AccountGender;
+import com.aptechfpt.converter.GenderConverter;
+import com.aptechfpt.converter.JodaDateTimeConverter;
+import com.aptechfpt.dto.AccountDTO;
 import java.io.Serializable;
-import java.util.Collection;
 import java.util.Date;
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-import javax.persistence.UniqueConstraint;
+import java.util.Set;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
+import org.apache.commons.codec.digest.DigestUtils;
+import org.joda.time.DateTime;
 
 /**
  *
  * @author Kiero
  */
 @Entity
-@Table(name = "Account", catalog = "Unify", schema = "dbo", uniqueConstraints = {
-    @UniqueConstraint(columnNames = {"Email"})})
-@XmlRootElement
+@Table(name = "Account", catalog = "Unify", schema = "dbo")
 @NamedQueries({
-    @NamedQuery(name = "Account.findAll", query = "SELECT a FROM Account a"),
-    @NamedQuery(name = "Account.findByAccountId", query = "SELECT a FROM Account a WHERE a.accountId = :accountId"),
-    @NamedQuery(name = "Account.findByEmail", query = "SELECT a FROM Account a WHERE a.email = :email"),
-    @NamedQuery(name = "Account.findByPassword", query = "SELECT a FROM Account a WHERE a.password = :password")})
+    @NamedQuery(name = "Account.findAll", query = "SELECT a FROM Account a ORDER BY a.accountId ASC")})
 public class Account implements Serializable {
-    @JoinTable(name = "AccountRole", joinColumns = {
-        @JoinColumn(name = "AccountId", referencedColumnName = "AccountId", nullable = false)}, 
-            inverseJoinColumns = {
-        @JoinColumn(name = "RoleId", referencedColumnName = "RoleId", nullable = false)})
-    @ManyToMany
-    private Collection<Role> roleCollection;
     private static final long serialVersionUID = 1L;
+
     @Id
-    @Basic(optional = false)
-    @NotNull
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "AccountId", nullable = false)
     private Integer accountId;
+
     // @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="Invalid email")//if the field contains email address consider using this annotation to enforce field validation
-    @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 100)
-    @Column(name = "Email", nullable = false, length = 100)
+    @Column(name = "Email", nullable = false, unique = true, length = 100)
     private String email;
-    @Basic(optional = false)
+
     @NotNull
     @Size(min = 1, max = 200)
     @Column(name = "Password", nullable = false, length = 200)
     private String password;
-    @Basic(optional = false)
+
     @NotNull
     @Size(min = 1, max = 400)
     @Column(name = "ImageLink", nullable = false, length = 400)
     private String imageLink;
-    @Size(max = 50)
-    @Column(name = "FirstName", length = 50)
+
+    @NotNull
+    @Size(min = 1, max = 50)
+    @Column(name = "FirstName", nullable = false, length = 50)
     private String firstName;
-    @Size(max = 50)
-    @Column(name = "LastName", length = 50)
+
+    @NotNull
+    @Size(min = 1, max = 50)
+    @Column(name = "LastName", nullable = false, length = 50)
     private String lastName;
+
     // @Pattern(regexp="^\\(?(\\d{3})\\)?[- ]?(\\d{3})[- ]?(\\d{4})$", message="Invalid phone/fax format, should be as xxx-xxx-xxxx")//if the field contains phone or fax number consider using this annotation to enforce field validation
     @Size(max = 20)
-    @Column(name = "Phone", length = 20)
+    @Column(name = "Phone", nullable = false, length = 20)
     private String phone;
+
     @Size(max = 200)
     @Column(name = "Address", length = 200)
     private String address;
+
     @Size(max = 1)
-    @Column(name = "Gender", length = 1)
-    private String gender;
-    @Column(name = "DayOfBirth")
+    @Convert(converter = GenderConverter.class)
+    @Column(name = "Gender", nullable = false, length = 1)
+    private AccountGender gender;
+
     @Temporal(TemporalType.TIMESTAMP)
-    private Date dayOfBirth;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 27)
-    @Column(name = "ModifiedDate", nullable = false, length = 27)
-    private String modifiedDate;
+    @Convert(converter = JodaDateTimeConverter.class)
+    @Column(name = "DayOfBirth", nullable = false)
+    private DateTime dayOfBirth;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    @Convert(converter = JodaDateTimeConverter.class)
+    @Column(name = "CreatedDate", insertable = false, updatable = false)
+    private DateTime createdDate;
+
+    @ElementCollection(targetClass = Role.class)
+    @CollectionTable(name = "AccountRole",
+            joinColumns = @JoinColumn(name = "Email", nullable = false, referencedColumnName = "Email"),
+            uniqueConstraints = @UniqueConstraint(columnNames = {"Email", "Role"}))
+    @Enumerated(EnumType.STRING)
+    @Column(name = "Role", length = 20, nullable = false)
+    private Set<Role> roles;
 
     public Account() {
     }
-
-    public Account(Integer accountId) {
-        this.accountId = accountId;
+    
+    public Account(AccountDTO dto) {
+        this.accountId = dto.getAccountId() != 0 ? dto.getAccountId() : null;
+        this.email = dto.getEmail();
+        this.password = DigestUtils.sha512Hex(dto.getPassword());
+        this.imageLink = dto.getImageLink();
+        this.firstName = dto.getFirstName();
+        this.lastName = dto.getLastName();
+        this.phone = dto.getPhone();
+        this.address = dto.getAddress();
+        this.gender = dto.getGender();
+        this.dayOfBirth = dto.getDateOfBirth();
+        this.createdDate = dto.getCreatedDate();
+        this.roles = dto.getRoles();
     }
-
-    public Account(Integer accountId, String email, String password, String imageLink, String modifiedDate) {
+    
+    public Account(Integer accountId, String email, String password, String imageLink, String firstName, String lastName, String phone, String address, AccountGender gender, DateTime dayOfBirth, DateTime createdDate, Set<Role> roles) {
         this.accountId = accountId;
         this.email = email;
         this.password = password;
         this.imageLink = imageLink;
-        this.modifiedDate = modifiedDate;
-    }
-
-    public Integer getAccountId() {
-        return accountId;
-    }
-
-    public void setAccountId(Integer accountId) {
-        this.accountId = accountId;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getImageLink() {
-        return imageLink;
-    }
-
-    public void setImageLink(String imageLink) {
-        this.imageLink = imageLink;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
         this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
         this.lastName = lastName;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
         this.phone = phone;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
         this.address = address;
-    }
-
-    public String getGender() {
-        return gender;
-    }
-
-    public void setGender(String gender) {
         this.gender = gender;
-    }
-
-    public Date getDayOfBirth() {
-        return dayOfBirth;
-    }
-
-    public void setDayOfBirth(Date dayOfBirth) {
         this.dayOfBirth = dayOfBirth;
-    }
-
-    public String getModifiedDate() {
-        return modifiedDate;
-    }
-
-    public void setModifiedDate(String modifiedDate) {
-        this.modifiedDate = modifiedDate;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (accountId != null ? accountId.hashCode() : 0);
-        return hash;
+        this.createdDate = createdDate;
+        this.roles = roles;
     }
 
     @Override
@@ -221,13 +139,51 @@ public class Account implements Serializable {
         return "com.aptechfpt.Account[ accountId=" + accountId + " ]";
     }
 
-    @XmlTransient
-    public Collection<Role> getRoleCollection() {
-        return roleCollection;
+    public Integer getAccountId() {
+        return accountId;
     }
 
-    public void setRoleCollection(Collection<Role> roleCollection) {
-        this.roleCollection = roleCollection;
+    public String getEmail() {
+        return email;
     }
-    
+
+    public String getPassword() {
+        return password;
+    }
+
+    public String getImageLink() {
+        return imageLink;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public AccountGender getGender() {
+        return gender;
+    }
+
+    public DateTime getDayOfBirth() {
+        return dayOfBirth;
+    }
+
+    public DateTime getCreatedDate() {
+        return createdDate;
+    }
+
+    public Set<Role> getRoles() {
+        return roles;
+    }
 }

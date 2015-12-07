@@ -17,7 +17,7 @@ public interface AccountFacadeLocal {
 
     void remove(Account account);
 
-    Account find(Object id);
+    Account findById(int id);
 
     List<Account> findAll();
 

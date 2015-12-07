@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee 
-                             http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
+<web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee                               http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
     <filter>
         <filter-name>UrlRewriteFilter</filter-name>
         <filter-class>org.tuckey.web.filters.urlrewrite.UrlRewriteFilter</filter-class>
@@ -11,31 +8,79 @@
             <param-value>/WEB-INF/urlrewrite.xml</param-value>
         </init-param>
         <init-param>
+            <param-name>confReloadCheckInterval</param-name>
+            <param-value>1</param-value>
+        </init-param>
+        <init-param>
             <param-name>logLevel</param-name>
             <param-value>DEBUG</param-value>
         </init-param>
     </filter>
+    <filter>
+        <filter-name>GZipFilter</filter-name>
+        <filter-class>org.tuckey.web.filters.urlrewrite.gzip.GzipFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>GZipFilter</filter-name>
+        <url-pattern>/css/*</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>GZipFilter</filter-name>
+        <url-pattern>/js/*</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>GZipFilter</filter-name>
+        <url-pattern>/plugins/*</url-pattern>
+    </filter-mapping>
     <filter-mapping>
         <filter-name>UrlRewriteFilter</filter-name>
         <url-pattern>/*</url-pattern>
         <dispatcher>REQUEST</dispatcher>
         <dispatcher>FORWARD</dispatcher>
     </filter-mapping>
-<!--    <listener>
+    <!--    <listener>
         <description>InitContextServletListener</description>
         <listener-class>com.aptechfpt.listener.InitContextServletListener</listener-class>
     </listener>-->
     <servlet>
         <servlet-name>HomeController</servlet-name>
         <servlet-class>com.aptechfpt.controller.HomeController</servlet-class>
+        <load-on-startup>1</load-on-startup>
     </servlet>
     <servlet>
         <servlet-name>AuthenticateController</servlet-name>
         <servlet-class>com.aptechfpt.controller.AuthenticateController</servlet-class>
+        <load-on-startup>1</load-on-startup>
     </servlet>
     <servlet>
         <servlet-name>ProductController</servlet-name>
         <servlet-class>com.aptechfpt.controller.ProductController</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet>
+        <servlet-name>AdminUserController</servlet-name>
+        <servlet-class>com.aptechfpt.controller.AdminUserController</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet>
+        <servlet-name>POInsert</servlet-name>
+        <servlet-class>com.aptechfpt.controller.POInsertController</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet>
+        <servlet-name>ErrorHandleController</servlet-name>
+        <servlet-class>com.aptechfpt.controller.ErrorHandleController</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet>
+        <servlet-name>AdminSubCategory</servlet-name>
+        <servlet-class>com.aptechfpt.controller.AdminSubCategoryController</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet>
+        <servlet-name>AdminProduct</servlet-name>
+        <servlet-class>com.aptechfpt.controller.AdminProductController</servlet-class>
+        <load-on-startup>1</load-on-startup>
     </servlet>
     <servlet-mapping>
         <servlet-name>HomeController</servlet-name>
@@ -49,6 +94,22 @@
         <servlet-name>ProductController</servlet-name>
         <url-pattern>/ProductController</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminUserController</servlet-name>
+        <url-pattern>/AdminUserController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ErrorHandleController</servlet-name>
+        <url-pattern>/ErrorHandleController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminProduct</servlet-name>
+        <url-pattern>/AdminProduct</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminSubCategory</servlet-name>
+        <url-pattern>/AdminSubCategory</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30
@@ -57,4 +118,17 @@
             <name>SESSIONID</name>
         </cookie-config>
     </session-config>
+    <login-config>
+        <auth-method>FORM</auth-method>
+        <realm-name>UnifyRealm</realm-name>
+    </login-config>
+    <security-role>
+        <role-name>ADMINISTRATOR</role-name>
+    </security-role>
+    <security-role>
+        <role-name>SALEPERSON</role-name>
+    </security-role>
+    <security-role>
+        <role-name>USER</role-name>
+    </security-role>
 </web-app>

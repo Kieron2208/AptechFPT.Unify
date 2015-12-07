@@ -81,7 +81,7 @@
                                     </ul>
                                 </li>
                             </ul>
-                         </li>
+                        </li>
                         <!-- Women Shop -->
                         <li class="dropdown">
                             <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">
@@ -114,7 +114,7 @@
                                     </ul>
                                 </li>
                             </ul>
-                         </li>
+                        </li>
                         <!-- Women Shop -->
 
                         <!-- Kid Shop -->
@@ -145,7 +145,7 @@
                                     </ul>
                                 </li>
                             </ul>
-                         </li>
+                        </li>
                         <!-- End Kid Shop -->
 
                         <!-- Contact -->
@@ -173,6 +173,28 @@
                             </a>
                         </li>
                         <!-- End Account -->
+                        <!-- Contact -->
+                        <li class="dropdown">
+                            <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown">
+                                <c:url value="/img/user/user.jpg" var="profile"/>
+                                <img src="${profile}" class="img-circle" width="25px" height="25px"/> admin@yourstore.com
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a href="javascript:void(0);">Profile</a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0);">My Order</a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0);">My Comments</a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0);">Order History</a>
+                                </li>
+                            </ul>
+                        </li>    
+                        <!-- End Contact -->
                     </ul>
                 </div>
             </div><!--/navbar-collapse-->

@@ -16,7 +16,7 @@ import static org.assertj.core.api.Assertions.*;
  */
 //Chạy test không cần Arquillian
 public class RoutingTest {
-    private static String base = "http://localhost:8080/Unify-web";
+    private static String base = "http://localhost:8080/Unify-web-test";
     private static WebClient webClient;
 
     @BeforeClass

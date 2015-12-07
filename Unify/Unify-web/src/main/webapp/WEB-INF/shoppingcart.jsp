@@ -13,398 +13,181 @@
         <script src="<c:url value="/js/forms/page_login.js"/>"></script>
         <script src="<c:url value="/js/plugins/stepWizard.js"/>"></script>
         <script src="<c:url value="/js/forms/product-quantity.js"/>"></script>
+        <script src="<c:url value="/plugins/angular.min.js"/>"></script>
+        <script src="<c:url value="/js/shoppingcart.js"/>"></script>
+        <script src="<c:url value="/plugins/jquery/jquery.min.js"/>"></script>
+
         <script>
-            jQuery(document).ready(function() {
+            jQuery(document).ready(function () {
                 App.init();
                 Login.initLogin();
-                App.initScrollBar();        
+                App.initScrollBar();
                 StepWizard.initStepWizard();
-        //        StyleSwitcher.initStyleSwitcher();      
+                //        StyleSwitcher.initStyleSwitcher();      
             });
         </script>
     </jsp:attribute>
     <jsp:body>
-    <!--=== Breadcrumbs v4 ===-->
-    <div class="breadcrumbs-v4">
-        <div class="container">
-            <div class="filter"></div>
-            <span class="page-name">Check Out</span>
-            <h1>Maecenas <span class="shop-green">enim</span> sapien</h1>
-            <ul class="breadcrumb-v4-in">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="">Product</a></li>
-                <li class="active">Shopping Cart</li>
-            </ul>
-        </div><!--/end container-->
-    </div> 
-    <!--=== End Breadcrumbs v4 ===-->
 
-    <!--=== Content Medium Part ===-->
-    <div class="content-md margin-bottom-30">
-        <div class="container">
-            <form class="shopping-cart" action="#">
-                <div>
-                    <div class="header-tags">            
-                        <div class="overflow-h">
-                            <h2>Shopping Cart</h2>
-                            <p>Review &amp; edit your product</p>
-                            <i class="rounded-x fa fa-check"></i>
-                        </div>    
-                    </div>
-                    <section>
-                        <div class="table-responsive">
-                            <table class="table table-striped">
-                                <thead>
-                                    <tr>
-                                        <th>Product</th>
-                                        <th>Price</th>
-                                        <th>Qty</th>
-                                        <th>Total</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td class="product-in-table">
-                                            <img class="img-responsive" src="<c:url value="/img/thumb/08.jpg"/>" alt="">
-                                            <div class="product-it-in">
-                                                <h3>Double-Breasted</h3>
-                                                <span>Sed aliquam tincidunt tempus</span>
-                                            </div>    
-                                        </td>
-                                        <td>$ 160.00</td>
-                                        <td>
-                                            <button type='button' class="quantity-button" name='subtract' onclick='javascript: subtractQty1();' value='-'>-</button>
-                                            <input type='text' class="quantity-field" name='qty1' value="5" id='qty1'/>
-                                            <button type='button' class="quantity-button" name='add' onclick='javascript: document.getElementById("qty1").value++;' value='+'>+</button>
-                                        </td>
-                                        <td class="shop-red">$ 320.00</td>
-                                        <td>
-                                            <button type="button" class="close"><span>&times;</span><span class="sr-only">Close</span></button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="product-in-table">
-                                            <img class="img-responsive" src="<c:url value="/img/thumb/07.jpg"/>" alt="">
-                                            <div class="product-it-in">
-                                                <h3>Vivamus ligula</h3>
-                                                <span>Sed aliquam tincidunt tempus</span>
-                                            </div>    
-                                        </td>
-                                        <td>$ 160.00</td>
-                                        <td>
-                                            <button type='button' class="quantity-button" name='subtract' onclick='javascript: subtractQty2();' value='-'>-</button>
-                                            <input type='text' class="quantity-field" name='qty2' value="3" id='qty2'/>
-                                            <button type='button' class="quantity-button" name='add' onclick='javascript: document.getElementById("qty2").value++;' value='+'>+</button>
-                                        </td>
-                                        <td class="shop-red">$ 320.00</td>
-                                        <td>
-                                            <button type="button" class="close"><span>&times;</span><span class="sr-only">Close</span></button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="product-in-table">
-                                            <img class="img-responsive" src="<c:url value="/img/thumb/06.jpg"/>" alt="">
-                                            <div class="product-it-in">
-                                                <h3>Vivamus ligula</h3>
-                                                <span>Sed aliquam tincidunt tempus</span>
-                                            </div>    
-                                        </td>
-                                        <td>$ 160.00</td>
-                                        <td>
-                                            <button type='button' class="quantity-button" name='subtract' onclick='javascript: subtractQty3();' value='-'>-</button>
-                                            <input type='text' class="quantity-field" name='qty3' value="1" id='qty3'/>
-                                            <button type='button' class="quantity-button" name='add' onclick='javascript: document.getElementById("qty3").value++;' value='+'>+</button>
-                                        </td>
-                                        <td class="shop-red">$ 320.00</td>
-                                        <td>
-                                            <button type="button" class="close"><span>&times;</span><span class="sr-only">Close</span></button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="product-in-table">
-                                            <img class="img-responsive" src="<c:url value="/img/thumb/09.jpg"/>" alt="">
-                                            <div class="product-it-in">
-                                                <h3>Vivamus ligula</h3>
-                                                <span>Sed aliquam tincidunt tempus</span>
-                                            </div>    
-                                        </td>
-                                        <td>$ 160.00</td>
-                                        <td>
-                                            <button type='button' class="quantity-button" name='subtract' onclick='javascript: subtractQty4();' value='-'>-</button>
-                                            <input type='text' class="quantity-field" name='qty4' value="7" id='qty4'/>
-                                            <button type='button' class="quantity-button" name='add' onclick='javascript: document.getElementById("qty4").value++;' value='+'>+</button>
-                                        </td>
-                                        <td class="shop-red">$ 320.00</td>
-                                        <td>
-                                            <button type="button" class="close"><span>&times;</span><span class="sr-only">Close</span></button>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
+        <!--=== Breadcrumbs v4 ===-->
+        <div class="breadcrumbs-v4">
+            <div class="container">
+                <div class="filter"></div>
+                <span class="page-name">Check Out</span>
+                <h1>Maecenas <span class="shop-green">enim</span> sapien</h1>
+                <ul class="breadcrumb-v4-in">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="">Product</a></li>
+                    <li class="active">Shopping Cart</li>
+                </ul>
+            </div><!--/end container-->
+        </div> 
+        <!--=== End Breadcrumbs v4 ===-->
+
+        <!--=== Content Medium Part ===-->
+        <div class="content-md margin-bottom-30" ng-app="myApp">
+            <div class="container" ng-controller="MyController">
+                <section ng-show="hide()">
+                    <h3>There is no items in your cart</h3>
+                </section>
+                <div ng-show="show()">
+
+                    <form class="shopping-cart"  action="#" >
+                        <div class="header-tags">            
+                            <div class="overflow-h">
+                                <h2><i class="rounded-x fa fa-check"></i>SHOPPING CART</h2>
+                                <p>Review &amp; edit your product </p>
+
+                            </div>    
                         </div>
-                    </section>
-                    
+
+                        <section >
+                            <div class="table-responsive">
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>Product Name</th>
+                                            <th>Price</th>
+                                            <th>Quantity</th>
+                                            <th>Total</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="e in cart track by $index">
+                                            <td class="product-in-table">
+                                                <img class="img-responsive" src="{{e.pic}}" alt="">
+                                                <div class="product-it-in">
+                                                    <h3>{{e.name}}</h3>
+                                                    <span>Sed aliquam tincidunt tempus</span>
+                                                </div>    
+                                            </td>
+                                            <td>{{e.price|currency:"$":0}}</td>
+                                            <td>
+                                                <input type='button' class="quantity-button"  ng-click="put(e.id, e.name, e.pic, e.price, -1)"  value='-'/>
+                                                <input type='text' class="quantity-field"  readonly="true" value="{{e.quantity}}" />
+                                                <input type='button' class="quantity-button"  ng-click="put(e.id, e.name, e.pic, e.price, 1)"  value='+'/>
+                                            </td>
+                                            <td class="shop-red">{{e.total|currency:"$":0}}</td>
+                                            <td>
+                                                <button type="button" class="close" ng-click="put(e.id, e.name, e.pic, e.price, -999999)"><span>&times;</span><span class="sr-only">Close</span></button>
+                                            </td>
+                                        </tr>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </section>
+                    </form>
                     <div class="header-tags">
                         <div class="overflow-h">
-                            <h2>Billing info</h2>
-                            <p>Shipping and address infot</p>
-                            <i class="rounded-x fa fa-home"></i>
+                            <h2><i class="rounded-x fa fa-home"></i>PURCHASE INFORMATION</h2>
+                            <p>Please enter your information</p>
+
                         </div>    
                     </div>
-                    <section class="billing-info">
-                        <div class="row">
-                            <div class="col-md-6 md-margin-bottom-40">
-                                <h2 class="title-type">Billing Address</h2>
-                                <div class="billing-info-inputs checkbox-list">
-                                    <div class="row">
-                                        <div class="col-sm-6">
-                                            <input id="name" type="text" placeholder="First Name" name="firstname" class="form-control required">
-                                            <input id="email" type="text" placeholder="Email" name="email" class="form-control required email">
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <input id="surname" type="text" placeholder="Last Name" name="lastname" class="form-control required">
-                                            <input id="phone" type="tel" placeholder="Phone" name="phone" class="form-control required">
-                                        </div>
-                                    </div>
-                                    <input id="billingAddress" type="text" placeholder="Address Line 1" name="address1" class="form-control required">
-                                    <input id="billingAddress2" type="text" placeholder="Address Line 2" name="address2" class="form-control required">
-                                    <div class="row">
-                                        <div class="col-sm-6">
-                                            <input id="city" type="text" placeholder="City" name="city" class="form-control required">
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <input id="zip" type="text" placeholder="Zip/Postal Code" name="zip" class="form-control required">
-                                        </div>
-                                    </div>
-                                    
-                                    <label class="checkbox text-left">
-                                        <input type="checkbox" name="checkbox"/>
-                                        <i></i>
-                                        Ship item to the above billing address
-                                    </label>
-                                </div>
-                            </div>
+                    <form id="myForm" method="post" action="POInsert"  class="shopping-cart" name="myForm" novalidate="novalidate">                         
 
-                            <div class="col-md-6">
-                                <h2 class="title-type">Shipping Address</h2>
-                                <div class="billing-info-inputs checkbox-list">
-                                    <div class="row">
-                                        <div class="col-sm-6">
-                                            <input id="name2" type="text" placeholder="First Name" name="firstname" class="form-control">
-                                            <input id="email2" type="text" placeholder="Email" name="email" class="form-control email">
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <input id="surname2" type="text" placeholder="Last Name" name="lastname" class="form-control">
-                                            <input id="phone2" type="tel" placeholder="Phone" name="phone" class="form-control">
-                                        </div>
-                                    </div>
-                                    <input id="shippingAddress" type="text" placeholder="Address Line 1" name="address1" class="form-control">
-                                    <input id="shippingAddress2" type="text" placeholder="Address Line 2" name="address2" class="form-control">
-                                    <div class="row">
-                                        <div class="col-sm-6">
-                                            <input id="city2" type="text" placeholder="City" name="city" class="form-control">
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <input id="zip2" type="text" placeholder="Zip/Postal Code" name="zip" class="form-control">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>       
-                    </section>
-                        
-                    <div class="header-tags">
-                        <div class="overflow-h">
-                            <h2>Payment</h2>
-                            <p>Select Payment method</p>
-                            <i class="rounded-x fa fa-credit-card"></i>
-                        </div>    
-                    </div>
-                    <section>
-                        <div class="row">
-                            <div class="col-md-6 md-margin-bottom-50">
-                                <h2 class="title-type">Choose a payment method</h2>
-                                <!-- Accordion -->
-                                <div class="accordion-v2">
-                                    <div class="panel-group" id="accordion">
-                                        <div class="panel panel-default">
-                                            <div class="panel-heading">
-                                                <h4 class="panel-title">
-                                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
-                                                        <i class="fa fa-credit-card"></i>
-                                                        Credit or Debit Card
-                                                    </a>
-                                                </h4>
+                        <section >
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h2 class="title-type">Shipping Address</h2>
+                                    <div class="billing-info-inputs checkbox-list">
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <input  required placeholder="Enter Your Name" ng-model="customer.name"
+                                                        ng-trim="true" type="text"  name="fname" class="form-control"/>
+                                                <span style="color:red" ng-show="myForm.fname.$dirty && myForm.fname.$invalid">
+                                                    <span ng-show="myForm.fname.$error.required">Your name is required.</span>
+                                                </span>
                                             </div>
-                                            <div id="collapseOne" class="panel-collapse collapse in">
-                                                <div class="panel-body cus-form-horizontal">
-                                                    <div class="form-group">
-                                                        <label class="col-sm-4 no-col-space control-label">Cardholder Name</label>
-                                                        <div class="col-sm-8">
-                                                            <input type="text" class="form-control required" name="cardholder" placeholder="">
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label class="col-sm-4 no-col-space control-label">Card Number</label>
-                                                        <div class="col-sm-8">
-                                                            <input type="text" class="form-control required" name="cardnumber" placeholder="">
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label class="col-sm-4 no-col-space control-label">Payment Types</label>
-                                                        <div class="col-sm-8">
-                                                            <ul class="list-inline payment-type">
-                                                                <li><i class="fa fa-cc-paypal"></i></li>
-                                                                <li><i class="fa fa-cc-visa"></i></li>
-                                                                <li><i class="fa fa-cc-mastercard"></i></li>
-                                                                <li><i class="fa fa-cc-discover"></i></li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label class="col-sm-4">Expiration Date</label>
-                                                        <div class="col-sm-8 input-small-field">
-                                                            <input type="text" name="mm" placeholder="MM" class="form-control required sm-margin-bottom-20">
-                                                            <span class="slash">/</span>
-                                                            <input type="text" name="yy" placeholder="YY" class="form-control required">
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label class="col-sm-4 no-col-space control-label">CSC</label>
-                                                        <div class="col-sm-8 input-small-field">
-                                                            <input type="text" name="number" placeholder="" class="form-control required">
-                                                            <a href="#">What's this?</a>
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                            <div class="col-sm-6">
+                                                <input  required placeholder="Enter Your Phone Number" ng-model="customer.phone"
+                                                        ng-trim="true" type="tel"   name="phone" class="form-control"/>
+                                                <span style="color:red" ng-show="myForm.phone.$dirty && myForm.phone.$invalid">
+                                                    <span ng-show="myForm.phone.$error.required">Your phone is required.</span>
+                                                </span>
                                             </div>
                                         </div>
-                                        <div class="panel panel-default">
-                                            <div class="panel-heading">
-                                                <h4 class="panel-title">
-                                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
-                                                        <i class="fa fa-paypal"></i>
-                                                        Pay with PayPal
-                                                    </a>
-                                                </h4>
-                                            </div>
-                                            <div id="collapseTwo" class="panel-collapse collapse">
-                                                <div class="content margin-left-10">
-                                                    <a href="#"><img src="https://www.paypalobjects.com/webstatic/en_US/i/buttons/PP_logo_h_150x38.png" alt="PayPal"></a>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        <input  required placeholder="Enter Your Address" ng-model="customer.add"
+                                                ng-trim="true" type="text"  name="address" class="form-control"/>
+                                        <span style="color:red" ng-show="myForm.address.$dirty && myForm.address.$invalid">
+                                            <span ng-show="myForm.address.$error.required">Your address is required.</span>
+                                        </span>      
                                     </div>
                                 </div>
-                                <!-- End Accordion -->    
-                            </div>
+                                <div class="col-md-6 md-margin-bottom-40">
+                                    <h2 class="title-type">SUB TOTAL</h2>
+                                    <ul class="list-inline total-result">
+                                        <li>
+                                            <h4>Subtotal:</h4>
+                                            <div class="total-result-in">
+                                                <span >{{cart.sum("total") | currency}}</span>
+                                            </div>    
+                                        </li>    
+                                        <li>
+                                            <h4>Shipping (2%):</h4>
+                                            <div class="total-result-in">
+                                                <span class="text-right">{{cart.sum("total") * 0.02 | currency}}</span>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <h4>Tax (10%):</h4>
+                                            <div class="total-result-in">
+                                                <span class="text-right">{{cart.sum("total") * 0.1 | currency}}</span>
+                                            </div>
+                                        </li>
+                                        <li class="divider"></li>
+                                        <li class="total-price">
+                                            <h4>Total:</h4>
+                                            <div class="total-result-in">
+                                                <span >{{cart.sum("total") * 1.12 | currency}}</span>
+                                                <input type="hidden" ng-model="customer.subtotal" value="{{cart.sum('total') * 1.12}}" name="total"/>
+                                                <input type="hidden"  value="{{cart}}" name="cart"/>
+                                            </div>
+                                        </li>
 
-                            <div class="col-md-6">
-                                <h2 class="title-type">Frequently asked questions</h2>
-                                <!-- Accordion -->
-                                <div class="accordion-v2 plus-toggle">
-                                    <div class="panel-group" id="accordion-v2">
-                                        <div class="panel panel-default">
-                                            <div class="panel-heading">
-                                                <h4 class="panel-title">
-                                                    <a data-toggle="collapse" data-parent="#accordion-v2" href="#collapseOne-v2">
-                                                        What payments methods can I use?
-                                                    </a>
-                                                </h4>
-                                            </div>
-                                            <div id="collapseOne-v2" class="panel-collapse collapse in">
-                                                <div class="panel-body">
-                                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam hendrerit, felis vel tincidunt sodales, urna metus rutrum leo, sit amet finibus velit ante nec lacus. Cras erat nunc, pulvinar nec leo at, rhoncus elementum orci. Nullam ut sapien ultricies, gravida ante ut, ultrices nunc.
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="panel panel-default">
-                                            <div class="panel-heading">
-                                                <h4 class="panel-title">
-                                                    <a data-toggle="collapse" class="collapsed" data-parent="#accordion-v2" href="#collapseTwo-v2">
-                                                        Can I use gift card to pay for my purchase?
-                                                    </a>
-                                                </h4>
-                                            </div>
-                                            <div id="collapseTwo-v2" class="panel-collapse collapse">
-                                                <div class="panel-body">
-                                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam hendrerit, felis vel tincidunt sodales, urna metus rutrum leo, sit amet finibus velit ante nec lacus. Cras erat nunc, pulvinar nec leo at, rhoncus elementum orci. Nullam ut sapien ultricies, gravida ante ut, ultrices nunc.    
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="panel panel-default">
-                                            <div class="panel-heading">
-                                                <h4 class="panel-title">
-                                                    <a data-toggle="collapse" class="collapsed" data-parent="#accordion-v2" href="#collapseThree-v2">
-                                                        Will I be charged when I place my order?
-                                                    </a>
-                                                </h4>
-                                            </div>
-                                            <div id="collapseThree-v2" class="panel-collapse collapse">
-                                                <div class="panel-body">
-                                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam hendrerit, felis vel tincidunt sodales, urna metus rutrum leo, sit amet finibus velit ante nec lacus. Cras erat nunc, pulvinar nec leo at, rhoncus elementum orci. Nullam ut sapien ultricies, gravida ante ut, ultrices nunc.    
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="panel panel-default">
-                                            <div class="panel-heading">
-                                                <h4 class="panel-title">
-                                                    <a data-toggle="collapse" class="collapsed" data-parent="#accordion-v2" href="#collapseFour-v2">
-                                                        How long will it take to get my order?
-                                                    </a>
-                                                </h4>
-                                            </div>
-                                            <div id="collapseFour-v2" class="panel-collapse collapse">
-                                                <div class="panel-body">
-                                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam hendrerit, felis vel tincidunt sodales, urna metus rutrum leo, sit amet finibus velit ante nec lacus. Cras erat nunc, pulvinar nec leo at, rhoncus elementum orci. Nullam ut sapien ultricies, gravida ante ut, ultrices nunc.    
-                                                </div>
-                                            </div>
-                                        </div>    
-                                    </div>
+                                    </ul>
+                                    <br/>
+                                    <input type="button" class="btn-u btn-u-lg" value="CANCEL"/>
+                                    <input type="button" ng-click="formsubmit()"
+                                           ng-disabled="myForm.$invalid ||
+                                                       myForm.fname.$dirty && myForm.fname.$invalid ||
+                                                       myForm.phone.$dirty && myForm.phone.$invalid ||
+                                                       myForm.address.$dirty && myForm.address.$invalid ||
+                                                       hide()"
+                                           style="float: right" class="btn-u btn-u-lg" value="CHECK OUT"/>
                                 </div>
-                                <!-- End Accordion -->    
-                            </div>
-                        </div>
-                    </section>
 
-                    <div class="coupon-code">
-                        <div class="row">
-                            <div class="col-sm-4 sm-margin-bottom-30">
-                                <h3>Discount Code</h3>
-                                <p>Enter your coupon code</p>
-                                <input class="form-control margin-bottom-10" name="code" type="text">
-                                <button type="button" class="btn-u btn-u-sea-shop">Apply Coupon</button>
-                            </div>
-                            <div class="col-sm-3 col-sm-offset-5">
-                                <ul class="list-inline total-result">
-                                    <li>
-                                        <h4>Subtotal:</h4>
-                                        <div class="total-result-in">
-                                            <span>$ 1280.00</span>
-                                        </div>    
-                                    </li>    
-                                    <li>
-                                        <h4>Shipping:</h4>
-                                        <div class="total-result-in">
-                                            <span class="text-right">- - - -</span>
-                                        </div>
-                                    </li>
-                                    <li class="divider"></li>
-                                    <li class="total-price">
-                                        <h4>Total:</h4>
-                                        <div class="total-result-in">
-                                            <span>$ 1280.00</span>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>    
+
+                            </div>       
+                        </section>
+                    </form>
                 </div>
-            </form>
-        </div><!--/end container-->
-    </div>
-    <!--=== End Content Medium Part ===-->     
 
-    </jsp:body>
-</t:defaultLayout>
+
+
+            </div><!--/end container-->
+            <!--=== End Content Medium Part ===-->     
+
+        </jsp:body>
+    </t:defaultLayout>
