@@ -3,18 +3,23 @@ package com.aptechfpt.test;
 import com.aptechfpt.bean.AccountFacadeLocal;
 import com.aptechfpt.converter.JodaDateTimeConverter;
 import com.aptechfpt.dto.AccountDTO;
+import com.aptechfpt.enumtype.Role;
 import com.aptechfpt.mock.AccountFacadeMock;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import java.io.File;
 import java.net.URL;
+import java.util.Enumeration;
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import static org.assertj.core.api.Assertions.*;
+import org.assertj.core.description.Description;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.arquillian.test.api.ArquillianResource;
@@ -24,6 +29,7 @@ import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.importer.ExplodedImporter;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.shrinkwrap.resolver.api.maven.Maven;
+import org.joda.time.DateTime;
 import org.junit.runner.RunWith;
 
 /**
@@ -58,11 +64,15 @@ public class AccountControllerTest {
 
         return war;
     }
+    
     @ArquillianResource
     private URL url;
     
     @Inject
     private AccountFacadeLocal accountFacade;
+    
+    @Inject
+    private HttpServletRequest request;
     
     @Test
     public void finished_Build() throws Exception{
@@ -70,8 +80,27 @@ public class AccountControllerTest {
     }
     
     @Test
-    public void Test_Mocking_EJB() throws Exception{
-        assertThat(1).isEqualTo(1);
+    public void Test_Login() throws Exception {
+        request.login("kieron2208@gmail.com", "123456");
+        System.out.println("Principal.getName() :" + request.getUserPrincipal().getName());
+        System.out.println("getRemoteUser() :" + request.getRemoteUser());
+        System.out.println("getAuthType() :" + request.getAuthType());
+        System.out.println("User: " + request.isUserInRole(Role.USER.name()));
+        System.out.println("SalePerson :" + request.isUserInRole(Role.SALEPERSON.name()));
+        System.out.println("Administrator: " + request.isUserInRole(Role.ADMINISTRATOR.name()));
+        HttpSession session = request.getSession();
+        
+        System.out.println("Creation Time :" + new DateTime(session.getCreationTime()).toString());
+        Enumeration<String> attributeNames = session.getAttributeNames();
+        while (attributeNames.hasMoreElements()) {
+            System.out.println("GetAttributeNames :" + attributeNames.nextElement());
+        }
+        System.out.println("GetLastAccessTime :" + new DateTime(session.getLastAccessedTime()).toString());
+        System.out.println("GetID :" + session.getId());
+        System.out.println("getMaxINactiveInternal :" + session.getMaxInactiveInterval());
+        assertThat(request.isUserInRole(Role.USER.name())).isTrue().as("Is User:");
+        assertThat(request.isUserInRole(Role.SALEPERSON.name())).isTrue().as("Is SalePerson:");
+        assertThat(request.isUserInRole(Role.ADMINISTRATOR.name())).isFalse().as("Not Admin");
     }
 
     private static GenericArchive metaInfFolder() {

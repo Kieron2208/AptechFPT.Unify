@@ -1,5 +1,6 @@
-package com.aptechfpt.entity;
+package com.aptechfpt.converter;
 
+import com.aptechfpt.enumtype.AccountGender;
 import java.util.Date;
 import javax.persistence.AttributeConverter;
 import javax.persistence.Converter;

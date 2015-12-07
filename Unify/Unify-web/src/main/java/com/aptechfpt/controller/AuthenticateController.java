@@ -21,7 +21,7 @@ public class AuthenticateController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String action = (String) request.getAttribute("action");
+        String action = request.getParameter("action");
         switch (action) {
             case "logout":
                 logger.log(Level.INFO, "Go to: {0} method.", action);
@@ -33,7 +33,7 @@ public class AuthenticateController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String action = (String) request.getAttribute("action");
+        String action = request.getParameter("action");
         switch (action) {
             case "login":
                 login(request, response);
@@ -72,16 +72,16 @@ public class AuthenticateController extends HttpServlet {
             try {
                 request.login(username, password);
                 logger.log(Level.INFO, "{0} User: {1} login successfull", new Object[]{AuthenticateController.class.getName(), username});
-                response.sendRedirect(request.getContextPath() + "/admin");
+                response.sendRedirect(request.getRequestURI());
             } catch (ServletException ex) {
                 request.setAttribute("msg", "Login Failed");
                 logger.log(Level.INFO, "{0} User: {1} login failed.", new Object[]{AuthenticateController.class.getName(), username});
-                request.getRequestDispatcher("WEB-INF/login.jsp").forward(request, response);
+                request.getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
             }
         } else {
             request.setAttribute("msg", "User Already Login");
             logger.log(Level.INFO, "{0} User: {1} login Existed.", new Object[]{AuthenticateController.class.getName(), username});
-            request.getRequestDispatcher("WEB-INF/login.jsp").forward(request, response);
+            request.getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
         }
     }
 }

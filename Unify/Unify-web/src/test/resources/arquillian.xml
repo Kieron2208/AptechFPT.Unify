@@ -4,13 +4,14 @@
     xsi:schemaLocation="http://jboss.org/schema/arquillian
      http://www.jboss.org/schema/arquillian/arquillian_1_0.xsd">
  
-    <container qualifier="glassfish-managed" default="true">
+    <container qualifier="glassfish-remote" default="true">
         <configuration>
-            <property name="remoteServerHttpPort">9009</property>
+<!--            <property name="remoteServerHttpPort">9009</property>
             <property name="remoteServerAddress">localhost</property>
-            <property name="remoteServerAdminPort">4848</property>
+            <property name="remoteServerAdminPort">4848</property>-->
             <property name="adminUser">admin</property>
             <property name="adminPassword">123</property>
+            <property name="target">server</property>
         </configuration>
     </container>
  

@@ -1,8 +1,8 @@
 package com.aptechfpt.dto;
 
 import com.aptechfpt.entity.Account;
-import com.aptechfpt.entity.AccountGender;
-import com.aptechfpt.entity.Role;
+import com.aptechfpt.enumtype.AccountGender;
+import com.aptechfpt.enumtype.Role;
 import java.util.HashSet;
 import java.util.Set;
 import org.joda.time.DateTime;

@@ -1,4 +1,4 @@
-package com.aptechfpt.entity;
+package com.aptechfpt.enumtype;
 
 /**
  *

@@ -1,5 +1,8 @@
 package com.aptechfpt.entity;
 
+import com.aptechfpt.enumtype.Role;
+import com.aptechfpt.enumtype.AccountGender;
+import com.aptechfpt.converter.GenderConverter;
 import com.aptechfpt.converter.JodaDateTimeConverter;
 import com.aptechfpt.dto.AccountDTO;
 import java.io.Serializable;
@@ -18,7 +21,7 @@ import org.joda.time.DateTime;
 @Entity
 @Table(name = "Account", catalog = "Unify", schema = "dbo")
 @NamedQueries({
-    @NamedQuery(name = "Account.findAll", query = "SELECT a FROM Account a")})
+    @NamedQuery(name = "Account.findAll", query = "SELECT a FROM Account a ORDER BY a.accountId ASC")})
 public class Account implements Serializable {
     private static final long serialVersionUID = 1L;
 

@@ -53,14 +53,14 @@
 
                     <div class="col-md-5">
                         <form id="sky-form1" class="log-reg-block sky-form"
-                              method="POST" action="">
+                              method="POST" action="<c:url value="/login"/>">
                             <h2>Log in to your account</h2>
 
                             <section>
                                 <label class="input login-input">
                                     <div class="input-group">
                                         <span class="input-group-addon"><i class="fa fa-user"></i></span>
-                                        <input type="email" placeholder="Email Address" name="email" class="form-control">
+                                        <input type="email" placeholder="Email Address" name="txtEmail" class="form-control">
                                     </div>
                                 </label>
                             </section>        
@@ -68,7 +68,7 @@
                                 <label class="input login-input no-border-top">
                                     <div class="input-group">
                                         <span class="input-group-addon"><i class="fa fa-lock"></i></span>
-                                        <input type="password" placeholder="Password" name="password" class="form-control">
+                                        <input type="password" placeholder="Password" name="txtPassword" class="form-control">
                                     </div>    
                                 </label>
                             </section>

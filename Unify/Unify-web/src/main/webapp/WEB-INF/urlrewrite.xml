@@ -12,21 +12,29 @@
             
         </note>
         <from>^/$</from>
-        <to>/HomeController</to>
+        <to last="true">/HomeController</to>
     </rule>
 
     <rule>
         <name>to Login Page</name>
         <condition type="method">GET</condition>
         <from>^/login$</from>
-        <to>/AuthenticateController?action=login</to>
+        <set name="action" type="parameter">login</set>
+        <to last="true">/WEB-INF/login.jsp</to>
     </rule>
 
+    <rule>
+        <name>to Login Page</name>
+        <condition type="method">POST</condition>
+        <from>^/login$</from>
+        <to last="true">/AuthenticateController?action=login</to>
+    </rule>
+    
     <rule>
         <name>to Register Page</name>
         <condition type="method">GET</condition>
         <from>^/register$</from>
-        <to>/AuthenticateController?action=register</to>
+        <to>/WEB-INF/register.jsp</to>
     </rule>
 
     <rule>
@@ -52,10 +60,11 @@
         <to>/WEB-INF/productdetail.jsp</to>
     </rule>
 
+    
     <rule>
         <name>Check Out Page</name>
         <condition type="method">GET</condition>
-        <from>^/checkout$</from>
+        <from>^/shoppingcart$</from>
         <to>/WEB-INF/shoppingcart.jsp</to>
     </rule>
 
@@ -85,7 +94,7 @@
         <name>Admin User Management</name>
         <condition type="method">GET</condition>
         <from>^/administrator/user$</from>
-        <to>/WEB-INF/admin/users.jsp</to>
+        <to>/AdminUserController</to>
     </rule>
 
     <rule>
@@ -93,5 +102,71 @@
         <condition type="method">GET</condition>
         <from>^/administrator/user/new$</from>
         <to>/WEB-INF/admin/createUser.jsp</to>
+    </rule>
+    
+    <rule>
+        <name>to View Product Admin Page</name>
+        <condition type="method">GET</condition>
+        <from>^/administrator/viewProduct$</from>
+        <to>/AdminProduct?action=view</to>
+    </rule>
+    
+    <rule>
+        <name>to Crate Product Admin Page</name>
+        <condition type="method">GET</condition>
+        <from>^/administrator/addProduct$</from>
+        <to>/AdminProduct?action=reAdd</to>
+    </rule>
+    
+    <rule>
+        <name>to View Sub Category Admin Page</name>
+        <condition type="method">GET</condition>
+        <from>^/administrator/viewSubCategory$</from>
+        <to>/AdminSubCategory?action=view</to>
+    </rule>
+    
+    <rule>
+        <name>to Sub Category Admin Page</name>
+        <condition type="method">GET</condition>
+        <from>^/administrator/addSubCategory$</from>
+        <to>/AdminSubCategory?action=reAdd</to>
+    </rule>
+    
+    <rule>
+        <name>Purchase Controller</name>
+        <from>^/administrator/purchaselist$</from>
+        <to>/PurchaseController</to>
+    </rule>
+    
+    <rule>
+        <name> Purchase Report Page</name>
+        <from>^/administrator/purchasereport$</from>
+        <to>/WEB-INF/admin/purchasereport.jsp</to>
+    </rule>
+    
+    <rule>
+        <name> Purchase Report Print Page</name>
+        <from>^/administrator/purchasereportprint$</from>
+        <to>/WEB-INF/admin/reportprint.jsp</to>
+    </rule>
+    
+    <rule>
+        <from>^/404$</from>
+        <to last="true">/WEB-INF/404.jsp</to>
+    </rule>
+    
+    <rule>
+        <from>^/500$</from>
+        <to last="true">/WEB-INF/500.jsp</to>
+    </rule>
+    
+    <rule>
+        <from>^/administrator/404$</from>
+        <to last="true">/WEB-INF/admin/404.jsp</to>
+    </rule>
+    
+    <rule>
+        <from>^/administrator/500$</from>
+        <to last="true">/WEB-INF/admin/500.jsp</to>
     </rule>
 </urlrewrite>
