@@ -56,10 +56,9 @@
         <name>to Product Detail Page</name>
         <condition type="method">GET</condition>
         <from>^/product/([0-9]+)$</from>
-        <!--<to last="true">/ProductController?action=detail&amp;id=$1</to>-->
-        <to>/WEB-INF/productdetail.jsp</to>
+        <to last="true">/ProductController?action=detail&amp;id=$1</to>
+        <!--<to>/WEB-INF/productdetail.jsp</to>-->
     </rule>
-
     
     <rule>
         <name>Check Out Page</name>

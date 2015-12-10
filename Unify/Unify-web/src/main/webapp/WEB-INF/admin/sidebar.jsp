@@ -32,12 +32,12 @@
                     <i class="fa fa-user"></i> <span>User Management</span> 
                     <!--<i class="fa fa-angle-left pull-right"></i>-->
                 </a>
-<!--                <ul class="treeview-menu">
-                    <li class="active">
-                        <a href="${userLink}"><i class="fa fa-circle-o"></i> User List</a>
-                    </li>
-                    <li><a href="index2.html"><i class="fa fa-circle-o"></i> Dashboard v2</a></li>
-                </ul>-->
+                <!--                <ul class="treeview-menu">
+                                    <li class="active">
+                                        <a href="${userLink}"><i class="fa fa-circle-o"></i> User List</a>
+                                    </li>
+                                    <li><a href="index2.html"><i class="fa fa-circle-o"></i> Dashboard v2</a></li>
+                                </ul>-->
             </li>
             <li>
                 <a href="#">
@@ -68,6 +68,22 @@
                         <a href="${addSubCategory}"><i class="fa fa-circle-o"></i> Add New Sub Category</a>
                     </li>
                 </ul>
+            </li>
+            <li class="active treeview">
+                <a href="#">
+                    <i class="fa fa-book"></i> <span>PurchaseOrder Management</span> <i class="fa fa-angle-left pull-right"></i>
+                </a>
+
+                <ul class="treeview-menu">
+                    <li class="active">
+                        <c:url value="/administrator/purchaselist" var="purchaseLink"/>
+                        <a href="${purchaseLink}"><i class="fa fa-circle-o"></i> Purchase List</a>
+                    </li>
+                    <li>
+                        <c:url value="/administrator/purchasereport" var="reportLink"/>
+                        <a href="${reportLink}"><i class="fa fa-circle-o"></i> Report</a>
+                    </li>
+                </ul>  
             </li>
         </ul>
     </section>

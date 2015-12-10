@@ -4,44 +4,55 @@
  * and open the template in the editor.
  */
 package com.aptechfpt.entity;
-
+import com.aptechfpt.converter.JodaDateTimeStringConverter;
+import com.aptechfpt.entity.Account;
+import com.aptechfpt.entity.PurchaseOrderDetail;
+import org.joda.time.DateTime;
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.Convert;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
-
 /**
  *
- * @author Kiero
+ * @author ken
  */
 @Entity
 @Table(name = "PurchaseOrder", catalog = "Unify", schema = "dbo")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "PurchaseOrder.findAll", query = "SELECT p FROM PurchaseOrder p"),
-    @NamedQuery(name = "PurchaseOrder.findByPurchaseOrderId", query = "SELECT p FROM PurchaseOrder p WHERE p.purchaseOrderId = :purchaseOrderId"),
+    @NamedQuery(name = "PurchaseOrder.findByPurchaseOrderId", query = "SELECT p FROM PurchaseOrder p ORDER BY p.purchaseOrderId desc"),
     @NamedQuery(name = "PurchaseOrder.findBySubTotal", query = "SELECT p FROM PurchaseOrder p WHERE p.subTotal = :subTotal"),
     @NamedQuery(name = "PurchaseOrder.findByStatus", query = "SELECT p FROM PurchaseOrder p WHERE p.status = :status"),
-    @NamedQuery(name = "PurchaseOrder.findByCreatedDate", query = "SELECT p FROM PurchaseOrder p WHERE p.createdDate = :createdDate")})
+    @NamedQuery(name = "PurchaseOrder.findByCreatedDate", query = "SELECT p FROM PurchaseOrder p WHERE p.createdDate >= :fDate AND p.createdDate <=:toDate ")})
 public class PurchaseOrder implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
-    @NotNull
+    //@NotNull
     @Column(name = "PurchaseOrderId", nullable = false)
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Integer purchaseOrderId;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Basic(optional = false)
@@ -61,104 +72,109 @@ public class PurchaseOrder implements Serializable {
     @NotNull
     @Column(name = "Status", nullable = false)
     private boolean status;
+    
     @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 27)
-    @Column(name = "CreatedDate", nullable = false, length = 27)
-    private String createdDate;
+    @Column(name = "CancelInvoice", insertable = false)
+    private boolean CancelInvoice;
+    
+    @Basic(optional = false)
+    @Temporal(TemporalType.TIMESTAMP)
+    @Convert(converter = JodaDateTimeStringConverter.class)
+    @Column(name = "CreatedDate",insertable = false, updatable = false)
+    private DateTime createdDate;
+    
     @Lob
     @Size(max = 2147483647)
     @Column(name = "Name", length = 2147483647)
     private String name;
+    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "purchaseOrderId")
-    private Collection<PurchaseOrderDetail> purchaseOrderDetailCollection;
-
+    private Collection<PurchaseOrderDetail> purchaseOrderDetailCollection = new ArrayList<>();
+    
+    @JoinColumn(name = "AccountId", referencedColumnName = "AccountId")
+    @ManyToOne
+    private Account accountId;
+    
     public PurchaseOrder() {
     }
-
     public PurchaseOrder(Integer purchaseOrderId) {
         this.purchaseOrderId = purchaseOrderId;
     }
-
-    public PurchaseOrder(Integer purchaseOrderId, BigDecimal subTotal, boolean status, String createdDate) {
+    public PurchaseOrder(Integer purchaseOrderId, BigDecimal subTotal, boolean status) {
         this.purchaseOrderId = purchaseOrderId;
         this.subTotal = subTotal;
         this.status = status;
-        this.createdDate = createdDate;
     }
-
     public Integer getPurchaseOrderId() {
         return purchaseOrderId;
     }
-
     public void setPurchaseOrderId(Integer purchaseOrderId) {
         this.purchaseOrderId = purchaseOrderId;
     }
-
     public BigDecimal getSubTotal() {
         return subTotal;
     }
-
     public void setSubTotal(BigDecimal subTotal) {
         this.subTotal = subTotal;
     }
-
     public String getAddress() {
         return address;
     }
-
     public void setAddress(String address) {
         this.address = address;
     }
-
     public String getPhone() {
         return phone;
     }
-
     public void setPhone(String phone) {
         this.phone = phone;
     }
-
     public boolean getStatus() {
         return status;
     }
-
     public void setStatus(boolean status) {
         this.status = status;
     }
-
-    public String getCreatedDate() {
+    public DateTime getCreatedDate() {
         return createdDate;
     }
-
-    public void setCreatedDate(String createdDate) {
+    public void setCreatedDate(DateTime createdDate) {
         this.createdDate = createdDate;
     }
-
     public String getName() {
         return name;
     }
-
     public void setName(String name) {
         this.name = name;
     }
-
     @XmlTransient
     public Collection<PurchaseOrderDetail> getPurchaseOrderDetailCollection() {
         return purchaseOrderDetailCollection;
     }
-
     public void setPurchaseOrderDetailCollection(Collection<PurchaseOrderDetail> purchaseOrderDetailCollection) {
         this.purchaseOrderDetailCollection = purchaseOrderDetailCollection;
     }
+    public Account getAccountId() {
+        return accountId;
+    }
+    public void setAccountId(Account accountId) {
+        this.accountId = accountId;
+    }
 
+    public boolean isCancelInvoice() {
+        return CancelInvoice;
+    }
+
+    public void setCancelInvoice(boolean CancelInvoice) {
+        this.CancelInvoice = CancelInvoice;
+    }
+    
     @Override
     public int hashCode() {
         int hash = 0;
         hash += (purchaseOrderId != null ? purchaseOrderId.hashCode() : 0);
         return hash;
     }
-
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
@@ -171,10 +187,9 @@ public class PurchaseOrder implements Serializable {
         }
         return true;
     }
-
     @Override
     public String toString() {
-        return "com.aptechfpt.entity.PurchaseOrder[ purchaseOrderId=" + purchaseOrderId + " ]";
+        return "entity.PurchaseOrder[ purchaseOrderId=" + purchaseOrderId + " ]";
     }
     
 }

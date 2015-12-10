@@ -4,8 +4,10 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
 
-    <include file="config/liquibase/changelog/initial-schema.xml" relativeToChangelogFile="false"/>
+    
+    <include file="src/main/resources/config/liquibase/changelog/00000000000000_initial_schema.xml" relativeToChangelogFile="false"/>
+<!--    <include file="config/liquibase/changelog/initial-schema.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20151028142219-changelog.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/201511250958-changelog.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/201511250958-changelog.xml" relativeToChangelogFile="false"/>-->
 
 </databaseChangeLog>

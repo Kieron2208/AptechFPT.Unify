@@ -29,11 +29,13 @@
                         <li class="menu-icons shopping-cart">
                             <c:url value="/shoppingcart" var="shoppingcart"/>
                             <i class="menu-icons-style radius-x fa fa-shopping-cart"></i>
-                            <span class="badge">0</span>
+                            <span class="badge" ng-show="show()">{{cart.sum("quantity")}}</span>
+                            <span class="badge" ng-show="hide()">0</span>
                             <div class="shopping-cart-open">
-                                <span class="shc-title">No products in the Cart</span>
-                                <a href="${shoppingcart}" class="btn-u"><i class="fa fa-shopping-cart"></i> Cart</a>
-                                <span class="shc-total">Total: <strong>$0.00</strong></span>
+                                <span class="shc-title" ng-show="hide()">No products in the Cart</span>
+                                <span class="shc-title" ng-show="show()">There are <b style="color: red">{{cart.sum("quantity")}}</b> items in your Cart</span>
+                                <a href="${shoppingcart}" ng-show="show()" class="btn-u"><i class="fa fa-shopping-cart"></i> Cart</a>
+                                <span class="shc-total" ng-show="show()">Total: <strong>{{cart.sum("total") | currency:"$":0}}</strong></span>
                             </div>
                         </li>
                         <li class="menu-icons">
@@ -181,16 +183,16 @@
                             </a>
                             <ul class="dropdown-menu">
                                 <li>
-                                    <a href="javascript:void(0);">Profile</a>
+                                    <a href="javascript:void(0);"><i class="fa fa-user"></i> Profile</a>
                                 </li>
                                 <li>
-                                    <a href="javascript:void(0);">My Order</a>
+                                    <a href="javascript:void(0);"><i class="fa fa-shopping-cart"></i> My Order</a>
                                 </li>
                                 <li>
-                                    <a href="javascript:void(0);">My Comments</a>
+                                    <a href="javascript:void(0);"><i class="fa fa-comment"></i> My Comments</a>
                                 </li>
                                 <li>
-                                    <a href="javascript:void(0);">Order History</a>
+                                    <a href="javascript:void(0);"><i class="fa fa-history"></i> Order History</a>
                                 </li>
                             </ul>
                         </li>    

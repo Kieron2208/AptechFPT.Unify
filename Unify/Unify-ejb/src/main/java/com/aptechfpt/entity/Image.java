@@ -9,7 +9,11 @@ import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -30,10 +34,14 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Image.findByImagePath", query = "SELECT i FROM Image i WHERE i.imagePath = :imagePath"),
     @NamedQuery(name = "Image.findByDisplayOrder", query = "SELECT i FROM Image i WHERE i.displayOrder = :displayOrder")})
 public class Image implements Serializable {
+    @JoinColumn(name = "ProductId", referencedColumnName = "ProductId", nullable = false)
+    @ManyToOne(optional = false)
+    private Product productId;
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
     @NotNull
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ImageId", nullable = false)
     private Long imageId;
     @Basic(optional = false)
@@ -106,6 +114,14 @@ public class Image implements Serializable {
     @Override
     public String toString() {
         return "com.aptechfpt.entity.Image[ imageId=" + imageId + " ]";
+    }
+
+    public Product getProductId() {
+        return productId;
+    }
+
+    public void setProductId(Product productId) {
+        this.productId = productId;
     }
     
 }

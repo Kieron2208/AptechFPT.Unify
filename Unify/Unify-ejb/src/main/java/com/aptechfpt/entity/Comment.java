@@ -5,14 +5,22 @@
  */
 package com.aptechfpt.entity;
 
+import com.aptechfpt.converter.JodaDateTimeStringConverter;
 import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
+import javax.persistence.Convert;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -33,30 +41,43 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Comment.findByCreatedDate", query = "SELECT c FROM Comment c WHERE c.createdDate = :createdDate")})
 public class Comment implements Serializable {
     private static final long serialVersionUID = 1L;
+    
     @Id
     @Basic(optional = false)
-    @NotNull
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "CommentId", nullable = false)
     private Integer commentId;
+    
     @Basic(optional = false)
     @NotNull
-    @Column(name = "Like", nullable = false)
+    @Column(name = "[Like]", nullable = false)
     private int like;
+    
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 8000)
     @Column(name = "Comments", nullable = false, length = 8000)
     private String comments;
+    
     @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 27)
-    @Column(name = "ModifiedDate", nullable = false, length = 27)
+    @Temporal(TemporalType.TIMESTAMP)
+    @Convert(converter = JodaDateTimeStringConverter.class)
+    @Column(name = "ModifiedDate", insertable = false)
     private String modifiedDate;
+    
     @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 27)
-    @Column(name = "CreatedDate", nullable = false, length = 27)
+    @Temporal(TemporalType.TIMESTAMP)
+    @Convert(converter = JodaDateTimeStringConverter.class)
+    @Column(name = "CreatedDate", insertable = false, updatable = false)
     private String createdDate;
+    
+    @JoinColumn(name = "AccountId", referencedColumnName = "AccountId", nullable = false)
+    @ManyToOne(optional = false)
+    private Account accountId;
+    
+    @JoinColumn(name = "ProductId", referencedColumnName = "ProductId", nullable = false)
+    @ManyToOne(optional = false)
+    private Product productId;
 
     public Comment() {
     }
@@ -111,6 +132,22 @@ public class Comment implements Serializable {
 
     public void setCreatedDate(String createdDate) {
         this.createdDate = createdDate;
+    }
+
+    public Account getAccountId() {
+        return accountId;
+    }
+
+    public void setAccountId(Account accountId) {
+        this.accountId = accountId;
+    }
+
+    public Product getProductId() {
+        return productId;
+    }
+
+    public void setProductId(Product productId) {
+        this.productId = productId;
     }
 
     @Override
