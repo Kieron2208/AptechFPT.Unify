@@ -21,6 +21,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -43,40 +44,57 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Product.findByGender", query = "SELECT p FROM Product p WHERE p.gender = :gender"),
     @NamedQuery(name = "Product.findByAvailable", query = "SELECT p FROM Product p WHERE p.available = :available")})
 public class Product implements Serializable {
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "productId")
-    private Collection<PriceHistory> priceHistoryCollection;
+
     private static final long serialVersionUID = 1L;
+
     @Id
     @Basic(optional = false)
     @NotNull
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ProductId", nullable = false)
     private Integer productId;
+
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 100)
     @Column(name = "Name", nullable = false, length = 100)
     private String name;
+
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Basic(optional = false)
     @NotNull
     @Column(name = "UnitPrice", nullable = false, precision = 19, scale = 4)
     private BigDecimal unitPrice;
+
     @Basic(optional = false)
     @NotNull
-    @Column(name = "Like", nullable = false)
+    @Column(name = "[Like]", nullable = false)
     private int like;
     @Column(name = "Gender")
     private Integer gender;
+
     @Lob
     @Size(max = 2147483647)
     @Column(name = "Description", length = 2147483647)
     private String description;
+
     @Basic(optional = false)
     @NotNull
     @Column(name = "Available", nullable = false)
     private boolean available;
+
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "productId")
     private Collection<PurchaseOrderDetail> purchaseOrderDetailCollection;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "productId")
+    private Collection<PriceHistory> priceHistoryCollection;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "productId")
+    private Collection<Image> imageCollection;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "productId")
+    private Collection<Comment> commentCollection;
+
     @JoinColumn(name = "SubCategoryId", referencedColumnName = "SubCategoryId", nullable = false)
     @ManyToOne(optional = false)
     private SubCategory subCategoryId;
@@ -152,23 +170,6 @@ public class Product implements Serializable {
         this.available = available;
     }
 
-    @XmlTransient
-    public Collection<PurchaseOrderDetail> getPurchaseOrderDetailCollection() {
-        return purchaseOrderDetailCollection;
-    }
-
-    public void setPurchaseOrderDetailCollection(Collection<PurchaseOrderDetail> purchaseOrderDetailCollection) {
-        this.purchaseOrderDetailCollection = purchaseOrderDetailCollection;
-    }
-
-    public SubCategory getSubCategoryId() {
-        return subCategoryId;
-    }
-
-    public void setSubCategoryId(SubCategory subCategoryId) {
-        this.subCategoryId = subCategoryId;
-    }
-
     @Override
     public int hashCode() {
         int hash = 0;
@@ -195,6 +196,32 @@ public class Product implements Serializable {
     }
 
     @XmlTransient
+    public Collection<Comment> getCommentCollection() {
+        return commentCollection;
+    }
+
+    public void setCommentCollection(Collection<Comment> commentCollection) {
+        this.commentCollection = commentCollection;
+    }
+
+    public SubCategory getSubCategoryId() {
+        return subCategoryId;
+    }
+
+    public void setSubCategoryId(SubCategory subCategoryId) {
+        this.subCategoryId = subCategoryId;
+    }
+
+    @XmlTransient
+    public Collection<PurchaseOrderDetail> getPurchaseOrderDetailCollection() {
+        return purchaseOrderDetailCollection;
+    }
+
+    public void setPurchaseOrderDetailCollection(Collection<PurchaseOrderDetail> purchaseOrderDetailCollection) {
+        this.purchaseOrderDetailCollection = purchaseOrderDetailCollection;
+    }
+
+    @XmlTransient
     public Collection<PriceHistory> getPriceHistoryCollection() {
         return priceHistoryCollection;
     }
@@ -202,5 +229,14 @@ public class Product implements Serializable {
     public void setPriceHistoryCollection(Collection<PriceHistory> priceHistoryCollection) {
         this.priceHistoryCollection = priceHistoryCollection;
     }
-    
+
+    @XmlTransient
+    public Collection<Image> getImageCollection() {
+        return imageCollection;
+    }
+
+    public void setImageCollection(Collection<Image> imageCollection) {
+        this.imageCollection = imageCollection;
+    }
+
 }

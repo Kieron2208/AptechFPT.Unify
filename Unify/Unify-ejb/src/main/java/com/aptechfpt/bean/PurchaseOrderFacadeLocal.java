@@ -3,6 +3,7 @@ package com.aptechfpt.bean;
 import com.aptechfpt.entity.PurchaseOrder;
 import java.util.List;
 import javax.ejb.Local;
+import org.joda.time.DateTime;
 
 /**
  *
@@ -27,4 +28,5 @@ public interface PurchaseOrderFacadeLocal {
 
     PurchaseOrder getID();
     
+    List<PurchaseOrder> getReport(DateTime f, DateTime t);
 }

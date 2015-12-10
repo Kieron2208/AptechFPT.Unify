@@ -45,8 +45,8 @@
         <!--=== End Breadcrumbs v4 ===-->
 
         <!--=== Content Medium Part ===-->
-        <div class="content-md margin-bottom-30" ng-app="myApp">
-            <div class="container" ng-controller="MyController">
+        <div class="content-md margin-bottom-30">
+            <div class="container">
                 <section ng-show="hide()">
                     <h3>There is no items in your cart</h3>
                 </section>

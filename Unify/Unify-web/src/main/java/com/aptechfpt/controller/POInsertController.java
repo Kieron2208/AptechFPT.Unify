@@ -1,16 +1,21 @@
+package com.aptechfpt.controller;
+
 import com.aptechfpt.utils.MaHoa;
 import com.aptechfpt.bean.AccountFacadeLocal;
 import com.aptechfpt.bean.PriceHistoryFacadeLocal;
 import com.aptechfpt.bean.ProductFacadeLocal;
 import com.aptechfpt.bean.PurchaseOrderDetailFacadeLocal;
 import com.aptechfpt.bean.PurchaseOrderFacadeLocal;
+import com.aptechfpt.dto.PurchaseOrderDTO;
 import com.aptechfpt.entity.Account;
 import com.aptechfpt.entity.Product;
 import com.aptechfpt.entity.PurchaseOrder;
 import com.aptechfpt.entity.PurchaseOrderDetail;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.lang.reflect.Type;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
@@ -78,46 +83,38 @@ public class POInsertController extends HttpServlet {
             
             Gson gson = new Gson();
             
+            Type collectionType = new TypeToken<ArrayList<PurchaseOrderDTO>>() {}.getType();
+            List<PurchaseOrderDTO> PODTO = new Gson().fromJson(cart, collectionType);  
+        
+            Object object=null;
+            for(PurchaseOrderDTO o:PODTO){
+                pid = o.id;
+                Product p= productFacade.find(pid);
+                quantity = o.quantity;
+                BigDecimal price = o.price;
+                BigDecimal total = o.total;
+                BigDecimal cost = priceHistoryFacade.getCost(p);
+                PurchaseOrderDetail pod = new PurchaseOrderDetail();
+                pod.setCost(cost);
+                pod.setProductId(p);
+                pod.setQuantity(quantity);
+                pod.setUnitPrice(price);
+                pod.setSubtotal(total);
+                pod.setPurchaseOrderId(po);
+                listpod.add(pod);
+            }
+            Account acc = accountFacade.findById(cid);
             
-//            JSONArray arrayObj=null;
-//            for(String s:cart){
-//               out.print(s);
-//               
-//                JSONParser jsonParser=new JSONParser();
-//                object=jsonParser.parse(s);
-//                arrayObj=(JSONArray) object;
-//                
-//            }
-//            Object object=null;
-//            for(Object o:arrayObj){
-//                JSONObject jsonObject = (JSONObject) o;
-//                pid = (int)(long) jsonObject.get("id");
-//                Product p= productFacade.find(pid);
-//                quantity = (int)(long) jsonObject.get("quantity");
-//                BigDecimal price = new BigDecimal((long)jsonObject.get("price"));
-//                BigDecimal total = new BigDecimal((long)jsonObject.get("total"));
-//                BigDecimal cost = priceHistoryFacade.getCost(p);
-//                PurchaseOrderDetail pod = new PurchaseOrderDetail();
-//                pod.setCost(cost);
-//                pod.setProductId(p);
-//                pod.setQuantity(quantity);
-//                pod.setUnitPrice(price);
-//                pod.setSubtotal(total);
-//                pod.setPurchaseOrderId(po);
-//                listpod.add(pod);
-//            }
-//            Account acc = accountFacade.findById(cid);
-//            
-//            po.setAccountId(acc);
-//            po.setSubTotal(ct);
-//            po.setAddress(mh.encrypt(cadd));
-//            po.setName(mh.encrypt(cname));
-//            po.setPhone(mh.encrypt(cphone));
-//            po.setStatus(false);
-//            //po.setCreatedDate((new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS").format(new Date())).toString());
-//            po.setPurchaseOrderDetailCollection(listpod);
-//            purchaseOrderFacade.create(po);
-//            out.print("Thanh cong");
+            po.setAccountId(acc);
+            po.setSubTotal(ct);
+            po.setAddress(mh.encrypt(cadd));
+            po.setName(mh.encrypt(cname));
+            po.setPhone(mh.encrypt(cphone));
+            po.setStatus(false);
+            //po.setCreatedDate((new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS").format(new Date())).toString());
+            po.setPurchaseOrderDetailCollection(listpod);
+            purchaseOrderFacade.create(po);
+            out.print("Thanh cong");
             
         }catch(Exception e){
             e.printStackTrace();

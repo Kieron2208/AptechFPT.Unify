@@ -16,22 +16,6 @@
             <param-value>DEBUG</param-value>
         </init-param>
     </filter>
-    <filter>
-        <filter-name>GZipFilter</filter-name>
-        <filter-class>org.tuckey.web.filters.urlrewrite.gzip.GzipFilter</filter-class>
-    </filter>
-    <filter-mapping>
-        <filter-name>GZipFilter</filter-name>
-        <url-pattern>/css/*</url-pattern>
-    </filter-mapping>
-    <filter-mapping>
-        <filter-name>GZipFilter</filter-name>
-        <url-pattern>/js/*</url-pattern>
-    </filter-mapping>
-    <filter-mapping>
-        <filter-name>GZipFilter</filter-name>
-        <url-pattern>/plugins/*</url-pattern>
-    </filter-mapping>
     <filter-mapping>
         <filter-name>UrlRewriteFilter</filter-name>
         <url-pattern>/*</url-pattern>
@@ -82,6 +66,18 @@
         <servlet-class>com.aptechfpt.controller.AdminProductController</servlet-class>
         <load-on-startup>1</load-on-startup>
     </servlet>
+    <servlet>
+        <servlet-name>POUpdate</servlet-name>
+        <servlet-class>com.aptechfpt.controller.POUpdateController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>PurchaseController</servlet-name>
+        <servlet-class>com.aptechfpt.controller.PurchaseController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>PurchaseReport</servlet-name>
+        <servlet-class>com.aptechfpt.controller.PurchaseReportController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>HomeController</servlet-name>
         <url-pattern>/HomeController</url-pattern>
@@ -109,6 +105,22 @@
     <servlet-mapping>
         <servlet-name>AdminSubCategory</servlet-name>
         <url-pattern>/AdminSubCategory</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>POInsert</servlet-name>
+        <url-pattern>/POInsert</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>POUpdate</servlet-name>
+        <url-pattern>/POUpdate</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PurchaseController</servlet-name>
+        <url-pattern>/PurchaseController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PurchaseReport</servlet-name>
+        <url-pattern>/PurchaseReport</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -6,11 +6,13 @@ import com.aptechfpt.converter.GenderConverter;
 import com.aptechfpt.converter.JodaDateTimeConverter;
 import com.aptechfpt.dto.AccountDTO;
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.Date;
 import java.util.Set;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import javax.xml.bind.annotation.XmlTransient;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.joda.time.DateTime;
 
@@ -23,6 +25,7 @@ import org.joda.time.DateTime;
 @NamedQueries({
     @NamedQuery(name = "Account.findAll", query = "SELECT a FROM Account a ORDER BY a.accountId ASC")})
 public class Account implements Serializable {
+
     private static final long serialVersionUID = 1L;
 
     @Id
@@ -56,6 +59,12 @@ public class Account implements Serializable {
     @Column(name = "LastName", nullable = false, length = 50)
     private String lastName;
 
+    @Basic(optional = false)
+    @Convert(converter = GenderConverter.class)
+    @Size(min = 1, max = 1)
+    @Column(name = "Gender", nullable = false, length = 1)
+    private AccountGender gender;
+
     // @Pattern(regexp="^\\(?(\\d{3})\\)?[- ]?(\\d{3})[- ]?(\\d{4})$", message="Invalid phone/fax format, should be as xxx-xxx-xxxx")//if the field contains phone or fax number consider using this annotation to enforce field validation
     @Size(max = 20)
     @Column(name = "Phone", nullable = false, length = 20)
@@ -65,19 +74,21 @@ public class Account implements Serializable {
     @Column(name = "Address", length = 200)
     private String address;
 
-    @Size(max = 1)
-    @Convert(converter = GenderConverter.class)
-    @Column(name = "Gender", nullable = false, length = 1)
-    private AccountGender gender;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "isAvailable", nullable = false)
+    private boolean isAvailable;
 
-    @Temporal(TemporalType.TIMESTAMP)
+    @Basic(optional = false)
     @Convert(converter = JodaDateTimeConverter.class)
     @Column(name = "DayOfBirth", nullable = false)
+    @Temporal(TemporalType.TIMESTAMP)
     private DateTime dayOfBirth;
 
-    @Temporal(TemporalType.TIMESTAMP)
+    @Basic(optional = false)
     @Convert(converter = JodaDateTimeConverter.class)
     @Column(name = "CreatedDate", insertable = false, updatable = false)
+    @Temporal(TemporalType.TIMESTAMP)
     private DateTime createdDate;
 
     @ElementCollection(targetClass = Role.class)
@@ -88,9 +99,18 @@ public class Account implements Serializable {
     @Column(name = "Role", length = 20, nullable = false)
     private Set<Role> roles;
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "accountId")
+    private Collection<FeedBack> feedBackCollection;
+
+    @OneToMany(mappedBy = "accountId")
+    private Collection<PurchaseOrder> purchaseOrderCollection;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "accountId")
+    private Collection<Comment> commentCollection;
+
     public Account() {
     }
-    
+
     public Account(AccountDTO dto) {
         this.accountId = dto.getAccountId() != 0 ? dto.getAccountId() : null;
         this.email = dto.getEmail();
@@ -105,7 +125,7 @@ public class Account implements Serializable {
         this.createdDate = dto.getCreatedDate();
         this.roles = dto.getRoles();
     }
-    
+
     public Account(Integer accountId, String email, String password, String imageLink, String firstName, String lastName, String phone, String address, AccountGender gender, DateTime dayOfBirth, DateTime createdDate, Set<Role> roles) {
         this.accountId = accountId;
         this.email = email;
@@ -171,19 +191,66 @@ public class Account implements Serializable {
         return address;
     }
 
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    @XmlTransient
+    public Collection<Comment> getCommentCollection() {
+        return commentCollection;
+    }
+
+    public void setCommentCollection(Collection<Comment> commentCollection) {
+        this.commentCollection = commentCollection;
+    }
+
+    @XmlTransient
+    public Collection<FeedBack> getFeedBackCollection() {
+        return feedBackCollection;
+    }
+
+    public void setFeedBackCollection(Collection<FeedBack> feedBackCollection) {
+        this.feedBackCollection = feedBackCollection;
+    }
+
+    @XmlTransient
+    public Collection<PurchaseOrder> getPurchaseOrderCollection() {
+        return purchaseOrderCollection;
+    }
+
+    public void setPurchaseOrderCollection(Collection<PurchaseOrder> purchaseOrderCollection) {
+        this.purchaseOrderCollection = purchaseOrderCollection;
+    }
+
     public AccountGender getGender() {
         return gender;
+    }
+
+    public void setGender(AccountGender gender) {
+        this.gender = gender;
     }
 
     public DateTime getDayOfBirth() {
         return dayOfBirth;
     }
 
+    public void setDayOfBirth(DateTime dayOfBirth) {
+        this.dayOfBirth = dayOfBirth;
+    }
+
     public DateTime getCreatedDate() {
         return createdDate;
     }
 
-    public Set<Role> getRoles() {
-        return roles;
+    public void setCreatedDate(DateTime createdDate) {
+        this.createdDate = createdDate;
+    }
+
+    public boolean getIsAvailable() {
+        return isAvailable;
+    }
+
+    public void setIsAvailable(boolean isAvailable) {
+        this.isAvailable = isAvailable;
     }
 }

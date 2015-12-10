@@ -4,6 +4,8 @@
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <t:defaultLayout title="Shop UI">
     <jsp:attribute name="pagejs">
+        <script src="<c:url value="/plugins/angular.min.js"/>"></script>
+        <script src="<c:url value="/js/shoppingcart.js"/>"></script>
         <script src="<c:url value="/js/plugins/revolution-slider.js"/>"></script>
         <script type="text/javascript">
             jQuery(document).ready(function () {
@@ -313,7 +315,7 @@
                                     </c:if>
                                 </c:forEach>
                                 <a class="product-review" href="shop-ui-inner.html">Quick review</a>
-                                <a class="add-to-cart" href="#"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                                <a class="add-to-cart" ng-click="put(${p.productId},'${p.name}','${img.imagePath}',${p.unitPrice},1)" href><i class="fa fa-shopping-cart"></i>Add to cart</a>
                                 <div class="shop-rgba-dark-green rgba-banner">New</div>
                             </div>
                             <div class="product-description product-description-brd">

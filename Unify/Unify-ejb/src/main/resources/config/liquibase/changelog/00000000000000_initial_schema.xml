@@ -1,0 +1,419 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog 
+                            http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd
+                            http://www.liquibase.org/xml/ns/dbchangelog-ext 
+                            http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+    <changeSet id="00000000000001" author="Kieron Tran">
+        
+        <createTable tableName="Category">
+            <column autoIncrement="true" name="CategoryId" type="int">
+                <constraints primaryKey="true" primaryKeyName="PK_Category"/>
+            </column>
+            <column name="Name" type="varchar(100)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <createTable tableName="SubCategory">
+            <column autoIncrement="true" name="SubCategoryId" type="int">
+                <constraints primaryKey="true" primaryKeyName="PK_SubCategory"/>
+            </column>
+            <column name="CategoryId" type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column name="Name" type="varchar(100)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <createTable tableName="Product">
+            <column autoIncrement="true" name="ProductId" type="int">
+                <constraints primaryKey="true" primaryKeyName="PK_PRODUCT"/>
+            </column>
+            <column name="SubCategoryId" type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column name="Name" type="varchar(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="UnitPrice" type="decimal(19, 4)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="Like" type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column name="Gender" type="int"/>
+            <column name="Description" type="varchar(MAX)"/>
+            <column defaultValueNumeric="0" name="Available" type="bit">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <createTable tableName="PriceHistory">
+            <column autoIncrement="true" name="PriceHistoryId" type="bigint">
+                <constraints primaryKey="true" primaryKeyName="PK_PriceHistory"/>
+            </column>
+            <column name="ProductId" type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column name="Cost" type="decimal(19, 4)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="Price" type="decimal(19, 4)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="getdate()" name="CreatedDate" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <createTable tableName="Image">
+            <column autoIncrement="true" name="ImageId" type="bigint">
+                <constraints primaryKey="true" primaryKeyName="PK_Image"/>
+            </column>
+            <column name="ProductId" type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ImagePath" type="varchar(400)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="DisplayOrder" type="int">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <createTable tableName="Account">
+            <column autoIncrement="true" name="AccountId" type="int">
+                <constraints primaryKey="true" primaryKeyName="PK_ACCOUNT"/>
+            </column>
+            <column name="Email" type="varchar(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="Password" type="varchar(200)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ImageLink" type="varchar(400)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="FirstName" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="LastName" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="Phone" type="varchar(20)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="Address" type="varchar(200)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="Gender" type="varchar(1)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="DayOfBirth" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="getdate()" name="CreatedDate" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="1" name="isAvailable" type="bit">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <createTable tableName="AccountRole">
+            <column name="Email" type="varchar(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="Role" type="varchar(20)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <createTable tableName="FeedBack">
+            <column autoIncrement="true" name="FeedBackId" type="int">
+                <constraints primaryKey="true" primaryKeyName="FK_FEEDBACKID"/>
+            </column>
+            <column name="AccountId" type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column name="Title" type="varchar(200)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="Description" type="varchar(MAX)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="getdate()" name="CreatedDate" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+            <column name="Status" type="int">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <createTable tableName="Comment">
+            <column autoIncrement="true" name="CommentId" type="int">
+                <constraints primaryKey="true" primaryKeyName="FK_COMMENT"/>
+            </column>
+            <column name="ProductId" type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column name="AccountId" type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="Like" type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column name="Comments" type="varchar(8000)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="getdate()" name="ModifiedDate" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="getdate()" name="CreatedDate" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <createTable tableName="PurchaseOrder">
+            <column autoIncrement="true" name="PurchaseOrderId" type="int">
+                <constraints primaryKey="true" primaryKeyName="PK_PURCHASEORDER"/>
+            </column>
+            <column name="AccountId" type="int"/>
+            <column name="SubTotal" type="decimal(19, 4)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="Address" type="varchar(MAX)"/>
+            <column name="Phone" type="varchar(MAX)"/>
+            <column defaultValueNumeric="0" name="Status" type="bit">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="getdate()" name="CreatedDate" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+            <column name="Name" type="varchar(MAX)"/>
+            <column defaultValueNumeric="1" name="CancelInvoice" type="bit">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <createTable tableName="PurchaseOrderDetail">
+            <column autoIncrement="true" name="PurchaseOrderDetailId" type="bigint">
+                <constraints primaryKey="true" primaryKeyName="PK_PurchaseOrderDetailId"/>
+            </column>
+            <column name="PurchaseOrderId" type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ProductId" type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column name="Quantity" type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column name="Cost" type="decimal(19, 4)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="UnitPrice" type="decimal(19, 4)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="Subtotal" type="decimal(19, 4)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        
+        <addUniqueConstraint 
+            columnNames="Name" 
+            constraintName="UC_CATEGORY_NAME" 
+            tableName="Category"/>
+        <addUniqueConstraint 
+            columnNames="Name"
+            constraintName="UC_SUBCATEGORY_NAME"
+            tableName="SubCategory"/>
+        <addUniqueConstraint 
+            columnNames="Name" 
+            constraintName="UC_PRODUCTNAME" 
+            tableName="Product"/>
+        <addUniqueConstraint 
+            columnNames="Email" 
+            constraintName="UC_ACCOUNT_EMAIL" 
+            tableName="Account"/>
+        <addUniqueConstraint 
+            columnNames="Email, Role" 
+            constraintName="UQ_ACCOUNTROLE_EMAIL_ROLE" 
+            tableName="AccountRole"/>
+        
+        <addForeignKeyConstraint 
+            baseColumnNames="CategoryId" 
+            baseTableName="SubCategory" 
+            constraintName="FK_SUBCATEGORY_CATEGORY" 
+            deferrable="false" 
+            initiallyDeferred="false" 
+            onDelete="NO ACTION" 
+            onUpdate="NO ACTION" 
+            referencedColumnNames="CategoryId" 
+            referencedTableName="Category"/>
+        <addForeignKeyConstraint 
+            baseColumnNames="SubCategoryId" 
+            baseTableName="Product" 
+            constraintName="FK_SUBCATEGORYID_PRODUCT" 
+            deferrable="false" 
+            initiallyDeferred="false" 
+            onDelete="NO ACTION" 
+            onUpdate="NO ACTION" 
+            referencedColumnNames="SubCategoryId" 
+            referencedTableName="SubCategory"/>
+        <addForeignKeyConstraint
+            baseColumnNames="ProductId"
+            baseTableName="PriceHistory"
+            constraintName="FK_PRICEHISTORY_PRODUCT"
+            deferrable="false"
+            initiallyDeferred="false"
+            onDelete="NO ACTION"
+            onUpdate="NO ACTION"
+            referencedColumnNames="ProductId"
+            referencedTableName="Product"/>
+        <addForeignKeyConstraint
+            baseColumnNames="ProductId"
+            baseTableName="Image"
+            constraintName="FK_IMAGE_PRODUCT"
+            deferrable="false"
+            initiallyDeferred="false"
+            onDelete="NO ACTION"
+            onUpdate="NO ACTION"
+            referencedColumnNames="ProductId"
+            referencedTableName="Product"/>
+        <addForeignKeyConstraint
+            baseColumnNames="AccountId"
+            baseTableName="FeedBack"
+            constraintName="FK_FEEDBACK_ACCOUNT"
+            deferrable="false"
+            initiallyDeferred="false"
+            onDelete="NO ACTION"
+            onUpdate="NO ACTION"
+            referencedColumnNames="AccountId"
+            referencedTableName="Account"/>
+        <addForeignKeyConstraint 
+            baseColumnNames="AccountId" 
+            baseTableName="Comment"
+            constraintName="FK_COMMENT_ACCOUNT"
+            deferrable="false"
+            initiallyDeferred="false"
+            onDelete="NO ACTION"
+            onUpdate="NO ACTION"
+            referencedColumnNames="AccountId"
+            referencedTableName="Account"/>
+        <addForeignKeyConstraint
+            baseColumnNames="ProductId"
+            baseTableName="Comment"
+            constraintName="FK_COMMENT_PRODUCT"
+            deferrable="false"
+            initiallyDeferred="false"
+            onDelete="NO ACTION"
+            onUpdate="NO ACTION"
+            referencedColumnNames="ProductId"
+            referencedTableName="Product"/>
+        <addForeignKeyConstraint
+            baseColumnNames="AccountId"
+            baseTableName="PurchaseOrder"
+            constraintName="FK_PURCHASEORDER_ACCOUNT"
+            deferrable="false"
+            initiallyDeferred="false"
+            onDelete="NO ACTION"
+            onUpdate="NO ACTION"
+            referencedColumnNames="AccountId"
+            referencedTableName="Account"/>
+        <addForeignKeyConstraint
+            baseColumnNames="PurchaseOrderId"
+            baseTableName="PurchaseOrderDetail"
+            constraintName="FK_PURCHASEORDERDETAIL_PURCHCASEORDER"
+            deferrable="false"
+            initiallyDeferred="false"
+            onDelete="NO ACTION"
+            onUpdate="NO ACTION"
+            referencedColumnNames="PurchaseOrderId"
+            referencedTableName="PurchaseOrder"/>
+        <addForeignKeyConstraint
+            baseColumnNames="ProductId"
+            baseTableName="PurchaseOrderDetail"
+            constraintName="FK_PURCHASEORDERDETAIL_PRODUCT"
+            deferrable="false"
+            initiallyDeferred="false"
+            onDelete="NO ACTION"
+            onUpdate="NO ACTION"
+            referencedColumnNames="ProductId"
+            referencedTableName="Product"/>
+        
+        <loadData encoding="UTF-8"
+                  file="src/main/resources/config/liquibase/changelog/00000000000000_initial_schema/category.csv"
+                  separator=","
+                  tableName="Category"/>
+        <loadData encoding="UTF-8"
+                  file="src/main/resources/config/liquibase/changelog/00000000000000_initial_schema/subcategory.csv"
+                  separator=","
+                  tableName="SubCategory"/>
+        <loadData encoding="UTF-8"
+                  file="src/main/resources/config/liquibase/changelog/00000000000000_initial_schema/product.csv"
+                  separator=","
+                  tableName="Product"/>
+        <loadData encoding="UTF-8"
+                  file="src/main/resources/config/liquibase/changelog/00000000000000_initial_schema/pricehistory.csv"
+                  separator=","
+                  tableName="PriceHistory"/>
+        <loadData encoding="UTF-8"
+                  file="src/main/resources/config/liquibase/changelog/00000000000000_initial_schema/image.csv"
+                  separator=","
+                  tableName="Image"/>
+        <loadData encoding="UTF-8"
+                  file="src/main/resources/config/liquibase/changelog/00000000000000_initial_schema/account.csv"
+                  separator=","
+                  tableName="Account"/>
+        <loadData encoding="UTF-8"
+                  file="src/main/resources/config/liquibase/changelog/00000000000000_initial_schema/accountrole.csv"
+                  separator=","
+                  tableName="AccountRole"/>
+        <loadData encoding="UTF-8"
+                  file="src/main/resources/config/liquibase/changelog/00000000000000_initial_schema/feedback.csv"
+                  separator=","
+                  tableName="FeedBack"/>
+        <loadData encoding="UTF-8"
+                  file="src/main/resources/config/liquibase/changelog/00000000000000_initial_schema/comment.csv"
+                  separator=","
+                  tableName="Comment"/>
+        <loadData encoding="UTF-8"
+                  file="src/main/resources/config/liquibase/changelog/00000000000000_initial_schema/purchaseorder.csv"
+                  separator=","
+                  tableName="PurchaseOrder"/>
+        <loadData encoding="UTF-8"
+                  file="src/main/resources/config/liquibase/changelog/00000000000000_initial_schema/purchaseorderdetail.csv"
+                  separator=","
+                  tableName="PurchaseOrderDetail"/>
+        <rollback>
+            <delete tableName="PurchaseOrderDetail"/>
+            <delete tableName="PurchaseOrder"/>
+            <delete tableName="Comment"/>
+            <delete tableName="FeedBack"/>
+            <delete tableName="AccountRole"/>
+            <delete tableName="Account"/>
+            <delete tableName="Image"/>
+            <delete tableName="PriceHistory"/>
+            <delete tableName="Product"/>
+            <delete tableName="SubCategory"/>
+            <delete tableName="Category"/>
+            <dropAllForeignKeyConstraints baseTableName="PurchaseOrderDetail"/>
+            <dropAllForeignKeyConstraints baseTableName="PurchaseOrder"/>
+            <dropAllForeignKeyConstraints baseTableName="Comment"/>
+            <dropAllForeignKeyConstraints baseTableName="FeedBack"/>
+            <!--<dropAllForeignKeyConstraints baseTableName="AccountRole"/>-->
+            <dropAllForeignKeyConstraints baseTableName="Image"/>
+            <dropAllForeignKeyConstraints baseTableName="PriceHistory"/>
+            <dropAllForeignKeyConstraints baseTableName="Product"/>
+            <dropAllForeignKeyConstraints baseTableName="SubCategory"/>
+            <dropTable tableName="PurchaseOrderDetail"/>
+            <dropTable tableName="PurchaseOrder"/>
+            <dropTable tableName="Comment"/>
+            <dropTable tableName="FeedBack"/>
+            <dropTable tableName="AccountRole"/>
+            <dropTable tableName="Account"/>
+            <dropTable tableName="Image"/>
+            <dropTable tableName="PriceHistory"/>
+            <dropTable tableName="Product"/>
+            <dropTable tableName="SubCategory"/>
+            <dropTable tableName="Category"/>
+        </rollback>
+    </changeSet>
+
+</databaseChangeLog>

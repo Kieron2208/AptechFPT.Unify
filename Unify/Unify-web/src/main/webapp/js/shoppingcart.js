@@ -9,21 +9,21 @@
         var form = document.getElementById("myForm");
         var x = w.localStorage.getItem("shoppingcart");
 
-//        $scope.cart = JSON.parse(x) || [];
-        $scope.cart = [{
-                id: 1,
-                name: 'T-Shirt01',
-                pic: 'img/product/Tshirt01.jpg',
-                price: 140.0000,
-                quantity: 1,
-            }, {
-                id: 2,
-                name: 'T-Shirt02',
-                pic: 'img/product/Tshirt02.jpg',
-                price: 145.0000,
-                quantity: 1,
-            }
-        ];
+        $scope.cart = JSON.parse(x) || [];
+//        $scope.cart = [{
+//                id: 1,
+//                name: 'T-Shirt01',
+//                pic: 'img/product/Tshirt01.jpg',
+//                price: 140.0000,
+//                quantity: 1,
+//            }, {
+//                id: 2,
+//                name: 'T-Shirt02',
+//                pic: 'img/product/Tshirt02.jpg',
+//                price: 145.0000,
+//                quantity: 1,
+//            }
+//        ];
         $scope.put = function (id, n, pic, p, q) {
 
             //kiem tra 
