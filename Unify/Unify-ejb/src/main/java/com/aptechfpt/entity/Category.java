@@ -44,11 +44,13 @@ public class Category implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "CategoryId", nullable = false)
     private Integer categoryId;
+    
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 100)
     @Column(name = "Name", nullable = false, length = 100)
     private String name;
+    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "categoryId")
     private Collection<SubCategory> subCategoryCollection;
 
