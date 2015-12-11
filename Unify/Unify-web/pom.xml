@@ -48,12 +48,6 @@
                 <artifactId>arquillian-container-test-api</artifactId>
                 <version>1.1.10.Final</version>
             </dependency>
-<!--            <dependency>
-                <groupId>org.slf4j</groupId>
-                <artifactId>slf4j-api</artifactId>
-                <version>1.7.13</version>
-                <scope>test</scope>
-            </dependency>-->
         </dependencies>
     </dependencyManagement>
     
@@ -75,7 +69,21 @@
             <artifactId>urlrewritefilter</artifactId>
             <version>4.0.4</version>
         </dependency>
-        
+        <dependency>
+            <groupId>commons-codec</groupId>
+            <artifactId>commons-codec</artifactId>
+            <version>1.10</version>
+        </dependency>
+        <dependency>
+            <groupId>joda-time</groupId>
+            <artifactId>joda-time</artifactId>
+            <version>2.9.1</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>2.5</version>
+        </dependency>
         <!--Testing libraries-->
         <dependency>
             <groupId>junit</groupId>
@@ -106,18 +114,6 @@
             <version>1.0.0.CR4</version>
             <scope>test</scope>
         </dependency>
-<!--        <dependency>
-            <groupId>org.jboss.arquillian.container</groupId>
-            <artifactId>arquillian-glassfish-embedded-3.1</artifactId>
-            <version>1.0.0.CR4</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.glassfish.main.extras</groupId>
-            <artifactId>glassfish-embedded-all</artifactId>
-            <version>4.1</version>
-            <scope>test</scope>
-        </dependency>-->
         <dependency>
             <groupId>org.jboss.shrinkwrap.resolver</groupId>
             <artifactId>shrinkwrap-resolver-api</artifactId>
@@ -132,12 +128,34 @@
             <groupId>org.jboss.shrinkwrap.resolver</groupId>
             <artifactId>shrinkwrap-resolver-impl-maven</artifactId>
             <scope>test</scope>
-            <type>jar</type>
         </dependency>
         <dependency>
             <groupId>org.jboss.shrinkwrap.resolver</groupId>
             <artifactId>shrinkwrap-resolver-impl-maven-archive</artifactId>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss.arquillian.extension</groupId>
+            <artifactId>arquillian-jrebel-impl</artifactId>
+            <version>1.0.0.Alpha1</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-java</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.opera</groupId>
+            <artifactId>operadriver</artifactId>
+            <scope>test</scope>
+            <version>1.5</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.seleniumhq.selenium</groupId>
+                    <artifactId>selenium-remote-driver</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
     </dependencies>
 
@@ -146,6 +164,9 @@
             <testResource>
                 <directory>src/main/webapp</directory>
                 <filtering>true</filtering>
+            </testResource>
+            <testResource>
+                <directory>src/test/resources</directory>
             </testResource>
         </testResources>
         <plugins>

@@ -40,7 +40,7 @@
         <!-- CSS Customization -->
         <link rel="stylesheet" href="<c:url value="/css/custom.css"/>">
     </head>
-    <body class="header-fixed">
+    <body class="header-fixed" ng-app="myApp" ng-controller="MyController">
         <div class="wrapper">
             <%@include file="../header.jsp" %>
             <jsp:doBody/>

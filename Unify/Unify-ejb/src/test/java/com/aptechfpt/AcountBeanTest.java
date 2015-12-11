@@ -36,16 +36,15 @@ public class AcountBeanTest {
     @Deployment
     public static Archive<?> deploy() {
         File[] libraries = Maven.resolver().loadPomFromFile("pom.xml")
-                .resolve("com.microsoft.sqlserver:sqljdbc4"
-                        ,"org.assertj:assertj-core")
+                .importCompileAndRuntimeDependencies()
+                .resolve("org.assertj:assertj-core")
                 .withTransitivity()
                 .asFile();
-//        File file =new File("src/main/setup/glassfish-resources.xml");
-//        System.out.println("file existed: " + file.exists());
-//        System.out.println("file dir: " + file.getAbsolutePath());
-        WebArchive war = ShrinkWrap.create(WebArchive.class)
+                
+        WebArchive war = ShrinkWrap.create(WebArchive.class,"AccountTest.war")
                 .addPackage("com.aptechfpt.bean")
                 .addPackage("com.aptechfpt.entity")
+                .addPackage("com.aptechfpt.converter")
 //                .addAsManifestResource(file,"glassfish-resources.xml")
                 .addAsResource("META-INF/persistence.xml")
                 .addAsLibraries(libraries);
@@ -64,6 +63,8 @@ public class AcountBeanTest {
         System.out.println(findAll.size());
         for (Account account : findAll) {
             System.out.println("Email: " + account.getEmail());
+            System.out.println("Date Of Birth: " + account.getDayOfBirth().toString());
+            System.out.println("Created Date : " + account.getCreatedDate().toString());
         }
         assertThat(findAll).isNotNull();
     }
