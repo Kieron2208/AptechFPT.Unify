@@ -36,103 +36,21 @@
                         <a href="page_profile_me.html"><i class="fa fa-user"></i> Profile</a>
                     </li>
                     <li class="list-group-item">
-                        <a href="page_profile_users.html"><i class="fa fa-group"></i> Users</a>
+                        <a href="page_profile_users.html"><i class="fa fa-shopping-cart"></i> My Orders</a>
                     </li>
                     <li class="list-group-item">
-                        <a href="page_profile_projects.html"><i class="fa fa-cubes"></i> My Projects</a>
+                        <a href="page_profile_users.html"><i class="fa fa-reply"></i> My FeedBacks</a>
                     </li>
                     <li class="list-group-item">
-                        <a href="page_profile_comments.html"><i class="fa fa-comments"></i> Comments</a>
+                        <a href="page_profile_comments.html"><i class="fa fa-comments"></i>My Comments</a>
                     </li>
                     <li class="list-group-item">
-                        <a href="page_profile_history.html"><i class="fa fa-history"></i> History</a>
-                    </li>
-                    <li class="list-group-item">
-                        <a href="page_profile_settings.html"><i class="fa fa-cog"></i> Settings</a>
+                        <a href="page_profile_history.html"><i class="fa fa-history"></i>Order History</a>
                     </li>
                 </ul>
-
-                <div class="panel-heading-v2 overflow-h">
-                    <h2 class="heading-xs pull-left"><i class="fa fa-bar-chart-o"></i> Task Progress</h2>
-                    <a href="#"><i class="fa fa-cog pull-right"></i></a>
-                </div>
-                <h3 class="heading-xs">Web Design <span class="pull-right">92%</span></h3>
-                <div class="progress progress-u progress-xxs">
-                    <div style="width: 92%" aria-valuemax="100" aria-valuemin="0" aria-valuenow="92" role="progressbar" class="progress-bar progress-bar-u">
-                    </div>
-                </div>
-                <h3 class="heading-xs">Unify Project <span class="pull-right">85%</span></h3>
-                <div class="progress progress-u progress-xxs">
-                    <div style="width: 85%" aria-valuemax="100" aria-valuemin="0" aria-valuenow="85" role="progressbar" class="progress-bar progress-bar-blue">
-                    </div>
-                </div>
-                <h3 class="heading-xs">Sony Corporation <span class="pull-right">64%</span></h3>
-                <div class="progress progress-u progress-xxs margin-bottom-40">
-                    <div style="width: 64%" aria-valuemax="100" aria-valuemin="0" aria-valuenow="64" role="progressbar" class="progress-bar progress-bar-dark">
-                    </div>
-                </div>
-
+                
                 <hr>
 
-                <!--Notification-->
-                <div class="panel-heading-v2 overflow-h">
-                    <h2 class="heading-xs pull-left"><i class="fa fa-bell-o"></i> Notification</h2>
-                    <a href="#"><i class="fa fa-cog pull-right"></i></a>
-                </div>
-                <ul class="list-unstyled mCustomScrollbar margin-bottom-20" data-mcs-theme="minimal-dark">
-                    <li class="notification">
-                        <i class="icon-custom icon-sm rounded-x icon-bg-red icon-line icon-envelope"></i>
-                        <div class="overflow-h">
-                            <span><strong>Albert Heller</strong> has sent you email.</span>
-                            <small>Two minutes ago</small>
-                        </div>
-                    </li>
-                    <li class="notification">
-                        <img class="rounded-x" src="<c:url value="/img/testimonials/img6.jpg"/>" alt="">
-                        <div class="overflow-h">
-                            <span><strong>Taylor Lee</strong> started following you.</span>
-                            <small>Today 18:25 pm</small>
-                        </div>
-                    </li>
-                    <li class="notification">
-                        <i class="icon-custom icon-sm rounded-x icon-bg-yellow icon-line fa fa-bolt"></i>
-                        <div class="overflow-h">
-                            <span><strong>Natasha Kolnikova</strong> accepted your invitation.</span>
-                            <small>Yesterday 1:07 pm</small>
-                        </div>
-                    </li>
-                    <li class="notification">
-                        <img class="rounded-x" src="<c:url value="/img/testimonials/img1.jpg"/>" alt="">
-                        <div class="overflow-h">
-                            <span><strong>Mikel Andrews</strong> commented on your Timeline.</span>
-                            <small>23/12 11:01 am</small>
-                        </div>
-                    </li>
-                    <li class="notification">
-                        <i class="icon-custom icon-sm rounded-x icon-bg-blue icon-line fa fa-comments"></i>
-                        <div class="overflow-h">
-                            <span><strong>Bruno Js.</strong> added you to group chating.</span>
-                            <small>Yesterday 1:07 pm</small>
-                        </div>
-                    </li>
-                    <li class="notification">
-                        <img class="rounded-x" src="<c:url value="/img/testimonials/img6.jpg"/>" alt="">
-                        <div class="overflow-h">
-                            <span><strong>Taylor Lee</strong> changed profile picture.</span>
-                            <small>23/12 15:15 pm</small>
-                        </div>
-                    </li>
-                </ul>
-                <button type="button" class="btn-u btn-u-default btn-u-sm btn-block">Load More</button>
-                <!--End Notification-->
-
-                <div class="margin-bottom-50"></div>
-
-                <!--Datepicker-->
-                <form action="#" id="sky-form2" class="sky-form">
-                    <div id="inline-start"></div>
-                </form>
-                <!--End Datepicker-->
             </div>
             <!--End Left Sidebar-->
 
@@ -140,6 +58,24 @@
             <div class="col-md-9">
                 <div class="profile-body">
                 
+                    <div class="profile-bio">
+                        <div class="row">
+                            <div class="col-md-5">
+                                <img class="img-responsive md-margin-bottom-10" src="img/team/img32-md.jpg" alt="">
+                                <a class="btn-u btn-u-sm" href="#">Change Picture</a>
+                            </div>
+                            <div class="col-md-7">
+                                <h2>Edward Rooster</h2>
+                                <span><strong>Job:</strong> Web Developer</span>
+                                <span><strong>Position:</strong> Web Designer</span>
+                                <hr>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse eget massa nec turpis congue bibendum. Integer nulla felis, porta suscipit nulla et, dignissim commodo nunc. Morbi a semper nulla.</p>
+                                <p>Proin mauris odio, pharetra quis ligula non, vulputate vehicula quam. Nunc in libero vitae nunc ultricies tincidunt ut sed leo. Sed luctus dui ut congue consequat. Cras consequat nisl ante, nec malesuada velit pellentesque ac. Pellentesque nec arcu in ipsum iaculis convallis.</p>
+                            </div>
+                        </div>
+                    </div><!--/end row-->
+
+                    
                 </div>
             </div>
             <!-- End Profile Content -->

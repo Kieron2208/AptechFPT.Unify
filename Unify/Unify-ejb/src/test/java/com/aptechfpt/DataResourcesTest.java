@@ -50,7 +50,7 @@ public class DataResourcesTest {
         
         return war;
     }
-    
+
     @Resource
     private DataSource dataSource;
     

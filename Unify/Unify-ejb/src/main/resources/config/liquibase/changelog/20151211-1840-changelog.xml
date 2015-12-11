@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+    <changeSet author="Kieron Tran" id="1449834033849-1">
+        <sqlFile dbms="mssql"
+                 encoding="utf8"
+                 endDelimiter="\nGO"
+                 path="src/main/resources/config/liquibase/changelog/20151211-1840-changelog/Unify-extras.sql"
+                 relativeToChangelogFile="false"
+                 splitStatements="true"
+                 stripComments="true"/>
+        <rollback>
+            <dropAllForeignKeyConstraints baseTableName="AccountRole"/>
+            <update tableName="PurchaseOrder">
+                <column name="SubTotal" value="[SubTotal] / 1.12"/>
+                <where>[PurchaseOrderId] < 200</where>
+            </update>
+        </rollback>
+    </changeSet>
+</databaseChangeLog>

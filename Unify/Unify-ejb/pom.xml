@@ -40,12 +40,6 @@
                 <artifactId>arquillian-container-test-api</artifactId>
                 <version>1.1.10.Final</version>
             </dependency>
-            <dependency>
-                <groupId>org.slf4j</groupId>
-                <artifactId>slf4j-api</artifactId>
-                <version>1.7.13</version>
-                <scope>test</scope>
-            </dependency>
         </dependencies>
     </dependencyManagement>
 
@@ -67,6 +61,16 @@
             <artifactId>org.eclipse.persistence.jpa.modelgen.processor</artifactId>
             <version>2.5.2</version>
             <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>commons-codec</groupId>
+            <artifactId>commons-codec</artifactId>
+            <version>1.10</version>
+        </dependency>
+        <dependency>
+            <groupId>joda-time</groupId>
+            <artifactId>joda-time</artifactId>
+            <version>2.9.1</version>
         </dependency>
         <dependency>
             <groupId>com.microsoft.sqlserver</groupId>
@@ -122,21 +126,15 @@
             <version>1.0.0.CR4</version>
             <scope>test</scope>
         </dependency>
-<!--        <dependency>
-            <groupId>org.jboss.arquillian.container</groupId>
-            <artifactId>arquillian-glassfish-embedded-3.1</artifactId>
-            <version>1.0.0.CR4</version>
-            <scope>test</scope>
-        </dependency>-->
-<!--        <dependency>
-            <groupId>org.glassfish.main.extras</groupId>
-            <artifactId>glassfish-embedded-all</artifactId>
-            <version>4.1</version>
-            <scope>test</scope>
-        </dependency>-->
         <dependency>
             <groupId>org.jboss.shrinkwrap.resolver</groupId>
             <artifactId>shrinkwrap-resolver-impl-maven-archive</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss.arquillian.extension</groupId>
+            <artifactId>arquillian-jrebel-impl</artifactId>
+            <version>1.0.0.Alpha1</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
@@ -150,6 +148,9 @@
             <testResource>
                 <directory>src/main/setup</directory>
                 <filtering>true</filtering>
+            </testResource>
+            <testResource>
+                <directory>src/test/resources</directory>
             </testResource>
         </testResources>
         <plugins>
@@ -215,7 +216,7 @@
                 <artifactId>liquibase-maven-plugin</artifactId>
                 <version>3.4.1</version>
                 <configuration>
-                    <changeLogFile>src/main/resources/config/liquibase/changelog/201511250958-changelog.xml</changeLogFile>
+                    <changeLogFile>src/main/resources/config/liquibase/master.xml</changeLogFile>
                     <propertyFileWillOverride>true</propertyFileWillOverride>
                     <propertyFile>src/main/resources/config/liquibase/liquibase.properties</propertyFile>
                     <migrationSqlOutputFile>src/main/resources/config/liquibase/Unify.sql</migrationSqlOutputFile>
