@@ -5,6 +5,7 @@
  */
 package com.aptechfpt.entity;
 
+import com.aptechfpt.converter.JodaDateTimeConverter;
 import com.aptechfpt.converter.JodaDateTimeStringConverter;
 import java.io.Serializable;
 import javax.persistence.Basic;
@@ -61,13 +62,13 @@ public class Comment implements Serializable {
     
     @Basic(optional = false)
     @Temporal(TemporalType.TIMESTAMP)
-    @Convert(converter = JodaDateTimeStringConverter.class)
+    @Convert(converter = JodaDateTimeConverter.class)
     @Column(name = "ModifiedDate", insertable = false)
     private String modifiedDate;
     
     @Basic(optional = false)
     @Temporal(TemporalType.TIMESTAMP)
-    @Convert(converter = JodaDateTimeStringConverter.class)
+    @Convert(converter = JodaDateTimeConverter.class)
     @Column(name = "CreatedDate", insertable = false, updatable = false)
     private String createdDate;
     
