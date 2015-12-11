@@ -1,14 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.aptechfpt.entity;
 
-import com.aptechfpt.converter.JodaDateTimeStringConverter;
+import com.aptechfpt.converter.JodaDateTimeConverter;
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Convert;
@@ -64,7 +58,7 @@ public class PriceHistory implements Serializable {
 
     @Basic(optional = false)
     @Temporal(TemporalType.TIMESTAMP)
-    @Convert(converter = JodaDateTimeStringConverter.class)
+    @Convert(converter = JodaDateTimeConverter.class)
     @Column(name = "CreatedDate", insertable = false, updatable = false)
     private DateTime createdDate;
 
