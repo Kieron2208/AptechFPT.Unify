@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.aptechfpt.entity;
 
 import java.io.Serializable;
@@ -36,32 +31,40 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "PurchaseOrderDetail.findByUnitPrice", query = "SELECT p FROM PurchaseOrderDetail p WHERE p.unitPrice = :unitPrice"),
     @NamedQuery(name = "PurchaseOrderDetail.findBySubtotal", query = "SELECT p FROM PurchaseOrderDetail p WHERE p.subtotal = :subtotal")})
 public class PurchaseOrderDetail implements Serializable {
+    
     private static final long serialVersionUID = 1L;
+    
     @Id
     @Basic(optional = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "PurchaseOrderDetailId", nullable = false)
     private Long purchaseOrderDetailId;
+    
     @Basic(optional = false)
     @NotNull
     @Column(name = "Quantity", nullable = false)
     private int quantity;
+    
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Basic(optional = false)
     @NotNull
     @Column(name = "Cost", nullable = false, precision = 19, scale = 4)
     private BigDecimal cost;
+    
     @Basic(optional = false)
     @NotNull
     @Column(name = "UnitPrice", nullable = false, precision = 19, scale = 4)
     private BigDecimal unitPrice;
+    
     @Basic(optional = false)
     @NotNull
     @Column(name = "Subtotal", nullable = false, precision = 19, scale = 4)
     private BigDecimal subtotal;
+    
     @JoinColumn(name = "ProductId", referencedColumnName = "ProductId", nullable = false)
     @ManyToOne(optional = false)
     private Product productId;
+    
     @JoinColumn(name = "PurchaseOrderId", referencedColumnName = "PurchaseOrderId", nullable = false)
     @ManyToOne(optional = false)
     private PurchaseOrder purchaseOrderId;
