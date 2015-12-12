@@ -5,6 +5,7 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
 /**
@@ -34,6 +35,13 @@ public class AccountFacade extends AbstractFacade<Account> implements AccountFac
     @Override
     public Account findById(int id) {
         return super.find(id);
+    }
+
+    @Override
+    public Account findByEmail(String email) {
+        TypedQuery<Account> q = getEntityManager().createNamedQuery("Account.findByEmail",Account.class);
+        q.setParameter("email", email);
+        return (Account) q.getSingleResult();
     }
     
     

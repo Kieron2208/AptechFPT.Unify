@@ -5,6 +5,15 @@
     <jsp:attribute name="pagecss">
         <link rel="stylesheet" href="<c:url value="css/pages/log-reg-v3.css"/>">
     </jsp:attribute>
+    <jsp:attribute name="pagejs">
+        <script src="<c:url value="/js/forms/page_login.js"/>" type="text/javascript"></script>
+        <script src="<c:url value="/js/forms/page_contact_form.js"/>" type="text/javascript"></script>
+        <script>
+            $(document).ready(function(){
+                App.init();
+            });
+        </script>
+    </jsp:attribute>
     <jsp:body>
         <!--=== Breadcrumbs v4 ===-->
         <div class="breadcrumbs-v4">

@@ -11,6 +11,7 @@ import java.io.File;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.inject.Inject;
+import org.apache.commons.codec.digest.DigestUtils;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.shrinkwrap.api.Archive;
@@ -45,6 +46,9 @@ public class AcountBeanTest {
                 .addPackage("com.aptechfpt.bean")
                 .addPackage("com.aptechfpt.entity")
                 .addPackage("com.aptechfpt.converter")
+                .addPackage("com.aptechfpt.dto")
+                .addPackage("com.aptechfpt.enumtype")
+                .addPackage("com.aptechfpt.utils")
 //                .addAsManifestResource(file,"glassfish-resources.xml")
                 .addAsResource("META-INF/persistence.xml")
                 .addAsLibraries(libraries);
@@ -69,4 +73,12 @@ public class AcountBeanTest {
         assertThat(findAll).isNotNull();
     }
     
+    @Test
+    public void Find_Person_By_Email()throws Exception{
+        String email = "kieron2208@gmail.com";
+        Account account = accountFacadeLocal.findByEmail(email);
+        assertThat(account.getAccountId()).isEqualTo(2);
+        assertThat(account.getEmail()).isEqualTo(email);
+        assertThat(account.getPassword()).isEqualTo(DigestUtils.sha512Hex("123456"));
+    }
 }

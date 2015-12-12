@@ -61,6 +61,8 @@
         <!-- JS Page Level -->
         <script src="<c:url value="/js/shop.app.js"/>"></script>
         <script src="<c:url value="/js/plugins/owl-carousel.js"/>"></script>
+        <script src="<c:url value="/plugins/angular.min.js"/>"></script>
+        <script src="<c:url value="/js/shoppingcart.js"/>"></script>
         <jsp:invoke fragment="pagejs"/>
     </body>
 </html>

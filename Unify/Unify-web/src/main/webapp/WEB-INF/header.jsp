@@ -149,19 +149,13 @@
                             </ul>
                         </li>
                         <!-- End Kid Shop -->
-
-                        <!-- Contact -->
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                Contact
-                            </a>
-                        </li>    
-                        <!-- End Contact -->
-
+                        
+                        <c:if test="${pageContext.request.getUserPrincipal() == null}">
                         <!-- Shortcodes -->
                         <li class="dropdown">
                             <c:url value="/login" var="login"/>
                             <a href="${login}" class="dropdown-toggle">
+                                <i class="fa fa-sign-in"></i>
                                 Sign in
                             </a>
                         </li>
@@ -171,31 +165,39 @@
                         <li class="dropdown">
                             <c:url value="/register" var="register"/>
                             <a href="${register}" class="dropdown-toggle">
+                                <i class="fa fa-user"></i>
                                 Sign Up
                             </a>
                         </li>
+                        </c:if>
                         <!-- End Account -->
                         <!-- Contact -->
-                        <li class="dropdown">
-                            <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown">
-                                <c:url value="/img/user/user.jpg" var="profile"/>
-                                <img src="${profile}" class="img-circle" width="25px" height="25px"/> admin@yourstore.com
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li>
-                                    <a href="javascript:void(0);"><i class="fa fa-user"></i> Profile</a>
-                                </li>
-                                <li>
-                                    <a href="javascript:void(0);"><i class="fa fa-shopping-cart"></i> My Order</a>
-                                </li>
-                                <li>
-                                    <a href="javascript:void(0);"><i class="fa fa-comment"></i> My Comments</a>
-                                </li>
-                                <li>
-                                    <a href="javascript:void(0);"><i class="fa fa-history"></i> Order History</a>
-                                </li>
-                            </ul>
-                        </li>    
+                        <c:if test="${pageContext.request.getUserPrincipal() != null}">
+                            <li class="dropdown">
+                                <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown">
+                                    <c:url value="${sessionScope.Account.imageLink}" var="profile"/>
+                                    <img src="${profile}" class="img-circle" width="25px" height="25px"/> <c:out value="${sessionScope.Account.email}"/>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <c:url value="/profile" var="profilePageLink"/>
+                                        <a href="${profilePageLink}"><i class="fa fa-user"></i> Profile</a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:void(0);"><i class="fa fa-shopping-cart"></i> My Order</a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:void(0);"><i class="fa fa-comment"></i> My Comments</a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:void(0);"><i class="fa fa-history"></i> Order History</a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:void(0);"><i class="fa fa-sign-out"></i> Logout</a>
+                                    </li>
+                                </ul>
+                            </li>    
+                        </c:if>
                         <!-- End Contact -->
                     </ul>
                 </div>

@@ -1,11 +1,10 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page session="true" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@taglib tagdir="/WEB-INF/tags/" prefix="t" %>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <t:defaultLayout title="Shop UI">
     <jsp:attribute name="pagejs">
-        <script src="<c:url value="/plugins/angular.min.js"/>"></script>
-        <script src="<c:url value="/js/shoppingcart.js"/>"></script>
         <script src="<c:url value="/js/plugins/revolution-slider.js"/>"></script>
         <script type="text/javascript">
             jQuery(document).ready(function () {

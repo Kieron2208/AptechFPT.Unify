@@ -9,10 +9,10 @@ import org.joda.time.DateTime;
 
 /**
  *
- * @author Kiero
+ * @author kieron2208
  */
 public class AccountDTO {
-    
+
     private int accountId;
     private String email;
     private String password;
@@ -24,11 +24,10 @@ public class AccountDTO {
     private DateTime dateOfBirth;
     private AccountGender gender;
     private DateTime createdDate;
+    private boolean isAvaliable;
     private Set<Role> roles;
-    private boolean isDeleted;
-    private boolean Active;
-
-    public AccountDTO(int accountId,
+    
+    private AccountDTO(int accountId,
             String email,
             String password,
             String imageLink,
@@ -39,6 +38,7 @@ public class AccountDTO {
             DateTime dateOfBirth,
             AccountGender gender,
             DateTime createdDate,
+            boolean isAvaliable,
             Set<Role> roles) {
         this.accountId = accountId;
         this.email = email;
@@ -50,6 +50,7 @@ public class AccountDTO {
         this.address = address;
         this.dateOfBirth = dateOfBirth;
         this.gender = gender;
+        this.isAvaliable = isAvaliable;
         this.createdDate = createdDate;
         this.roles = roles;
     }
@@ -69,8 +70,10 @@ public class AccountDTO {
         this.address = builder.address;
         this.dateOfBirth = builder.dateOfBirth;
         this.gender = builder.gender;
+        this.isAvaliable = builder.avalaible;
         this.createdDate = builder.createdDate;
         this.roles = builder.roles;
+        
     }
 
     public static AccountDTO fromAccount(Account account) {
@@ -86,6 +89,7 @@ public class AccountDTO {
                 account.getDayOfBirth(),
                 account.getGender(),
                 account.getCreatedDate(),
+                account.isAvailable(),
                 account.getRoles());
     }
 
@@ -102,6 +106,7 @@ public class AccountDTO {
         private DateTime dateOfBirth;
         private DateTime createdDate;
         private Set<Role> roles;
+        private boolean avalaible;
         private AccountGender gender;
 
         public Builder(String email) {
@@ -164,6 +169,11 @@ public class AccountDTO {
             return this;
         }
 
+        public Builder isAvalaible(boolean avalaible) {
+            this.avalaible = avalaible;
+            return this;
+        }
+        
         public Builder CreatedDate(DateTime createdDate) {
             this.createdDate = createdDate;
             return this;
@@ -198,14 +208,6 @@ public class AccountDTO {
         return dateOfBirth;
     }
 
-    public boolean isIsDeleted() {
-        return isDeleted;
-    }
-
-    public boolean isActive() {
-        return Active;
-    }
-
     public int getAccountId() {
         return accountId;
     }
@@ -224,6 +226,10 @@ public class AccountDTO {
 
     public DateTime getCreatedDate() {
         return createdDate;
+    }
+
+    public boolean isAvaliable() {
+        return isAvaliable;
     }
 
     public Set<Role> getRoles() {
