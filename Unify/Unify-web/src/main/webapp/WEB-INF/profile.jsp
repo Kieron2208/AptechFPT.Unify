@@ -5,6 +5,8 @@
 <t:defaultLayout title="Shop UI - Profile">
     <jsp:attribute name="pagecss">
         <link href="<c:url value="/css/pages/profile.css"/>" rel="stylesheet" type="text/css"/>
+        <link href="<c:url value="/plugins/sky-forms-pro/skyforms/css/sky-forms.css"/>" rel="stylesheet" type="text/css"/>
+        <link href="<c:url value="/plugins/sky-forms-pro/skyforms/custom/custom-sky-forms.css"/>" rel="stylesheet" type="text/css"/>
     </jsp:attribute>
     <jsp:body>
     <!--=== Breadcrumbs v4 ===-->
@@ -15,8 +17,8 @@
             <h1>Maecenas <span class="shop-green">enim</span> sapien</h1>
             <ul class="breadcrumb-v4-in">
                 <li><a href="index.html">Home</a></li>
-                <li><a href="">Product</a></li>
-                <li class="active">Product Filter Page</li>
+                <li><a href="">User</a></li>
+                <li class="active">User Profile</li>
             </ul>
         </div><!--/end container-->
     </div> 
@@ -25,58 +27,144 @@
     <!--=== Profile ===-->
     <div class="container content profile">
     	<div class="row">
-            <!--Left Sidebar-->
-            <div class="col-md-3 md-margin-bottom-40">
-                <img class="img-responsive profile-img margin-bottom-20" src="<c:url value="/img/team/img32-md.jpg"/>" alt="">
 
-                <ul class="list-group sidebar-nav-v1 margin-bottom-40" id="sidebar-nav-1">
-                    <li class="list-group-item active">
-                        <a href="page_profile.html"><i class="fa fa-bar-chart-o"></i> Overall</a>
-                    </li>
-                    <li class="list-group-item">
-                        <a href="page_profile_me.html"><i class="fa fa-user"></i> Profile</a>
-                    </li>
-                    <li class="list-group-item">
-                        <a href="page_profile_users.html"><i class="fa fa-shopping-cart"></i> My Orders</a>
-                    </li>
-                    <li class="list-group-item">
-                        <a href="page_profile_users.html"><i class="fa fa-reply"></i> My FeedBacks</a>
-                    </li>
-                    <li class="list-group-item">
-                        <a href="page_profile_comments.html"><i class="fa fa-comments"></i>My Comments</a>
-                    </li>
-                    <li class="list-group-item">
-                        <a href="page_profile_history.html"><i class="fa fa-history"></i>Order History</a>
-                    </li>
-                </ul>
-                
-                <hr>
-
-            </div>
-            <!--End Left Sidebar-->
-
+            <jsp:include page="profileMenu.jsp">
+                <jsp:param name="active" value="homeprofile"/>
+            </jsp:include>
+            
             <!-- Profile Content -->
             <div class="col-md-9">
-                <div class="profile-body">
-                
-                    <div class="profile-bio">
-                        <div class="row">
-                            <div class="col-md-5">
-                                <img class="img-responsive md-margin-bottom-10" src="img/team/img32-md.jpg" alt="">
-                                <a class="btn-u btn-u-sm" href="#">Change Picture</a>
+                <div class="profile-body margin-bottom-20">
+                    <div class="tab-v1">
+                        <ul class="nav nav-justified nav-tabs">
+                            <li class="active"><a data-toggle="tab" href="#profile">Edit Profile</a></li>
+                            <li><a data-toggle="tab" href="#passwordTab">Change Password</a></li>
+                        </ul>
+                        <div class="tab-content">
+                            <div id="profile" class="profile-edit tab-pane fade in active">
+                                <h2 class="heading-md">Manage your Name, ID and Email Addresses.</h2>
+                                <p>Below are the name and email addresses on file for your account.</p>
+                                <br>
+                                <dl class="dl-horizontal">
+                                    <dt><strong>Your name </strong></dt>
+                                    <dd>
+                                        Edward Rooster
+                                        <span>
+                                            <a class="pull-right" href="#">
+                                                <i class="fa fa-pencil"></i>
+                                            </a>
+                                        </span>
+                                    </dd>
+                                    <hr>
+                                    <dt><strong>Your ID </strong></dt>
+                                    <dd>
+                                        FKJ-032440
+                                        <span>
+                                            <a class="pull-right" href="#">
+                                                <i class="fa fa-pencil"></i>
+                                            </a>
+                                        </span>
+                                    </dd>
+                                    <hr>
+                                    <dt><strong>Company name </strong></dt>
+                                    <dd>
+                                        Htmlstream
+                                        <span>
+                                            <a class="pull-right" href="#">
+                                                <i class="fa fa-pencil"></i>
+                                            </a>
+                                        </span>
+                                    </dd>
+                                    <hr>
+                                    <dt><strong>Primary Email Address </strong></dt>
+                                    <dd>
+                                        edward-rooster@gmail.com
+                                        <span>
+                                            <a class="pull-right" href="#">
+                                                <i class="fa fa-pencil"></i>
+                                            </a>
+                                        </span>
+                                    </dd>
+                                    <hr>
+                                    <dt><strong>Phone Number </strong></dt>
+                                    <dd>
+                                        (304) 33-2867-499
+                                        <span>
+                                            <a class="pull-right" href="#">
+                                                <i class="fa fa-pencil"></i>
+                                            </a>
+                                        </span>
+                                    </dd>
+                                    <hr>
+                                    <dt><strong>Office Number </strong></dt>
+                                    <dd>
+                                        (304) 44-9810-296
+                                        <span>
+                                            <a class="pull-right" href="#">
+                                                <i class="fa fa-pencil"></i>
+                                            </a>
+                                        </span>
+                                    </dd>
+                                    <hr>
+                                    <dt><strong>Address </strong></dt>
+                                    <dd>
+                                        California, US
+                                        <span>
+                                            <a class="pull-right" href="#">
+                                                <i class="fa fa-pencil"></i>
+                                            </a>
+                                        </span>
+                                    </dd>
+                                    <hr>
+                                </dl>
+                                <button type="button" class="btn-u btn-u-default">Cancel</button>
+                                <button type="button" class="btn-u">Save Changes</button>
                             </div>
-                            <div class="col-md-7">
-                                <h2>Edward Rooster</h2>
-                                <span><strong>Job:</strong> Web Developer</span>
-                                <span><strong>Position:</strong> Web Designer</span>
-                                <hr>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse eget massa nec turpis congue bibendum. Integer nulla felis, porta suscipit nulla et, dignissim commodo nunc. Morbi a semper nulla.</p>
-                                <p>Proin mauris odio, pharetra quis ligula non, vulputate vehicula quam. Nunc in libero vitae nunc ultricies tincidunt ut sed leo. Sed luctus dui ut congue consequat. Cras consequat nisl ante, nec malesuada velit pellentesque ac. Pellentesque nec arcu in ipsum iaculis convallis.</p>
-                            </div>
-                        </div>
-                    </div><!--/end row-->
 
-                    
+                            <div id="passwordTab" class="profile-edit tab-pane fade">
+                                <h2 class="heading-md">Manage your Security Settings</h2>
+                                <p>Change your password.</p>
+                                <br>
+                                <form class="sky-form" id="sky-form4" action="#">
+                                    <dl class="dl-horizontal">
+                                        <dt>Email address</dt>
+                                        <dd>
+                                            <section>
+                                                <label class="input">
+                                                    <i class="icon-append fa fa-envelope"></i>
+                                                    <input type="email" placeholder="Email address" readonly value="${Account.email}" name="email">
+                                                    <!--<b class="tooltip tooltip-bottom-right">Needed to verify your account</b>-->
+                                                </label>
+                                            </section>
+                                        </dd>
+                                        <dt>Enter your password</dt>
+                                        <dd>
+                                            <section>
+                                                <label class="input">
+                                                    <i class="icon-append fa fa-lock"></i>
+                                                    <input type="password" id="password" name="password" placeholder="Password">
+                                                    <b class="tooltip tooltip-bottom-right">Don't forget your password</b>
+                                                </label>
+                                            </section>
+                                        </dd>
+                                        <dt>Confirm Password</dt>
+                                        <dd>
+                                            <section>
+                                                <label class="input">
+                                                    <i class="icon-append fa fa-lock"></i>
+                                                    <input type="password" name="passwordConfirm" placeholder="Confirm password">
+                                                    <b class="tooltip tooltip-bottom-right">Don't forget your password</b>
+                                                </label>
+                                            </section>
+                                        </dd>
+                                    </dl>
+                                    <button type="button" class="btn-u btn-u-default">Cancel</button>
+                                    <button class="btn-u" type="submit">Save Changes</button>
+                                </form>
+                            </div>
+
+                        </div>
+                    </div>
                 </div>
             </div>
             <!-- End Profile Content -->

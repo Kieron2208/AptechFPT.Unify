@@ -31,6 +31,13 @@
     </rule>
     
     <rule>
+        <name>User Logout</name>
+        <condition type="method">GET</condition>
+        <from>^/logout$</from>
+        <to last="true">/AuthenticateController?action=logout&amp;requesturi=%{request-uri}</to>
+    </rule>
+    
+    <rule>
         <name>to Register Page</name>
         <condition type="method">GET</condition>
         <from>^/register$</from>
@@ -44,6 +51,34 @@
         <to>/WEB-INF/profile.jsp</to>
     </rule>
 
+    <rule>
+        <name>Profile current order Page</name>
+        <condition type="method">GET</condition>
+        <from>^/profile/currentorder$</from>
+        <to>/WEB-INF/profileCurrentOrder.jsp</to>
+    </rule>
+    
+    <rule>
+        <name>Profile current order Page</name>
+        <condition type="method">GET</condition>
+        <from>^/profile/orderhistory$</from>
+        <to>/WEB-INF/profileHistory.jsp</to>
+    </rule>
+    
+    <rule>
+        <name>Profile current order Page</name>
+        <condition type="method">GET</condition>
+        <from>^/profile/feedback$</from>
+        <to>/WEB-INF/profileFeedBack.jsp</to>
+    </rule>
+    
+    <rule>
+        <name>Profile current order Page</name>
+        <condition type="method">GET</condition>
+        <from>^/profile/mycomment$</from>
+        <to>/WEB-INF/profileComment.jsp</to>
+    </rule>
+    
     <rule>
         <name>to Product Grid Page</name>
         <condition type="method">GET</condition>
@@ -65,14 +100,6 @@
         <condition type="method">GET</condition>
         <from>^/shoppingcart$</from>
         <to>/WEB-INF/shoppingcart.jsp</to>
-    </rule>
-
-    <rule match-type="wildcard">
-        <condition operator="notequal" type="user-in-role">ADMINISTRATOR</condition>
-        <condition type="user-in-role" operator="notequal">SALEPERSON</condition>
-        <from>/adminstrator/*</from>
-        <set type="method">GET</set>    
-        <to type="redirect">%{context-path}/administrator/login</to>    
     </rule>
 
     <rule>
@@ -155,24 +182,5 @@
         <from>^/administrator/purchasereportprint$</from>
         <to>/WEB-INF/admin/reportprint.jsp</to>
     </rule>
-    
-    <rule>
-        <from>^/404$</from>
-        <to last="true">/WEB-INF/404.jsp</to>
-    </rule>
-    
-    <rule>
-        <from>^/500$</from>
-        <to last="true">/WEB-INF/500.jsp</to>
-    </rule>
-    
-    <rule>
-        <from>^/administrator/404$</from>
-        <to last="true">/WEB-INF/admin/404.jsp</to>
-    </rule>
-    
-    <rule>
-        <from>^/administrator/500$</from>
-        <to last="true">/WEB-INF/admin/500.jsp</to>
-    </rule>
+
 </urlrewrite>

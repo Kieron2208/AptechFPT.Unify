@@ -72,11 +72,16 @@ public class AuthenticateController extends HttpServlet {
 
     private void logout(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        logger.log(Level.INFO, "User Principal: {0}", request.getUserPrincipal().getName());
-        if (request.getUserPrincipal() == null) {
+        String uri = (String) request.getAttribute("javax.servlet.forward.request_uri");
+        System.out.println("Request URI: " + uri);
+        logger.log(Level.INFO, "User Principal: {0}", request.getRemoteUser());
+        if (request.getUserPrincipal() != null) {
             try {
+                String email = request.getUserPrincipal().getName();
                 request.logout();
-                logger.log(Level.INFO, "{0} logout successfully", request.getUserPrincipal().getName());
+                logger.log(Level.INFO, "{0} logout successfully", email);
+                String homepage = request.getContextPath() + "/";
+                response.sendRedirect(homepage);
             } catch (ServletException ex) {
                 ex.printStackTrace(System.err);
                 logger.info("Loggout failed.");

@@ -149,26 +149,26 @@
                             </ul>
                         </li>
                         <!-- End Kid Shop -->
-                        
-                        <c:if test="${pageContext.request.getUserPrincipal() == null}">
-                        <!-- Shortcodes -->
-                        <li class="dropdown">
-                            <c:url value="/login" var="login"/>
-                            <a href="${login}" class="dropdown-toggle">
-                                <i class="fa fa-sign-in"></i>
-                                Sign in
-                            </a>
-                        </li>
-                        <!-- End Shortcodes -->
 
-                        <!-- Account -->
-                        <li class="dropdown">
-                            <c:url value="/register" var="register"/>
-                            <a href="${register}" class="dropdown-toggle">
-                                <i class="fa fa-user"></i>
-                                Sign Up
-                            </a>
-                        </li>
+                        <c:if test="${pageContext.request.getUserPrincipal() == null}">
+                            <!-- Shortcodes -->
+                            <li class="dropdown">
+                                <c:url value="/login" var="login"/>
+                                <a href="${login}" class="dropdown-toggle">
+                                    <i class="fa fa-sign-in"></i>
+                                    Sign in
+                                </a>
+                            </li>
+                            <!-- End Shortcodes -->
+
+                            <!-- Account -->
+                            <li class="dropdown">
+                                <c:url value="/register" var="register"/>
+                                <a href="${register}" class="dropdown-toggle">
+                                    <i class="fa fa-user"></i>
+                                    Sign Up
+                                </a>
+                            </li>
                         </c:if>
                         <!-- End Account -->
                         <!-- Contact -->
@@ -179,21 +179,52 @@
                                     <img src="${profile}" class="img-circle" width="25px" height="25px"/> <c:out value="${sessionScope.Account.email}"/>
                                 </a>
                                 <ul class="dropdown-menu">
-                                    <li>
+                                    <c:if test="${pageContext.request.isUserInRole('ADMINISTRATOR')
+                                                  || pageContext.request.isUserInRole('SALEPERSON')}">
+                                          <li>
+                                              <c:url value="/administrator" var="adminPage"/>
+                                              <a href="${adminPage}"><i class="fa fa-lock"></i> Go to Admin Page</a>
+                                          </li>
+                                    </c:if>
+                                    <%
+                                        String uri = request.getRequestURI();
+                                        String contextPath = request.getContextPath();
+                                        String homeProfile = "";
+                                        String orderProfile = "";
+                                        String commentProfile = "";
+                                        String historyProfile = "";
+                                        if (uri.equals(contextPath + "/WEB-INF/profile.jsp")) {
+                                            homeProfile = "active";
+                                        }
+                                        if (uri.equals(contextPath + "/WEB-INF/profileCurrentOrder.jsp")) {
+                                            orderProfile = "active";
+                                        }
+                                        if (uri.equals(contextPath + "/WEB-INF/profileComment.jsp")) {
+                                            commentProfile = "active";
+                                        }
+                                        if (uri.equals(contextPath + "/WEB-INF/profileHistory.jsp")) {
+                                            historyProfile = "active";
+                                        }
+                                    %>
+                                    <li class="<%= homeProfile %>">
                                         <c:url value="/profile" var="profilePageLink"/>
                                         <a href="${profilePageLink}"><i class="fa fa-user"></i> Profile</a>
                                     </li>
-                                    <li>
-                                        <a href="javascript:void(0);"><i class="fa fa-shopping-cart"></i> My Order</a>
+                                    <li class="<%= orderProfile %>">
+                                        <c:url value="/profile/currentOrder" var="profileOrderPageLink"/>
+                                        <a href="${profileOrderPageLink}"><i class="fa fa-shopping-cart"></i> My Current Order</a>
+                                    </li>
+                                    <li class="<%= commentProfile %>">
+                                        <c:url value="/profile" var="profileCommentPageLink"/>
+                                        <a href="${profileCommentPageLink}"><i class="fa fa-comment"></i> My Comments</a>
+                                    </li>
+                                    <li class="<%= historyProfile %>">
+                                        <c:url value="/profile" var="profileHistoryPageLink"/>
+                                        <a href="${profileHistoryPageLink}"><i class="fa fa-history"></i> Order History</a>
                                     </li>
                                     <li>
-                                        <a href="javascript:void(0);"><i class="fa fa-comment"></i> My Comments</a>
-                                    </li>
-                                    <li>
-                                        <a href="javascript:void(0);"><i class="fa fa-history"></i> Order History</a>
-                                    </li>
-                                    <li>
-                                        <a href="javascript:void(0);"><i class="fa fa-sign-out"></i> Logout</a>
+                                        <c:url value="/logout" var="logout"/>
+                                        <a href="${logout}"><i class="fa fa-sign-out"></i> Logout</a>
                                     </li>
                                 </ul>
                             </li>    

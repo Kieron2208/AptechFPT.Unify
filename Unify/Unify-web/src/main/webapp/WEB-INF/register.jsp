@@ -59,8 +59,22 @@
                     <div class="col-md-5">
                         <form id="sky-form4" class="log-reg-block sky-form">
                             <h2>Create New Account</h2>
-
-                            <div class="login-input reg-input">
+                            <div class="login-input reg-input">                            
+                                <section>
+                                    <label class="input">
+                                        <input type="email" name="email" placeholder="Email address" class="form-control">
+                                    </label>
+                                </section>                                
+                                <section>
+                                    <label class="input">
+                                        <input type="password" name="password" placeholder="Password" id="password" class="form-control">
+                                    </label>
+                                </section>                                
+                                <section>
+                                    <label class="input">
+                                        <input type="password" name="passwordConfirm" placeholder="Confirm password" class="form-control">
+                                    </label>
+                                </section>  
                                 <div class="row">
                                     <div class="col-sm-6">
                                         <section>
@@ -79,10 +93,8 @@
                                 </div>
                                 <label class="select margin-bottom-15">
                                     <select name="gender" class="form-control">
-                                        <option value="0" selected disabled>Gender</option>
-                                        <option value="1">Male</option>
-                                        <option value="2">Female</option>
-                                        <option value="3">Other</option>
+                                        <option value="M">Male</option>
+                                        <option value="F">Female</option>
                                     </select>
                                 </label>
                                 <div class="row margin-bottom-10">
@@ -111,39 +123,18 @@
                                     <div class="col-xs-3">
                                         <input type="text" name="year" placeholder="Year" class="form-control">
                                     </div>
-                                </div>
+                                </div>                                
                                 <section>
                                     <label class="input">
-                                        <input type="text" name="username" placeholder="Username" class="form-control">
+                                        <input type="text" name="passwordConfirm" placeholder="Phone" class="form-control"/>
+                                    </label>
+                                </section>                                 
+                                <section>
+                                    <label class="input">
+                                        <textarea name="passwordConfirm" placeholder="Address" class="form-control"></textarea>
                                     </label>
                                 </section>                            
-                                <section>
-                                    <label class="input">
-                                        <input type="email" name="email" placeholder="Email address" class="form-control">
-                                    </label>
-                                </section>                                
-                                <section>
-                                    <label class="input">
-                                        <input type="password" name="password" placeholder="Password" id="password" class="form-control">
-                                    </label>
-                                </section>                                
-                                <section>
-                                    <label class="input">
-                                        <input type="password" name="passwordConfirm" placeholder="Confirm password" class="form-control">
-                                    </label>
-                                </section>                                
                             </div>
-
-                            <label class="checkbox margin-bottom-10">
-                                <input type="checkbox" name="checkbox"/>
-                                <i></i>
-                                Subscribe to our newsletter to get the latest offers
-                            </label>
-                            <label class="checkbox margin-bottom-20">
-                                <input type="checkbox" name="checkbox"/>
-                                <i></i>
-                                I have read agreed with the <a href="#">terms &amp; conditions</a>
-                            </label>
                             <button class="btn-u btn-u-sea-shop btn-block margin-bottom-20" type="submit">Create Account</button>
                         </form>
 
@@ -156,4 +147,4 @@
         </div>
         <!--=== End Registre ===-->     
     </jsp:body>
-</t:defaultLayout>>
+</t:defaultLayout>

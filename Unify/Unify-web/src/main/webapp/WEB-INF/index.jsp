@@ -4,11 +4,15 @@
 <%@taglib tagdir="/WEB-INF/tags/" prefix="t" %>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <t:defaultLayout title="Shop UI">
+    <jsp:attribute name="pagecss">
+        <link rel="stylesheet" href="<c:url value="/plugins/owl-carousel/owl-carousel/owl.carousel.css"/>">
+        <link rel="stylesheet" href="<c:url value="/plugins/revolution-slider/rs-plugin/css/settings.css"/>">
+    </jsp:attribute>
     <jsp:attribute name="pagejs">
         <script src="<c:url value="/js/plugins/revolution-slider.js"/>"></script>
         <script type="text/javascript">
             jQuery(document).ready(function () {
-                App.init();
+//                App.init();
                 App.initScrollBar();
                 App.initParallaxBg();
                 OwlCarousel.initOwlCarousel();

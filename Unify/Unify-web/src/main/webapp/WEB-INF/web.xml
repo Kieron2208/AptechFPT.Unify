@@ -78,6 +78,10 @@
         <servlet-name>PurchaseReport</servlet-name>
         <servlet-class>com.aptechfpt.controller.PurchaseReportController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AdminAuthenticateController</servlet-name>
+        <servlet-class>com.aptechfpt.controller.AdminAuthenticateController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>HomeController</servlet-name>
         <url-pattern>/HomeController</url-pattern>
@@ -122,6 +126,10 @@
         <servlet-name>PurchaseReport</servlet-name>
         <url-pattern>/PurchaseReport</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminAuthenticateController</servlet-name>
+        <url-pattern>/AdminAuthenticateController</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30
@@ -130,6 +138,14 @@
             <name>SESSIONID</name>
         </cookie-config>
     </session-config>
+    <error-page>
+        <error-code>404</error-code>
+        <location>/ErrorHandleController</location>
+    </error-page>
+    <error-page>
+        <error-code>500</error-code>
+        <location>/ErrorHandleController</location>
+    </error-page>
     <login-config>
         <auth-method>FORM</auth-method>
         <realm-name>UnifyRealm</realm-name>
