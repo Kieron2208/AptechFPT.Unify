@@ -75,12 +75,16 @@
         <servlet-class>com.aptechfpt.controller.PurchaseController</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>ProductLike</servlet-name>
-        <servlet-class>com.aptechfpt.controller.ProductLikeController</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>PurchaseReport</servlet-name>
         <servlet-class>com.aptechfpt.controller.PurchaseReportController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>POCancel</servlet-name>
+        <servlet-class>com.aptechfpt.controller.POCancelController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ProductLike</servlet-name>
+        <servlet-class>com.aptechfpt.controller.ProductLikeController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>HomeController</servlet-name>
@@ -125,6 +129,10 @@
     <servlet-mapping>
         <servlet-name>PurchaseReport</servlet-name>
         <url-pattern>/PurchaseReport</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>POCancel</servlet-name>
+        <url-pattern>/POCancel</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ProductLike</servlet-name>

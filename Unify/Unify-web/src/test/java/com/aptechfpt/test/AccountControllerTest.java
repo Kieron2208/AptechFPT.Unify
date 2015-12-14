@@ -1,8 +1,10 @@
 package com.aptechfpt.test;
 
 import com.aptechfpt.bean.AccountFacadeLocal;
+import com.aptechfpt.controller.AuthenticateController;
 import com.aptechfpt.converter.JodaDateTimeConverter;
 import com.aptechfpt.dto.AccountDTO;
+import com.aptechfpt.entity.Account;
 import com.aptechfpt.enumtype.Role;
 import com.aptechfpt.mock.AccountFacadeMock;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
@@ -11,6 +13,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import java.io.File;
 import java.net.URL;
 import java.util.Enumeration;
+import java.util.logging.Level;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -88,8 +91,17 @@ public class AccountControllerTest {
         System.out.println("User: " + request.isUserInRole(Role.USER.name()));
         System.out.println("SalePerson :" + request.isUserInRole(Role.SALEPERSON.name()));
         System.out.println("Administrator: " + request.isUserInRole(Role.ADMINISTRATOR.name()));
+        assertThat(request.isUserInRole(Role.USER.name())).isTrue().as("Is User:");
+        assertThat(request.isUserInRole(Role.SALEPERSON.name())).isTrue().as("Is SalePerson:");
+        assertThat(request.isUserInRole(Role.ADMINISTRATOR.name())).isFalse().as("Not Admin");
+    }
+
+    @Test
+    public void Session_Test()throws Exception{
+        request.login("kieron2208@gmail.com", "123456");
         HttpSession session = request.getSession();
-        
+        AccountDTO dto = setDTO("kieron2208@gmail.com");
+        session.setAttribute("Account", dto);
         System.out.println("Creation Time :" + new DateTime(session.getCreationTime()).toString());
         Enumeration<String> attributeNames = session.getAttributeNames();
         while (attributeNames.hasMoreElements()) {
@@ -98,15 +110,19 @@ public class AccountControllerTest {
         System.out.println("GetLastAccessTime :" + new DateTime(session.getLastAccessedTime()).toString());
         System.out.println("GetID :" + session.getId());
         System.out.println("getMaxINactiveInternal :" + session.getMaxInactiveInterval());
-        assertThat(request.isUserInRole(Role.USER.name())).isTrue().as("Is User:");
-        assertThat(request.isUserInRole(Role.SALEPERSON.name())).isTrue().as("Is SalePerson:");
-        assertThat(request.isUserInRole(Role.ADMINISTRATOR.name())).isFalse().as("Not Admin");
     }
-
     private static GenericArchive metaInfFolder() {
         return ShrinkWrap.create(GenericArchive.class)
                 .as(ExplodedImporter.class)
                 .importDirectory(WEBAPP_SRC)
                 .as(GenericArchive.class);
+    }
+    
+    private AccountDTO setDTO(String email) {
+        Account account = accountFacade.findByEmail(email);
+        AccountDTO dto = new AccountDTO.Builder(account.getAccountId(),account.getEmail())
+                .ImageLink(account.getImageLink())
+                .build();
+        return dto;
     }
 }

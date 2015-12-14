@@ -5,8 +5,10 @@ import com.aptechfpt.entity.PurchaseOrder;
 import com.aptechfpt.utils.MaHoa;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Iterator;
 import java.util.List;
 import javax.ejb.EJB;
+import javax.naming.InitialContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -23,16 +25,25 @@ public class PurchaseController extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        try {
+            InitialContext context = new InitialContext();
+            purchaseOrderFacade = (PurchaseOrderFacadeLocal) context.lookup("java:global/Unify-ear/Unify-ejb-1.0-SNAPSHOT/PurchaseOrderFacade!com.aptechfpt.bean.PurchaseOrderFacadeLocal");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             List<PurchaseOrder> list = purchaseOrderFacade.findAll();
             MaHoa mh = new MaHoa();
 
-            for (PurchaseOrder p : list) {
+            for (Iterator<PurchaseOrder> it = list.iterator(); it.hasNext(); ) {
+                PurchaseOrder p = it.next();
                 p.setName(mh.decrypt(p.getName()));
                 p.setAddress(mh.decrypt(p.getAddress()));
                 p.setPhone(mh.decrypt(p.getPhone()));
-
+                if (!p.getCancelInvoice()) {
+                    it.remove();
+                }
             }
 
             request.setAttribute("list", list);

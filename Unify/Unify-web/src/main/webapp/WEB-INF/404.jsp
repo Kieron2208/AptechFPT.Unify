@@ -44,12 +44,14 @@
             <div class="row">
                 <div class="col-md-8 col-md-offset-2">
                     <div class="error-v4">
-                        <a href="#"><img src="assets/img/logo2-default.png" alt=""></a>
+                        <c:url value="/img/logo.png" var="logo"/>
+                        <a href="#"><img src="${logo}" alt=""></a>
                         <h1>404</h1>
                         <span class="sorry">Sorry, the page you were looking for could not be found!</span>
                         <div class="row">
                             <div class="col-md-6 col-md-offset-3">
-                                <a class="btn-u btn-brd btn-u-light" href="#"> Go Back to Main Page</a>
+                                <c:url value="/" var="home"/>
+                                <a class="btn-u btn-brd btn-u-light" href="${home}"> Go Back to Main Page</a>
                             </div>
                         </div>
                     </div>
@@ -84,7 +86,7 @@
         </script>
         <script type="text/javascript">
             $.backstretch([
-                "/img/blur/img2.jpg"
+                    "<c:url value="/img/blur/img2.jpg"/>"
             ])
         </script>
     </body>

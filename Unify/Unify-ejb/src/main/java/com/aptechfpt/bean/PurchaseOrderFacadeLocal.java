@@ -29,4 +29,6 @@ public interface PurchaseOrderFacadeLocal {
     PurchaseOrder getID();
     
     List<PurchaseOrder> getReport(DateTime f, DateTime t);
+
+    List<PurchaseOrder> getListByAccountId(int AccountId);
 }

@@ -120,4 +120,9 @@ public class AccountFacadeMock implements AccountFacadeLocal {
     public int count() {
         return list.size();
     }
+
+    @Override
+    public Account findByEmail(String email) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

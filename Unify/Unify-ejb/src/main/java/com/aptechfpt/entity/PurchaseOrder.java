@@ -76,7 +76,7 @@ public class PurchaseOrder implements Serializable {
     
     @Basic(optional = false)
     @Column(name = "CancelInvoice", insertable = false)
-    private boolean CancelInvoice;
+    private boolean cancelInvoice;
     
     @Basic(optional = false)
     @Temporal(TemporalType.TIMESTAMP)
@@ -162,12 +162,12 @@ public class PurchaseOrder implements Serializable {
         this.accountId = accountId;
     }
 
-    public boolean isCancelInvoice() {
-        return CancelInvoice;
+    public boolean getCancelInvoice() {
+        return cancelInvoice;
     }
 
     public void setCancelInvoice(boolean CancelInvoice) {
-        this.CancelInvoice = CancelInvoice;
+        this.cancelInvoice = CancelInvoice;
     }
     
     @Override

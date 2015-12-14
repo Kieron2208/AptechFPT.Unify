@@ -19,6 +19,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -39,30 +41,36 @@ import org.joda.time.DateTime;
     @NamedQuery(name = "Comment.findByModifiedDate", query = "SELECT c FROM Comment c WHERE c.modifiedDate = :modifiedDate"),
     @NamedQuery(name = "Comment.findByCreatedDate", query = "SELECT c FROM Comment c WHERE c.createdDate = :createdDate")})
 public class Comment implements Serializable {
+
     private static final long serialVersionUID = 1L;
+    
     @Id
     @Basic(optional = false)
-    @NotNull
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "CommentId", nullable = false)
     private Integer commentId;
+    
     @Basic(optional = false)
     @NotNull
     @Column(name = "[Like]", nullable = false)
     private int like;
+    
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 8000)
     @Column(name = "Comments", nullable = false, length = 8000)
     private String comments;
+    
     @Basic(optional = false)
     @Convert(converter = JodaDateTimeConverter.class)
-    @Column(name = "ModifiedDate")
-    private DateTime modifiedDate;
-    @Basic(optional = false)
-    @Convert(converter = JodaDateTimeConverter.class)
-    @Column(name = "CreatedDate")
+    @Column(name = "CreatedDate", nullable = false)
+    @Temporal(TemporalType.TIMESTAMP)
     private DateTime createdDate;
+
+    @Basic(optional = false)
+    @Convert(converter = JodaDateTimeConverter.class)
+    @Column(name = "ModifiedDate", insertable = false, updatable = false)
+    private DateTime modifiedDate;
     
     @JoinColumn(name = "AccountId", referencedColumnName = "AccountId", nullable = false)
     @ManyToOne(optional = false)
