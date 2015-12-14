@@ -20,7 +20,7 @@ import org.joda.time.DateTime;
  * @author kieron2208
  */
 @Entity
-@Table(name = "Account", catalog = "AuthenticateTest", schema = "dbo")
+@Table(name = "Account", catalog = "Unify", schema = "dbo")
 @NamedQueries({
     @NamedQuery(name = "Account.findAll", query = "SELECT a FROM Account a"),
     @NamedQuery(name = "Account.findByAccountId", query = "SELECT a FROM Account a WHERE a.accountId = :accountId"),
