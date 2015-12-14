@@ -1,3 +1,8 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package com.aptechfpt.entity;
 
 import java.io.Serializable;
@@ -34,26 +39,21 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "SubCategory.findBySubCategoryId", query = "SELECT s FROM SubCategory s WHERE s.subCategoryId = :subCategoryId"),
     @NamedQuery(name = "SubCategory.findByName", query = "SELECT s FROM SubCategory s WHERE s.name = :name")})
 public class SubCategory implements Serializable {
-
     private static final long serialVersionUID = 1L;
-
     @Id
     @Basic(optional = false)
     @NotNull
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "SubCategoryId", nullable = false)
     private Integer subCategoryId;
-
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 100)
     @Column(name = "Name", nullable = false, length = 100)
     private String name;
-
     @JoinColumn(name = "CategoryId", referencedColumnName = "CategoryId", nullable = false)
     @ManyToOne(optional = false)
     private Category categoryId;
-
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "subCategoryId")
     private Collection<Product> productCollection;
 
@@ -126,5 +126,5 @@ public class SubCategory implements Serializable {
     public String toString() {
         return "com.aptechfpt.entity.SubCategory[ subCategoryId=" + subCategoryId + " ]";
     }
-
+    
 }

@@ -343,17 +343,13 @@
                             <div class="product-img">
                                 <c:forEach var="img" items="${p.imageCollection}">
                                     <c:if test="${img.displayOrder==1}">
-                                        <a href="shop-ui-inner.html"><img class="full-width img-responsive" src="${img.imagePath}" alt=""></a>
-                                        </c:if>
-                                    </c:forEach>
-                                <a class="product-review" href="shop-ui-inner.html">Quick review</a>
-                                <!--Them vao hinh--Chan-->
-                                <c:forEach var="img" items="${p.imageCollection}">
-                                    <c:if test="${img.displayOrder==1}">
-                                        <a class="add-to-cart" ng-click="put(${p.productId}, '${p.name}', '${img.imagePath}',${p.unitPrice}, 1)" href><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                                        <c:url value="/product/${p.productId}" var="productdetail"/>
+                                        <a href="${productdetail}"><img class="full-width img-responsive" src="${img.imagePath}" alt=""></a>
                                     </c:if>
                                 </c:forEach>
-
+                                <c:url value="/product/${p.productId}" var="productdetail"/>
+                                        <a class="product-review" href="${productdetail}">Quick review</a>
+                                <a class="add-to-cart" ng-click="put(${p.productId},'${p.name}','${img.imagePath}',${p.unitPrice},1)" href><i class="fa fa-shopping-cart"></i>Add to cart</a>
                                 <div class="shop-rgba-dark-green rgba-banner">New</div>
                             </div>
                             <div class="product-description product-description-brd">
@@ -364,8 +360,8 @@
                                             <c:if test="${p.gender==0}">Men</c:if>
                                             <c:if test="${p.gender==1}">Women</c:if>
                                             <c:if test="${p.gender==2}">Kid</c:if>
-                                            </span>
-                                            <span class="gender">${p.subCategoryId.name}</span>
+                                        </span>
+                                        <span class="gender">${p.subCategoryId.name}</span>
                                     </div>    
                                     <div class="product-price">
                                         <span class="title-price">
@@ -376,22 +372,18 @@
                                     </div>
                                 </div>    
                                 <ul class="list-inline product-ratings">
-                                    <li><div id="likecount${p.productId}">${p.like}</div></li>
-
+                                    <li>
+                                        <div id="likecount${p.productId}">${p.like}</div>
+                                    </li>
                                     <li class="like-icon">
                                         <form id="myform${p.productId}" method="post" action="ProductLike">
-
                                             <input type="hidden" name="pid" value="${p.productId}"/>
                                             <button type="submit" class="btn btn-link"><i class="fa fa-heart"> </i></button>
-
-
                                         </form>
                                     </li>
                                 </ul> 
-
                             </div>
-                        </li>  
-
+                        </li>    
                     </c:forEach>
                 </ul>
             </div> 
@@ -417,7 +409,8 @@
                                 </c:if>
                             </c:forEach>
                             <div class="thumb-product-in">
-                                <h4><a href="shop-ui-inner.html">${p.name}</a> – <a href="shop-ui-inner.html">${p.subCategoryId.name}</a></h4>
+                                <h4><c:url value="/product/${p.productId}" var="productdetail"/>
+                                        <a href="${productdetail}">${p.name}</a> – <a href="shop-ui-inner.html">${p.subCategoryId.name}</a></h4>
                                 <span class="thumb-product-type"><c:if test="${p.gender==0}">Men</c:if>
                                     <c:if test="${p.gender==1}">Women</c:if>
                                     <c:if test="${p.gender==2}">Kid</c:if></span>
@@ -452,7 +445,8 @@
                                 </c:if>
                             </c:forEach>
                             <div class="thumb-product-in">
-                                <h4><a href="shop-ui-inner.html">${p.name}</a> – <a href="shop-ui-inner.html">${p.subCategoryId.name}</a></h4>
+                                <h4><c:url value="/product/${p.productId}" var="productdetail"/>
+                                        <a href="${productdetail}">${p.name}</a> – <a href="shop-ui-inner.html">${p.subCategoryId.name}</a></h4>
                                 <span class="thumb-product-type"><c:if test="${p.gender==0}">Men</c:if>
                                     <c:if test="${p.gender==1}">Women</c:if>
                                     <c:if test="${p.gender==2}">Kid</c:if></span>
@@ -486,7 +480,8 @@
                                 </c:if>
                             </c:forEach>
                             <div class="thumb-product-in">
-                                <h4><a href="shop-ui-inner.html">${p.name}</a> – <a href="shop-ui-inner.html">${p.subCategoryId.name}</a></h4>
+                                <h4><c:url value="/product/${p.productId}" var="productdetail"/>
+                                        <a href="${productdetail}">${p.name}</a> – <a href="shop-ui-inner.html">${p.subCategoryId.name}</a></h4>
                                 <span class="thumb-product-type"><c:if test="${p.gender==0}">Men</c:if>
                                     <c:if test="${p.gender==1}">Women</c:if>
                                     <c:if test="${p.gender==2}">Kid</c:if>

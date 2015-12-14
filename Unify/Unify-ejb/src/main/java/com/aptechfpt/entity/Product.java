@@ -46,55 +46,56 @@ import javax.xml.bind.annotation.XmlTransient;
 public class Product implements Serializable {
 
     private static final long serialVersionUID = 1L;
-
+    
     @Id
     @Basic(optional = false)
     @NotNull
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ProductId", nullable = false)
     private Integer productId;
-
+    
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 100)
     @Column(name = "Name", nullable = false, length = 100)
     private String name;
-
+    
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Basic(optional = false)
     @NotNull
     @Column(name = "UnitPrice", nullable = false, precision = 19, scale = 4)
     private BigDecimal unitPrice;
-
+    
     @Basic(optional = false)
     @NotNull
     @Column(name = "[Like]", nullable = false)
     private int like;
+    
     @Column(name = "Gender")
     private Integer gender;
-
+    
     @Lob
     @Size(max = 2147483647)
     @Column(name = "Description", length = 2147483647)
     private String description;
-
+    
     @Basic(optional = false)
     @NotNull
     @Column(name = "Available", nullable = false)
     private boolean available;
-
+    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "productId")
     private Collection<PurchaseOrderDetail> purchaseOrderDetailCollection;
-
+    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "productId")
     private Collection<PriceHistory> priceHistoryCollection;
-
+    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "productId")
     private Collection<Image> imageCollection;
-
+    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "productId")
     private Collection<Comment> commentCollection;
-
+    
     @JoinColumn(name = "SubCategoryId", referencedColumnName = "SubCategoryId", nullable = false)
     @ManyToOne(optional = false)
     private SubCategory subCategoryId;

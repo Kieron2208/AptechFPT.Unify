@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+    <changeSet author="Kiero" id="1448420331854-1">
+        <delete tableName="AccountRole"/>
+        <delete tableName="Role"/>
+        <delete tableName="PurchaseOrderDetail"/>
+        <delete tableName="PurchaseOrder"/>
+        <delete tableName="FeedBack"/>
+        <addColumn tableName="PurchaseOrder">
+            <column name="Name" type="varchar(MAX)"/>
+        </addColumn>
+        <modifyDataType tableName="PurchaseOrder" columnName="Address" newDataType="varchar(MAX)"/>
+        <modifyDataType tableName="PurchaseOrder" columnName="Phone" newDataType="varchar(MAX)"/>
+        <addColumn tableName="FeedBack">
+            <column name="ProductId" type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column name="Status" type="int">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+        <dropForeignKeyConstraint baseTableName="AccountRole" constraintName="FK_ACCOUNTROLE_ROLE"/>
+        <dropTable tableName="Role"/>
+        <dropPrimaryKey tableName="AccountRole" constraintName="PK__AccountR__8C320947736AE73E"/>
+        <dropColumn tableName="AccountRole">
+            <column name="RoleId"/>
+        </dropColumn>
+        <addColumn tableName="AccountRole">
+            <column name="Role" type="varchar(20)">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+        <addUniqueConstraint tableName="AccountRole" 
+                             columnNames="AccountId,Role" 
+                             constraintName="UC_AccountId_Role"/>
+        <loadData encoding="UTF-8"
+                  file="src/main/resources/config/liquibase/purchaseorder2.csv"
+                  separator=","
+                  tableName="PurchaseOrder">
+            <column name="AccountId" type="NUMERIC"/>
+        </loadData>
+        <loadData encoding="UTF-8"
+                  file="src/main/resources/config/liquibase/feedback2.csv"
+                  separator=","
+                  tableName="FeedBack"/>
+        <loadData encoding="UTF-8"
+                  file="src/main/resources/config/liquibase/purchaseorderdetail.csv"
+                  separator=","
+                  tableName="PurchaseOrderDetail">
+        </loadData>
+        <loadData encoding="UTF-8"
+                  file="src/main/resources/config/liquibase/accountrole2.csv"
+                  separator=","
+                  tableName="AccountRole">
+        </loadData>
+        <rollback>
+            <delete tableName="FeedBack"/>
+            <delete tableName="PurchaseOrderDetail"/>
+            <delete tableName="PurchaseOrder"/>
+            <dropColumn tableName="FeedBack">
+                <column name="ProductId"/>
+                <column name="Status"/>
+            </dropColumn>
+            <dropColumn tableName="PurchaseOrder">
+                <column name="Name" />
+            </dropColumn>
+            <modifyDataType tableName="PurchaseOrder" columnName="Address" newDataType="varchar(100)"/>
+            <modifyDataType tableName="PurchaseOrder" columnName="Phone" newDataType="varchar(20)"/>
+            <loadData encoding="UTF-8"
+                      file="src/main/resources/config/liquibase/purchaseorder.csv"
+                      separator=","
+                      tableName="PurchaseOrder"/>
+            <loadData encoding="UTF-8"
+                      file="src/main/resources/config/liquibase/feedback.csv"
+                      separator=","
+                      tableName="FeedBack"/>
+            <loadData encoding="UTF-8"
+                      file="src/main/resources/config/liquibase/purchaseorderdetail.csv"
+                      separator=","
+                      tableName="PurchaseOrderDetail">
+            </loadData>
+        </rollback>
+    </changeSet>
+</databaseChangeLog>

@@ -25,7 +25,7 @@
         <!-- CSS Header and Footer -->
         <link rel="stylesheet" href="<c:url value="/css/headers/header-v6.css"/>">
         <link rel="stylesheet" href="<c:url value="/css/footers/footer-v4.css"/>">
-        
+
         <!-- CSS Implementing Plugins -->
         <link rel="stylesheet" href="<c:url value="/plugins/animate.css"/>">    
         <link rel="stylesheet" href="<c:url value="/plugins/line-icons/line-icons.css"/>">
