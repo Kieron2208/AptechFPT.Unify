@@ -1,57 +1,57 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package com.aptechfpt.controller;
 
-import com.aptechfpt.bean.PurchaseOrderFacadeLocal;
-import com.aptechfpt.entity.PurchaseOrder;
-import com.aptechfpt.utils.MaHoa;
+import com.aptechfpt.bean.ProductFacadeLocal;
+import com.aptechfpt.entity.Product;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Iterator;
-import java.util.List;
 import javax.ejb.EJB;
-import javax.naming.InitialContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author ken
  */
-public class PurchaseController extends HttpServlet {
+public class ProductLikeController extends HttpServlet {
 
     @EJB
-    private PurchaseOrderFacadeLocal purchaseOrderFacade;
+    private ProductFacadeLocal productFacade;
 
+    /**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            InitialContext context = new InitialContext();
-            purchaseOrderFacade = (PurchaseOrderFacadeLocal) context.lookup("java:global/Unify-ear/Unify-ejb-1.0-SNAPSHOT/PurchaseOrderFacade!com.aptechfpt.bean.PurchaseOrderFacadeLocal");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            List<PurchaseOrder> list = purchaseOrderFacade.findAll();
-            MaHoa mh = new MaHoa();
-
-            for (Iterator<PurchaseOrder> it = list.iterator(); it.hasNext(); ) {
-                PurchaseOrder p = it.next();
-                p.setName(mh.decrypt(p.getName()));
-                p.setAddress(mh.decrypt(p.getAddress()));
-                p.setPhone(mh.decrypt(p.getPhone()));
-                if (!p.getCancelInvoice()) {
-                    it.remove();
-                }
-            }
-
-            request.setAttribute("list", list);
-            request.getRequestDispatcher("WEB-INF/admin/purchase.jsp").forward(request, response);
-        } catch (Exception ex) {
-            ex.printStackTrace();
+            int id = Integer.parseInt(request.getParameter("pid"));
+            Product p = productFacade.find(id);
+            int l = p.getLike()+1;
+            p.setLike(l);
+            productFacade.edit(p);
+            HttpSession ses= request.getSession();
+            int k =p.getLike();
+            request.setAttribute("lik",k );
+            ses.setAttribute("id", p.getProductId());
+            request.getRequestDispatcher("WEB-INF/productlike.jsp").forward(request, response);
         }
-
+        catch(Exception e){
+            e.printStackTrace();
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
