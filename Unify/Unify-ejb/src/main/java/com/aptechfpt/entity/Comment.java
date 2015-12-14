@@ -8,6 +8,7 @@ package com.aptechfpt.entity;
 import com.aptechfpt.converter.JodaDateTimeConverter;
 import com.aptechfpt.converter.JodaDateTimeStringConverter;
 import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Convert;
@@ -25,6 +26,7 @@ import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import org.joda.time.DateTime;
 
 /**
  *
@@ -41,41 +43,44 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Comment.findByModifiedDate", query = "SELECT c FROM Comment c WHERE c.modifiedDate = :modifiedDate"),
     @NamedQuery(name = "Comment.findByCreatedDate", query = "SELECT c FROM Comment c WHERE c.createdDate = :createdDate")})
 public class Comment implements Serializable {
+
     private static final long serialVersionUID = 1L;
-    
+
     @Id
     @Basic(optional = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "CommentId", nullable = false)
     private Integer commentId;
-    
+
     @Basic(optional = false)
     @NotNull
     @Column(name = "[Like]", nullable = false)
     private int like;
-    
+
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 8000)
     @Column(name = "Comments", nullable = false, length = 8000)
     private String comments;
-    
+
     @Basic(optional = false)
-    @Temporal(TemporalType.TIMESTAMP)
+    @NotNull
     @Convert(converter = JodaDateTimeConverter.class)
-    @Column(name = "ModifiedDate", insertable = false)
-    private String modifiedDate;
-    
+    @Column(name = "CreatedDate", nullable = false)
+    @Temporal(TemporalType.TIMESTAMP)
+    private DateTime createdDate;
+
     @Basic(optional = false)
-    @Temporal(TemporalType.TIMESTAMP)
+    @NotNull
     @Convert(converter = JodaDateTimeConverter.class)
-    @Column(name = "CreatedDate", insertable = false, updatable = false)
-    private String createdDate;
-    
+    @Column(name = "ModifiedDate", nullable = false)
+    @Temporal(TemporalType.TIMESTAMP)
+    private DateTime modifiedDate;
+
     @JoinColumn(name = "AccountId", referencedColumnName = "AccountId", nullable = false)
     @ManyToOne(optional = false)
     private Account accountId;
-    
+
     @JoinColumn(name = "ProductId", referencedColumnName = "ProductId", nullable = false)
     @ManyToOne(optional = false)
     private Product productId;
@@ -87,7 +92,7 @@ public class Comment implements Serializable {
         this.commentId = commentId;
     }
 
-    public Comment(Integer commentId, int like, String comments, String modifiedDate, String createdDate) {
+    public Comment(Integer commentId, int like, String comments, DateTime modifiedDate, DateTime createdDate) {
         this.commentId = commentId;
         this.like = like;
         this.comments = comments;
@@ -117,22 +122,6 @@ public class Comment implements Serializable {
 
     public void setComments(String comments) {
         this.comments = comments;
-    }
-
-    public String getModifiedDate() {
-        return modifiedDate;
-    }
-
-    public void setModifiedDate(String modifiedDate) {
-        this.modifiedDate = modifiedDate;
-    }
-
-    public String getCreatedDate() {
-        return createdDate;
-    }
-
-    public void setCreatedDate(String createdDate) {
-        this.createdDate = createdDate;
     }
 
     public Account getAccountId() {
@@ -175,5 +164,21 @@ public class Comment implements Serializable {
     public String toString() {
         return "com.aptechfpt.entity.Comment[ commentId=" + commentId + " ]";
     }
-    
+
+    public DateTime getModifiedDate() {
+        return modifiedDate;
+    }
+
+    public void setModifiedDate(DateTime modifiedDate) {
+        this.modifiedDate = modifiedDate;
+    }
+
+    public DateTime getCreatedDate() {
+        return createdDate;
+    }
+
+    public void setCreatedDate(DateTime createdDate) {
+        this.createdDate = createdDate;
+    }
+
 }

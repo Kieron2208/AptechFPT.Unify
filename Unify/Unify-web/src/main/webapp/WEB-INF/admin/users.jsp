@@ -34,8 +34,8 @@
                                     <th>Email</th>
                                     <th>Profile</th>
                                     <th>First Name</th>
-                                    <th>Last Name</th>
                                     <th>Gender</th>
+                                    <th>Role</th>
                                     <th>Created Date</th>
                                     <th></th>
                                 </tr>
@@ -48,9 +48,13 @@
                                         <td>
                                             <img height="100" src="<c:url value="${a.imageLink}"/>"/>
                                         </td>
-                                        <td>${a.firstName}</td>
-                                        <td>${a.lastName}</td>
+                                        <td>${a.firstName} ${a.lastName}</td>
                                         <td>${a.gender.toString()}</td>
+                                        <td>
+                                            <c:forEach items="${a.roles}" var="r">
+                                                <p>${r.name()}</p>
+                                            </c:forEach>
+                                        </td>
                                         <td>${a.createdDate.toString("dd-MM-YYYY")}</td>
                                         <td>
                                             <a class="btn btn-success" href="#">

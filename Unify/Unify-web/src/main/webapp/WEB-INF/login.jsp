@@ -5,6 +5,15 @@
     <jsp:attribute name="pagecss">
         <link rel="stylesheet" href="<c:url value="css/pages/log-reg-v3.css"/>">
     </jsp:attribute>
+    <jsp:attribute name="pagejs">
+        <script src="<c:url value="/js/forms/page_login.js"/>" type="text/javascript"></script>
+        <script src="<c:url value="/js/forms/page_contact_form.js"/>" type="text/javascript"></script>
+        <script>
+            $(document).ready(function(){
+                App.init();
+            });
+        </script>
+    </jsp:attribute>
     <jsp:body>
         <!--=== Breadcrumbs v4 ===-->
         <div class="breadcrumbs-v4">
@@ -15,7 +24,7 @@
                 <ul class="breadcrumb-v4-in">
                     <li><a href="index.html">Home</a></li>
                     <li><a href="">Product</a></li>
-                    <li class="active">${hello}</li>
+                    <li class="active">Login</li>
                 </ul>
             </div><!--/end container-->
         </div> 
@@ -72,24 +81,13 @@
                                     </div>    
                                 </label>
                             </section>
-                            <div class="row margin-bottom-5">
-                                <div class="col-xs-6">
-                                    <label class="checkbox">
-                                        <input type="checkbox" name="checkbox"/>
-                                        <i></i>
-                                        Remember me
-                                    </label>
-                                </div>
-                                <div class="col-xs-6 text-right">
-                                    <a href="#">Forget your Password?</a>
-                                </div>
-                            </div>
                             <button class="btn-u btn-u-sea-shop btn-block margin-bottom-20" type="submit">Log in</button>
 
                         </form>
 
                         <div class="margin-bottom-20"></div>
-                        <p class="text-center">Don't have account yet? Learn more and <a href="shop-ui-register.html">Sign Up</a></p>
+                        <c:url value="/register" var="register"/>
+                        <p class="text-center">Don't have account yet? Learn more and <a href="${register}">Sign Up</a></p>
                     </div>
                 </div><!--/end row-->
             </div><!--/end container-->

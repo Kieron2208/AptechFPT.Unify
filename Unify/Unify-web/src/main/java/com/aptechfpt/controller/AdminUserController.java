@@ -9,8 +9,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.inject.Inject;
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -22,7 +20,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class AdminUserController extends HttpServlet {
 
-    @Inject
+    @EJB
     private AccountFacadeLocal accountFacade;
     
     private static final Logger logger = Logger.getLogger(AdminUserController.class.getName());

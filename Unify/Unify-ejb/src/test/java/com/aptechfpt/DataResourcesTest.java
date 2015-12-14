@@ -11,7 +11,11 @@ import com.aptechfpt.bean.AccountFacadeLocal;
 import com.aptechfpt.entity.Account;
 import java.io.File;
 import javax.annotation.Resource;
+import javax.inject.Inject;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.sql.DataSource;
+import javax.transaction.UserTransaction;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.shrinkwrap.api.Archive;
@@ -34,6 +38,7 @@ import org.junit.runner.RunWith;
  */
 @RunWith(Arquillian.class)
 public class DataResourcesTest {
+
     private static String RESOURCES_DIR = "src/main/resources";
 
     @Deployment
@@ -47,19 +52,19 @@ public class DataResourcesTest {
         mergeDependencies(war, libraries);
         System.out.println("EJB folder structure: ");
         System.out.println(war.toString(true));
-        
+
         return war;
     }
 
     @Resource
     private DataSource dataSource;
-    
+
     @Test
-    public void should_bean_be_injected() throws Exception{
+    public void should_bean_be_injected() throws Exception {
         assertNotNull(dataSource);
         assertNotNull(dataSource.getConnection());
     }
-    
+
     private static void mergeDependencies(JavaArchive archive, File... dependencies) {
         for (File file : dependencies) {
             archive.merge(ShrinkWrap.createFromZipFile(JavaArchive.class, file));
