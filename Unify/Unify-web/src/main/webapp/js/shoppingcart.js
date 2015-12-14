@@ -86,7 +86,12 @@
             var jsonStr = JSON.stringify($scope.cart);
             w.localStorage.setItem("shoppingcart", jsonStr);
         };
-
+        $scope.clearcart = function () {
+            
+            $scope.cart = [];
+            var jsonStr = JSON.stringify($scope.cart);
+            w.localStorage.setItem("shoppingcart", jsonStr);
+        };
         $scope.qu = 1;
         //return so
         $scope.toNumber = function (value) {

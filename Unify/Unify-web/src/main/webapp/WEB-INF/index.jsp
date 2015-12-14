@@ -19,6 +19,37 @@
                 RevolutionSlider.initRSfullWidth();
             });
         </script>
+
+
+        <script type="text/javascript">
+
+            (function () {
+                $(document).ready(function () {
+                    var frm = $('#myform55');
+                    frm.submit(function () {
+
+                        $.ajax({
+                            type: frm.attr('method'),
+                            url: frm.attr('action'),
+                            data: frm.serialize(),
+                            success: function (output) {
+                                $("#likecount55").html(output);
+
+                            }
+                        });
+                        return false;
+
+                    });
+                    
+
+                    
+                });
+            })();
+
+        </script>
+
+
+
     </jsp:attribute>
     <jsp:body>
         <!--=== Slider ===-->
@@ -315,10 +346,16 @@
                                 <c:forEach var="img" items="${p.imageCollection}">
                                     <c:if test="${img.displayOrder==1}">
                                         <a href="shop-ui-inner.html"><img class="full-width img-responsive" src="${img.imagePath}" alt=""></a>
+                                        </c:if>
+                                    </c:forEach>
+                                <a class="product-review" href="shop-ui-inner.html">Quick review</a>
+                                <!--Them vao hinh--Chan-->
+                                <c:forEach var="img" items="${p.imageCollection}">
+                                    <c:if test="${img.displayOrder==1}">
+                                        <a class="add-to-cart" ng-click="put(${p.productId}, '${p.name}', '${img.imagePath}',${p.unitPrice}, 1)" href><i class="fa fa-shopping-cart"></i>Add to cart</a>
                                     </c:if>
                                 </c:forEach>
-                                <a class="product-review" href="shop-ui-inner.html">Quick review</a>
-                                <a class="add-to-cart" ng-click="put(${p.productId},'${p.name}','${img.imagePath}',${p.unitPrice},1)" href><i class="fa fa-shopping-cart"></i>Add to cart</a>
+
                                 <div class="shop-rgba-dark-green rgba-banner">New</div>
                             </div>
                             <div class="product-description product-description-brd">
@@ -329,8 +366,8 @@
                                             <c:if test="${p.gender==0}">Men</c:if>
                                             <c:if test="${p.gender==1}">Women</c:if>
                                             <c:if test="${p.gender==2}">Kid</c:if>
-                                        </span>
-                                        <span class="gender">${p.subCategoryId.name}</span>
+                                            </span>
+                                            <span class="gender">${p.subCategoryId.name}</span>
                                     </div>    
                                     <div class="product-price">
                                         <span class="title-price">
@@ -341,15 +378,22 @@
                                     </div>
                                 </div>    
                                 <ul class="list-inline product-ratings">
-                                    <li><i class="rating-selected fa fa-star"></i></li>
-                                    <li><i class="rating-selected fa fa-star"></i></li>
-                                    <li><i class="rating-selected fa fa-star"></i></li>
-                                    <li><i class="rating fa fa-star"></i></li>
-                                    <li><i class="rating fa fa-star"></i></li>
-                                    <li class="like-icon"><a data-original-title="Like" data-toggle="tooltip" data-placement="left" class="tooltips" href="#"><i class="fa fa-heart"></i></a></li>
-                                </ul>    
+                                    <li><div id="likecount${p.productId}">${p.like}</div></li>
+
+                                    <li class="like-icon">
+                                        <form id="myform${p.productId}" method="post" action="ProductLike">
+
+                                            <input type="hidden" name="pid" value="${p.productId}"/>
+                                            <button type="submit" class="btn btn-link"><i class="fa fa-heart"> </i></button>
+
+
+                                        </form>
+                                    </li>
+                                </ul> 
+
                             </div>
-                        </li>    
+                        </li>  
+
                     </c:forEach>
                 </ul>
             </div> 
@@ -377,15 +421,22 @@
                             <div class="thumb-product-in">
                                 <h4><a href="shop-ui-inner.html">${p.name}</a> – <a href="shop-ui-inner.html">${p.subCategoryId.name}</a></h4>
                                 <span class="thumb-product-type"><c:if test="${p.gender==0}">Men</c:if>
-                                            <c:if test="${p.gender==1}">Women</c:if>
-                                            <c:if test="${p.gender==2}">Kid</c:if></span>
-                            </div>
-                            <ul class="list-inline overflow-h">
-                                <li class="thumb-product-price">
+                                    <c:if test="${p.gender==1}">Women</c:if>
+                                    <c:if test="${p.gender==2}">Kid</c:if></span>
+                                </div>
+                                <ul class="list-inline overflow-h">
+                                    <li class="thumb-product-price">
                                     <c:set var="price" value="${p.unitPrice}"/>
                                     <fmt:setLocale value="en_US"/>
                                     <fmt:formatNumber value="${price}" type="currency"/></li>
-                                <li class="thumb-product-purchase"><a href="#"><i class="fa fa-shopping-cart"></i></a> | <a href="#"><i class="fa fa-heart"></i></a></li>
+                                <li class="thumb-product-purchase">
+                                    <c:forEach var="img" items="${p.imageCollection}">
+                                        <c:if test="${img.displayOrder==1}">
+                                            <a  ng-click="put(${p.productId}, '${p.name}', '${img.imagePath}',${p.unitPrice}, 1)" href><i class="fa fa-shopping-cart"></i></a>
+                                            </c:if>
+                                        </c:forEach>
+
+                                    | <a href="#"><i class="fa fa-heart"></i></a></li>
                             </ul>    
                         </div>
                     </c:forEach>
@@ -405,15 +456,22 @@
                             <div class="thumb-product-in">
                                 <h4><a href="shop-ui-inner.html">${p.name}</a> – <a href="shop-ui-inner.html">${p.subCategoryId.name}</a></h4>
                                 <span class="thumb-product-type"><c:if test="${p.gender==0}">Men</c:if>
-                                            <c:if test="${p.gender==1}">Women</c:if>
-                                            <c:if test="${p.gender==2}">Kid</c:if></span>
-                            </div>
-                            <ul class="list-inline overflow-h">
-                                <li class="thumb-product-price">
+                                    <c:if test="${p.gender==1}">Women</c:if>
+                                    <c:if test="${p.gender==2}">Kid</c:if></span>
+                                </div>
+                                <ul class="list-inline overflow-h">
+                                    <li class="thumb-product-price">
                                     <c:set var="price" value="${p.unitPrice}"/>
                                     <fmt:setLocale value="en_US"/>
                                     <fmt:formatNumber value="${price}" type="currency"/></li>
-                                <li class="thumb-product-purchase"><a href="#"><i class="fa fa-shopping-cart"></i></a> | <a href="#"><i class="fa fa-heart"></i></a></li>
+                                <li class="thumb-product-purchase">
+                                    <c:forEach var="img" items="${p.imageCollection}">
+                                        <c:if test="${img.displayOrder==1}">
+                                            <a  ng-click="put(${p.productId}, '${p.name}', '${img.imagePath}',${p.unitPrice}, 1)" href><i class="fa fa-shopping-cart"></i></a>
+                                            </c:if>
+                                        </c:forEach>
+
+                                    | <a href="#"><i class="fa fa-heart"></i></a></li>
                             </ul>    
                         </div>
                     </c:forEach>
@@ -432,18 +490,29 @@
                             <div class="thumb-product-in">
                                 <h4><a href="shop-ui-inner.html">${p.name}</a> – <a href="shop-ui-inner.html">${p.subCategoryId.name}</a></h4>
                                 <span class="thumb-product-type"><c:if test="${p.gender==0}">Men</c:if>
-                                            <c:if test="${p.gender==1}">Women</c:if>
-                                            <c:if test="${p.gender==2}">Kid</c:if></span>
-                            </div>
-                            <ul class="list-inline overflow-h">
-                                <li class="thumb-product-price">
+                                    <c:if test="${p.gender==1}">Women</c:if>
+                                    <c:if test="${p.gender==2}">Kid</c:if>
+                                    </span>
+                                </div>
+                                <ul class="list-inline overflow-h">
+                                    <li class="thumb-product-price">
                                     <c:set var="price" value="${p.unitPrice}"/>
                                     <fmt:setLocale value="en_US"/>
                                     <fmt:formatNumber value="${price}" type="currency"/></li>
-                                <li class="thumb-product-purchase"><a href="#"><i class="fa fa-shopping-cart"></i></a> | <a href="#"><i class="fa fa-heart"></i></a></li>
+                                <li class="thumb-product-purchase">
+
+                                    <c:forEach var="img" items="${p.imageCollection}">
+                                        <c:if test="${img.displayOrder==1}">
+                                            <a  ng-click="put(${p.productId}, '${p.name}', '${img.imagePath}',${p.unitPrice}, 1)" href><i class="fa fa-shopping-cart"></i></a>
+                                            </c:if>
+                                        </c:forEach>
+
+
+                                    | <a href="#"><i class="fa fa-heart"></i></a></li>
                             </ul>    
                         </div>
                     </c:forEach>
+
                 </div>
             </div><!--/end row-->
 
