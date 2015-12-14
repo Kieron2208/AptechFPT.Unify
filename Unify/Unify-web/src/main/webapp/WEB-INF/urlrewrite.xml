@@ -34,7 +34,7 @@
         <name>User Logout</name>
         <condition type="method">GET</condition>
         <from>^/logout$</from>
-        <to last="true">/AuthenticateController?action=logout</to>
+        <to last="true">/AuthenticateController?action=logout&amp;requesturi=%{request-uri}</to>
     </rule>
     
     <rule>
@@ -43,16 +43,9 @@
         <from>^/register$</from>
         <to>/WEB-INF/register.jsp</to>
     </rule>
-
+    
     <class-rule class="com.aptechfpt.filter.profileRule"/>
-
-    <rule>
-        <name>Profile Page</name>
-        <condition type="method">GET</condition>
-        <from>^/profile$</from>
-        <to>/WEB-INF/profile.jsp</to>
-    </rule>
-
+    
     <rule>
         <name>to Product Grid Page</name>
         <condition type="method">GET</condition>
@@ -76,14 +69,6 @@
         <to>/WEB-INF/shoppingcart.jsp</to>
     </rule>
 
-    <rule match-type="wildcard">
-        <condition operator="notequal" type="user-in-role">ADMINISTRATOR</condition>
-        <condition type="user-in-role" operator="notequal">SALEPERSON</condition>
-        <from>/adminstrator/*</from>
-        <set type="method">GET</set>    
-        <to type="redirect">%{context-path}/administrator/login</to>    
-    </rule>
-
     <rule>
         <name>Admin Page</name>
         <condition type="method">GET</condition>
@@ -104,21 +89,21 @@
         <from>^/administrator/user$</from>
         <to>/AdminUserController</to>
     </rule>
-    
-    <rule>
-        <name>Admin User Profile</name>
-        <condition type="method">GET</condition>
-        <from>^/administrator/user/profile$</from>
-        <to>/WEB-INF/admin/userprofile.jsp</to>
-    </rule>
-    
+
     <rule>
         <name>Admin Create New User</name>
         <condition type="method">GET</condition>
         <from>^/administrator/user/new$</from>
         <to>/WEB-INF/admin/createUser.jsp</to>
     </rule>
-    
+
+    <rule>
+        <name>Admin User Profile</name>
+        <condition type="method">GET</condition>
+        <from>^/administrator/user/profile$</from>
+        <to>/WEB-INF/admin/userprofile.jsp</to>
+    </rule>
+        
     <rule>
         <name>to View Product Admin Page</name>
         <condition type="method">GET</condition>
@@ -162,26 +147,7 @@
     <rule>
         <name> Purchase Report Print Page</name>
         <from>^/administrator/purchasereportprint$</from>
-        <to>/WEB-INF/admin/report.jsp</to>
+        <to>/WEB-INF/admin/reportprint.jsp</to>
     </rule>
-    
-    <rule>
-        <from>^/404$</from>
-        <to last="true">/WEB-INF/404.jsp</to>
-    </rule>
-    
-    <rule>
-        <from>^/500$</from>
-        <to last="true">/WEB-INF/500.jsp</to>
-    </rule>
-    
-    <rule>
-        <from>^/administrator/404$</from>
-        <to last="true">/WEB-INF/admin/404.jsp</to>
-    </rule>
-    
-    <rule>
-        <from>^/administrator/500$</from>
-        <to last="true">/WEB-INF/admin/500.jsp</to>
-    </rule>
+
 </urlrewrite>

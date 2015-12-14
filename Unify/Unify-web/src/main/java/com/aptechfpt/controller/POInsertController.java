@@ -6,7 +6,6 @@ import com.aptechfpt.bean.PriceHistoryFacadeLocal;
 import com.aptechfpt.bean.ProductFacadeLocal;
 import com.aptechfpt.bean.PurchaseOrderDetailFacadeLocal;
 import com.aptechfpt.bean.PurchaseOrderFacadeLocal;
-import com.aptechfpt.dto.AccountDTO;
 import com.aptechfpt.dto.PurchaseOrderDTO;
 import com.aptechfpt.entity.Account;
 import com.aptechfpt.entity.Product;
@@ -29,7 +28,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -65,34 +63,33 @@ public class POInsertController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            HttpSession session = request.getSession();
-            AccountDTO account = (AccountDTO) session.getAttribute("Account");
-
-            String cname = request.getParameter("fname");
-            String cphone = request.getParameter("phone");
-            String cadd = request.getParameter("address");
-
-            String xx = request.getParameter("total");
-            BigDecimal ct = new BigDecimal(xx);
-
+            int cid = 1;//lay id cua user dang nhap
+            String cname= request.getParameter("fname");
+            String cphone= request.getParameter("phone");
+            String cadd= request.getParameter("address");
+            
+            
+            
+            String xx=request.getParameter("total");
+            BigDecimal ct= new BigDecimal(xx);
+            
 //            String [] cart = request.getParameterValues("cart");
-            String cart = request.getParameter("cart");
+            String cart  = request.getParameter("cart");
             MaHoa mh = new MaHoa();
-            int pid = 0, quantity = 0;
-
-            List<PurchaseOrderDetail> listpod = new ArrayList<>();
+            int pid=0, quantity=0;
+            
+            List<PurchaseOrderDetail> listpod= new ArrayList<>();
             PurchaseOrder po = new PurchaseOrder();
-
+            
             Gson gson = new Gson();
-
-            Type collectionType = new TypeToken<ArrayList<PurchaseOrderDTO>>() {
-            }.getType();
-            List<PurchaseOrderDTO> PODTO = new Gson().fromJson(cart, collectionType);
-
-            Object object = null;
-            for (PurchaseOrderDTO o : PODTO) {
+            
+            Type collectionType = new TypeToken<ArrayList<PurchaseOrderDTO>>() {}.getType();
+            List<PurchaseOrderDTO> PODTO = new Gson().fromJson(cart, collectionType);  
+        
+            Object object=null;
+            for(PurchaseOrderDTO o:PODTO){
                 pid = o.id;
-                Product p = productFacade.find(pid);
+                Product p= productFacade.find(pid);
                 quantity = o.quantity;
                 BigDecimal price = o.price;
                 BigDecimal total = o.total;
@@ -106,12 +103,9 @@ public class POInsertController extends HttpServlet {
                 pod.setPurchaseOrderId(po);
                 listpod.add(pod);
             }
-            if (account != null) {
-                Integer id = account.getAccountId();
-                Account acc = accountFacade.findById(id);
-                po.setAccountId(acc);
-            }
-
+            Account acc = accountFacade.findById(cid);
+            
+            po.setAccountId(acc);
             po.setSubTotal(ct);
             po.setAddress(mh.encrypt(cadd));
             po.setName(mh.encrypt(cname));
@@ -120,13 +114,9 @@ public class POInsertController extends HttpServlet {
             //po.setCreatedDate((new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS").format(new Date())).toString());
             po.setPurchaseOrderDetailCollection(listpod);
             purchaseOrderFacade.create(po);
-            po.setName(cname);
-            po.setAddress(cadd);
-            po.setPhone(cphone);
-            request.setAttribute("o", po);
-            request.getRequestDispatcher("WEB-INF/cartinfor.jsp").forward(request, response);
-
-        } catch (Exception e) {
+            out.print("Thanh cong");
+            
+        }catch(Exception e){
             e.printStackTrace();
         }
     }
@@ -161,4 +151,5 @@ public class POInsertController extends HttpServlet {
         return "Short description";
     }// </edit
 
+   
 }

@@ -48,18 +48,7 @@
         <div class="content-md margin-bottom-30">
             <div class="container">
                 <section ng-show="hide()">
-                    <div class="headline-center margin-bottom-60">
-                        <h2>There is no item no in your shopping cart, please go to 
-                            <c:url value="/" var="home"/>
-                        <a href="${home}">
-                            <img src="<c:url value="/img/logo1-default.png"/>" alt="There is no item in your shopping cart"/>
-                        </a>
-                        for adding items
-                        </h2>
-                        <p>
-                            <img src="<c:url value="/img/cart-empty.png"/>" alt="There is no item in your shopping cart"/>
-                        </p>
-                    </div><!--/end Headline Center-->
+                    <h3>There is no items in your cart</h3>
                 </section>
                 <div ng-show="show()">
 
@@ -89,7 +78,7 @@
                                                 <img class="img-responsive" src="{{e.pic}}" alt="">
                                                 <div class="product-it-in">
                                                     <h3>{{e.name}}</h3>
-                                                    
+                                                    <span>Sed aliquam tincidunt tempus</span>
                                                 </div>    
                                             </td>
                                             <td>{{e.price|currency:"$":0}}</td>
@@ -125,30 +114,24 @@
                                     <div class="billing-info-inputs checkbox-list">
                                         <div class="row">
                                             <div class="col-sm-6">
-                                                <input  required placeholder="Enter Your Name" ng-model="customer.name" ng-maxlength="20" ng-minlength="10"
+                                                <input  required placeholder="Enter Your Name" ng-model="customer.name"
                                                         ng-trim="true" type="text"  name="fname" class="form-control"/>
                                                 <span style="color:red" ng-show="myForm.fname.$dirty && myForm.fname.$invalid">
                                                     <span ng-show="myForm.fname.$error.required">Your name is required.</span>
-                                                    <span ng-show="myForm.fname.$error.minlength">Name at least 10 characters</span>
-                                                    <span ng-show="myForm.fname.$error.maxlength">Name only 20 characters</span>
                                                 </span>
                                             </div>
                                             <div class="col-sm-6">
-                                                <input  required placeholder="Enter Your Phone Number" ng-model="customer.phone" ng-pattern="/^\d+$/"
-                                                        ng-trim="true" type="text" ng-maxlength="11" ng-minlength="10"  name="phone" class="form-control"/>
+                                                <input  required placeholder="Enter Your Phone Number" ng-model="customer.phone"
+                                                        ng-trim="true" type="tel"   name="phone" class="form-control"/>
                                                 <span style="color:red" ng-show="myForm.phone.$dirty && myForm.phone.$invalid">
                                                     <span ng-show="myForm.phone.$error.required">Your phone is required.</span>
-                                                    <span ng-show="myForm.phone.$error.minlength||myForm.phone.$error.maxlength||myForm.phone.$error.pattern">Phone accepts 10-11 digits only</span>
-                                                    
                                                 </span>
                                             </div>
                                         </div>
                                         <input  required placeholder="Enter Your Address" ng-model="customer.add"
-                                                ng-trim="true" type="text" ng-maxlength="50" ng-minlength="15"  name="address" class="form-control"/>
+                                                ng-trim="true" type="text"  name="address" class="form-control"/>
                                         <span style="color:red" ng-show="myForm.address.$dirty && myForm.address.$invalid">
                                             <span ng-show="myForm.address.$error.required">Your address is required.</span>
-                                            <span ng-show="myForm.address.$error.minlength">Address at least 15 characters</span>
-                                            <span ng-show="myForm.address.$error.maxlength">Address only 50 characters</span>
                                         </span>      
                                     </div>
                                 </div>
@@ -185,7 +168,7 @@
 
                                     </ul>
                                     <br/>
-                                    <input type="button" class="btn-u btn-u-lg" ng-click="clearcart()" value="CANCEL"/>
+                                    <input type="button" class="btn-u btn-u-lg" value="CANCEL"/>
                                     <input type="button" ng-click="formsubmit()"
                                            ng-disabled="myForm.$invalid ||
                                                        myForm.fname.$dirty && myForm.fname.$invalid ||

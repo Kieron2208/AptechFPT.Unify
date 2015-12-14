@@ -6,7 +6,6 @@
     <jsp:attribute name="pagecss">
         <link href="<c:url value="/plugins/datatables/dataTables.bootstrap.css"/>" type="text/css"  rel="stylesheet"/>
         <link href="<c:url value="/plugins/daterangepicker/daterangepicker-bs3.css"/>" type="text/css"  rel="stylesheet"/>
-        
     </jsp:attribute>
     <jsp:attribute name="pagejs">
         
@@ -52,8 +51,7 @@
             </script>
     </jsp:attribute>
     <jsp:body>
-       
-        <div class="row" >
+        <div class="row">
             <div class="col-xs-12">
                 <div class="box">
                     <div class="pad margin no-print">
@@ -64,12 +62,11 @@
                                 <div class="input-group col-md-4">                                    
                                     <input type="text" class="form-control" id="demo" name="daterange" value="" />                                  
                                     <span class="input-group-btn">
-                                        <button type="submit" class="btn btn-success ">Go!</button>
+                                        <button type="submit" class="btn btn-success ">Report</button>
                                     </span>
                                     
                                 </div> 
                                 </form>
-                                
                             </div>
                         </div>
                     </div>

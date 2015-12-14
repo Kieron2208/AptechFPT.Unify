@@ -28,7 +28,6 @@
                             <thead>
                                 <tr>
                                     <th>ID</th>
-
                                     <th>Name</th>
                                     <th>Address</th>
                                     <th>Phone</th>
@@ -42,53 +41,36 @@
                                 <c:forEach var="p" items="${list}">
                                     <tr>
                                         <td>${p.purchaseOrderId}</td>
-
                                         <td>${p.name}</td>
                                         <td>${p.address}</td>
                                         <td>${p.phone}</td>
                                         <td style="alignment-adjust: central">
                                             <c:if test="${p.status.equals(true)}">
                                                 <strong><i class="fa fa-check margin-r-5"></i>  Finish</strong>
-                                            </a>
+                                                </a>
                                             </c:if>
-                                                
                                             <c:if test="${p.status.equals(false)}">
                                                 <form method="post" action="../POUpdate">
-                                                    <input type="hidden" name="id" value="${p.purchaseOrderId}"/>
-                                                    <strong><i class="fa fa-location-arrow margin-r-5"></i></strong>                                                    
-                                                    <input type="submit" class="btn btn-link" value="Approve">
+                                                    <input type="hidden" name="id" value="${p.purchaseOrderId}"/>                                                    
+                                                    <input type="submit" class=" btn  btn-danger" value="Approve">
                                                 </form>
-                                                <form method="post" action="../POCancel">
-                                                    <input type="hidden" name="id" value="${p.purchaseOrderId}"/> 
-                                                    <strong><i class="fa fa-close margin-r-5"></i></strong>
-                                                    <input type="submit" class="btn btn-link" value="Cancel">
-                                                </form>    
                                             </c:if>                                           
                                         </td>
                                         <td>
                                             ${p.createdDate}
-
                                         </td>
                                         <td>
                                             <c:set var="total" value="${p.subTotal}"/>
-                                            <fmt:setLocale value="en-US"/>
                                             <fmt:formatNumber value="${total}" 
                                                               type="currency"/>
                                         </td>
                                         <td>
-
                                             <a class="btn btn-success" href data-toggle="modal" data-target="#myModal${p.purchaseOrderId}">
                                                 <i class="glyphicon glyphicon-zoom-in icon-white"></i>
                                             </a>
-
                                         </td>
                                     </tr>
-
                                 </c:forEach>
-
-
-
-
                             </tbody>
                             <!--                            <tfoot>
                                                             <tr>
@@ -145,15 +127,15 @@
                                     </div><!-- /.col -->
                                     <div class="col-sm-4 invoice-col">
                                         <b>Invoice #${p.purchaseOrderId}</b><br>
-                                        
+
                                         <b>Status:</b>
-                                            <c:if test="${p.status.equals(true)}">
-                                                Done
-                                            </c:if>
-                                            <c:if test="${p.status.equals(false)}">
-                                                On Progress
-                                            </c:if>                                        
-                                        
+                                        <c:if test="${p.status.equals(true)}">
+                                            Done
+                                        </c:if>
+                                        <c:if test="${p.status.equals(false)}">
+                                            On Progress
+                                        </c:if>                                        
+
                                         <br>
                                         <b>Payment Due:</b>${p.createdDate}<br>
                                         <b>Account:</b> #${p.accountId.accountId}
@@ -169,7 +151,6 @@
                                                     <th>Serial #</th>
                                                     <th>Product</th>
                                                     <th>Quantity</th>
-                                                    <th>Price</th>
                                                     <th>Description</th>
                                                     <th>Subtotal</th>
                                                 </tr>
@@ -180,18 +161,11 @@
                                                         <td>${item.productId.productId}</td>
                                                         <td>${item.productId.name}</td>
                                                         <td>${item.quantity}</td>
-                                                        <td>
-                                                        <c:set var="price" value="${item.unitPrice}"/>
-                                                        <fmt:setLocale value="en-US"/>
-                                                            <fmt:formatNumber value="${price}" 
-                                                              type="currency"/>
-                                                        </td>
                                                         <td>${item.productId.description}</td>
                                                         <td>
                                                             <c:set var="subtotal" value="${item.subtotal}"/>
-                                                            <fmt:setLocale value="en-US"/>
                                                             <fmt:formatNumber value="${subtotal}" 
-                                                              type="currency"/>
+                                                                              type="currency"/>
                                                         </td>
                                                     </tr>
                                                 </c:forEach>
@@ -212,36 +186,32 @@
                                                     <th style="width:50%">Subtotal:</th>
                                                     <td>
                                                         <c:set var="xtotal" value="${p.subTotal/1.12}"/>
-                                                        <fmt:setLocale value="en-US"/>
                                                         <fmt:formatNumber value="${xtotal}" maxFractionDigits="0"
-                                                              type="currency"/>.00                                                        
+                                                                          type="currency"/>.00                                                        
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <th>Tax(10%):</th>
                                                     <td>
                                                         <c:set var="tax" value="${(p.subTotal/1.12)*0.1}"/>
-                                                        <fmt:setLocale value="en-US"/>
                                                         <fmt:formatNumber value="${tax}"  maxFractionDigits="2"
-                                                              type="currency"/>
+                                                                          type="currency"/>
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <th>Shipping(2%):</th>
                                                     <td>
                                                         <c:set var="ship" value="${(p.subTotal/1.12)*0.02}"/>
-                                                        <fmt:setLocale value="en-US"/>
                                                         <fmt:formatNumber value="${ship}"  maxFractionDigits="2"
-                                                              type="currency"/>
+                                                                          type="currency"/>
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <th>Total:</th>
                                                     <td>
                                                         <c:set var="total" value="${p.subTotal}"/>
-                                                        <fmt:setLocale value="en-US"/>
                                                         <fmt:formatNumber value="${total}"  maxFractionDigits="2"
-                                                              type="currency"/>
+                                                                          type="currency"/>
                                                     </td>
                                                 </tr>
                                             </table>
