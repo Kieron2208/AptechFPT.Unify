@@ -4,12 +4,9 @@
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <t:defaultLayout title="Shop UI">
     <jsp:attribute name="pagejs">
-        <script src="<c:url value="/plugins/angular.min.js"/>"></script>
-        <script src="<c:url value="/js/shoppingcart.js"/>"></script>
         <script src="<c:url value="/js/plugins/revolution-slider.js"/>"></script>
         <script type="text/javascript">
             jQuery(document).ready(function () {
-                App.init();
                 App.initScrollBar();
                 App.initParallaxBg();
                 OwlCarousel.initOwlCarousel();
