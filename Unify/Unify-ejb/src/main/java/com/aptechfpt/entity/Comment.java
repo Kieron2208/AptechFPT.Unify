@@ -6,9 +6,7 @@
 package com.aptechfpt.entity;
 
 import com.aptechfpt.converter.JodaDateTimeConverter;
-import com.aptechfpt.converter.JodaDateTimeStringConverter;
 import java.io.Serializable;
-import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Convert;
@@ -45,42 +43,39 @@ import org.joda.time.DateTime;
 public class Comment implements Serializable {
 
     private static final long serialVersionUID = 1L;
-
+    
     @Id
     @Basic(optional = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "CommentId", nullable = false)
     private Integer commentId;
-
+    
     @Basic(optional = false)
     @NotNull
     @Column(name = "[Like]", nullable = false)
     private int like;
-
+    
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 8000)
     @Column(name = "Comments", nullable = false, length = 8000)
     private String comments;
-
+    
     @Basic(optional = false)
-    @NotNull
     @Convert(converter = JodaDateTimeConverter.class)
     @Column(name = "CreatedDate", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private DateTime createdDate;
 
     @Basic(optional = false)
-    @NotNull
     @Convert(converter = JodaDateTimeConverter.class)
-    @Column(name = "ModifiedDate", nullable = false)
-    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "ModifiedDate", insertable = false, updatable = false)
     private DateTime modifiedDate;
-
+    
     @JoinColumn(name = "AccountId", referencedColumnName = "AccountId", nullable = false)
     @ManyToOne(optional = false)
     private Account accountId;
-
+    
     @JoinColumn(name = "ProductId", referencedColumnName = "ProductId", nullable = false)
     @ManyToOne(optional = false)
     private Product productId;
@@ -124,6 +119,22 @@ public class Comment implements Serializable {
         this.comments = comments;
     }
 
+    public DateTime getModifiedDate() {
+        return modifiedDate;
+    }
+
+    public void setModifiedDate(DateTime modifiedDate) {
+        this.modifiedDate = modifiedDate;
+    }
+
+    public DateTime getCreatedDate() {
+        return createdDate;
+    }
+
+    public void setCreatedDate(DateTime createdDate) {
+        this.createdDate = createdDate;
+    }
+
     public Account getAccountId() {
         return accountId;
     }
@@ -164,21 +175,5 @@ public class Comment implements Serializable {
     public String toString() {
         return "com.aptechfpt.entity.Comment[ commentId=" + commentId + " ]";
     }
-
-    public DateTime getModifiedDate() {
-        return modifiedDate;
-    }
-
-    public void setModifiedDate(DateTime modifiedDate) {
-        this.modifiedDate = modifiedDate;
-    }
-
-    public DateTime getCreatedDate() {
-        return createdDate;
-    }
-
-    public void setCreatedDate(DateTime createdDate) {
-        this.createdDate = createdDate;
-    }
-
+    
 }

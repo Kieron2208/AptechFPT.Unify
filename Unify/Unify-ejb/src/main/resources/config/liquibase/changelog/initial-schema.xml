@@ -1,0 +1,339 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog 
+                            http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd
+                            http://www.liquibase.org/xml/ns/dbchangelog-ext 
+                            http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <changeSet id="1" author="kierontran">
+        <createTable tableName="Category">
+            <column name="CategoryId" type="int" autoIncrement="true"> 
+                <constraints primaryKey="true"
+                             primaryKeyName="PK_Category"/>
+            </column>
+            <column name="Name" type="varchar(100)">
+                <constraints nullable="false" unique="true"
+                             uniqueConstraintName="UC_Category_Name"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="SubCategory">
+            <column name="SubCategoryId" type="int" autoIncrement="true">
+                <constraints primaryKey="true"
+                             primaryKeyName="PK_SubCategory"/>
+            </column>
+            <column name="CategoryId" type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column name="Name" type="varchar(100)">
+                <constraints nullable="false" unique="true" uniqueConstraintName="UC_SUBCATEGORY_NAME"/>
+            </column>
+        </createTable>
+
+        <addForeignKeyConstraint baseTableName="SubCategory" 
+                                 baseColumnNames="CategoryId"
+                                 constraintName="FK_SUBCATEGORY_CATEGORY"
+                                 referencedTableName="Category"
+                                 referencedColumnNames="CategoryId"/>
+
+        <createTable tableName="Product">
+            <column name="ProductId" type="int" autoIncrement="true">
+                <constraints primaryKey="true"
+                             primaryKeyName="PK_PRODUCT"/>
+            </column>
+            <column name="SubCategoryId" type="int" >
+                <constraints nullable="false"/>
+            </column>
+            <column name="Name" type="varchar(100)">
+                <constraints nullable="false" unique="true"
+                             uniqueConstraintName="UC_ProductName"/>
+            </column>
+            <column name="UnitPrice" type="decimal(19,4)" >
+                <constraints nullable="false" />
+            </column>
+            <column name="Like" type="int" defaultValueNumeric="0">
+                <constraints nullable="false"/>
+            </column>
+            <column name="Gender" type="int"/>
+            <column name="Description" type="varchar(max)"/>
+            <column name="Available" type="boolean" 
+                    defaultValueBoolean="false">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addForeignKeyConstraint baseTableName="Product"
+                                 baseColumnNames="SubCategoryId"
+                                 constraintName="FK_SUBCATEGORYID_PRODUCT"
+                                 referencedTableName="SubCategory"
+                                 referencedColumnNames="SubCategoryId"/>
+
+        <createTable tableName="Role">
+            <column name="RoleId" type="int" autoIncrement="true">
+                <constraints primaryKey="true"
+                             primaryKeyName="PK_ROLE"/>
+            </column>
+            <column name="Name" type="varchar(50)">
+                <constraints unique="true"
+                             uniqueConstraintName="UC_ROLE"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="AccountRole">
+            <column name="AccountId" type="int" autoIncrement="true">
+                <constraints nullable="false"/>
+            </column>
+            <column name="RoleId" type="int">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addPrimaryKey tableName="AccountRole"
+                       columnNames="AccountId, RoleId"/>
+
+        <createTable tableName="Account">
+            <column name="AccountId" type="int" autoIncrement="true">
+                <constraints primaryKey="true"
+                             primaryKeyName="PK_ACCOUNT"/>
+            </column>
+            <column name="Email" type="varchar(100)">
+                <constraints nullable="false" unique="true" 
+                             uniqueConstraintName="UC_ACCOUNT_EMAIL"/>
+            </column>
+            <column name="Password" type="varchar(200)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ImageLink" type="varchar(400)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="FirstName" type="varchar(50)"/>
+            <column name="LastName" type="varchar(50)"/>
+            <column name="Phone" type="varchar(20)"/>
+            <column name="Address" type="varchar(200)"/>
+            <column name="Gender" type="varchar(1)" />
+            <column name="DayOfBirth" type="timestamp"/>
+            <column name="ModifiedDate" type="datetime2(7)"
+                    defaultValueDate="SYSDATETIME()">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        
+        <addForeignKeyConstraint baseTableName="AccountRole"
+                                 baseColumnNames="RoleId"
+                                 constraintName="FK_ACCOUNTROLE_ROLE"
+                                 referencedTableName="Role"
+                                 referencedColumnNames="RoleId"/>
+
+        <addForeignKeyConstraint baseTableName="AccountRole" 
+                                 baseColumnNames="AccountId"
+                                 constraintName="FK_ACCOUNTROLE_ACCOUNT"
+                                 referencedTableName="Account"
+                                 referencedColumnNames="AccountId"/>
+
+        <createTable tableName="Image">
+            <column name="ImageId" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" primaryKeyName="PK_Image"/>
+            </column>
+            <column name="ProductId" type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ImagePath" type="varchar(400)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="DisplayOrder" type="int">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addForeignKeyConstraint baseTableName="Image" 
+                                 baseColumnNames="ProductId" 
+                                 constraintName="FK_IMAGE_PRODUCT" 
+                                 referencedTableName="Product" 
+                                 referencedColumnNames="ProductId"/>
+
+        <createTable tableName="PriceHistory">
+            <column name="PriceHistoryId" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" primaryKeyName="PK_PriceHistory"/>
+            </column>
+            <column name="ProductId" type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column name="Cost" type="decimal(19,4)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="Price" type="decimal(19,4)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CreatedDate" type="timestamp"
+                    defaultValueDate="GETDATE()">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addForeignKeyConstraint baseTableName="PriceHistory" 
+                                 baseColumnNames="ProductId"
+                                 constraintName="FK_PRICEHISTORY_PRODUCT" 
+                                 referencedTableName="Product" 
+                                 referencedColumnNames="ProductId"/>
+
+        <createTable tableName="PurchaseOrder">
+            <column name="PurchaseOrderId" type="int" autoIncrement="true">
+                <constraints primaryKey="true"
+                             primaryKeyName="PK_PURCHASEORDER"/>
+            </column>
+            <column name="AccountId" type="int"/>
+            <column name="SubTotal" type="decimal(19,4)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="Address" type="varchar(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="Phone" type="varchar(20)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="Status" type="boolean" defaultValueBoolean="false">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CreatedDate" type="datetime2(7)"
+                    defaultValueDate="SYSDATETIME()">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addForeignKeyConstraint baseTableName="PurchaseOrder" 
+                                 baseColumnNames="AccountId"
+                                 constraintName="FK_PURCHASEORDER_ACCOUNT"
+                                 referencedTableName="Account"
+                                 referencedColumnNames="AccountId"/>
+
+        <createTable tableName="PurchaseOrderDetail">
+            <column name="PurchaseOrderDetailId" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" primaryKeyName="PK_PurchaseOrderDetailId"/>
+            </column> 
+            <column name="PurchaseOrderId" type="int">
+                <constraints nullable="false"/>
+            </column> 
+            <column name="ProductId" type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column name="Quantity" type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column name="Cost" type="decimal(19,4)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="UnitPrice" type="decimal(19,4)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="Subtotal" type="decimal(19,4)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        
+        <addForeignKeyConstraint baseTableName="PurchaseOrderDetail"
+                                 baseColumnNames="PurchaseOrderId"
+                                 constraintName="FK_PURCHASEORDERDETAIL_PURCHCASEORDER"
+                                 referencedTableName="PurchaseOrder"
+                                 referencedColumnNames="PurchaseOrderId"/>
+
+        <addForeignKeyConstraint baseTableName="PurchaseOrderDetail"
+                                 baseColumnNames="ProductId"
+                                 constraintName="FK_PURCHASEORDERDETAIL_PRODUCT"
+                                 referencedTableName="Product"
+                                 referencedColumnNames="ProductId"/>
+
+        <createTable tableName="FeedBack">
+            <column name="FeedBackId" type="int" autoIncrement="true">
+                <constraints primaryKey="true"
+                             primaryKeyName="FK_FEEDBACKID"/>
+            </column>
+            <column name="AccountId" type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column name="Title" type="varchar(200)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="Description" type="varchar(MAX)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CreatedDate" type="datetime2(7)"
+                    defaultValueDate="SYSDATETIME()">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addForeignKeyConstraint baseTableName="FeedBack"
+                                 baseColumnNames="AccountId"
+                                 constraintName="FK_FEEDBACK_ACCOUNT"
+                                 referencedTableName="Account"
+                                 referencedColumnNames="AccountId"/>
+
+        <createTable tableName="Comment">
+            <column name="CommentId" type="int" autoIncrement="true">
+                <constraints primaryKeyName="FK_COMMENT"
+                             primaryKey="true"/>
+            </column>
+            <column name="ProductId" type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column name="AccountId" type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column name="Like" type="int"
+                    defaultValueNumeric="0">
+                <constraints nullable="false"/>
+            </column>
+            <column name="Comments" type="varchar(8000)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ModifiedDate" type="datetime2(7)"
+                    defaultValueDate="SYSDATETIME()">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CreatedDate" type="datetime2(7)"
+                    defaultValueDate="SYSDATETIME()">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addForeignKeyConstraint baseTableName="Comment"
+                                 baseColumnNames="ProductId"
+                                 constraintName="FK_COMMENT_PRODUCT"
+                                 referencedTableName="Product"
+                                 referencedColumnNames="ProductId"/>
+
+        <addForeignKeyConstraint baseTableName="Comment"
+                                 baseColumnNames="AccountId"
+                                 constraintName="FK_COMMENT_ACCOUNT"
+                                 referencedTableName="Account"
+                                 referencedColumnNames="AccountId"/>
+
+        <rollback>
+            <dropAllForeignKeyConstraints baseTableName="SubCategory"/>
+            <dropAllForeignKeyConstraints baseTableName="Product"/>
+            <dropAllForeignKeyConstraints baseTableName="Image"/>
+            <dropAllForeignKeyConstraints baseTableName="PurchaseOrderDetail"/>
+            <dropAllForeignKeyConstraints baseTableName="PurchaseOrder"/>
+            <dropAllForeignKeyConstraints baseTableName="AccountRole"/>
+            <dropAllForeignKeyConstraints baseTableName="FeedBack"/>
+            <dropAllForeignKeyConstraints baseTableName="PriceHistory"/>
+            <dropAllForeignKeyConstraints baseTableName="Comment"/>
+            <dropTable tableName="Category"/>
+            <dropTable tableName="SubCategory"/>
+            <dropTable tableName="Product"/>
+            <dropTable tableName="Image"/>
+            <dropTable tableName="PurchaseOrderDetail"/>
+            <dropTable tableName="PurchaseOrder"/>
+            <dropTable tableName="Account"/>
+            <dropTable tableName="AccountRole"/>
+            <dropTable tableName="FeedBack"/>
+            <dropTable tableName="PriceHistory"/>
+            <dropTable tableName="Role"/>
+            <dropTable tableName="Comment"/>
+        </rollback>
+    </changeSet>
+
+</databaseChangeLog>

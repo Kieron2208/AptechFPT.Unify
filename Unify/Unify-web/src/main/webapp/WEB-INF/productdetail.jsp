@@ -1,6 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@taglib tagdir="/WEB-INF/tags" prefix="t" %>
+<%@taglib tagdir="/WEB-INF/tags/" prefix="t" %>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <t:defaultLayout title="Shop UI - Product Detail">
     <jsp:attribute name="pagecss">
@@ -46,7 +46,7 @@
             <!-- Breadcrumbs v5 -->
             <div class="container">
                 <ul class="breadcrumb-v5">
-                    <li><a href="index.html">&nbsp;</li>
+                    <li>&nbsp;</li>
                 </ul> 
             </div>
             <!-- End Breadcrumbs v5 -->
@@ -93,8 +93,6 @@
                                 <span>(1) <a href="#">Review</a> | <a href="#"> Add Review</a></span>
                             </li>
                         </ul><!--/end shop product ratings-->
-
-                        <p>${pro.description}</p><br>
 
                         <ul class="list-inline shop-product-prices margin-bottom-30">
                             <li class="shop-red">
