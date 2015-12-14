@@ -1,8 +1,14 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package com.aptechfpt.entity;
 
 import com.aptechfpt.converter.JodaDateTimeConverter;
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Convert;
@@ -35,33 +41,28 @@ import org.joda.time.DateTime;
     @NamedQuery(name = "PriceHistory.findByPrice", query = "SELECT p FROM PriceHistory p WHERE p.price = :price"),
     @NamedQuery(name = "PriceHistory.findByCreatedDate", query = "SELECT p FROM PriceHistory p WHERE p.createdDate = :createdDate")})
 public class PriceHistory implements Serializable {
-
     private static final long serialVersionUID = 1L;
-    
     @Id
     @Basic(optional = false)
     @NotNull
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "PriceHistoryId", nullable = false)
     private Long priceHistoryId;
-    
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Basic(optional = false)
     @NotNull
     @Column(name = "Cost", nullable = false, precision = 19, scale = 4)
     private BigDecimal cost;
-    
     @Basic(optional = false)
     @NotNull
     @Column(name = "Price", nullable = false, precision = 19, scale = 4)
     private BigDecimal price;
-
     @Basic(optional = false)
-    @Temporal(TemporalType.TIMESTAMP)
     @Convert(converter = JodaDateTimeConverter.class)
-    @Column(name = "CreatedDate", insertable = false, updatable = false)
+    @Column(name = "CreatedDate", nullable = false)
+    @Temporal(TemporalType.TIMESTAMP)
     private DateTime createdDate;
-
+    
     @JoinColumn(name = "ProductId", referencedColumnName = "ProductId", nullable = false)
     @ManyToOne(optional = false)
     private Product productId;
@@ -144,5 +145,5 @@ public class PriceHistory implements Serializable {
     public String toString() {
         return "com.aptechfpt.entity.PriceHistory[ priceHistoryId=" + priceHistoryId + " ]";
     }
-
+    
 }

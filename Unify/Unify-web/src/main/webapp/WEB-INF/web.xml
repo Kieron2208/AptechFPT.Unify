@@ -79,8 +79,16 @@
         <servlet-class>com.aptechfpt.controller.PurchaseReportController</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>POCancel</servlet-name>
+        <servlet-class>com.aptechfpt.controller.POCancelController</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>AdminAuthenticateController</servlet-name>
         <servlet-class>com.aptechfpt.controller.AdminAuthenticateController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ProductLike</servlet-name>
+        <servlet-class>com.aptechfpt.controller.ProductLikeController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>ProfileController</servlet-name>
@@ -122,21 +130,29 @@
         <servlet-name>POUpdate</servlet-name>
         <url-pattern>/POUpdate</url-pattern>
     </servlet-mapping>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminAuthenticateController</servlet-name>
+        <url-pattern>/AdminAuthenticateController</url-pattern>
     <servlet-mapping>
         <servlet-name>PurchaseController</servlet-name>
         <url-pattern>/PurchaseController</url-pattern>
     </servlet-mapping>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ProfileController</servlet-name>
+        <url-pattern>/ProfileController</url-pattern>
     <servlet-mapping>
         <servlet-name>PurchaseReport</servlet-name>
         <url-pattern>/PurchaseReport</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>AdminAuthenticateController</servlet-name>
-        <url-pattern>/AdminAuthenticateController</url-pattern>
+        <servlet-name>POCancel</servlet-name>
+        <url-pattern>/POCancel</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>ProfileController</servlet-name>
-        <url-pattern>/ProfileController</url-pattern>
+        <servlet-name>ProductLike</servlet-name>
+        <url-pattern>/ProductLike</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
