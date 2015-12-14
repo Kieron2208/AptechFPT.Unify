@@ -4,9 +4,8 @@
  * and open the template in the editor.
  */
 package com.aptechfpt.entity;
-import com.aptechfpt.converter.JodaDateTimeStringConverter;
-import com.aptechfpt.entity.Account;
-import com.aptechfpt.entity.PurchaseOrderDetail;
+
+import com.aptechfpt.converter.JodaDateTimeConverter;
 import org.joda.time.DateTime;
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -79,7 +78,7 @@ public class PurchaseOrder implements Serializable {
     
     @Basic(optional = false)
     @Temporal(TemporalType.TIMESTAMP)
-    @Convert(converter = JodaDateTimeStringConverter.class)
+    @Convert(converter = JodaDateTimeConverter.class)
     @Column(name = "CreatedDate",insertable = false, updatable = false)
     private DateTime createdDate;
     

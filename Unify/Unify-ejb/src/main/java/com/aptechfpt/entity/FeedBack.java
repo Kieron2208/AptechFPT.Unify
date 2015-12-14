@@ -5,7 +5,7 @@
  */
 package com.aptechfpt.entity;
 
-import com.aptechfpt.converter.JodaDateTimeStringConverter;
+import com.aptechfpt.converter.JodaDateTimeConverter;
 import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -62,7 +62,7 @@ public class FeedBack implements Serializable {
     private String description;
     @Basic(optional = false)
     @Temporal(TemporalType.TIMESTAMP)
-    @Convert(converter = JodaDateTimeStringConverter.class)
+    @Convert(converter = JodaDateTimeConverter.class)
     @Column(name = "CreatedDate", insertable = false, updatable = false)
     private DateTime createdDate;
     @Basic(optional = false)
