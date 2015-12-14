@@ -83,8 +83,16 @@
         <servlet-class>com.aptechfpt.controller.POCancelController</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>AdminAuthenticateController</servlet-name>
+        <servlet-class>com.aptechfpt.controller.AdminAuthenticateController</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>ProductLike</servlet-name>
         <servlet-class>com.aptechfpt.controller.ProductLikeController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ProfileController</servlet-name>
+        <servlet-class>com.aptechfpt.controller.ProfileController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>HomeController</servlet-name>
@@ -122,10 +130,18 @@
         <servlet-name>POUpdate</servlet-name>
         <url-pattern>/POUpdate</url-pattern>
     </servlet-mapping>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminAuthenticateController</servlet-name>
+        <url-pattern>/AdminAuthenticateController</url-pattern>
     <servlet-mapping>
         <servlet-name>PurchaseController</servlet-name>
         <url-pattern>/PurchaseController</url-pattern>
     </servlet-mapping>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ProfileController</servlet-name>
+        <url-pattern>/ProfileController</url-pattern>
     <servlet-mapping>
         <servlet-name>PurchaseReport</servlet-name>
         <url-pattern>/PurchaseReport</url-pattern>
@@ -146,6 +162,14 @@
             <name>SESSIONID</name>
         </cookie-config>
     </session-config>
+    <error-page>
+        <error-code>404</error-code>
+        <location>/ErrorHandleController</location>
+    </error-page>
+    <error-page>
+        <error-code>500</error-code>
+        <location>/ErrorHandleController</location>
+    </error-page>
     <login-config>
         <auth-method>FORM</auth-method>
         <realm-name>UnifyRealm</realm-name>
