@@ -6,7 +6,6 @@
 package com.aptechfpt.entity;
 
 import com.aptechfpt.converter.JodaDateTimeConverter;
-import com.aptechfpt.converter.JodaDateTimeStringConverter;
 import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -20,11 +19,10 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import org.joda.time.DateTime;
 
 /**
  *
@@ -42,35 +40,29 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Comment.findByCreatedDate", query = "SELECT c FROM Comment c WHERE c.createdDate = :createdDate")})
 public class Comment implements Serializable {
     private static final long serialVersionUID = 1L;
-    
     @Id
     @Basic(optional = false)
+    @NotNull
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "CommentId", nullable = false)
     private Integer commentId;
-    
     @Basic(optional = false)
     @NotNull
     @Column(name = "[Like]", nullable = false)
     private int like;
-    
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 8000)
     @Column(name = "Comments", nullable = false, length = 8000)
     private String comments;
-    
     @Basic(optional = false)
-    @Temporal(TemporalType.TIMESTAMP)
     @Convert(converter = JodaDateTimeConverter.class)
-    @Column(name = "ModifiedDate", insertable = false)
-    private String modifiedDate;
-    
+    @Column(name = "ModifiedDate")
+    private DateTime modifiedDate;
     @Basic(optional = false)
-    @Temporal(TemporalType.TIMESTAMP)
     @Convert(converter = JodaDateTimeConverter.class)
-    @Column(name = "CreatedDate", insertable = false, updatable = false)
-    private String createdDate;
+    @Column(name = "CreatedDate")
+    private DateTime createdDate;
     
     @JoinColumn(name = "AccountId", referencedColumnName = "AccountId", nullable = false)
     @ManyToOne(optional = false)
@@ -87,7 +79,7 @@ public class Comment implements Serializable {
         this.commentId = commentId;
     }
 
-    public Comment(Integer commentId, int like, String comments, String modifiedDate, String createdDate) {
+    public Comment(Integer commentId, int like, String comments, DateTime modifiedDate, DateTime createdDate) {
         this.commentId = commentId;
         this.like = like;
         this.comments = comments;
@@ -119,19 +111,19 @@ public class Comment implements Serializable {
         this.comments = comments;
     }
 
-    public String getModifiedDate() {
+    public DateTime getModifiedDate() {
         return modifiedDate;
     }
 
-    public void setModifiedDate(String modifiedDate) {
+    public void setModifiedDate(DateTime modifiedDate) {
         this.modifiedDate = modifiedDate;
     }
 
-    public String getCreatedDate() {
+    public DateTime getCreatedDate() {
         return createdDate;
     }
 
-    public void setCreatedDate(String createdDate) {
+    public void setCreatedDate(DateTime createdDate) {
         this.createdDate = createdDate;
     }
 

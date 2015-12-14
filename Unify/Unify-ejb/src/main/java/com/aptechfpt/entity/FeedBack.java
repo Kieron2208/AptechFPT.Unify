@@ -20,8 +20,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -41,11 +39,12 @@ import org.joda.time.DateTime;
     @NamedQuery(name = "FeedBack.findByCreatedDate", query = "SELECT f FROM FeedBack f WHERE f.createdDate = :createdDate"),
     @NamedQuery(name = "FeedBack.findByStatus", query = "SELECT f FROM FeedBack f WHERE f.status = :status")})
 public class FeedBack implements Serializable {
-
+    @JoinColumn(name = "AccountId", referencedColumnName = "AccountId", nullable = false)
+    @ManyToOne(optional = false)
+    private Account accountId;
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
-    @NotNull
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "FeedBackId", nullable = false)
     private Integer feedBackId;
@@ -61,17 +60,13 @@ public class FeedBack implements Serializable {
     @Column(name = "Description", nullable = false, length = 2147483647)
     private String description;
     @Basic(optional = false)
-    @Temporal(TemporalType.TIMESTAMP)
     @Convert(converter = JodaDateTimeConverter.class)
-    @Column(name = "CreatedDate", insertable = false, updatable = false)
+    @Column(name = "CreatedDate")
     private DateTime createdDate;
     @Basic(optional = false)
     @NotNull
     @Column(name = "Status", nullable = false)
     private int status;
-    @JoinColumn(name = "AccountId", referencedColumnName = "AccountId", nullable = false)
-    @ManyToOne(optional = false)
-    private Account accountId;
 
     public FeedBack() {
     }
@@ -160,5 +155,5 @@ public class FeedBack implements Serializable {
     public void setAccountId(Account accountId) {
         this.accountId = accountId;
     }
-
+    
 }
