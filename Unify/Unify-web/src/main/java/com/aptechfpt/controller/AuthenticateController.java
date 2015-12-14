@@ -121,6 +121,8 @@ public class AuthenticateController extends HttpServlet {
     private AccountDTO setDTO(String email) {
         Account account = accountFacade.findByEmail(email);
         AccountDTO dto = new AccountDTO.Builder(account.getAccountId(),account.getEmail())
+                .FirstName(account.getFirstName())
+                .LastName(account.getLastName())
                 .ImageLink(account.getImageLink())
                 .build();
         return dto;

@@ -29,7 +29,7 @@ import org.junit.runner.RunWith;
  * @author Kiero
  */
 @RunWith(Arquillian.class)
-public class AcountBeanTest {
+public class AccountBeanTest {
     
 //    @EJB
 //    private AccountFacadeLocal accountFacadeLocal;

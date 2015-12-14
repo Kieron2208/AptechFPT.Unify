@@ -6,6 +6,7 @@ import com.aptechfpt.converter.JodaDateTimeConverter;
 import com.aptechfpt.enumtype.AccountGender;
 import com.aptechfpt.enumtype.Role;
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.Set;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -102,6 +103,12 @@ public class Account implements Serializable {
     @Column(name = "Role", length = 20, nullable = false)
     private Set<Role> roles;
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "accountId")
+    private Collection<Comment> commentCollection;
+    
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "accountId")
+    private Collection<FeedBack> feedBackCollection;
+    
     public Account() {
     }
 
@@ -172,6 +179,22 @@ public class Account implements Serializable {
         return roles;
     }
 
+    public Collection<Comment> getCommentCollection() {
+        return commentCollection;
+    }
+
+    public Collection<FeedBack> getFeedBackCollection() {
+        return feedBackCollection;
+    }
+
+    public void setFeedBackCollection(Collection<FeedBack> feedBackCollection) {
+        this.feedBackCollection = feedBackCollection;
+    }
+
+    public void setCommentCollection(Collection<Comment> commentCollection) {
+        this.commentCollection = commentCollection;
+    }
+    
     @Override
     public int hashCode() {
         int hash = 0;

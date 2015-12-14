@@ -43,41 +43,8 @@
         <from>^/register$</from>
         <to>/WEB-INF/register.jsp</to>
     </rule>
-
-    <rule>
-        <name>Profile Page</name>
-        <condition type="method">GET</condition>
-        <from>^/profile$</from>
-        <to>/WEB-INF/profile.jsp</to>
-    </rule>
-
-    <rule>
-        <name>Profile current order Page</name>
-        <condition type="method">GET</condition>
-        <from>^/profile/currentorder$</from>
-        <to>/WEB-INF/profileCurrentOrder.jsp</to>
-    </rule>
     
-    <rule>
-        <name>Profile current order Page</name>
-        <condition type="method">GET</condition>
-        <from>^/profile/orderhistory$</from>
-        <to>/WEB-INF/profileHistory.jsp</to>
-    </rule>
-    
-    <rule>
-        <name>Profile current order Page</name>
-        <condition type="method">GET</condition>
-        <from>^/profile/feedback$</from>
-        <to>/WEB-INF/profileFeedBack.jsp</to>
-    </rule>
-    
-    <rule>
-        <name>Profile current order Page</name>
-        <condition type="method">GET</condition>
-        <from>^/profile/mycomment$</from>
-        <to>/WEB-INF/profileComment.jsp</to>
-    </rule>
+    <class-rule class="com.aptechfpt.filter.profileRule"/>
     
     <rule>
         <name>to Product Grid Page</name>

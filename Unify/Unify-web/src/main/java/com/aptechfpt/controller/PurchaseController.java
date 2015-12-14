@@ -32,7 +32,6 @@ public class PurchaseController extends HttpServlet {
                 p.setName(mh.decrypt(p.getName()));
                 p.setAddress(mh.decrypt(p.getAddress()));
                 p.setPhone(mh.decrypt(p.getPhone()));
-
             }
 
             request.setAttribute("list", list);

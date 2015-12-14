@@ -82,6 +82,10 @@
         <servlet-name>AdminAuthenticateController</servlet-name>
         <servlet-class>com.aptechfpt.controller.AdminAuthenticateController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ProfileController</servlet-name>
+        <servlet-class>com.aptechfpt.controller.ProfileController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>HomeController</servlet-name>
         <url-pattern>/HomeController</url-pattern>
@@ -129,6 +133,10 @@
     <servlet-mapping>
         <servlet-name>AdminAuthenticateController</servlet-name>
         <url-pattern>/AdminAuthenticateController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ProfileController</servlet-name>
+        <url-pattern>/ProfileController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

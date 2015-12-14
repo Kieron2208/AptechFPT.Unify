@@ -34,7 +34,39 @@
                 <!-- Profile Content -->
                 <div class="col-md-9">
                     <div class="profile-body margin-bottom-20">
-                        Current Order
+                        <!-- Review Form-->
+                        <form action="#" id="sky-form2" class="sky-form">
+                            <header>FeedBack Form</header>
+
+                            <fieldset>
+
+                                <section>
+                                    <label class="input">
+                                        <i class="icon-append fa fa-envelope"></i>
+                                        <input type="email" name="email" readonly placeholder="Your e-mail" value="${Account.email} - ${Account.fullName}">
+                                    </label>
+                                </section>
+
+                                <section>
+                                    <label class="input">
+                                        <i class="icon-append fa fa-user"></i>
+                                        <input type="text" name="title" placeholder="Title">
+                                    </label>
+                                </section>
+                                    
+                                <section>
+                                    <label class="label"></label>
+                                    <label class="textarea">
+                                        <i class="icon-append fa fa-comment"></i>
+                                        <textarea rows="10" name="review" id="review" placeholder="Text of the review"></textarea>
+                                    </label>
+                                </section>
+                            </fieldset>
+                            <footer>
+                                <button type="submit" class="btn-u">Send your feedback</button>
+                            </footer>
+                        </form>
+                        <!-- End Review Form-->
                     </div>
                 </div>
                 <!-- End Profile Content -->

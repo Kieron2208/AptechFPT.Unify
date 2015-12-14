@@ -7,6 +7,7 @@ package com.aptechfpt.entity;
 
 import com.aptechfpt.converter.JodaDateTimeConverter;
 import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Convert;
@@ -43,32 +44,38 @@ import org.joda.time.DateTime;
 public class FeedBack implements Serializable {
 
     private static final long serialVersionUID = 1L;
+    
     @Id
     @Basic(optional = false)
-    @NotNull
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "FeedBackId", nullable = false)
     private Integer feedBackId;
+    
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 200)
     @Column(name = "Title", nullable = false, length = 200)
     private String title;
+    
     @Basic(optional = false)
     @NotNull
     @Lob
     @Size(min = 1, max = 2147483647)
     @Column(name = "Description", nullable = false, length = 2147483647)
     private String description;
-    @Basic(optional = false)
-    @Temporal(TemporalType.TIMESTAMP)
-    @Convert(converter = JodaDateTimeConverter.class)
-    @Column(name = "CreatedDate", insertable = false, updatable = false)
-    private DateTime createdDate;
+    
     @Basic(optional = false)
     @NotNull
     @Column(name = "Status", nullable = false)
     private int status;
+    
+    @Basic(optional = false)
+    @NotNull
+    @Convert(converter = JodaDateTimeConverter.class)
+    @Column(name = "CreatedDate", nullable = false)
+    @Temporal(TemporalType.TIMESTAMP)
+    private DateTime createdDate;
+    
     @JoinColumn(name = "AccountId", referencedColumnName = "AccountId", nullable = false)
     @ManyToOne(optional = false)
     private Account accountId;
@@ -112,13 +119,6 @@ public class FeedBack implements Serializable {
         this.description = description;
     }
 
-    public DateTime getCreatedDate() {
-        return createdDate;
-    }
-
-    public void setCreatedDate(DateTime createdDate) {
-        this.createdDate = createdDate;
-    }
 
     public int getStatus() {
         return status;
@@ -159,6 +159,14 @@ public class FeedBack implements Serializable {
 
     public void setAccountId(Account accountId) {
         this.accountId = accountId;
+    }
+
+    public DateTime getCreatedDate() {
+        return createdDate;
+    }
+
+    public void setCreatedDate(DateTime createdDate) {
+        this.createdDate = createdDate;
     }
 
 }

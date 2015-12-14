@@ -6,6 +6,7 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 import org.joda.time.DateTime;
 
 /**
@@ -29,10 +30,11 @@ public class PurchaseOrderFacade extends AbstractFacade<PurchaseOrder> implement
 
     @Override
     public PurchaseOrder getID() {
-         Query q = em.createNamedQuery("PurchaseOrder.findByPurchaseOrderId");
-         PurchaseOrder po = (PurchaseOrder) q.setMaxResults(1).getSingleResult();
-         return po;
+        Query q = em.createNamedQuery("PurchaseOrder.findByPurchaseOrderId");
+        PurchaseOrder po = (PurchaseOrder) q.setMaxResults(1).getSingleResult();
+        return po;
     }
+
     @Override
     public List<PurchaseOrder> getReport(DateTime f, DateTime t) {
         Query q = em.createNamedQuery("PurchaseOrder.findByCreatedDate");
@@ -41,5 +43,12 @@ public class PurchaseOrderFacade extends AbstractFacade<PurchaseOrder> implement
         List<PurchaseOrder> list = q.getResultList();
         return list;
     }
-    
+
+    @Override
+    public List<PurchaseOrder> getListByAccountId(int AccountId) {
+        TypedQuery<PurchaseOrder> q = em.createNamedQuery("PurchaseOrder.findByAccount", PurchaseOrder.class);
+        q.setParameter("accountId", AccountId);
+        return q.getResultList();
+    }
+
 }

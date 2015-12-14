@@ -211,15 +211,15 @@
                                         <a href="${profilePageLink}"><i class="fa fa-user"></i> Profile</a>
                                     </li>
                                     <li class="<%= orderProfile %>">
-                                        <c:url value="/profile/currentOrder" var="profileOrderPageLink"/>
+                                        <c:url value="/profile/currentorder" var="profileOrderPageLink"/>
                                         <a href="${profileOrderPageLink}"><i class="fa fa-shopping-cart"></i> My Current Order</a>
                                     </li>
                                     <li class="<%= commentProfile %>">
-                                        <c:url value="/profile" var="profileCommentPageLink"/>
+                                        <c:url value="/profile/mycomment" var="profileCommentPageLink"/>
                                         <a href="${profileCommentPageLink}"><i class="fa fa-comment"></i> My Comments</a>
                                     </li>
                                     <li class="<%= historyProfile %>">
-                                        <c:url value="/profile" var="profileHistoryPageLink"/>
+                                        <c:url value="/profile/orderhistory" var="profileHistoryPageLink"/>
                                         <a href="${profileHistoryPageLink}"><i class="fa fa-history"></i> Order History</a>
                                     </li>
                                     <li>

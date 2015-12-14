@@ -19,6 +19,7 @@ public class AccountDTO {
     private String imageLink;
     private String firstName;
     private String lastName;
+    private String fullName;
     private String phone;
     private String address;
     private DateTime dateOfBirth;
@@ -46,6 +47,7 @@ public class AccountDTO {
         this.imageLink = imageLink;
         this.firstName = firstName;
         this.lastName = lastName;
+        this.fullName = firstName + " " + lastName;
         this.phone = phone;
         this.address = address;
         this.dateOfBirth = dateOfBirth;
@@ -66,6 +68,7 @@ public class AccountDTO {
         this.imageLink = builder.imageLink;
         this.firstName = builder.firstName;
         this.lastName = builder.lastName;
+        this.fullName = builder.firstName + " " + builder.lastName;
         this.phone = builder.phone;
         this.address = builder.address;
         this.dateOfBirth = builder.dateOfBirth;
@@ -186,6 +189,10 @@ public class AccountDTO {
 
     public String getImageLink() {
         return imageLink;
+    }
+
+    public String getFullName() {
+        return fullName;
     }
 
     public String getFirstName() {
