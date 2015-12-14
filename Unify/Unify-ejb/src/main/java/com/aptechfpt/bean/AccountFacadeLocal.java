@@ -24,5 +24,7 @@ public interface AccountFacadeLocal {
     List<Account> findRange(int[] range);
 
     int count();
+
+    Account findByEmail(String email);
     
 }

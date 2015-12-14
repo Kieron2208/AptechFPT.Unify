@@ -28,7 +28,6 @@
                             <thead>
                                 <tr>
                                     <th>ID</th>
-
                                     <th>Name</th>
                                     <th>Address</th>
                                     <th>Phone</th>
@@ -42,16 +41,14 @@
                                 <c:forEach var="p" items="${list}">
                                     <tr>
                                         <td>${p.purchaseOrderId}</td>
-
                                         <td>${p.name}</td>
                                         <td>${p.address}</td>
                                         <td>${p.phone}</td>
                                         <td style="alignment-adjust: central">
                                             <c:if test="${p.status.equals(true)}">
                                                 <strong><i class="fa fa-check margin-r-5"></i>  Finish</strong>
-                                            </a>
+                                                </a>
                                             </c:if>
-                                                
                                             <c:if test="${p.status.equals(false)}">
                                                 <form method="post" action="../POUpdate">
                                                     <input type="hidden" name="id" value="${p.purchaseOrderId}"/>                                                    
@@ -61,7 +58,6 @@
                                         </td>
                                         <td>
                                             ${p.createdDate}
-
                                         </td>
                                         <td>
                                             <c:set var="total" value="${p.subTotal}"/>
@@ -69,19 +65,12 @@
                                                               type="currency"/>
                                         </td>
                                         <td>
-
                                             <a class="btn btn-success" href data-toggle="modal" data-target="#myModal${p.purchaseOrderId}">
                                                 <i class="glyphicon glyphicon-zoom-in icon-white"></i>
                                             </a>
-
                                         </td>
                                     </tr>
-
                                 </c:forEach>
-
-
-
-
                             </tbody>
                             <!--                            <tfoot>
                                                             <tr>
@@ -138,15 +127,15 @@
                                     </div><!-- /.col -->
                                     <div class="col-sm-4 invoice-col">
                                         <b>Invoice #${p.purchaseOrderId}</b><br>
-                                        
+
                                         <b>Status:</b>
-                                            <c:if test="${p.status.equals(true)}">
-                                                Done
-                                            </c:if>
-                                            <c:if test="${p.status.equals(false)}">
-                                                On Progress
-                                            </c:if>                                        
-                                        
+                                        <c:if test="${p.status.equals(true)}">
+                                            Done
+                                        </c:if>
+                                        <c:if test="${p.status.equals(false)}">
+                                            On Progress
+                                        </c:if>                                        
+
                                         <br>
                                         <b>Payment Due:</b>${p.createdDate}<br>
                                         <b>Account:</b> #${p.accountId.accountId}
@@ -176,7 +165,7 @@
                                                         <td>
                                                             <c:set var="subtotal" value="${item.subtotal}"/>
                                                             <fmt:formatNumber value="${subtotal}" 
-                                                              type="currency"/>
+                                                                              type="currency"/>
                                                         </td>
                                                     </tr>
                                                 </c:forEach>
@@ -198,7 +187,7 @@
                                                     <td>
                                                         <c:set var="xtotal" value="${p.subTotal/1.12}"/>
                                                         <fmt:formatNumber value="${xtotal}" maxFractionDigits="0"
-                                                              type="currency"/>.00                                                        
+                                                                          type="currency"/>.00                                                        
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -206,7 +195,7 @@
                                                     <td>
                                                         <c:set var="tax" value="${(p.subTotal/1.12)*0.1}"/>
                                                         <fmt:formatNumber value="${tax}"  maxFractionDigits="2"
-                                                              type="currency"/>
+                                                                          type="currency"/>
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -214,7 +203,7 @@
                                                     <td>
                                                         <c:set var="ship" value="${(p.subTotal/1.12)*0.02}"/>
                                                         <fmt:formatNumber value="${ship}"  maxFractionDigits="2"
-                                                              type="currency"/>
+                                                                          type="currency"/>
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -222,7 +211,7 @@
                                                     <td>
                                                         <c:set var="total" value="${p.subTotal}"/>
                                                         <fmt:formatNumber value="${total}"  maxFractionDigits="2"
-                                                              type="currency"/>
+                                                                          type="currency"/>
                                                     </td>
                                                 </tr>
                                             </table>

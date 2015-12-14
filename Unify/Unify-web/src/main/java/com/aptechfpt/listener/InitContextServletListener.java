@@ -5,12 +5,15 @@
  */
 package com.aptechfpt.listener;
 
+import com.aptechfpt.controller.ProductController;
 import java.util.EnumSet;
 import javax.servlet.DispatcherType;
 import javax.servlet.FilterRegistration;
+import javax.servlet.MultipartConfigElement;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
+import javax.servlet.ServletRegistration;
 import javax.servlet.annotation.WebListener;
 import org.tuckey.web.filters.urlrewrite.UrlRewriteFilter;
 import org.tuckey.web.filters.urlrewrite.gzip.GzipFilter;
@@ -29,6 +32,9 @@ public class InitContextServletListener implements ServletContextListener {
         urlrewrite.addMappingForUrlPatterns(EnumSet.of(DispatcherType.REQUEST, DispatcherType.FORWARD), true, "/*");
         urlrewrite.setInitParameter("confPath", "WEB-INF/urlrewrite.xml");
         urlrewrite.setInitParameter("logLevel", "DEBUG");
+        ServletRegistration.Dynamic servlet = context.addServlet("ProductController", ProductController.class);
+        String realPath = context.getRealPath("");
+        servlet.setMultipartConfig(new MultipartConfigElement(realPath + ""));
         FilterRegistration gzip = context.addFilter("GZipFilter", GzipFilter.class);
     }
 

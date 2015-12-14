@@ -31,8 +31,6 @@
         <link rel="stylesheet" href="<c:url value="/plugins/line-icons/line-icons.css"/>">
         <link rel="stylesheet" href="<c:url value="/plugins/font-awesome/css/font-awesome.min.css"/>">
         <link rel="stylesheet" href="<c:url value="/plugins/scrollbar/css/jquery.mCustomScrollbar.css"/>">
-        <link rel="stylesheet" href="<c:url value="/plugins/owl-carousel/owl-carousel/owl.carousel.css"/>">
-        <link rel="stylesheet" href="<c:url value="/plugins/revolution-slider/rs-plugin/css/settings.css"/>">
         <jsp:invoke fragment="pagecss"/>
         <!-- CSS Theme -->
         <link rel="stylesheet" href="<c:url value="/css/theme-colors/default.css"/>" id="style_color">
@@ -61,6 +59,13 @@
         <!-- JS Page Level -->
         <script src="<c:url value="/js/shop.app.js"/>"></script>
         <script src="<c:url value="/js/plugins/owl-carousel.js"/>"></script>
+        <script src="<c:url value="/plugins/angular.min.js"/>"></script>
+        <script src="<c:url value="/js/shoppingcart.js"/>"></script>
         <jsp:invoke fragment="pagejs"/>
+        <script>
+            $(document).ready(function(){
+                App.init();
+            });
+        </script>
     </body>
 </html>
