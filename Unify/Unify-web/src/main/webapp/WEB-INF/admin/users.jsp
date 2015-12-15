@@ -22,9 +22,9 @@
                     <div class="box-header">
                         <h3 class="box-title">Data Table With Full Features</h3>
                         <c:url value="/administrator/user/new" var="userCreateLink"/>
-                            <a href="${userCreateLink}" class="btn btn-success pull-right">
-                                <i class="fa fa-save"></i> Created
-                            </a>
+                        <a href="${userCreateLink}" class="btn btn-success pull-right">
+                            <i class="fa fa-save"></i> Created
+                        </a>
                     </div><!-- /.box-header -->
                     <div class="box-body">
                         <table id="example1" class="table table-bordered table-striped">
@@ -34,8 +34,8 @@
                                     <th>Email</th>
                                     <th>Profile</th>
                                     <th>First Name</th>
+                                    <th>Last Name</th>
                                     <th>Gender</th>
-                                    <th>Role</th>
                                     <th>Created Date</th>
                                     <th></th>
                                 </tr>
@@ -48,13 +48,9 @@
                                         <td>
                                             <img height="100" src="<c:url value="${a.imageLink}"/>"/>
                                         </td>
-                                        <td>${a.firstName} ${a.lastName}</td>
+                                        <td>${a.firstName}</td>
+                                        <td>${a.lastName}</td>
                                         <td>${a.gender.toString()}</td>
-                                        <td>
-                                            <c:forEach items="${a.roles}" var="r">
-                                                <p>${r.name()}</p>
-                                            </c:forEach>
-                                        </td>
                                         <td>${a.createdDate.toString("dd-MM-YYYY")}</td>
                                         <td>
                                             <a class="btn btn-success" href="#">
@@ -65,6 +61,18 @@
                                                 <i class="glyphicon glyphicon-edit icon-white"></i>
                                                 Edit
                                             </a>
+                                            <c:if test="${pageContext.request.isUserInRole('ADMINISTRATOR')}">
+                                                <c:if test="${p.isAvailable}">
+                                                    <a class="btn btn-danger" href="#">
+                                                        <i class="glyphicon glyphicon-remove icon-white"></i>
+                                                    </a>
+                                                </c:if>
+                                                <c:if test="${!p.isAvailable}">
+                                                    <a class="btn btn-primary" href="#">
+                                                        <i class="glyphicon glyphicon-ok icon-white"></i>
+                                                    </a>
+                                                </c:if>
+                                            </c:if>
                                         </td>
                                     </tr>
                                 </c:forEach>

@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    angular.module('myApp', []).controller('MyController', MyController);
+    angular.module('myApp', ['ui.bootstrap']).controller('MyController', MyController);
 
     MyController.$inject = ['$scope', '$http', '$window'];
 
@@ -87,7 +87,7 @@
             w.localStorage.setItem("shoppingcart", jsonStr);
         };
         $scope.clearcart = function () {
-            
+
             $scope.cart = [];
             var jsonStr = JSON.stringify($scope.cart);
             w.localStorage.setItem("shoppingcart", jsonStr);
@@ -115,5 +115,12 @@
         };
 
     }
+
+    angular.module('myApp').controller('myModalController', myModalController);
+
+    function myModalController() {
+        
+    }
+
 })();
 

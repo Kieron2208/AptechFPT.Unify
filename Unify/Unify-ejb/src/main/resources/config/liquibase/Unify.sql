@@ -2,16 +2,31 @@
 -- Update Database Script
 -- *********************************************************************
 -- Change Log: src/main/resources/config/liquibase/master.xml
--- Ran at: 12/11/15 7:32 PM
--- Against: sa@jdbc:sqlserver://localhost\sqlexpress:1433;xopenStates=false;trustServerCertificate=false;sendStringParametersAsUnicode=true;selectMethod=direct;responseBuffering=adaptive;packetSize=8000;loginTimeout=15;lockTimeout=-1;lastUpdateCount=true;encrypt=false;disableStatementPooling=true;databaseName=Unify;applicationName=Microsoft SQL Server JDBC Driver;
+-- Ran at: 12/14/15 8:56 PM
+-- Against: sa@jdbc:sqlserver://localhost\sqlexpress:1433;xopenStates=false;trustServerCertificate=false;sendStringParametersAsUnicode=true;selectMethod=direct;responseBuffering=adaptive;packetSize=8000;loginTimeout=15;lockTimeout=-1;lastUpdateCount=true;encrypt=false;disableStatementPooling=true;databaseName=Unifies;applicationName=Microsoft SQL Server JDBC Driver;
 -- Liquibase version: 3.4.1
 -- *********************************************************************
 
-USE [Unify];
+USE [Unifies];
+GO
+
+-- Create Database Lock Table
+CREATE TABLE [DATABASECHANGELOGLOCK] ([ID] [int] NOT NULL, [LOCKED] [bit] NOT NULL, [LOCKGRANTED] [datetime2](3) NULL, [LOCKEDBY] [nvarchar](255) NULL, CONSTRAINT [PK_DATABASECHANGELOGLOCK] PRIMARY KEY ([ID]))
+GO
+
+-- Initialize Database Lock Table
+DELETE FROM [DATABASECHANGELOGLOCK]
+GO
+
+INSERT INTO [DATABASECHANGELOGLOCK] ([ID], [LOCKED]) VALUES (1, 0)
 GO
 
 -- Lock Database
-UPDATE [DATABASECHANGELOGLOCK] SET [LOCKED] = 1, [LOCKEDBY] = 'KIERONTRAN-PC (192.168.56.1)', [LOCKGRANTED] = '2015-12-11T19:32:32.965' WHERE [ID] = 1 AND [LOCKED] = 0
+UPDATE [DATABASECHANGELOGLOCK] SET [LOCKED] = 1, [LOCKEDBY] = 'KIERONTRAN-PC (192.168.11.12)', [LOCKGRANTED] = '2015-12-14T20:56:17.724' WHERE [ID] = 1 AND [LOCKED] = 0
+GO
+
+-- Create Database Change Log Table
+CREATE TABLE [DATABASECHANGELOG] ([ID] [nvarchar](255) NOT NULL, [AUTHOR] [nvarchar](255) NOT NULL, [FILENAME] [nvarchar](255) NOT NULL, [DATEEXECUTED] [datetime2](3) NOT NULL, [ORDEREXECUTED] [int] NOT NULL, [EXECTYPE] [nvarchar](10) NOT NULL, [MD5SUM] [nvarchar](35) NULL, [DESCRIPTION] [nvarchar](255) NULL, [COMMENTS] [nvarchar](255) NULL, [TAG] [nvarchar](255) NULL, [LIQUIBASE] [nvarchar](20) NULL, [CONTEXTS] [nvarchar](255) NULL, [LABELS] [nvarchar](255) NULL)
 GO
 
 -- Changeset src/main/resources/config/liquibase/changelog/00000000000000_initial_schema.xml::00000000000001::Kieron Tran
@@ -203,7 +218,13 @@ UPDATE [Unify].[dbo].[PurchaseOrder] SET [SubTotal] = [SubTotal] * 1.12 WHERE [P
 
 END TRY
 BEGIN CATCH
-    SELECT ERROR_NUMBER() AS ErrorNumber ,ERROR_SEVERITY() AS ErrorSeverity ,ERROR_STATE() AS ErrorState ,ERROR_PROCEDURE() AS ErrorProcedure ,ERROR_LINE() AS ErrorLine ,ERROR_MESSAGE() AS ErrorMessage;
+    SELECT 
+	ERROR_NUMBER() AS ErrorNumber ,
+    ERROR_SEVERITY() AS ErrorSeverity ,
+    ERROR_STATE() AS ErrorState ,
+    ERROR_PROCEDURE() AS ErrorProcedure ,
+    ERROR_LINE() AS ErrorLine ,
+    ERROR_MESSAGE() AS ErrorMessage;
     IF @@TRANCOUNT > 0 ROLLBACK TRANSACTION;
 END CATCH;
 
@@ -211,7 +232,7 @@ IF @@TRANCOUNT > 0
     COMMIT TRANSACTION;
 GO
 
-INSERT INTO [DATABASECHANGELOG] ([ID], [AUTHOR], [FILENAME], [DATEEXECUTED], [ORDEREXECUTED], [MD5SUM], [DESCRIPTION], [COMMENTS], [EXECTYPE], [CONTEXTS], [LABELS], [LIQUIBASE]) VALUES ('1449834033849-1', 'Kieron Tran', 'src/main/resources/config/liquibase/changelog/20151211-1840-changelog.xml', GETDATE(), 2, '7:913103143bf69891157b78c26af24144', 'sqlFile', '', 'EXECUTED', NULL, NULL, '3.4.1')
+INSERT INTO [DATABASECHANGELOG] ([ID], [AUTHOR], [FILENAME], [DATEEXECUTED], [ORDEREXECUTED], [MD5SUM], [DESCRIPTION], [COMMENTS], [EXECTYPE], [CONTEXTS], [LABELS], [LIQUIBASE]) VALUES ('1449834033849-1', 'Kieron Tran', 'src/main/resources/config/liquibase/changelog/20151211-1840-changelog.xml', GETDATE(), 2, '7:de0c9feb6e1313ac036853dc50aa02ff', 'sqlFile', '', 'EXECUTED', NULL, NULL, '3.4.1')
 GO
 
 -- Release Database Lock
