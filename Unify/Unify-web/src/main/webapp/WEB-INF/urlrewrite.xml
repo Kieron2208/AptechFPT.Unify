@@ -75,19 +75,26 @@
         <from>^/shoppingcart$</from>
         <to>/WEB-INF/shoppingcart.jsp</to>
     </rule>
-
-    <rule>
-        <name>Admin Page</name>
-        <condition type="method">GET</condition>
-        <from>^/administrator$</from>
-        <to>/WEB-INF/admin/index.jsp</to>
-    </rule>
-
+    
     <rule>
         <name>Admin Login Page</name>
         <condition type="method">GET</condition>
         <from>^/administrator/login$</from>
         <to>/WEB-INF/admin/login.jsp</to>
+    </rule>
+
+    <rule>
+        <condition type="user-in-role" operator="notequal">ADMINSTRATOR</condition>
+        <condition type="user-in-role" operator="notequal">SALEPERSON</condition>
+        <from>^/administrator(.*)$</from>
+        <to last="true">/WEB-INF/admin/login.jsp</to>
+    </rule>
+    
+    <rule>
+        <name>Admin Page</name>
+        <condition type="method">GET</condition>
+        <from>^/administrator$</from>
+        <to>/WEB-INF/admin/index.jsp</to>
     </rule>
 
     <rule>
