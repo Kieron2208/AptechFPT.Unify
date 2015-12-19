@@ -73,6 +73,12 @@ public class PurchaseOrderBeanTest {
             System.out.println("Status: " + p.getStatus());
         }
         assertThat(list.size()).isEqualTo(8);
+        
+        
     }
 
+    @Test
+    public void Get_Highest_Sale(){
+        String sql = "SELECT TOP 10 SUM(pod.Quantity) AS Quantity, pod.ProductId FROM [Unify].[dbo].[PurchaseOrderDetail] pod INNER JOIN [Unify].[dbo].[PurchaseOrder] po ON pod.PurchaseOrderId = po.PurchaseOrderId WHERE po.CreatedDate >= '2015-12-01' AND po.CreatedDate <= '2015-12-30' GROUP BY pod.ProductId ORDER BY Quantity DESC";
+    }
 }

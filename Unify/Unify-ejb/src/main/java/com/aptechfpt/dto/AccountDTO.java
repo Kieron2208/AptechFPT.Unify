@@ -112,6 +112,9 @@ public class AccountDTO {
         private boolean avalaible;
         private AccountGender gender;
 
+        public Builder() {
+        }
+
         public Builder(String email) {
             this(0, email);
         }
@@ -120,6 +123,16 @@ public class AccountDTO {
             this.accountId = accountId;
             this.email = email;
             this.roles = new HashSet<>();
+        }
+
+        public Builder Id(int accountId) {
+            this.accountId = accountId;
+            return this;
+        }
+
+        public Builder Email(String email) {
+            this.email = email;
+            return this;
         }
 
         public Builder Password(String password) {

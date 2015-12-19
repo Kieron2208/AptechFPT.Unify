@@ -81,6 +81,7 @@
                                     </div>    
                                 </label>
                             </section>
+                            <p>${msg}</p>
                             <button class="btn-u btn-u-sea-shop btn-block margin-bottom-20" type="submit">Log in</button>
 
                         </form>

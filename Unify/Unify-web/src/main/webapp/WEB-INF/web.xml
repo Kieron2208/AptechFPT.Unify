@@ -11,7 +11,7 @@
             <param-name>confReloadCheckInterval</param-name>
             <param-value>1</param-value>
         </init-param>
-<!--        <init-param>
+        <!--        <init-param>
             <param-name>logLevel</param-name>
             <param-value>DEBUG</param-value>
         </init-param>-->
@@ -95,6 +95,14 @@
         <servlet-class>com.aptechfpt.controller.ProfileController</servlet-class>
         <load-on-startup>1</load-on-startup>
     </servlet>
+    <servlet>
+        <servlet-name>InsertSalePerson</servlet-name>
+        <servlet-class>com.aptechfpt.controller.InsertSalePerson</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AdminProfileController</servlet-name>
+        <servlet-class>com.aptechfpt.controller.AdminProfileController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>HomeController</servlet-name>
         <url-pattern>/HomeController</url-pattern>
@@ -158,6 +166,14 @@
     <servlet-mapping>
         <servlet-name>PurchaseController</servlet-name>
         <url-pattern>/PurchaseController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>InsertSalePerson</servlet-name>
+        <url-pattern>/InsertSalePerson</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminProfileController</servlet-name>
+        <url-pattern>/AdminProfileController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

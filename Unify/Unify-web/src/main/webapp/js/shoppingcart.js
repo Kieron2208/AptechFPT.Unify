@@ -81,6 +81,7 @@
 
         };
         $scope.formsubmit = function () {
+            //TODO: add confirm modal
             form.submit();
             $scope.cart = [];
             var jsonStr = JSON.stringify($scope.cart);

@@ -93,7 +93,7 @@ public class Account implements Serializable {
 
     @Basic(optional = false)
     @Column(name = "isAvailable")
-    private boolean isAvailable;
+    private boolean available;
 
     @ElementCollection(targetClass = Role.class)
     @CollectionTable(name = "AccountRole",
@@ -109,6 +109,9 @@ public class Account implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "accountId")
     private Collection<FeedBack> feedBackCollection;
     
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "accountId")
+    private Collection<PurchaseOrder> purchaseOrderCollection;
+    
     public Account() {
     }
 
@@ -123,7 +126,7 @@ public class Account implements Serializable {
         this.phone = dto.getPhone();
         this.gender = dto.getGender();
         this.dayOfBirth = dto.getDateOfBirth();
-        this.isAvailable = dto.isAvaliable();
+        this.available = dto.isAvaliable();
         this.roles = dto.getRoles();
     }
 
@@ -172,7 +175,7 @@ public class Account implements Serializable {
     }
 
     public boolean isAvailable() {
-        return isAvailable;
+        return available;
     }
 
     public Set<Role> getRoles() {
@@ -193,6 +196,14 @@ public class Account implements Serializable {
 
     public void setCommentCollection(Collection<Comment> commentCollection) {
         this.commentCollection = commentCollection;
+    }
+
+    public Collection<PurchaseOrder> getPurchaseOrderCollection() {
+        return purchaseOrderCollection;
+    }
+
+    public void setPurchaseOrderCollection(Collection<PurchaseOrder> PurchaseOrderCollection) {
+        this.purchaseOrderCollection = PurchaseOrderCollection;
     }
     
     @Override

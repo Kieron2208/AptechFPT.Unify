@@ -82,7 +82,21 @@
         <from>^/administrator/login$</from>
         <to>/WEB-INF/admin/login.jsp</to>
     </rule>
-
+    
+    <rule>
+        <name>Admin Login Page</name>
+        <condition type="method">POST</condition>
+        <from>^/administrator/login$</from>
+        <to>/AdminAuthenticateController?action=login</to>
+    </rule>
+    
+    <rule>
+        <name>Admin Login Page</name>
+        <condition type="method">GET</condition>
+        <from>^/administrator/logout$</from>
+        <to>/AdminAuthenticateController?action=logout</to>
+    </rule>
+    
     <rule>
         <condition type="user-in-role" operator="notequal">ADMINSTRATOR</condition>
         <condition type="user-in-role" operator="notequal">SALEPERSON</condition>
@@ -115,7 +129,14 @@
         <name>Admin User Profile</name>
         <condition type="method">GET</condition>
         <from>^/administrator/user/profile$</from>
-        <to>/WEB-INF/admin/userprofile.jsp</to>
+        <to last="true">/AdminProfileController?action=profile</to>
+    </rule>
+    
+    <rule>
+        <name>Admin User Profile</name>
+        <condition type="method">GET</condition>
+        <from>^/administrator/user/profile/detail$</from>
+        <to last="true">/AdminProfileController?action=detail</to>
     </rule>
     
     <rule>

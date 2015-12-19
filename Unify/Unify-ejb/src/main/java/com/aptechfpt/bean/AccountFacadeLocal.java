@@ -26,5 +26,11 @@ public interface AccountFacadeLocal {
     int count();
 
     Account findByEmail(String email);
+
+    List<Account> GetOnlyUsers();
+
+    boolean isExistedEmail(String email);
+
+    boolean checkPassword(int accountId, String password);
     
 }

@@ -6,7 +6,6 @@ import com.aptechfpt.converter.JodaDateTimeConverter;
 import com.aptechfpt.dto.AccountDTO;
 import com.aptechfpt.entity.Account;
 import com.aptechfpt.enumtype.Role;
-import com.aptechfpt.mock.AccountFacadeMock;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
@@ -54,7 +53,6 @@ public class AccountControllerTest {
 
         WebArchive war = ShrinkWrap.create(WebArchive.class, "Unify-web-test.war")
                 .addClass(AccountFacadeLocal.class)
-                .addClass(AccountFacadeMock.class)
                 .addClass(JodaDateTimeConverter.class)
                 .addClass(AccountDTO.class)
                 .addPackage("com.aptechfpt.entity")

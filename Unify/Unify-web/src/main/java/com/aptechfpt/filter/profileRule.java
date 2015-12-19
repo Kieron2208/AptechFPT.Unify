@@ -32,7 +32,7 @@ public class profileRule extends RewriteRule {
                     return new RewriteMatch() {
                         @Override
                         public boolean execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-                            request.getRequestDispatcher("/WEB-INF/profileCurrentOrder.jsp").forward(request, response);
+                            request.getRequestDispatcher("/ProfileController?action=currentOrder").forward(request, response);
                             return true;
                         }
                     };
