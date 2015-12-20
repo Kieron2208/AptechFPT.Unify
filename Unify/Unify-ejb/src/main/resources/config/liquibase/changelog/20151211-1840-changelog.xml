@@ -10,10 +10,7 @@
                  stripComments="true"/>
         <rollback>
             <dropAllForeignKeyConstraints baseTableName="AccountRole"/>
-            <update tableName="PurchaseOrder">
-                <column name="SubTotal" value="[SubTotal] / 1.12"/>
-                <where>[PurchaseOrderId] < 200</where>
-            </update>
+            <sql>UPDATE [Unify].[dbo].[PurchaseOrder] SET [SubTotal] = [SubTotal] / 1.12 WHERE [PurchaseOrderId] &#060; 200</sql>
         </rollback>
     </changeSet>
 </databaseChangeLog>
