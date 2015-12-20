@@ -7,6 +7,9 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import org.joda.time.DateTime;
+import org.joda.time.DateTimeZone;
+import org.joda.time.format.DateTimeFormat;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -47,6 +50,10 @@ public class JSONtoObject {
         }
     }
     
+    @Test
+    public void hello2(){
+        System.out.println(new DateTime().now().toString(DateTimeFormat.forPattern("yyyy-MM-dd'T'HH:mm:ss'Z")));
+    }
 }
 
     class PODTO {

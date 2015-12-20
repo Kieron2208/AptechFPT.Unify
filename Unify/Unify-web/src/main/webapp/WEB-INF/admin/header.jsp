@@ -32,10 +32,12 @@
                             <!-- Menu Footer-->
                             <li class="user-footer">
                                 <div class="pull-left">
-                                    <a href="#" class="btn btn-default btn-flat">Profile</a>
+                                    <c:url value="/administrator/user/profile" var="profileLink"/>
+                                    <a href="${profileLink}" class="btn btn-default btn-flat">Profile</a>
                                 </div>
                                 <div class="pull-right">
-                                    <a href="#" class="btn btn-default btn-flat">Sign out</a>
+                                    <c:url value="/administrator/logout" var="logoutLink"/>
+                                    <a href="${logoutLink}" class="btn btn-default btn-flat">Sign out</a>
                                 </div>
                             </li>
                         </ul>

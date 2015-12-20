@@ -28,13 +28,24 @@
         <div class="container content profile">
             <div class="row">
                 <jsp:include page="profileMenu.jsp">
-                    <jsp:param name="active" value="history"/>
+                    <jsp:param name="active" value="feedback"/>
                 </jsp:include>
 
                 <!-- Profile Content -->
                 <div class="col-md-9">
                     <div class="profile-body margin-bottom-20">
-                        Current Order
+                        <!-- Review Form-->
+                         <div class="headline-center margin-bottom-60">
+                    <h2>Thank you for your feedback, <strong>UIShop.Inc</strong></h2>
+                    <p>
+                        <c:url value="/" var="home"/>
+                        <a href="${home}">
+                            <img src="<c:url value="/img/logo1-default.png"/>" alt="There is no item in your shopping cart"/>
+                        </a>
+                    </p>
+                </div>
+                        
+                        <!-- End Review Form-->
                     </div>
                 </div>
                 <!-- End Profile Content -->

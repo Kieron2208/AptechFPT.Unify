@@ -52,16 +52,20 @@
         <script src="<c:url value="/plugins/back-to-top.js"/>"></script>
         <script src="<c:url value="/plugins/smoothScroll.js"/>"></script>
         <script src="<c:url value="/plugins/jquery.parallax.js"/>"></script>
+        <script src="<c:url value="/plugins/toastr/toastr.js"/>" type="text/javascript"></script>
         <script src="<c:url value="/plugins/owl-carousel/owl-carousel/owl.carousel.js"/>"></script>
         <script src="<c:url value="/plugins/scrollbar/js/jquery.mCustomScrollbar.concat.min.js"/>"></script>
         <script src="<c:url value="/plugins/revolution-slider/rs-plugin/js/jquery.themepunch.tools.min.js"/>"></script>
         <script src="<c:url value="/plugins/revolution-slider/rs-plugin/js/jquery.themepunch.revolution.min.js"/>"></script>
         <!-- JS Page Level -->
+        <script>window.baseContext = '<c:url value="/"/>';</script>
         <script src="<c:url value="/js/shop.app.js"/>"></script>
         <script src="<c:url value="/js/plugins/owl-carousel.js"/>"></script>
         <script src="<c:url value="/plugins/angular/angular.min.js"/>"></script>
+        <script src="<c:url value="/plugins/ng-file-upload/ng-file-upload.min.js"/>" type="text/javascript"></script>
         <script src="<c:url value="/plugins/angular-bootstrap/ui-bootstrap-tpls.min.js"/>"></script>
         <script src="<c:url value="/js/shoppingcart.js"/>"></script>
+        <script src="<c:url value="/js/clientuser.controller.js"/>"></script>
         <jsp:invoke fragment="pagejs"/>
         <script>
             $(document).ready(function(){

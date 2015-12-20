@@ -26,6 +26,9 @@ public class ErrorHandleController extends HttpServlet {
             case 404:
                 catch404status(request, response);
                 break;
+            case 405:
+                catch404status(request, response);
+                break;
             case 500:
                 catch500status(request, response);
                 break;
