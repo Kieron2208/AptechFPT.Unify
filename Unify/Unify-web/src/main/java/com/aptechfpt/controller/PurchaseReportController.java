@@ -52,6 +52,7 @@ public class PurchaseReportController extends HttpServlet {
         }
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
+            request.setCharacterEncoding("UTF-8");
             String date = request.getParameter("daterange");
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
             String from = LocalDate.parse(date.split("-")[0].trim(), formatter).toString();
@@ -130,6 +131,8 @@ public class PurchaseReportController extends HttpServlet {
             session.setAttribute("cancel", cancel);
             session.setAttribute("list", list);
             session.setAttribute("day", days);
+            session.setAttribute("from", from);
+            session.setAttribute("to", to);
             request.getRequestDispatcher("WEB-INF/admin/reportprint.jsp").forward(request, response);
         } catch (Exception e) {
             e.printStackTrace();

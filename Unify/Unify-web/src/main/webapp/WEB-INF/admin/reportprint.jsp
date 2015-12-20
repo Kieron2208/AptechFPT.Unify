@@ -1,6 +1,27 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<style>
+    @media print {
+        body {-webkit-print-color-adjust: exact;}
+    }
+    #div1{
+        background-color: #F39C12 !important;
+        color: #FFF !important;
+    }
+    #div2{
+        background-color: #00A65A !important;
+        color: #FFF !important;
+    }
+    #div3{
+        background-color: #DD4B39 !important;
+        color: #FFF !important;
+    }
+    #div4{
+        background-color: #00C0EF !important;
+        color: #FFF !important;
+    }
+</style>
 <script>
     $(function () {
         var pieChartCanvas = $("#pieChart").get(0).getContext("2d");
@@ -69,7 +90,7 @@
     });
 </script>
 
-        
+
 <section class="invoice" >
     <div id="printdiv">
         <!-- title row -->
@@ -86,23 +107,27 @@
         </div>
         <!-- info row -->
         <div class="row invoice-info">
+            <h2 class="box-body text-center"><strong>PURCHASE REPORT</strong></h2>
             <div class="col-sm-4 invoice-col">
 
                 <address>
 
-                    <h3> TOTAL REVENUE: 
-                        <strong >
+                    <h3>From: ${from}</h3>
+                    <h3>To: ${to}</h3>
+                    <h3> Total Cost: 
+                        <strong>
                             <c:set var="dt" value="${doanhthu}"/>
                             <fmt:formatNumber value="${dt}" 
                                               type="currency"/>
                         </strong><br></h3>
-                        <h3>TOTAL PROFIT: <strong >
+                    <h3>Total Profit: <strong>
                             <c:set var="ln" value="${loinhuan}"/>
                             <fmt:formatNumber value="${ln}" 
                                               type="currency"/>
                         </strong><br>
 
                     </h3>
+
 
                 </address>
             </div><!-- /.col -->
@@ -143,12 +168,13 @@
                 </address>
             </div><!-- /.col -->
         </div><!-- /.row -->
-        <div class="row">
+        <c:if test="${hoanthanh>0}">
+        <div class="row row1">
             <div class="col-xs-12">
                 <div class="box">
-                    <div class="box-header">
-                        <h3 class="box-title">Data Table With Full Features</h3>
-                    </div><!-- /.box-header -->
+                    <h3><strong>PURCHASE FINISH</strong></h3>
+                    
+                    
                     <div class="box-body">
                         <table id="example1" class="table table-bordered table-striped">
                             <thead>
@@ -157,163 +183,252 @@
                                     <th>BillID</th>
                                     <th>Name</th>
                                     <th>Address</th>
-                                    <th>Phone</th>
-                                    <th>Status</th>
+                                    <th>Phone</th>                                    
                                     <th>Date</th>
                                     <th>Subtotal</th>
-
                                 </tr>
                             </thead>
                             <tbody >
                                 <c:set var="x" value="0"/>
                                 <c:forEach var="p" items="${list}">
-                                    <tr>
-                                        <td>${x=x+1}</td>
-                                        <td>${p.purchaseOrderId}</td>
-                                        <td>${p.name}</td>
-                                        <td>${p.address}</td>
-                                        <td>${p.phone}</td>
-                                        <td style="alignment-adjust: central">
-                                            <c:if test="${p.cancelInvoice.equals(true)}">
-                                                <c:if test="${p.status.equals(true)}">
+                                    <c:if test="${p.cancelInvoice.equals(true)}">
+                                        <c:if test="${p.status.equals(true)}">
+                                            <tr>
+                                                <td>${x=x+1}</td>
+                                                <td>${p.purchaseOrderId}</td>
+                                                <td>${p.name}</td>
+                                                <td>${p.address}</td>
+                                                <td>${p.phone}</td>
 
-                                                    <strong><i class="fa fa-check margin-r-5"></i>  Finish</strong>
+                                                <td>
+                                                    <c:set var="string1" value="${p.createdDate}"/>
+                                                    <c:set var="string2" value="${fn:substring(string1, 0, 10)}" />
+                                                    ${string2}
 
-                                                </c:if>
 
-                                                <c:if test="${p.status.equals(false)}">
+                                                </td>
+                                                <td>
+                                                    <c:set var="total" value="${p.subTotal}"/>
+                                                    <fmt:formatNumber value="${total}" 
+                                                                      type="currency"/>
+                                                </td>
 
-                                                    <strong><i class="fa fa-truck margin-r-5"></i> Deliver</strong>
+                                            </tr>
+                                        </c:if>
 
-                                                </c:if>
-                                            </c:if>
-                                            <c:if test="${p.cancelInvoice.equals(false)}">
-                                                <strong><i class="fa fa-close margin-r-5"></i> Cancel</strong>
-                                            </c:if>
 
-                                        </td>
-                                        <td>
-                                            ${p.createdDate}
-
-                                        </td>
-                                        <td>
-                                            <c:set var="total" value="${p.subTotal}"/>
-                                            <fmt:formatNumber value="${total}" 
-                                                              type="currency"/>
-                                        </td>
-
-                                    </tr>
-
+                                    </c:if>
                                 </c:forEach>
-
-
-
-
                             </tbody>
+                        </table>
+                    </div>
+                            
+                    <!--Table Print-->
+                    <!-- /.box-body -->
+                </div>
 
+            </div>
+        </div>
+        </c:if>
+         <c:if test="${giaohang>0}">
+        <div class="row row2">
+            <div class="col-xs-12">
+                <div class="box">
+                <h3><strong>PURCHASE IN PROGRESS</strong></h3>
+                
+                   
+                    <div class="box-body">
+                        <table id="example1" class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th>No</th>
+                                    <th>BillID</th>
+                                    <th>Name</th>
+                                    <th>Address</th>
+                                    <th>Phone</th>                                    
+                                    <th>Date</th>
+                                    <th>Subtotal</th>
+                                </tr>
+                            </thead>
+                            <tbody >
+                                <c:set var="x" value="0"/>
+                                <c:forEach var="p" items="${list}">
+                                    <c:if test="${p.cancelInvoice.equals(true)}">
+                                        <c:if test="${p.status.equals(false)}">
+                                            <tr>
+                                                <td>${x=x+1}</td>
+                                                <td>${p.purchaseOrderId}</td>
+                                                <td>${p.name}</td>
+                                                <td>${p.address}</td>
+                                                <td>${p.phone}</td>                                       
+                                                <td>
+                                                    <c:set var="string1" value="${p.createdDate}"/>
+                                                    <c:set var="string2" value="${fn:substring(string1, 0, 10)}" />
+                                                    ${string2}
+                                                </td>
+                                                <td>
+                                                    <c:set var="total" value="${p.subTotal}"/>
+                                                    <fmt:formatNumber value="${total}" 
+                                                                      type="currency"/>
+                                                </td>
+                                            </tr>
+                                        </c:if>
+                                    </c:if>
+                                </c:forEach>
+                            </tbody>
                         </table>
                     </div>
                     <!--Table Print-->
                     <!-- /.box-body -->
+                    
                 </div>
-               
+
             </div>
         </div>
+         </c:if>
+        <c:if test="${cancel>0}">
+        <div class="row row3">
+            <div class="col-xs-12">
+                <div class="box">
+                <h3><strong>PURCHASE CANCEL</strong></h3>
+                 
+                    
+                    <div class="box-body">
+                        <table id="example1" class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th>No</th>
+                                    <th>BillID</th>
+                                    <th>Name</th>
+                                    <th>Address</th>
+                                    <th>Phone</th>                                    
+                                    <th>Date</th>
+                                    <th>Subtotal</th>
+                                </tr>
+                            </thead>
+                            <tbody >
+                                <c:set var="x" value="0"/>
+                                <c:forEach var="p" items="${list}">
+                                    <c:if test="${p.cancelInvoice.equals(false)}">
+                                        <tr>
+                                            <td>${x=x+1}</td>
+                                            <td>${p.purchaseOrderId}</td>
+                                            <td>${p.name}</td>
+                                            <td>${p.address}</td>
+                                            <td>${p.phone}</td>                                        
+                                            <td>
+                                                <c:set var="string1" value="${p.createdDate}"/>
+                                                <c:set var="string2" value="${fn:substring(string1, 0, 10)}" />
+                                                ${string2}
+                                            </td>
+                                            <td>
+                                                <c:set var="total" value="${p.subTotal}"/>
+                                                <fmt:formatNumber value="${total}" 
+                                                                  type="currency"/>
+                                            </td>
+                                        </tr>
+                                    </c:if>
+                                </c:forEach>
+                            </tbody>
+                        </table>
+                    </div>
+                    <!--Table Print-->
+                    <!-- /.box-body -->
+                    
+                </div>
 
+            </div>
+        </div>
+        </c:if>
 
         <div class="row">
-            <!-- /.col -->
-            <section class="content-header">
-                <h1>Chart</h1>
+            <c:if test="${hanghoa!=0}">
+                <!-- /.col -->
+                <section class="content-header">
+                    <h1>Chart</h1>
 
-            </section>
-            <section class="content">
-                <div class="row">
-                    <div class="col-md-6">
-                        <!-- DONUT CHART -->
-                        <div class="box box-danger">
-                            <div class="box-header with-border">
-                                <h3>Category compare</h3>
-                                <div class="box-tools pull-right">
-                                    <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-                                    <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                </section>
+
+
+                <section class="content">
+                    <div class="row col-xs-12">
+                        <div class="col-md-6">
+                            <!-- DONUT CHART -->
+                            <div class="box box-danger">
+                                <div class="box-header with-border">
+                                    <h3>Category compare</h3>
+
                                 </div>
-                            </div>
+                                <div class="box-body">
+                                    <canvas id="pieChart" style="height:250px"></canvas>
+                                </div><!-- /.box-body -->
+                            </div><!-- /.box -->
+                        </div>
+
+                        <div class="col-md-3 invoice-col"> 
                             <div class="box-body">
-                                <canvas id="pieChart" style="height:250px"></canvas>
-                            </div><!-- /.box-body -->
-                        </div><!-- /.box -->
-                    </div>
-                    
-                    <div class="col-md-4 invoice-col">
+                                <div class="alert  alert-dismissable" id="div1" >
+                                    <span class="info-box-text">Accessory</span>
+                                    <span class="info-box-number">${acc}</span>
 
-                                <div class="info-box bg-yellow">
-                                    <span class="info-box-icon">
-                                        <i class="ion ion-ios-heart-outline"></i>
+                                    <span class="progress-description">
+                                        <c:set var="ts" value="${(acc/hanghoa)*100}"/>
+                                        <fmt:formatNumber value="${ts}" maxFractionDigits="2" />%
+                                        in ${day} Days
+                                    </span>  
+                                </div>
+                                <div class="alert  alert-dismissable" id="div2" >
+
+
+                                    <span class="info-box-text">Pant</span>
+                                    <span class="info-box-number">${pant}</span>
+
+                                    <span class="progress-description">
+                                        <c:set var="qu" value="${(pant/hanghoa)*100}"/>
+                                        <fmt:formatNumber value="${qu}" maxFractionDigits="2" />%
+                                        in ${day} Days
                                     </span>
-                                    <div class="info-box-content">
-                                        <span class="info-box-text">Accessory</span>
-                                        <span class="info-box-number">${acc}</span>
-                                        <div class="progress">
-                                            <div class="progress-bar" style="width: ${(acc/hanghoa)*100}%"></div>
-                                        </div>
-                                        <span class="progress-description">
-                                            <c:set var="ts" value="${(acc/hanghoa)*100}"/>
-                                            <fmt:formatNumber value="${ts}" maxFractionDigits="2" />%
-                                            in ${day} Days
-                                        </span>
-                                    </div><!-- /.info-box-content -->
-                                </div><!-- /.info-box -->
-                                <div class="info-box bg-green">
-                                    <span class="info-box-icon"><i class="ion ion-ios-eye-outline"></i></span>
-                                    <div class="info-box-content">
-                                        <span class="info-box-text">Pant</span>
-                                        <span class="info-box-number">${pant}</span>
-                                        <div class="progress">
-                                            <div class="progress-bar" style="width: ${(pant/hanghoa)*100}%"></div>
-                                        </div>
-                                        <span class="progress-description">
-                                            <c:set var="qu" value="${(pant/hanghoa)*100}"/>
-                                            <fmt:formatNumber value="${qu}" maxFractionDigits="2" />%
-                                            in ${day} Days
-                                        </span>
-                                    </div><!-- /.info-box-content -->
-                                </div><!-- /.info-box -->
-                                <div class="info-box bg-red">
-                                    <span class="info-box-icon"><i class="ion ion-ios-cloud-download-outline"></i></span>
-                                    <div class="info-box-content">
-                                        <span class="info-box-text">Dress</span>
-                                        <span class="info-box-number">${dress}</span>
-                                        <div class="progress">
-                                            <div class="progress-bar" style="width: ${(dress/hanghoa)*100}%"></div>
-                                        </div>
-                                        <span class="progress-description">
-                                            <c:set var="ad" value="${(dress/hanghoa)*100}"/>
-                                            <fmt:formatNumber value="${ad}" maxFractionDigits="2" />%                            
-                                                in ${day} Days
-                                        </span>
-                                    </div><!-- /.info-box-content -->
-                                </div><!-- /.info-box -->
-                                <div class="info-box bg-aqua">
-                                    <span class="info-box-icon"><i class="ion-ios-chatbubble-outline"></i></span>
-                                    <div class="info-box-content">
-                                        <span class="info-box-text">Shirt</span>
-                                        <span class="info-box-number">${shirt}</span>
-                                        <div class="progress">
-                                            <div class="progress-bar" style="width:${(shirt/hanghoa)*100}%"></div>
-                                        </div>
-                                        <span class="progress-description">
-                                            <c:set var="ad" value="${(shirt/hanghoa)*100}"/>
-                                            <fmt:formatNumber value="${ad}" maxFractionDigits="2" />%                            
-                                                in ${day} Days
-                                        </span>
-                                    </div><!-- /.info-box-content -->
-                                </div><!-- /.info-box -->
-                            </div>
-                    <!--Noi dung % tung thanh phan-->
-                </div>
-            </section>
 
+                                </div>
+
+                            </div><!-- /.box-body -->
+
+                        </div>
+                        <div class="col-md-3 invoice-col"> 
+                            <div class="box-body">
+
+                                <div class="alert  alert-dismissable" id="div3" >
+
+
+                                    <span class="info-box-text">Dress</span>
+                                    <span class="info-box-number">${dress}</span>
+
+                                    <span class="progress-description">
+                                        <c:set var="ad" value="${(dress/hanghoa)*100}"/>
+                                        <fmt:formatNumber value="${ad}" maxFractionDigits="2" />%                            
+                                        in ${day} Days
+                                    </span>
+                                </div>
+                                <div class="alert  alert-dismissable" id="div4" >
+
+                                    <span class="info-box-text">Shirt</span>
+                                    <span class="info-box-number">${shirt}</span>
+
+                                    <span class="progress-description">
+                                        <c:set var="ad" value="${(shirt/hanghoa)*100}"/>
+                                        <fmt:formatNumber value="${ad}" maxFractionDigits="2" />%                            
+                                        in ${day} Days
+                                    </span>
+
+                                </div>
+                            </div><!-- /.box-body -->
+
+                        </div>
+
+                        <!--Noi dung % tung thanh phan-->
+                    </div>
+                </section>
+            </c:if>
 
         </div><!-- /.row -->
     </div>
@@ -322,7 +437,7 @@
         <div class="col-xs-12">
             <c:url value="/administrator/purchasereportprint" var="printLink"/>
             <a href="${printLink}"  target="_blank" class="btn btn-default"><i class="fa fa-print"></i> Print</a>
-             
+
         </div>
     </div>
 </section>

@@ -65,6 +65,7 @@ public class POInsertController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
+            request.setCharacterEncoding("UTF-8");
             HttpSession session = request.getSession();
             AccountDTO account = (AccountDTO) session.getAttribute("Account");
 
@@ -123,7 +124,8 @@ public class POInsertController extends HttpServlet {
             po.setName(cname);
             po.setAddress(cadd);
             po.setPhone(cphone);
-            request.setAttribute("o", po);
+            
+            session.setAttribute("o", po);
             request.getRequestDispatcher("WEB-INF/cartinfor.jsp").forward(request, response);
 
         } catch (Exception e) {
