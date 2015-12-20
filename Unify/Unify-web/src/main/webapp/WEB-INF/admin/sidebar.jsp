@@ -10,7 +10,8 @@
                 </div>
                 <div class="pull-left info">
                     <p>${Account.fullName}</p>
-                    <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+                    <c:url value="/administrator/user/profile" var="profileLink"/>
+                    <a href="${profileLink}"><i class="fa fa-circle text-success"></i> Online</a>
                 </div>
             </div>
         </c:if>

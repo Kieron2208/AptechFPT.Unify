@@ -35,10 +35,6 @@
             <c:url value="/profile/mycomment" var="commentLink"/>
             <a href="${commentLink}"><i class="fa fa-comments"></i>My Comments</a>
         </li>
-        <li class="list-group-item ${history}">
-            <c:url value="/profile/orderhistory" var="historyOrderLink"/>
-            <a href="${historyOrderLink}"><i class="fa fa-history"></i>Order History</a>
-        </li>
     </ul>
 
 </div>

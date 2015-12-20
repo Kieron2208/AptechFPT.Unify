@@ -1,7 +1,9 @@
 (function () {
     'use strict';
 
-    angular.module('myApp', ['ui.bootstrap']).controller('MyController', MyController);
+    angular.module('myApp', ['ui.bootstrap', 'ngFileUpload']);
+    angular.module('myApp')
+            .controller('MyController', MyController);
 
     MyController.$inject = ['$scope', '$http', '$window'];
 
@@ -81,6 +83,7 @@
 
         };
         $scope.formsubmit = function () {
+            //TODO: add confirm modal
             form.submit();
             $scope.cart = [];
             var jsonStr = JSON.stringify($scope.cart);

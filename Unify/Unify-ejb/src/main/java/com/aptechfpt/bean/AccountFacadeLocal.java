@@ -26,5 +26,17 @@ public interface AccountFacadeLocal {
     int count();
 
     Account findByEmail(String email);
+
+    List<Account> GetOnlyUsers();
+
+    boolean isExistedEmail(String email);
+
+    boolean comparePassword(int accountId, String password);
+
+    void updateProfile(Account a);
+
+    boolean banAccount(int accountId);
+
+    void editPassword(int accountId, String password);
     
 }

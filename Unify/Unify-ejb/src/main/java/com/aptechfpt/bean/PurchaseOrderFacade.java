@@ -46,7 +46,7 @@ public class PurchaseOrderFacade extends AbstractFacade<PurchaseOrder> implement
 
     @Override
     public List<PurchaseOrder> getListByAccountId(int AccountId) {
-        TypedQuery<PurchaseOrder> q = em.createNamedQuery("PurchaseOrder.findByAccount", PurchaseOrder.class);
+        TypedQuery<PurchaseOrder> q = em.createQuery("SELECT p FROM PurchaseOrder p WHERE p.accountId.accountId = :accountId", PurchaseOrder.class);
         q.setParameter("accountId", AccountId);
         return q.getResultList();
     }
