@@ -71,6 +71,9 @@ public class ProfileController extends HttpServlet {
             case "detail":
                 detail(request, response);
                 break;
+            case "comment":
+                comment(request, response);
+                break;
         }
     }
 
@@ -97,7 +100,7 @@ public class ProfileController extends HttpServlet {
                 .append("\"phone\":\"").append(ac.getPhone()).append("\",")
                 .append("\"gender\":\"").append(ac.getGender()).append("\",")
                 .append("\"address\":\"").append(ac.getAddress()).append("\",")
-                .append("\"dateOfBirth\":\"").append(ac.getDayOfBirth().toString(DateTimeFormat.forPattern("yyyy-MM-dd'T'HH:mm:ss'Z"))).append("\",");
+                .append("\"dateOfBirth\":\"").append(ac.getDayOfBirth().toString(DateTimeFormat.forPattern("yyyy-MM-dd'T'HH:mm:ss'Z"))).append("\"");
 //
 //        if (request.isUserInRole("ADMINISTRATOR")) {
 //            builder.append("\"role\":\"").append("ADMINISTRATOR").append("\"");
@@ -215,8 +218,8 @@ public class ProfileController extends HttpServlet {
     }
 
     private String writeFile(FileItem fileItem) {
-        if (fileItem.getName() != null) {
-            if (!fileItem.isFormField()) {
+        if (!fileItem.isFormField()) {
+            if (fileItem.getName() != null) {
                 String realPath = getServletContext().getRealPath("/");
                 File uploadDir = new File(realPath + "img/user/" + fileItem.getName());
 //                    File file = File.createTempFile("img", ".jpg", uploadDir);
@@ -226,12 +229,12 @@ public class ProfileController extends HttpServlet {
                     ex.printStackTrace();
                 }
             } else {
-                return fileItem.getString();
+                return "/img/user/user.jpg";
             }
-            return "/img/user/" + fileItem.getName();
         } else {
-            return "/img/user/user.jpg";
+            return fileItem.getString();
         }
+        return "/img/user/" + fileItem.getName();
     }
 
     private void ChangePassword(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -271,5 +274,13 @@ public class ProfileController extends HttpServlet {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
+    }
+
+    private void comment(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        AccountDTO dto = (AccountDTO) session.getAttribute("Account");
+        Account account = accountFacade.findById(dto.getAccountId());
+        request.setAttribute("account", account);
+        request.getRequestDispatcher("/WEB-INF/profileComment.jsp").forward(request, response);
     }
 }

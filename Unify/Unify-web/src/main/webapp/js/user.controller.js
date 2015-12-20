@@ -128,7 +128,7 @@
         function activate() {
             var promises = [init(), fetchData()];
             return $q.all(promises).then(function () {
-                logger.info('Activated Create Employee Dialog.');
+                return;
             });
         }
 
@@ -165,13 +165,15 @@
 
         function submit() {
             if (vm.userForm.$valid) {
+                var arrayOfString = vm.entity.imgLink.split(baseContext);
+                var imgPath ='/'+ arrayOfString[1];
                 Upload.upload({
                     url: baseContext + 'administrator/user/profile',
                     data: {
                         id: vm.entity.id,
                         email: vm.entity.email,
                         password: vm.entity.password,
-                        image: vm.entity.avatar || vm.entity.imgLink,
+                        image: vm.entity.avatar || imgPath,
                         firstName: vm.entity.firstName,
                         lastName: vm.entity.lastName,
                         phone: vm.entity.phone,
@@ -182,6 +184,7 @@
                     }
                 }).then(function (resp) {
                     logger.success("Update Successful.", resp);
+                    location.reload();
                 }, function (resp) {
                     logger.error("Update Failed.", resp);
                 });
@@ -204,7 +207,8 @@
         function activate() {
             var promises = [];
             return $q.all(promises).then(function () {
-                logger.info('Activated Password Employee Dialog.');
+//                logger.info('Activated Password Employee Dialog.');
+                return;
             });
         }
 

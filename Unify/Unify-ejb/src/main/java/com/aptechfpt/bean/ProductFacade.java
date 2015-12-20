@@ -44,4 +44,14 @@ public class ProductFacade extends AbstractFacade<Product> implements ProductFac
         list = q.getResultList();
         return list;
     }
+
+    @Override
+    public List<Product> getTop10Like() {
+        List<Product> list = new ArrayList<>();
+        Query q = em.createQuery("SELECT  p FROM Product p WHERE p.available = TRUE ORDER BY p.like DESC");
+        q.setMaxResults(10);
+        list = q.getResultList();
+        return list;
+    }
+    
 }

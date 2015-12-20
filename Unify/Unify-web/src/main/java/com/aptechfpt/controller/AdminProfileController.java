@@ -223,8 +223,8 @@ public class AdminProfileController extends HttpServlet {
     }
 
     private String writeFile(FileItem fileItem) {
-        if (fileItem.getName() != null) {
-            if (!fileItem.isFormField()) {
+        if (!fileItem.isFormField()) {
+            if (fileItem.getName() != null) {
                 String realPath = getServletContext().getRealPath("/");
                 File uploadDir = new File(realPath + "img/user/" + fileItem.getName());
 //                    File file = File.createTempFile("img", ".jpg", uploadDir);
@@ -234,12 +234,12 @@ public class AdminProfileController extends HttpServlet {
                     ex.printStackTrace();
                 }
             } else {
-                return fileItem.getString();
+                return "/img/user/user.jpg";
             }
-            return "/img/user/" + fileItem.getName();
         } else {
-            return "/img/user/user.jpg";
+            return fileItem.getString();
         }
+        return "/img/user/" + fileItem.getName();
     }
 
     private void ChangePassword(HttpServletRequest request, HttpServletResponse response) throws IOException {

@@ -19,37 +19,27 @@
         </script>
 
 
-        <script type="text/javascript">
-
-            (function () {
-                $(document).ready(function () {
-                    var frm = $('#myform55');
-                    frm.submit(function () {
-
-                        $.ajax({
-                            type: frm.attr('method'),
-                            url: frm.attr('action'),
-                            data: frm.serialize(),
-                            success: function (output) {
-                                $("#likecount55").html(output);
-
-                            }
-                        });
-                        return false;
-
-                    });
-                    
-
-                    
-                });
-            })();
-
-        </script>
+        <script type="text/javascript" src="<c:url value="/js/like1.js"/>" >  </script>
 
 
 
     </jsp:attribute>
     <jsp:body>
+        <script type="text/ng-template" id="myModalContent.html">
+        <div class="modal-header">
+        <strong>
+            <h3 class="modal-title" style="color:red"><i style="color:red" class="fa fa-exclamation-triangle"></i>WARNING!</h3>
+        </strong>
+        </div>
+        <div class="modal-body">
+        <h3> <strong class="item-name">You shopping cart only can add 30 products once!</strong></h3>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-warning" type="button" ng-click="cancel()">OK</button>
+            
+        </div>
+    </script>
+    
         <!--=== Slider ===-->
         <div class="tp-banner-container">
             <div class="tp-banner">
@@ -349,7 +339,13 @@
                                 </c:forEach>
                                 <c:url value="/product/${p.productId}" var="productdetail"/>
                                         <a class="product-review" href="${productdetail}">Quick review</a>
-                                <a class="add-to-cart" ng-click="put(${p.productId},'${p.name}','${img.imagePath}',${p.unitPrice},1)" href><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                                <c:forEach var="img" items="${p.imageCollection}">
+                                    <c:if test="${img.displayOrder==1}">
+                                        <a class="add-to-cart" ng-click="put(${p.productId},'${p.name}','${img.imagePath}',${p.unitPrice},1)" href><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                                    </c:if>
+                                </c:forEach>        
+                                
+                                
                                 <div class="shop-rgba-dark-green rgba-banner">New</div>
                             </div>
                             <div class="product-description product-description-brd">

@@ -1,31 +1,58 @@
 (function () {
     'use strict';
 
-    angular.module('myApp', ['ui.bootstrap', 'ngFileUpload']);
-    angular.module('myApp')
-            .controller('MyController', MyController);
+    angular.module('myApp', ['ui.bootstrap', 'ngFileUpload']).controller('MyController', MyController);
+    MyController.$inject = ['$scope', '$http', '$window', '$modal'];
+    function MyController($scope, $http, w, $modal) {
 
-    MyController.$inject = ['$scope', '$http', '$window'];
-
-    function MyController($scope, $http, w) {
-        var form = document.getElementById("myForm");
         var x = w.localStorage.getItem("shoppingcart");
 
         $scope.cart = JSON.parse(x) || [];
-//        $scope.cart = [{
-//                id: 1,
-//                name: 'T-Shirt01',
-//                pic: 'img/product/Tshirt01.jpg',
-//                price: 140.0000,
-//                quantity: 1,
-//            }, {
-//                id: 2,
-//                name: 'T-Shirt02',
-//                pic: 'img/product/Tshirt02.jpg',
-//                price: 145.0000,
-//                quantity: 1,
-//            }
-//        ];
+
+        $scope.open = function (size) {
+            $scope.animationsEnabled = true;
+            var modalInstance = $modal.open({
+                animation: $scope.animationsEnabled,
+                templateUrl: 'myModalContent.html',
+                controller: myModalController,
+                size: size
+
+            });
+            $scope.toggleAnimation = function () {
+                $scope.animationsEnabled = !$scope.animationsEnabled;
+            };
+        };
+        $scope.openconfirm = function (size) {
+            $scope.animationsEnabled = true;
+            var modalInstance = $modal.open({
+                animation: $scope.animationsEnabled,
+                templateUrl: 'myModalConfirm.html',
+                controller: myModalConfirmController,
+                size: size
+            });
+            modalInstance.result.then(function () {
+            }, function () {
+            });
+            $scope.toggleAnimation = function () {
+                $scope.animationsEnabled = !$scope.animationsEnabled;
+            };
+        };
+        $scope.opencancel = function (size) {
+            $scope.animationsEnabled = true;
+            var modalInstance = $modal.open({
+                animation: $scope.animationsEnabled,
+                templateUrl: 'myModalCancel.html',
+                controller: myModalCancelController,
+                size: size
+            });
+            modalInstance.result.then(function () {
+            }, function () {
+            });
+            $scope.toggleAnimation = function () {
+                $scope.animationsEnabled = !$scope.animationsEnabled;
+            };
+        };
+
         $scope.put = function (id, n, pic, p, q) {
 
             //kiem tra 
@@ -37,8 +64,9 @@
             }
             //add
             if (addToArray) {
-                if ($scope.cart.sum("quantity") + q > 20) {
-                    alert("Qua nhieu");
+                if ($scope.cart.sum("quantity") + q > 30) {
+                    $scope.open();
+                    $scope.toggleAnimation();
                 } else {
                     $scope.cart.push({
                         id: id,
@@ -53,8 +81,9 @@
                 }
             }
             else {
-                if ($scope.cart.sum("quantity") + q > 20) {
-                    alert("Qua nhieu khong them duoc");
+                if ($scope.cart.sum("quantity") + q > 30) {
+                    $scope.open();
+                    $scope.toggleAnimation();
                 } else {
                     for (var i = 0; i < $scope.cart.length; i++) {
                         var item = $scope.cart[i];
@@ -79,21 +108,15 @@
             name: '',
             phone: null,
             address: '',
-            subTotal: 0
-
+            subTotal: 0,
+            comment: ''
         };
         $scope.formsubmit = function () {
-            //TODO: add confirm modal
-            form.submit();
-            $scope.cart = [];
-            var jsonStr = JSON.stringify($scope.cart);
-            w.localStorage.setItem("shoppingcart", jsonStr);
+            $scope.openconfirm();
+
         };
         $scope.clearcart = function () {
-
-            $scope.cart = [];
-            var jsonStr = JSON.stringify($scope.cart);
-            w.localStorage.setItem("shoppingcart", jsonStr);
+            $scope.opencancel();
         };
         $scope.qu = 1;
         //return so
@@ -120,10 +143,51 @@
     }
 
     angular.module('myApp').controller('myModalController', myModalController);
+    function myModalController($scope, $uibModalInstance) {
+        $scope.ok = function () {
+            $uibModalInstance.close();
+        };
 
-    function myModalController() {
-        
+        $scope.cancel = function () {
+            $uibModalInstance.dismiss('cancel');
+        };
     }
+
+
+    angular.module('myApp').controller('myModalConfirmController', myModalConfirmController);
+    function myModalConfirmController($scope, $http, $window, $uibModalInstance) {
+        var form = document.getElementById("myForm");
+        $scope.ok = function () {
+            form.submit();
+            $scope.cart = [];
+            var jsonStr = JSON.stringify($scope.cart);
+            $window.localStorage.setItem("shoppingcart", jsonStr);
+            $uibModalInstance.close();
+        };
+
+        $scope.cancel = function () {
+            $uibModalInstance.dismiss();
+        };
+    }
+
+
+    angular.module('myApp').controller('myModalCancelController', myModalCancelController);
+    function myModalCancelController($scope, $http, $window, $uibModalInstance) {
+
+        $scope.ok = function () {
+            $scope.cart = [];
+            var jsonStr = JSON.stringify($scope.cart);
+            $window.localStorage.setItem("shoppingcart", jsonStr);
+            location.reload();
+            $uibModalInstance.close();
+        };
+
+        $scope.cancel = function () {
+            $uibModalInstance.dismiss();
+        };
+    }
+
+
 
 })();
 

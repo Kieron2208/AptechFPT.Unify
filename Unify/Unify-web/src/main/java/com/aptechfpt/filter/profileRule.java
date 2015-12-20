@@ -67,7 +67,7 @@ public class profileRule extends RewriteRule {
                     return new RewriteMatch() {
                         @Override
                         public boolean execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-                            request.getRequestDispatcher("/WEB-INF/profileComment.jsp").forward(request, response);
+                            request.getRequestDispatcher("/ProfileController?action=comment").forward(request, response);
                             return true;
                         }
                     };
