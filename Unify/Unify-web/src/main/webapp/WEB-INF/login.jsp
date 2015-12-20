@@ -9,7 +9,8 @@
         <script src="<c:url value="/js/forms/page_login.js"/>" type="text/javascript"></script>
         <script src="<c:url value="/js/forms/page_contact_form.js"/>" type="text/javascript"></script>
         <script>
-            $(document).ready(function(){
+            window.emailRegex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+            $(document).ready(function () {
                 App.init();
             });
         </script>
@@ -62,26 +63,51 @@
 
                     <div class="col-md-5">
                         <form id="sky-form1" class="log-reg-block sky-form"
-                              method="POST" action="<c:url value="/login"/>">
+                              method="POST" action="<c:url value="/login"/>" name="LoginFrom" novalidate>
                             <h2>Log in to your account</h2>
 
                             <section>
                                 <label class="input login-input">
                                     <div class="input-group">
                                         <span class="input-group-addon"><i class="fa fa-user"></i></span>
-                                        <input type="email" placeholder="Email Address" name="txtEmail" class="form-control">
+                                        <input type="email"
+                                               placeholder="Email Address"
+                                               required
+                                               ng-pattern="emailRegex"
+                                               ng-model="txtEmail"
+                                        name="txtEmail"
+                                        class="form-control">
                                     </div>
+                                    <span style="color:red" ng-show="LoginFrom.txtEmail.$invalid && LoginFrom.txtEmail.$dirty">
+                                        <span ng-show="LoginFrom.txtEmail.$error.required">Email is required.</span>
+                                        <span ng-show="LoginFrom.txtEmail.$error.pattern">Invalid Email format</span>
+                                    </span>
                                 </label>
                             </section>        
                             <section>
                                 <label class="input login-input no-border-top">
                                     <div class="input-group">
                                         <span class="input-group-addon"><i class="fa fa-lock"></i></span>
-                                        <input type="password" placeholder="Password" name="txtPassword" class="form-control">
+                                        <input type="password"
+                                               placeholder="Password"
+                                               name="txtPassword"
+                                               ng-pattern="/^[A-Za-z0-9]+$/"
+                                               ng-minlength="6"
+                                               ng-maxlength="20"
+                                               required
+                                               ng-model="txtPassword"
+                                               class="form-control">
                                     </div>    
+                                    <span style="color:red" ng-show="LoginFrom.txtPassword.$invalid && LoginFrom.txtPassword.$dirty">
+                                        <span ng-show="LoginFrom.txtPassword.$error.required">Password needs to provide.</span>
+                                        <span ng-show="LoginFrom.txtPassword.$error.pattern">Number and Word Only</span>
+                                        <span ng-show="LoginFrom.txtPassword.$error.minlength">Password is too short. Need more than 6 characters.</span>
+                                        <span ng-show="LoginFrom.txtPassword.$error.maxlength">Password is too long. Need less than 20 characters.</span>
+                                    </span>
                                 </label>
                             </section>
-                            <button class="btn-u btn-u-sea-shop btn-block margin-bottom-20" type="submit">Log in</button>
+                            <p>${msg}</p>
+                            <button class="btn-u btn-u-sea-shop btn-block margin-bottom-20" ng-disabled="LoginFrom.$vaid" type="submit">Log in</button>
 
                         </form>
 

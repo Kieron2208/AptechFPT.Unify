@@ -24,7 +24,7 @@ public class InitContextServletListener implements ServletContextListener {
     public void contextInitialized(ServletContextEvent sce) {
         ServletContext context = sce.getServletContext();
         context.log(this.getClass().getName() + " initial is called");
-        context.setAttribute("initMsg", "Testing Listenter");
+        context.setAttribute("initMsg", "");
     }
 
     @Override

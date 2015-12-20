@@ -102,11 +102,19 @@ public class AuthenticateController extends HttpServlet {
                 request.login(username, password);
                 logger.log(Level.INFO, "{0} User: {1} login successfull", new Object[]{AuthenticateController.class.getName(), username});
                 AccountDTO dto = setDTO(username);
-                HttpSession session = request.getSession();
-                session.setAttribute("Account", dto);
-                String context = request.getContextPath() + "/";
-                response.sendRedirect(context);
+                if (dto.isAvaliable()) {
+                    HttpSession session = request.getSession();
+                    session.setAttribute("Account", dto);
+                    String context = request.getContextPath() + "/";
+                    response.sendRedirect(context);
+                } else {
+                    request.logout();
+                    request.setAttribute("msg", "Your account has been banned");
+                    logger.log(Level.INFO, "{0} User: {1} has been banned.", new Object[]{AuthenticateController.class.getName(), username});
+                    request.getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
+                }
             } catch (ServletException ex) {
+                ex.printStackTrace();
                 request.setAttribute("msg", "Login Failed");
                 logger.log(Level.INFO, "{0} User: {1} login failed.", new Object[]{AuthenticateController.class.getName(), username});
                 request.getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
@@ -120,10 +128,12 @@ public class AuthenticateController extends HttpServlet {
 
     private AccountDTO setDTO(String email) {
         Account account = accountFacade.findByEmail(email);
-        AccountDTO dto = new AccountDTO.Builder(account.getAccountId(),account.getEmail())
+        AccountDTO dto = new AccountDTO.Builder(account.getAccountId(), account.getEmail())
                 .FirstName(account.getFirstName())
                 .LastName(account.getLastName())
                 .ImageLink(account.getImageLink())
+                .isAvalaible(account.isAvailable())
+                .Gender(account.getGender())
                 .build();
         return dto;
     }
