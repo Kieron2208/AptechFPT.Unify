@@ -28,7 +28,48 @@
         </script>
     </jsp:attribute>
     <jsp:body>
+        <script type="text/ng-template" id="myModalContent.html">
+            <div class="modal-header">
+            <strong>
+            <h3 class="modal-title" style="color:red"><i style="color:red" class="fa fa-exclamation-triangle"></i>WARNING!</h3>
+            </strong>
+            </div>
+            <div class="modal-body">
+            <h3> <strong class="item-name">You shopping cart only can add 30 products once!</strong></h3>
+            </div>
+            <div class="modal-footer">
+            <button class="btn btn-warning" type="button" ng-click="cancel()">OK</button>
 
+            </div>
+        </script>
+        <script type="text/ng-template" id="myModalConfirm.html">
+            <div class="modal-header">
+            <strong>
+            <h3 class="modal-title" style="color:red"><i style="color:red;" class="fa fa-refresh fa-spin"></i>CONFIRM!</h3>
+            </strong>
+            </div>
+            <div class="modal-body">
+            <h3> <strong class="item-name">Please confirm your choose!</strong></h3>
+            </div>
+            <div class="modal-footer">
+            <button class="btn btn-primary" type="button" ng-click="ok()">Confirm</button>
+            <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+            </div>
+        </script>
+        <script type="text/ng-template" id="myModalCancel.html">
+            <div class="modal-header">
+            <strong>
+            <h3 class="modal-title" style="color:red"><i style="color:red;" class="fa fa-exclamation-triangle"></i>CONFIRM!</h3>
+            </strong>
+            </div>
+            <div class="modal-body">
+            <h3> <strong class="item-name">This will remove all items in your shopping cart!</strong></h3>
+            </div>
+            <div class="modal-footer">
+            <button class="btn btn-primary" type="button" ng-click="ok()">Confirm</button>
+            <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+            </div>
+        </script>
         <!--=== Breadcrumbs v4 ===-->
         <div class="breadcrumbs-v4">
             <div class="container">
@@ -51,10 +92,10 @@
                     <div class="headline-center margin-bottom-60">
                         <h2>There is no item no in your shopping cart, please go to 
                             <c:url value="/" var="home"/>
-                        <a href="${home}">
-                            <img src="<c:url value="/img/logo1-default.png"/>" alt="There is no item in your shopping cart"/>
-                        </a>
-                        for adding items
+                            <a href="${home}">
+                                <img src="<c:url value="/img/logo1-default.png"/>" alt="There is no item in your shopping cart"/>
+                            </a>
+                            for adding items
                         </h2>
                         <p>
                             <img src="<c:url value="/img/cart-empty.png"/>" alt="There is no item in your shopping cart"/>
@@ -89,7 +130,7 @@
                                                 <img class="img-responsive" src="{{e.pic}}" alt="">
                                                 <div class="product-it-in">
                                                     <h3>{{e.name}}</h3>
-                                                    
+
                                                 </div>    
                                             </td>
                                             <td>{{e.price|currency:"$":0}}</td>
@@ -138,8 +179,8 @@
                                                         ng-trim="true" type="text" ng-maxlength="11" ng-minlength="10"  name="phone" class="form-control"/>
                                                 <span style="color:red" ng-show="myForm.phone.$dirty && myForm.phone.$invalid">
                                                     <span ng-show="myForm.phone.$error.required">Your phone is required.</span>
-                                                    <span ng-show="myForm.phone.$error.minlength||myForm.phone.$error.maxlength||myForm.phone.$error.pattern">Phone accepts 10-11 digits only</span>
-                                                    
+                                                    <span ng-show="myForm.phone.$error.minlength || myForm.phone.$error.maxlength || myForm.phone.$error.pattern">Phone accepts 10-11 digits only</span>
+
                                                 </span>
                                             </div>
                                         </div>
@@ -185,7 +226,9 @@
 
                                     </ul>
                                     <br/>
-                                    <input type="button" class="btn-u btn-u-lg" ng-click="clearcart()" value="CANCEL"/>
+                                    <input type="button" class="btn-u btn-u-lg" 
+                                           
+                                           ng-click="clearcart()" value="CANCEL"/>
                                     <input type="button" ng-click="formsubmit()"
                                            ng-disabled="myForm.$invalid ||
                                                        myForm.fname.$dirty && myForm.fname.$invalid ||
@@ -194,7 +237,7 @@
                                                        hide()"
                                            style="float: right" class="btn-u btn-u-lg" value="CHECK OUT"/>
                                 </div>
-
+                                
 
                             </div>       
                         </section>

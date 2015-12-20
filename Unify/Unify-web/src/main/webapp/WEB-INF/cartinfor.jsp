@@ -80,7 +80,7 @@
                             <thead>
                                 <tr>
                                     <th>Product</th>
-                                    <th class="hidden-sm">Description</th>
+                                    
 
                                     <th>Price</th><th>Quantity</th>
                                     <th>SubTotal</th>
@@ -98,11 +98,7 @@
                                             </c:forEach>
 
                                         </td>
-                                        <td class="td-width">
-
-                                            <p>${p.productId.description}</p>
-
-                                        </td>
+                                        
                                         <td>
                                             <strong>
                                                 <c:set var="total" value="${p.unitPrice}"/>
@@ -165,7 +161,15 @@
                                               type="currency"/> 
                         </strong>
                         <br />
-
+                        <br/>
+                        
+<div class="row no-print" style="float: right">
+        <div class="col-xs-12">
+            <c:url value="/purchaseprint" var="printLink"/>
+            <a href="${printLink}"  target="_blank" class="btn btn-default"><i class="fa fa-print"></i> Print</a>
+             
+        </div>
+    </div>
                     </address>
                 </div><!--/col-md-3-->
                 <!-- End Address -->
@@ -178,7 +182,9 @@
                         </a>
                     </p>
                 </div>
-            </div><!--/end container-->
+            </div>
+                        
+        </div><!--/end container-->
             <!--=== End Content Medium Part ===-->     
 
         </jsp:body>

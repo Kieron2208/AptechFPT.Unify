@@ -34,4 +34,6 @@ public interface ProductFacadeLocal {
 
     List<Product> findMostLike();
 
+    List<Product> getTop10Like();
+
 }
