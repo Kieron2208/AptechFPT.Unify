@@ -4,13 +4,13 @@
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <t:defaultLayout title="Shop UI - Product Detail">
     <jsp:attribute name="pagecss">
-        <link rel="stylesheet" href="<c:url value="/plugins/sky-forms-pro/skyforms/css/sky-forms.css"/>"/>
+           <link rel="stylesheet" href="<c:url value="/plugins/sky-forms-pro/skyforms/css/sky-forms.css"/>"/>
         <link rel="stylesheet" href="<c:url value="/plugins/sky-forms-pro/skyforms/custom/custom-sky-forms.css"/>"/>
         <link rel="stylesheet" href="<c:url value="/plugins/master-slider/quick-start/masterslider/style/masterslider.css"/>"/>
         <link rel='stylesheet' href="<c:url value="/plugins/master-slider/quick-start/masterslider/skins/default/style.css"/>"/>
     </jsp:attribute>
     <jsp:attribute name="pagejs">
-        <!-- Master Slider -->
+        <script src="<c:url value="/js/like1.js"/>"></script>
         <script src="<c:url value="/plugins/master-slider/quick-start/masterslider/masterslider.min.js"/>"></script>
         <script src="<c:url value="/plugins/master-slider/quick-start/masterslider/jquery.easing.min.js"/>"></script>
         <!-- JS Page Level -->
@@ -88,7 +88,17 @@
                         </div><!--/end shop product social-->
 
                         <ul class="list-inline product-ratings margin-bottom-30">
-                            <li>${pro.like} Like</li>
+                            <li>
+                                <div id="likecountt${pro.productId}">${pro.like} Like</div>
+
+                            </li>
+                            <li>
+                                <form id="likeform${pro.productId}" method="post" action="../ProductLike">
+                                    <input type="hidden" name="pid" value="${pro.productId}"/>
+                                    <button type="submit" class="btn btn-link"><i class="fa fa-heart"> </i></button>
+                                </form>
+                            </li>
+
                             <li class="product-review-list">
                                 <span>(1) <a href="#">Review</a> | <a href="#"> Add Review</a></span>
                             </li>
@@ -107,7 +117,7 @@
                                 </c:if>
                             </c:forEach>
                         </div><!--/end product quantity-->    
-                        <p class="wishlist-category"><strong>Categories:</strong> <a href="#">${pro.subCategoryId.name}</a> <a href="#">${pro.subCategoryId.categoryId.name}</a></p>
+                        <p class="wishlist-category"><strong>Categories:</strong> ${pro.subCategoryId.name}${pro.subCategoryId.categoryId.name}</p>
                     </div>
                 </div><!--/end row-->
             </div>    

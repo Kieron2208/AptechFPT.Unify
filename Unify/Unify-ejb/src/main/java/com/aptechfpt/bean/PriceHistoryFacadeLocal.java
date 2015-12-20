@@ -28,5 +28,9 @@ public interface PriceHistoryFacadeLocal {
     int count();
 
     BigDecimal getCost(Product product);
+
+    PriceHistory getNew(Product product);
+
+
     
 }
