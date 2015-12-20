@@ -5,7 +5,7 @@
  */
 package com.aptechfpt.bean;
 
-import com.aptechfpt.dto.HighSale;
+import com.aptechfpt.entity.Product;
 import com.aptechfpt.entity.PurchaseOrderDetail;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +13,6 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
-import org.joda.time.DateTime;
 
 /**
  *
@@ -44,7 +43,7 @@ public class PurchaseOrderDetailFacade extends AbstractFacade<PurchaseOrderDetai
     }
 
     @Override
-    public List<HighSale> getTop10Buy(String f, String t) {
+public List<HighSale> getTop10Buy(String f, String t) {
         List<HighSale> list = new ArrayList();
         try{
        String sql = "SELECT TOP 10 SUM(r.Quantity) AS Quantity, r.Name AS ProductName \n"
@@ -66,6 +65,13 @@ public class PurchaseOrderDetailFacade extends AbstractFacade<PurchaseOrderDetai
         }catch(Exception e){
             e.printStackTrace();
         }
+        
+    @Override
+    public List<Product> findMost() {
+        List<Product> list = new ArrayList();
+        Query q = em.createQuery("SELECT p.productId FROM PurchaseOrderDetail p GROUP BY p.productId ORDER BY sum(p.quantity) DESC");
+        q.setMaxResults(3);
+        list = q.getResultList();
         return list;
     }
     

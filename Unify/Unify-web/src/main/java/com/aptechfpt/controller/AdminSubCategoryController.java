@@ -1,4 +1,3 @@
-
 package com.aptechfpt.controller;
 
 import com.aptechfpt.bean.CategoryFacadeLocal;
@@ -33,35 +32,70 @@ public class AdminSubCategoryController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            
+
         }
     }
-    
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String action = request.getParameter("action");
-            switch (action){
-                case "view":
-                    List<SubCategory> sublist = subCategoryFacade.findAll();
-                    request.setAttribute("sublist", sublist);
-                    request.getRequestDispatcher("WEB-INF/admin/viewSubCategory.jsp").forward(request, response);
-                    break;
-                case "reAdd":
-                    List<Category> categorylist = categoryFacade.findAll();
-                    request.setAttribute("categorylist", categorylist);
-                    request.getRequestDispatcher("WEB-INF/admin/addSubCategory.jsp").forward(request, response);
-                    break;
-            }
-        
+        switch (action) {
+            case "view":
+                viewSub(request, response);
+                break;
+            case "reAdd":
+                List<Category> categorylist = categoryFacade.findAll();
+                request.setAttribute("categorylist", categorylist);
+                request.getRequestDispatcher("WEB-INF/admin/addSubCategory.jsp").forward(request, response);
+                break;
+            case "reUpdate":
+                int id = Integer.parseInt(request.getParameter("id"));
+                SubCategory sub = subCategoryFacade.find(id);
+                request.setAttribute("sub", sub);
+                List<Category> category = categoryFacade.findAll();
+                request.setAttribute("categorylist", category);
+                request.getRequestDispatcher("WEB-INF/admin/updateSubCategory.jsp").forward(request, response);
+                break;
+        }
+
+    }
+
+    public void viewSub(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        List<SubCategory> sublist = subCategoryFacade.findAll();
+        request.setAttribute("sublist", sublist);
+        request.getRequestDispatcher("WEB-INF/admin/viewSubCategory.jsp").forward(request, response);
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        String action = request.getParameter("action");
+        switch (action) {
+            case "add":
+                String name = request.getParameter("txtName");
+                int categoryID = Integer.parseInt(request.getParameter("txtCategory"));
+                SubCategory sub = new SubCategory();
+                Category cate = categoryFacade.find(categoryID);
+                sub.setName(name);
+                sub.setCategoryId(cate);
+                subCategoryFacade.create(sub);
+                viewSub(request, response);
+                break;
+            case "update":
+                int id = Integer.parseInt(request.getParameter("txtId"));
+                String subname = request.getParameter("txtName");
+                int cateID = Integer.parseInt(request.getParameter("txtCategory"));
+                Category category = categoryFacade.find(cateID);
+                SubCategory subcategory = subCategoryFacade.find(id);
+                subcategory.setName(subname);
+                subcategory.setCategoryId(category);
+                subCategoryFacade.edit(subcategory);
+                viewSub(request, response);
+                break;
+        }
     }
 
-    
     @Override
     public String getServletInfo() {
         return "Short description";
