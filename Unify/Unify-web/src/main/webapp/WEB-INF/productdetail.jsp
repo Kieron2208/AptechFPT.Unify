@@ -24,6 +24,20 @@
                 MasterSliderShowcase2.initMasterSliderShowcase2();
             });
         </script>
+        <script type="text/ng-template" id="myModalContent.html">
+        <div class="modal-header">
+        <strong>
+            <h3 class="modal-title" style="color:red"><i style="color:red" class="fa fa-exclamation-triangle"></i>WARNING!</h3>
+        </strong>
+        </div>
+        <div class="modal-body">
+        <h3> <strong class="item-name">You shopping cart only can add 30 products once!</strong></h3>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-warning" type="button" ng-click="cancel()">OK</button>
+            
+        </div>
+    </script>
     </jsp:attribute>
     <jsp:body>
         <!--=== Shop Product ===-->

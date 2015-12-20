@@ -26,7 +26,7 @@
     <!-- AdminLTE Skins. Choose a skin from the css/skins
          folder instead of downloading all of them to reduce the load. -->
     <link rel="stylesheet" href="<c:url value="/admin/css/skins/skin-blue.min.css"/>">
-
+    <link rel="stylesheet" href="<c:url value="/plugins/toastr/toastr.min.css"/>">
     <jsp:invoke fragment="pagecss"/>
 
     <link href="<c:url value="/plugins/PACE/themes/purple/pace-theme-minimal.css"/>" rel="stylesheet" type="text/css"/>
@@ -80,7 +80,11 @@
     <script src="<c:url value="/plugins/bootstrap/js/bootstrap.min.js"/>"></script>
     <!-- AdminLTE App -->
     <script src="<c:url value="/admin/js/app.min.js"/>"></script>
-    
+    <script src="<c:url value="/plugins/toastr/toastr.min.js"/>" type="text/javascript"></script>
+    <script src="<c:url value="/plugins/angular/angular.min.js"/>" type="text/javascript"></script>
+        <script src="<c:url value="/plugins/ng-file-upload/ng-file-upload.min.js"/>" type="text/javascript"></script>
+        <script src="<c:url value="/plugins/angular-bootstrap/ui-bootstrap-tpls.min.js"/>" type="text/javascript"></script>
+        <script src="<c:url value="/js/user.controller.js"/>" type="text/javascript"></script>
     <jsp:invoke fragment="pagejs"/>
   </body>
 </html>

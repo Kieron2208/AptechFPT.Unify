@@ -113,6 +113,7 @@ public class AccountDTO {
         private AccountGender gender;
 
         public Builder() {
+            this.roles = new HashSet<>();
         }
 
         public Builder(String email) {

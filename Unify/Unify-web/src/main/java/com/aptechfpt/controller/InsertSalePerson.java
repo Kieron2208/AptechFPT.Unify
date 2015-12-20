@@ -126,6 +126,7 @@ public class InsertSalePerson extends HttpServlet {
             return "/img/user/user.jpg";
         }
     }
+    
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

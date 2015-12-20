@@ -38,12 +38,7 @@
                                 <span class="shc-total" ng-show="show()">Total: <strong>{{cart.sum("total") | currency:"$":0}}</strong></span>
                             </div>
                         </li>
-                        <li class="menu-icons">
-                            <i class="menu-icons-style search search-close search-btn fa fa-search"></i>
-                            <div class="search-open">
-                                <input type="text" class="animated fadeIn form-control" placeholder="Start searching ...">
-                            </div>
-                        </li>
+                        
                     </ul>
                 </div>
                 <!-- End Header Inner Right -->
@@ -53,40 +48,27 @@
             <div class="collapse navbar-collapse navbar-responsive-collapse">
                 <div class="menu-container">
                     <ul class="nav navbar-nav">
-                        <li class="dropdown">
-                            <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">
-                                ${initMsg}
-                            </a>
-                        </li>
                         <!-- Men Shop -->
                         <li class="dropdown">
                             <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">
                                 Men
                             </a>
                             <ul class="dropdown-menu">
-                                <li class="dropdown-submenu">
-                                    <a href="javascript:void(0);">Shirt</a>
-                                    <ul class="dropdown-menu">
-                                        <li><a href="#">T-Shirt</a></li>
-                                        <li><a href="#">Shirt</a></li>
-                                    </ul>
-                                </li>
-                                <li class="dropdown-submenu">
-                                    <a href="javascript:void(0);">Pants</a>
-                                    <ul class="dropdown-menu">
-                                        <li><a href="#">Kaki</a></li>
-                                        <li><a href="#">Jeans</a></li>
-                                    </ul>
-                                </li>
-                                <li class="dropdown-submenu">
-                                    <a href="javascript:void(0);">Accessory</a>
-                                    <ul class="dropdown-menu">
-                                        <li><a href="#">Tie</a></li>
-                                        <li><a href="#">Belt</a></li>
-                                        <li><a href="#">SunGlasses</a></li>
-                                        <li><a href="#">Shoes</a></li>
-                                    </ul>
-                                </li>
+                                <c:forEach var="c" items="${listcategory}">
+                                    <li class="dropdown-submenu">
+                                        <c:if test="${c.categoryId!=3}">
+                                            <a href="javascript:void(0);">${c.name}</a>
+                                            <ul class="dropdown-menu">
+                                                <c:forEach var="sub" items="${c.subCategoryCollection}">
+                                                    <c:if test="${sub.productCollection.size()>0}">
+                                                        <c:url value="/productgrid/${sub.subCategoryId}/0" var="productgrid"/>
+                                                        <li><a href="${productgrid}">${sub.name}</a></li>
+                                                    </c:if>
+                                                </c:forEach>
+                                            </ul>
+                                        </c:if>
+                                    </li>
+                                </c:forEach>
                             </ul>
                         </li>
                         <!-- Women Shop -->
@@ -95,31 +77,22 @@
                                 Women
                             </a>
                             <ul class="dropdown-menu">
-                                <li class="dropdown-submenu">
-                                    <a href="javascript:void(0);">Shirt</a>
-                                    <ul class="dropdown-menu">
-                                        <li><a href="#">T-Shirt</a></li>
-                                        <li><a href="#">Shirt</a></li>
-                                        <li><a href="#">Dress</a></li>
-                                    </ul>
-                                </li>
-                                <li class="dropdown-submenu">
-                                    <a href="javascript:void(0);">Pants</a>
-                                    <ul class="dropdown-menu">
-                                        <li><a href="#">Kaki</a></li>
-                                        <li><a href="#">Jeans</a></li>
-                                        <li><a href="#">Skirt</a></li>
-                                    </ul>
-                                </li>
-                                <li class="dropdown-submenu">
-                                    <a href="javascript:void(0);">Accessory</a>
-                                    <ul class="dropdown-menu">
-                                        <li><a href="#">Handbag</a></li>
-                                        <li><a href="#">Belt</a></li>
-                                        <li><a href="#">SunGlasses</a></li>
-                                        <li><a href="#">Shoes</a></li>
-                                    </ul>
-                                </li>
+                                <c:forEach var="c" items="${listcategory}">
+                                    <li class="dropdown-submenu">
+                                        <a href="javascript:void(0);">${c.name}</a>
+                                        <ul class="dropdown-menu">
+                                            <c:forEach var="sub" items="${c.subCategoryCollection}">
+                                                <c:if test="${sub.subCategoryId!=10}">
+                                                    <c:if test="${sub.productCollection.size()>0}">
+                                                        <c:url value="/productgrid/${sub.subCategoryId}/1" var="productgrid"/>
+                                                        <li><a href="${productgrid}">${sub.name}</a></li>
+                                                    </c:if>
+                                                    
+                                                </c:if>
+                                            </c:forEach>
+                                        </ul>
+                                    </li>
+                                </c:forEach>
                             </ul>
                         </li>
                         <!-- Women Shop -->
@@ -130,27 +103,21 @@
                                 Kid
                             </a>
                             <ul class="dropdown-menu">
-                                <li class="dropdown-submenu">
-                                    <a href="javascript:void(0);">Shirt</a>
-                                    <ul class="dropdown-menu">
-                                        <li><a href="#">T-Shirt</a></li>
-                                        <li><a href="#">Shirt</a></li>
-                                    </ul>
-                                </li>
-                                <li class="dropdown-submenu">
-                                    <a href="javascript:void(0);">Pants</a>
-                                    <ul class="dropdown-menu">
-                                        <li><a href="#">Kaki</a></li>
-                                        <li><a href="#">Jeans</a></li>
-                                    </ul>
-                                </li>
-                                <li class="dropdown-submenu">
-                                    <a href="javascript:void(0);">Accessory</a>
-                                    <ul class="dropdown-menu">
-                                        <li><a href="#">SunGlasses</a></li>
-                                        <li><a href="#">Shoes</a></li>
-                                    </ul>
-                                </li>
+                                <c:forEach var="c" items="${listcategory}">
+                                    <li class="dropdown-submenu">
+                                        <a href="javascript:void(0);">${c.name}</a>
+                                        <ul class="dropdown-menu">
+                                            <c:forEach var="sub" items="${c.subCategoryCollection}">
+                                                <c:if test="${sub.subCategoryId!=10}">
+                                                    <c:if test="${sub.productCollection.size()>0}">
+                                                        <c:url value="/productgrid/${sub.subCategoryId}/2" var="productgrid"/>
+                                                        <li><a href="${productgrid}">${sub.name}</a></li>
+                                                    </c:if>
+                                                </c:if>
+                                            </c:forEach>
+                                        </ul>
+                                    </li>
+                                </c:forEach>
                             </ul>
                         </li>
                         <!-- End Kid Shop -->

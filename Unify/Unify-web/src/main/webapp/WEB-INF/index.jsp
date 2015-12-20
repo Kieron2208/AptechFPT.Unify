@@ -329,7 +329,8 @@
                                 <c:forEach var="img" items="${p.imageCollection}">
                                     <c:if test="${img.displayOrder==1}">
                                         <c:url value="/product/${p.productId}" var="productdetail"/>
-                                        <a href="${productdetail}"><img class="full-width img-responsive" src="${img.imagePath}" alt=""></a>
+                                        <c:url value="${img.imagePath}" var="imageLink"/>
+                                        <a href="${productdetail}"><img class="full-width img-responsive" src="${imageLink}" alt=""></a>
                                         </c:if>
                                     </c:forEach>
                                     <c:url value="/product/${p.productId}" var="productdetail"/>

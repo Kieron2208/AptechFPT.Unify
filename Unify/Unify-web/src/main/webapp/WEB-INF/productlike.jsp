@@ -1,1 +1,1 @@
-${lik}
+${lik} Like

@@ -89,8 +89,8 @@
                                                             <p>Images:
                                                                 <c:forEach var="img" items="${p.imageCollection}">
                                                                     <c:url value="/product/${p.productId}" var="productdetail"/>
-                                                                    <img class="full-width img-responsive" src="../${img.imagePath}" alt="">
-                                                                </c:forEach>
+                                                                    <img class="full-width img-responsive" height="100px" width="100px" src="<c:url value="/${img.imagePath}"/>" alt="">
+                                                                </c:forEach><br/><br/>
                                                             </p>
                                                         </div>
                                                         <div class="modal-footer">

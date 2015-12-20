@@ -4,10 +4,13 @@ import com.aptechfpt.bean.ImageFacadeLocal;
 import com.aptechfpt.bean.PriceHistoryFacadeLocal;
 import com.aptechfpt.bean.ProductFacadeLocal;
 import com.aptechfpt.bean.SubCategoryFacadeLocal;
+import com.aptechfpt.dto.AccountDTO;
 import com.aptechfpt.entity.Image;
 import com.aptechfpt.entity.PriceHistory;
 import com.aptechfpt.entity.Product;
 import com.aptechfpt.entity.SubCategory;
+import com.aptechfpt.enumtype.AccountGender;
+import com.aptechfpt.enumtype.Role;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -29,6 +32,7 @@ import org.apache.commons.fileupload.FileItemFactory;
 import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
+import org.joda.time.DateTime;
 
 public class AdminProductController extends HttpServlet {
 
@@ -92,106 +96,154 @@ public class AdminProductController extends HttpServlet {
     }
 
     public void addPro(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        String name = request.getParameter("txtName");
-        BigDecimal importPrice = new BigDecimal(request.getParameter("txtImport"));
-        BigDecimal price = new BigDecimal(request.getParameter("txtPrice"));
-        int gender = Integer.parseInt(request.getParameter("txtGender"));
-        String des = request.getParameter("txtDes");
-        int subID = Integer.parseInt(request.getParameter("txtSub"));
-        SubCategory sub = subCategoryFacade.find(subID);
-        String[] imglist = ImageGet(request);
-        boolean avai = Boolean.parseBoolean(request.getParameter("txtAvailable"));
-        Product pro = new Product();
-        pro.setName(name);
-        pro.setUnitPrice(price);
-        pro.setGender(gender);
-        pro.setDescription(des);
-        pro.setLike(0);
-        pro.setSubCategoryId(sub);
-        pro.setAvailable(avai);
-        productFacade.create(pro);
-        for (int i = 0; i < imglist.length; i++) {
-            if (i == 0) {
-                Image img = new Image();
-                img.setDisplayOrder(1);
-                img.setProductId(pro);
-                img.setImagePath(imglist[i]);
-                imageFacade.create(img);
-            } else {
-                Image img = new Image();
-                img.setDisplayOrder(0);
-                img.setProductId(pro);
-                img.setImagePath(imglist[i]);
-                imageFacade.create(img);
-            }
-//            File source = new File("C:\\Users\\thuat_000\\Desktop\\Img\\" + imglist[i]);
-//            File dest = new File("E:\\Aptech\\Sem 4\\Project\\AptechFPT.Unify-master\\Unify\\Unify-web\\src\\main\\webapp\\img\\product\\" + imglist[i]);
-//            copyFileUsingFileStreams(source, dest);
-
-        }
-        PriceHistory priceHistory = new PriceHistory();
-        priceHistory.setProductId(pro);
-        priceHistory.setCost(importPrice);
-        priceHistory.setPrice(price);
-        priceHistoryFacade.create(priceHistory);
-        viewPro(request, response);
-    }
-
-    private static void copyFileUsingFileStreams(File source, File dest)
-            throws IOException {
-        InputStream input = null;
-        OutputStream output = null;
         try {
-            input = new FileInputStream(source);
-            output = new FileOutputStream(dest);
-            byte[] buf = new byte[1024];
-            int bytesRead;
-            while ((bytesRead = input.read(buf)) > 0) {
-                output.write(buf, 0, bytesRead);
+            //boolean isMultipartContext = ServletFileUpload.isMultipartContent(request);
+            FileItemFactory factory = new DiskFileItemFactory();
+            ServletFileUpload upload = new ServletFileUpload(factory);
+            List<FileItem> fields = upload.parseRequest(request);
+            String name = null;
+            BigDecimal importPrice = null;
+            BigDecimal price = null;
+            int gender = 0;
+            String des = null;
+            int subID = 0;
+            String imglist = null;
+            boolean avai = false;
+            for (FileItem fileItem : fields) {
+                switch (fileItem.getFieldName()) {
+                    case "txtName":
+                        System.out.println("txtName: " + fileItem.getString());
+                        name = fileItem.getString();
+                        continue;
+                    case "txtImport":
+                        System.out.println("txtImport: " + fileItem.getString());
+                        importPrice = new BigDecimal(fileItem.getString());
+                        continue;
+                    case "txtPrice":
+                        System.out.println("txtPrice: " + fileItem.getString());
+                        price = new BigDecimal(fileItem.getString());
+                        continue;
+                    case "txtGender":
+                        System.out.println("txtGender: " + fileItem.getString());
+                        gender = Integer.parseInt(fileItem.getString());
+                        continue;
+                    case "txtDes":
+                        System.out.println("txtDes: " + fileItem.getString());
+                        des = fileItem.getString();
+                        continue;
+                    case "txtSub":
+                        System.out.println("txtSub: " + fileItem.getString());
+                        subID = Integer.parseInt(fileItem.getString());
+                        continue;
+                        case "txtAvailable":
+                        System.out.println("txtAvailable: " + fileItem.getString());
+                        avai = Boolean.parseBoolean(fileItem.getString());
+                        continue;
+                    case "txtImg":
+                        System.out.println("txtImg: " + fileItem.toString());
+                        imglist = ImageGet(fileItem);
+                }
             }
-        } finally {
-            input.close();
-            output.close();
-        }
-    }
-
-    public void updatePro(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        int id = Integer.parseInt(request.getParameter("txtId"));
-        String name = request.getParameter("txtName");
-        BigDecimal importPrice = new BigDecimal(request.getParameter("txtImport"));
-        BigDecimal price = new BigDecimal(request.getParameter("txtPrice"));
-        int gender = Integer.parseInt(request.getParameter("txtGender"));
-        String des = request.getParameter("txtDes");
-        int subID = Integer.parseInt(request.getParameter("txtSub"));
-        SubCategory sub = subCategoryFacade.find(subID);
-        String[] imglist = ImageGet(request);
-        boolean avai = Boolean.parseBoolean(request.getParameter("txtAvailable"));
-        Product pro = productFacade.find(id);
-        pro.setName(name);
-        pro.setUnitPrice(price);
-        pro.setGender(gender);
-        pro.setDescription(des);
-        pro.setSubCategoryId(sub);
-        pro.setAvailable(avai);
-        productFacade.edit(pro);
-        for (int i = 0; i < imglist.length; i++) {
+            SubCategory sub = subCategoryFacade.find(subID);
+            Product pro = new Product();
+            pro.setName(name);
+            pro.setUnitPrice(price);
+            pro.setGender(gender);
+            pro.setDescription(des);
+            pro.setSubCategoryId(sub);
+            pro.setAvailable(avai);
+            productFacade.create(pro);
             Image img = new Image();
-            img.setDisplayOrder(0);
+            img.setDisplayOrder(1);
             img.setProductId(pro);
-            img.setImagePath(imglist[i]);
+            img.setImagePath(imglist);
             imageFacade.create(img);
-//            File source = new File("C:\\Users\\thuat_000\\Desktop\\Img\\" + imglist[i]);
-//            File dest = new File("E:\\Aptech\\Sem 4\\Project\\AptechFPT.Unify-master\\Unify\\Unify-web\\src\\main\\webapp\\img\\product\\" + imglist[i]);
-//            copyFileUsingFileStreams(source, dest);
-        }
-        PriceHistory priceHistory = priceHistoryFacade.getNew(pro);
-        if (importPrice != priceHistory.getCost() || price != priceHistory.getPrice()) {
+            PriceHistory priceHistory = new PriceHistory();
             priceHistory.setProductId(pro);
             priceHistory.setCost(importPrice);
             priceHistory.setPrice(price);
             priceHistoryFacade.create(priceHistory);
+            response.sendRedirect(request.getContextPath() + "/administrator/viewProduct");
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            Logger.getLogger(AdminProductController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        viewPro(request, response);
+    }
+
+    public void updatePro(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        try {
+            boolean isMultipartContext = ServletFileUpload.isMultipartContent(request);
+            FileItemFactory factory = new DiskFileItemFactory();
+            ServletFileUpload upload = new ServletFileUpload(factory);
+            List<FileItem> fields = upload.parseRequest(request);
+            int id = 0;
+            String name = null;
+            BigDecimal importPrice = null;
+            BigDecimal price = null;
+            int gender = 0;
+            String des = null;
+            int subID = 0;
+            String imglist = null;
+            for (FileItem fileItem : fields) {
+                switch (fileItem.getFieldName()) {
+                    case "txtId":
+                        System.out.println("txtId: " + fileItem.getString());
+                        id = Integer.parseInt(fileItem.getString());
+                        continue;
+                    case "txtName":
+                        System.out.println("txtName: " + fileItem.getString());
+                        name = fileItem.getString();
+                        continue;
+                    case "txtImport":
+                        System.out.println("txtImport: " + fileItem.getString());
+                        importPrice = new BigDecimal(fileItem.getString());
+                        continue;
+                    case "txtPrice":
+                        System.out.println("txtPrice: " + fileItem.getString());
+                        price = new BigDecimal(fileItem.getString());
+                        continue;
+                    case "txtGender":
+                        System.out.println("txtGender: " + fileItem.getString());
+                        gender = Integer.parseInt(fileItem.getString());
+                        continue;
+                    case "txtDes":
+                        System.out.println("txtDes: " + fileItem.getString());
+                        des = fileItem.getString();
+                        continue;
+                    case "txtSub":
+                        System.out.println("txtSub: " + fileItem.getString());
+                        subID = Integer.parseInt(fileItem.getString());
+                        continue;
+                    case "txtImg":
+                        System.out.println("txtImg: " + fileItem.getString());
+                        imglist = ImageGet(fileItem);
+                }
+            }
+            SubCategory sub = subCategoryFacade.find(subID);
+            Product pro = productFacade.find(id);
+            pro.setName(name);
+            pro.setUnitPrice(price);
+            pro.setGender(gender);
+            pro.setDescription(des);
+            pro.setSubCategoryId(sub);
+            productFacade.edit(pro);
+            Image img = new Image();
+            img.setDisplayOrder(0);
+            img.setProductId(pro);
+            img.setImagePath(imglist);
+            imageFacade.create(img);
+            PriceHistory priceHistory = priceHistoryFacade.getNew(pro);
+            if (importPrice != priceHistory.getCost() || price != priceHistory.getPrice()) {
+                priceHistory.setProductId(pro);
+                priceHistory.setCost(importPrice);
+                priceHistory.setPrice(price);
+                priceHistoryFacade.create(priceHistory);
+            }
+            response.sendRedirect(request.getContextPath() + "/administrator/viewProduct");
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            Logger.getLogger(AdminProductController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     public void reAdd(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
@@ -230,37 +282,49 @@ public class AdminProductController extends HttpServlet {
         }
     }
 
-    private String[] ImageGet(HttpServletRequest request) {
-        try {
-            boolean isMultipartContext = ServletFileUpload.isMultipartContent(request);
-            FileItemFactory factory = new DiskFileItemFactory();
-            ServletFileUpload upload = new ServletFileUpload(factory);
-            List<FileItem> fields = upload.parseRequest(request);
-            if (isMultipartContext) {
-                String[] itemDir = null;
-                int count = 0;
-                for (FileItem fieldItem : fields) {
-                    if (!fieldItem.isFormField()) {
-                        String realPath = getServletContext().getRealPath("/");
-                        File uploadDir = new File(realPath + "img/product/" + fieldItem.getName());
-                        itemDir[count] = "/img/product/" + fieldItem.getName();
-                        count++;
+//    private String[] ImageGet(FileItem fields) {
+//        try {
+////            boolean isMultipartContext = ServletFileUpload.isMultipartContent(request);
+////            FileItemFactory factory = new DiskFileItemFactory();
+////            ServletFileUpload upload = new ServletFileUpload(factory);
+////            List<FileItem> fields = upload.parseRequest(request);
+////            if (isMultipartContext) {
+//                String[] itemDir = null;
+//                int count = 0;
+////                for (FileItem fieldItem : fields) {
+//                    if (!fieldItem.isFormField()) {
+//                        String realPath = getServletContext().getRealPath("/");
+//                        File uploadDir = new File(realPath + "img/product/" + fieldItem.getName());
+//                        itemDir[count] = "/img/product/" + fieldItem.getName();
+//                        count++;
+////                    File file = File.createTempFile("img", ".jpg", uploadDir);
+//                        System.out.println("file real parth: " + uploadDir.getAbsolutePath());
+//                        try {
+//                            fieldItem.write(uploadDir);
+//                        } catch (Exception ex) {
+//                            ex.printStackTrace();
+//                        }
+//                    }
+//                }
+////            }
+//        } catch (FileUploadException ex) {
+//            Logger.getLogger(AdminProductController.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//    }
+    private String ImageGet(FileItem fileItem) {
+        if (fileItem.getName() != null) {
+            String realPath = getServletContext().getRealPath("/");
+            File uploadDir = new File(realPath + "img/product/" + fileItem.getName());
 //                    File file = File.createTempFile("img", ".jpg", uploadDir);
-                        System.out.println("file real parth: " + uploadDir.getAbsolutePath());
-                        try {
-                            fieldItem.write(uploadDir);
-                        } catch (Exception ex) {
-                            ex.printStackTrace();
-                        }
-                    }
-                }
-                return itemDir;
+            try {
+                fileItem.write(uploadDir);
+            } catch (Exception ex) {
+                ex.printStackTrace();
             }
-            return null;
-        } catch (FileUploadException ex) {
-            Logger.getLogger(AdminProductController.class.getName()).log(Level.SEVERE, null, ex);
+            return "/img/product/" + fileItem.getName();
+        } else {
+            return "/img/product/img32-md.jpg";
         }
-        return null;
     }
 
     @Override

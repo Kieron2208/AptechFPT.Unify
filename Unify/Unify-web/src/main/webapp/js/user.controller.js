@@ -3,7 +3,7 @@
 
     angular.module('app', ['ui.bootstrap', 'ngFileUpload']);
 
-    angular.module('app').constant('baseContext', baseContext)
+    angular.module('app')
             .constant('toastr', toastr);
 
     angular.module('app').controller('UserController', UserController);

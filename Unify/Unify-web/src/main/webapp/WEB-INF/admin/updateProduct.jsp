@@ -4,24 +4,23 @@
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <t:adminLayout title="Shop UI - AdminPage - User Management">
     <jsp:attribute name="pagecss">
-        <link href="<c:url value="/plugins/datatables/dataTables.bootstrap.css"/>" type="text/css"  rel="stylesheet"/>
+        <!--<link href="<c:url value="/plugins/datatables/dataTables.bootstrap.css"/>" type="text/css"  rel="stylesheet"/>-->
         <link href="<c:url value="/plugins/bootstrap/css/bootstrap.min.css"/>" type="text/css"  rel="stylesheet"/>
-        <link href="<c:url value="/plugins/bootstrap/css/bootstrap-theme.min.css"/>" type="text/css"  rel="stylesheet"/>
+        <!--<link href="<c:url value="/plugins/bootstrap/css/bootstrap-theme.min.css"/>" type="text/css"  rel="stylesheet"/>-->
     </jsp:attribute>
     <jsp:attribute name="pagejs">
-        <script src="<c:url value="/plugins/datatables/jquery.dataTables.min.js"/>" type="text/javascript"></script>
+<!--        <script src="<c:url value="/plugins/datatables/jquery.dataTables.min.js"/>" type="text/javascript"></script>
         <script src="<c:url value="/plugins/ng-file-upload-bower-10.1.9/ng-file-upload.js"/>" type="text/javascript"></script>
         <script src="<c:url value="/plugins/input-mask/jquery.inputmask.js"/>" type="text/javascript"></script>
         <script src="<c:url value="/plugins/datatables/dataTables.bootstrap.min.js"/>" type="text/javascript"></script>
-        <script src="<c:url value="/plugins/slimScroll/jquery.slimscroll.min.js"/>" type="text/javascript"></script>
-        <script>
+        <script src="<c:url value="/plugins/slimScroll/jquery.slimscroll.min.js"/>" type="text/javascript"></script>-->
+<!--        <script>
             $(function () {
                 $('#example1').DataTable();
             });
-        </script>
+        </script>-->
         <script>
-            var app = angular.module('myApp', []);
-            app.controller('validateCtrl', function ($scope) {
+            angular.module('app').controller('validateCtrl', function ($scope) {
                 $scope.txtName = "${pro.name}";
                 $scope.txtImport = "${imp}";
                 $scope.txtPrice = "${pro.unitPrice}";
@@ -33,8 +32,8 @@
         <div class="row">
             <div class="col-xs-12">
                 <div class="box">
-                    <form role="form" method="POST" action="<c:url value="/AdminProduct"/>"
-                          ng-app="myApp" name="myForm" ng-controller="validateCtrl" novalidate>
+                    <form role="form" method="POST" action="<c:url value="/administrator/updateProduct/update"/>"
+                          enctype="multipart/form-data" ng-app="app" name="myForm" ng-controller="validateCtrl">
                         <div class="box-header with-border">
                             <h3 class="box-title">Update Product</h3>
                         </div>
@@ -46,7 +45,7 @@
                                        required ng-trim="true" ng-pattern="/^[0-9a-zA-Z\s]{3,20}$/"/>
                                 <span style="color: red" ng-show="myForm.txtName.$dirty && myForm.txtName.$invalid">
                                     <span ng-show="myForm.txtName.$error.required">Product name cant be blank</span>
-                                    <span ng-show="myForm.txtname.$error.pattern">The value is not a valid Name!</span>
+                                    <span ng-show="myForm.txtName.$error.pattern">The value is not a valid Name!</span>
                                 </span>
                             </div>
                             <div class="form-group">
@@ -116,22 +115,11 @@
                                 </c:forEach>
 
                             </div>
-                            <div class="checkbox">
-                                <c:if test="${pro.available==true}">
-                                    <label>
-                                        <input type="checkbox" name="txtAvailable" value="true" checked> Available
-                                    </label>
-                                </c:if>
-                                <c:if test="${pro.available==false}">
-                                    <label>
-                                        <input type="checkbox" name="txtAvailable" value="true"> Available
-                                    </label>
-                                </c:if>
-                            </div>
+                            
                         </div><!-- /.box-body -->
 
                         <div class="box-footer">
-                            <button type="submit" class="btn btn-primary" name="action" value="update"
+                            <button type="submit" class="btn btn-primary" value="update"
                                    ng-disabled="myForm.$invalid" >Update</button>
                         </div>
                     </form>
