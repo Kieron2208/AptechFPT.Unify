@@ -7,10 +7,10 @@
             <param-name>confPath</param-name>
             <param-value>/WEB-INF/urlrewrite.xml</param-value>
         </init-param>
-        <init-param>
+        <!--        <init-param>
             <param-name>confReloadCheckInterval</param-name>
             <param-value>1</param-value>
-        </init-param>
+        </init-param>-->
         <!--        <init-param>
             <param-name>logLevel</param-name>
             <param-value>DEBUG</param-value>
@@ -103,6 +103,14 @@
         <servlet-name>AdminProfileController</servlet-name>
         <servlet-class>com.aptechfpt.controller.AdminProfileController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AcountUtilController</servlet-name>
+        <servlet-class>com.aptechfpt.controller.AcountUtilController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>RegisterController</servlet-name>
+        <servlet-class>com.aptechfpt.controller.RegisterController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>HomeController</servlet-name>
         <url-pattern>/HomeController</url-pattern>
@@ -175,6 +183,14 @@
         <servlet-name>AdminProfileController</servlet-name>
         <url-pattern>/AdminProfileController</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AcountUtilController</servlet-name>
+        <url-pattern>/AcountUtilController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RegisterController</servlet-name>
+        <url-pattern>/RegisterController</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30
@@ -185,6 +201,10 @@
     </session-config>
     <error-page>
         <error-code>404</error-code>
+        <location>/ErrorHandleController</location>
+    </error-page>
+    <error-page>
+        <error-code>405</error-code>
         <location>/ErrorHandleController</location>
     </error-page>
     <error-page>

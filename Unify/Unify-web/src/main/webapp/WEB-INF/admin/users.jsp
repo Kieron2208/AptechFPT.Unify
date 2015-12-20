@@ -81,12 +81,13 @@
                                             </a>
                                             <c:if test="${pageContext.request.isUserInRole('ADMINISTRATOR')}">
                                                 <c:if test="${a.available}">
-                                                    <a class="btn btn-danger" href="#" rel="Ban this User">
+                                                    <c:url value="/administrator/user/ban/${a.accountId}" var="banLink"/>
+                                                    <a class="btn btn-danger" href="${banLink}" rel="Ban this User">
                                                         <i class="fa fa-lock icon-white"></i>
                                                     </a>
                                                 </c:if>
                                                 <c:if test="${!a.available}">
-                                                    <a class="btn btn-primary" href="#"  rel="Unban this User">
+                                                    <a class="btn btn-primary" href="${banLink}"  rel="Unban this User">
                                                         <i class="fa fa-unlock icon-white"></i>
                                                     </a>
                                                 </c:if>

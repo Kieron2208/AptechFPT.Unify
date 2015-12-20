@@ -36,15 +36,14 @@ public class profileRule extends RewriteRule {
                             return true;
                         }
                     };
-                }
-                if (uri.equals(contextPath + "/profile/orderhistory")) {
+                }if (uri.equals(contextPath + "/profile/detail")) {
                     if (log.isDebugEnabled()) {
-                        log.debug(contextPath + "/profile/orderhistory matched");
+                        log.debug(contextPath + "/profile/detail matched");
                     }
                     return new RewriteMatch() {
                         @Override
                         public boolean execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-                            request.getRequestDispatcher("/WEB-INF/profileHistory.jsp").forward(request, response);
+                            request.getRequestDispatcher("/ProfileController?action=detail").forward(request, response);
                             return true;
                         }
                     };
@@ -79,7 +78,7 @@ public class profileRule extends RewriteRule {
                 return new RewriteMatch() {
                     @Override
                     public boolean execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-                        request.getRequestDispatcher("/WEB-INF/profile.jsp").forward(request, response);
+                        request.getRequestDispatcher("/ProfileController?action=profile").forward(request, response);
                         return true;
                     }
                 };

@@ -31,7 +31,8 @@ import org.joda.time.DateTime;
  *
  * @author Kiero
  */
-public class InsertSalePerson extends HttpServlet {
+public class RegisterController extends HttpServlet {
+
     @EJB
     private AccountFacadeLocal accountFacade;
 
@@ -53,10 +54,10 @@ public class InsertSalePerson extends HttpServlet {
                         System.out.println("password: " + fileItem.getString());
                         builder.Password(fileItem.getString());
                         continue;
-                    case "image":
-                        System.out.println("image: " + fileItem.getName());
-                        builder.ImageLink(writeFile(fileItem));
-                        continue;
+//                    case "image":
+//                        System.out.println("image: " + fileItem.getName());
+//                        builder.ImageLink(writeFile(fileItem));
+//                        continue;
                     case "firstName":
                         System.out.println("firstName: " + fileItem.getString());
                         builder.FirstName(fileItem.getString());
@@ -80,11 +81,10 @@ public class InsertSalePerson extends HttpServlet {
                     case "dateOfBirth":
                         System.out.println("dateOfBirth: " + fileItem.getString());
                         builder.DateOfBirth(new DateTime(fileItem.getString()));
-                    case "role":
-                        System.out.println("role: " + fileItem.getString());
-                        builder.Role(Role.valueOf(fileItem.getString()));
                 }
             }
+            builder.ImageLink("/img/user/user.jpg");
+            builder.Role(Role.USER);
             AccountDTO dto = builder.build();
             System.out.println("Email: " + dto.getEmail());
             System.out.println("Password: " + dto.getPassword());
@@ -122,19 +122,50 @@ public class InsertSalePerson extends HttpServlet {
                 ex.printStackTrace();
             }
             return "/img/user/" + fileItem.getName();
-        }else {
+        } else {
             return "/img/user/user.jpg";
         }
     }
+
+    /**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet RegisterController</title>");
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet RegisterController at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
+        }
+    }
+
+    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+    /**
+     * Handles the HTTP <code>GET</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String action = request.getParameter("action");
-        switch (action) {
-            case "checkMail":
-                checkEmail(request, response);
-                break;
-        }
+        processRequest(request, response);
     }
 
     /**
@@ -148,12 +179,7 @@ public class InsertSalePerson extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String action = request.getParameter("action");
-        switch (action){
-            case "register":
-                Register(request,response);
-                break;
-        }
+        processRequest(request, response);
     }
 
     /**
@@ -165,14 +191,5 @@ public class InsertSalePerson extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-
-    private void checkEmail(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        String email = request.getParameter("value");
-        boolean isExisted = accountFacade.isExistedEmail(email);
-        response.setContentType("application/json");
-        PrintWriter out = response.getWriter();
-        out.print(!isExisted);
-        out.close();
-    }
 
 }

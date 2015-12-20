@@ -37,7 +37,19 @@ public class AdminUserController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-//        try {
+        String action = request.getParameter("action");
+        switch(action){
+            case "list":
+        list(request, response);
+                break;
+            case "ban":
+        ban(request, response);
+                break;
+        }
+    }
+
+    private void list(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        //        try {
 //            InitialContext context = new InitialContext();
 //            accountFacade = (AccountFacadeLocal) context.lookup("java:global/Unify-ear/Unify-ejb-1.0-SNAPSHOT/AccountFacade!com.aptechfpt.bean.AccountFacadeLocal");
 //        } catch (NamingException ex) {
@@ -75,6 +87,12 @@ public class AdminUserController extends HttpServlet {
     @Override
     public String getServletInfo() {
         return "Short description";
+    }
+
+    private void ban(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        int accountId = Integer.parseInt(request.getParameter("accountId"));
+        accountFacade.banAccount(accountId);
+        response.sendRedirect(request.getContextPath() + "/administrator/user");
     }
 
 }

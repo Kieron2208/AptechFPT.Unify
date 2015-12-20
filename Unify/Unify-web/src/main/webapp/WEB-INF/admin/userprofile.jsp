@@ -48,15 +48,15 @@
         <script src="<c:url value="/plugins/angular-bootstrap/ui-bootstrap-tpls.min.js"/>" type="text/javascript"></script>
         <script src="<c:url value="/js/user.controller.js"/>" type="text/javascript"></script>
         <script>
-            (function ($) {
-                'use strict';
-                $(document).ready(function () {
+                    (function ($) {
+                    'use strict';
+                            $(document).ready(function () {
                     $('input[type="radio"]').iCheck({
-                        radioClass: 'iradio_square'
+                    radioClass: 'iradio_square'
                     });
-                    $('ul#tabs').tab();
-                });
-            })(jQuery);</script>
+                            $('ul#tabs').tab();
+                    });
+                    })(jQuery);</script>
         </jsp:attribute>
         <jsp:body>
         <div class="row" ng-app="app">
@@ -165,7 +165,7 @@
                                                    placeholder="Enter your first Name"
                                                    ng-model="vm.entity.firstName"/>
                                             <span style="color:red" ng-show="vm.userForm.txtFirstName.$invalid
-                                                        && vm.userForm.txtFirstName.$dirty">
+                                                                        && vm.userForm.txtFirstName.$dirty">
                                                 <span ng-show="vm.userForm.txtFirstName.$error.required">First Name is required.</span><br/>
                                                 <span ng-show="vm.userForm.txtFirstName.$error.pattern">Name should only contain alphabet.</span><br/>
                                                 <span ng-show="vm.userForm.txtFirstName.$error.minlength">First Name is too short.</span><br/>
@@ -183,7 +183,7 @@
                                                    placeholder="Enter your last Name"
                                                    ng-model="vm.entity.lastName"/>
                                             <span style="color:red" ng-show="vm.userForm.txtLastName.$invalid
-                                                        && vm.userForm.txtLastName.$dirty">
+                                                                        && vm.userForm.txtLastName.$dirty">
                                                 <span ng-show="vm.userForm.txtLastName.$error.required">Last Name is required.</span><br/>
                                                 <span ng-show="vm.userForm.txtLastName.$error.pattern">Last Name should only contain alphabet.</span><br/>
                                                 <span ng-show="vm.userForm.txtLastName.$error.minlength">Last Name is too short.</span><br/>
@@ -204,7 +204,6 @@
                                                    type="text"
                                                    readonly
                                                    date-disabled="vm.disabled(date, mode)"
-                                                   max-date="vm.maxdate"
                                                    uib-datepicker-popup="dd-MMMM-yyyy"
                                                    is-open="vm.dateStatus"
                                                    ng-model="vm.entity.dateOfBirth"
@@ -229,7 +228,7 @@
                                                    ng-model="vm.entity.phone"/>
                                         </div>
                                         <span style="color:red" ng-show="vm.userForm.txtPhone.$invalid
-                                                    && vm.userForm.txtPhone.$dirty">
+                                                                    && vm.userForm.txtPhone.$dirty">
                                             <span ng-show="vm.userForm.txtPhone.$error.required">Phone Number need to be provided</span><br/>
                                             <span ng-show="vm.userForm.txtPhone.$error.pattern">Doesn't look like Phone number.</span><br/>
                                             <span ng-show="vm.userForm.txtPhone.$error.minlength">Phone Number too short</span><br/>
@@ -245,14 +244,14 @@
                                             <input class="form-control" 
                                                    type="text" 
                                                    name="txtAddress"
-                                                   ng-pattern="/^[\w\s]+$/"
+                                                   ng-pattern="/^[\w\s\.]+$/"
                                                    ng-minlength="10"
                                                    ng-maxlength="200"
                                                    placeholder="Input your phone address"
                                                    ng-model="vm.entity.address"/>
                                         </div>
                                         <span style="color:red" ng-show="vm.userForm.txtAddress.$invalid
-                                                    && vm.userForm.txtAddress.$dirty">
+                                                                    && vm.userForm.txtAddress.$dirty">
                                             <span ng-show="vm.userForm.txtAddress.$error.required">Address need to be provided</span><br/>
                                             <span ng-show="vm.userForm.txtAddress.$error.pattern">Only alphabet and number are allow.</span><br/>
                                             <span ng-show="vm.userForm.txtAddress.$error.minlength">Address are too short</span><br/>
@@ -271,16 +270,16 @@
                                         </label>
                                     </div>
                                 </div>
-                                <div class="form-group">
-                                    <label for="RoleSelect" class="col-sm-2 control-label"> Role: </label>
-                                    <div class="col-sm-10">
-                                        <select class="form-control" name="RoleSelect" ng-model="vm.entity.role">
-                                            <option value="ADMINISTRATOR">ADMINISTRATOR</option>
-                                            <option value="SALEPERSON">SALE PERSON</option>
-                                            <option value="USER">USER</option>
-                                        </select>
-                                    </div>
-                                </div>
+                                <!--                                <div class="form-group">
+                                                                    <label for="RoleSelect" class="col-sm-2 control-label"> Role: </label>
+                                                                    <div class="col-sm-10">
+                                                                        <select class="form-control" name="RoleSelect" ng-model="vm.entity.role">
+                                                                            <option value="ADMINISTRATOR">ADMINISTRATOR</option>
+                                                                            <option value="SALEPERSON">SALE PERSON</option>
+                                                                            <option value="USER">USER</option>
+                                                                        </select>
+                                                                    </div>
+                                                                </div>-->
                                 <div class="form-group">
                                     <div class=" col-sm-2"></div>
                                     <div class="col-sm-10">
@@ -290,7 +289,7 @@
                             </form>
                         </div><!-- /.tab-pane -->
                         <div class="active tab-pane" id="password" ng-controller="PasswordController as vm">
-                            <form class="form-horizontal">
+                            <form class="form-horizontal" name="vm.userForm" novalidate>
                                 <div class="form-group">
                                     <label for="email" class="col-sm-2 control-label">Email</label>
                                     <div class="col-sm-10">
@@ -300,19 +299,81 @@
                                 <div class="form-group">
                                     <label for="inputEmail" class="col-sm-2 control-label">Old Password:</label>
                                     <div class="col-sm-10">
-                                        <input type="password" class="form-control" id="inputEmail" placeholder="Enter your Old Password ...">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="fa fa-key"></i></span>
+                                            <input type="password"
+                                                   name="txtOldPassword"
+                                                   ng-pattern="/^[A-Za-z0-9]+$/"
+                                                   ng-minlength="6"
+                                                   ng-maxlength="20"
+                                                   required
+                                                   ng-model="vm.oldpassword" 
+                                                   oldpassword 
+                                                   class="form-control"
+                                                   id="inputEmail"
+                                                   placeholder="Enter your Old Password ...">
+                                        </div>
+                                        <div ng-if="vm.userForm.txtOldPassword.$pending">Checking password ...</div>
+                                        <span style="color:red" ng-show="vm.userForm.txtOldPassword.$invalid && vm.userForm.txtOldPassword.$dirty">
+                                            <span ng-show="vm.userForm.txtOldPassword.$error.oldpassword">This is not your password.</span>
+                                            <span ng-show="vm.userForm.txtOldPassword.$error.required">Password needs to provide.</span>
+                                            <span ng-show="vm.userForm.txtOldPassword.$error.pattern">Number and Word Only</span>
+                                            <span ng-show="vm.userForm.txtOldPassword.$error.minlength">Password is too short. Need more than 6 characters.</span>
+                                            <span ng-show="vm.userForm.txtOldPassword.$error.maxlength">Password is too long. Need less than 20 characters.</span>
+                                        </span>
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="inputPassword" class="col-sm-2 control-label">New Password:</label>
+                                    <label for="txtPassword" class="col-sm-2 control-label">New Password:</label>
                                     <div class="col-sm-10">
-                                        <input type="password" class="form-control" id="inputPassword" placeholder="Enter your New Password ..." >
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="fa fa-key"></i></span>
+                                            <input id="txtPassword" 
+                                                   type="password" 
+                                                   class="form-control" 
+                                                   name="txtPassword" 
+                                                   ng-pattern="/^[A-Za-z0-9]+$/"
+                                                   ng-minlength="6"
+                                                   ng-maxlength="20"
+                                                   required
+                                                   newpassword
+                                                   ng-model="vm.password"
+                                                   placeholder="Enter Your Password"/>
+                                        </div>
+                                        <div ng-if="vm.userForm.txtPassword.$pending">Checking password ...</div>
+                                        <span style="color:red" ng-show="vm.userForm.txtPassword.$invalid && vm.userForm.txtPassword.$dirty">
+                                            <span ng-show="vm.userForm.txtPassword.$error.newpassword">New Password must no match to the old one.</span>
+                                            <span ng-show="vm.userForm.txtPassword.$error.required">Password needs to provide.</span>
+                                            <span ng-show="vm.userForm.txtPassword.$error.pattern">Number and Word Only</span>
+                                            <span ng-show="vm.userForm.txtPassword.$error.minlength">Password is too short. Need more than 6 characters.</span>
+                                            <span ng-show="vm.userForm.txtPassword.$error.maxlength">Password is too long. Need less than 20 characters.</span>
+                                        </span>
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="inputConfirmPassword" class="col-sm-2 control-label">Confirm New Password:</label>
+                                    <label for="txtConfirmPassword" class="col-sm-2 control-label">Password Confirm: </label>
                                     <div class="col-sm-10">
-                                        <input type="password" class="form-control" id="inputConfirmPassword" placeholder="Confrim your new password ..." >
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="fa fa-key"></i></span>
+                                            <input id="txtConfirmPassword" 
+                                                   type="password" 
+                                                   class="form-control" 
+                                                   name="txtConfirmPassword" 
+                                                   ng-model="vm.confirmpassword"
+                                                   compare-to="vm.password"
+                                                   ng-pattern="/^[A-Za-z0-9]+$/"
+                                                   ng-minlength="6"
+                                                   ng-maxlength="20"
+                                                   required
+                                                   placeholder="Re-Enter your password"/>
+                                        </div>
+                                        <span style="color:red" ng-show="vm.userForm.txtConfirmPassword.$invalid && vm.userForm.txtConfirmPassword.$dirty">
+                                            <span ng-show="vm.userForm.txtConfirmPassword.$error.required">Password needs to provide.</span><br/>
+                                            <span ng-show="vm.userForm.txtConfirmPassword.$error.pattern">Number and Word Only</span><br/>
+                                            <span ng-show="vm.userForm.txtConfirmPassword.$error.minlength">Password is too short. Need more than 6 characters.</span><br/>
+                                            <span ng-show="vm.userForm.txtConfirmPassword.$error.maxlength">Password is too long. Need less than 20 characters.</span><br/>
+                                            <span ng-show="vm.userForm.txtConfirmPassword.$error.compareTo">Confirm password doesn't math with previous.</span>
+                                        </span>
                                     </div>
                                 </div>
                                 <div class="form-group">

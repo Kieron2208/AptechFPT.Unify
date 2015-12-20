@@ -27,7 +27,7 @@ public class AccountDTO {
     private DateTime createdDate;
     private boolean isAvaliable;
     private Set<Role> roles;
-    
+
     private AccountDTO(int accountId,
             String email,
             String password,
@@ -76,7 +76,7 @@ public class AccountDTO {
         this.isAvaliable = builder.avalaible;
         this.createdDate = builder.createdDate;
         this.roles = builder.roles;
-        
+
     }
 
     public static AccountDTO fromAccount(Account account) {
@@ -151,7 +151,20 @@ public class AccountDTO {
         }
 
         public Builder Role(Role role) {
-            this.roles.add(role);
+            switch (role) {
+                case ADMINISTRATOR:
+                    this.roles.add(Role.ADMINISTRATOR);
+                    this.roles.add(Role.SALEPERSON);
+                    this.roles.add(Role.USER);
+                    break;
+                case SALEPERSON:
+                    this.roles.add(Role.SALEPERSON);
+                    this.roles.add(Role.USER);
+                    break;
+                case USER:
+                    this.roles.add(Role.USER);
+                    break;
+            }
             return this;
         }
 
@@ -189,7 +202,7 @@ public class AccountDTO {
             this.avalaible = avalaible;
             return this;
         }
-        
+
         public Builder CreatedDate(DateTime createdDate) {
             this.createdDate = createdDate;
             return this;

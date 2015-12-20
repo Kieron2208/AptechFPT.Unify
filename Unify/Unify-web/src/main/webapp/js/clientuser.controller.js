@@ -1,12 +1,12 @@
 (function () {
     'use strict';
 
-    angular.module('app', ['ui.bootstrap', 'ngFileUpload']);
+//    angular.module('myApp', ['ui.bootstrap', 'ngFileUpload']);
 
-    angular.module('app').constant('baseContext', baseContext)
+    angular.module('myApp').constant('baseContext', baseContext)
             .constant('toastr', toastr);
 
-    angular.module('app').controller('UserController', UserController);
+    angular.module('myApp').controller('UserController', UserController);
 
     UserController.$inject = ['$q', 'Upload', 'logger'];
 
@@ -22,8 +22,7 @@
             phone: '',
             gender: 'Male',
             address: '',
-            dateOfBirth: '',
-            role: 'SALEPERSON'
+            dateOfBirth: ''
         };
         vm.dateStatus = false;
         vm.openPopup = openPopup;
@@ -93,7 +92,7 @@
         }
     }
 
-    angular.module('app').controller('ProfileController', ProfileController);
+    angular.module('myApp').controller('ProfileController', ProfileController);
 
     ProfileController.$inject = ['$q', '$http', 'Upload', 'logger'];
 
@@ -106,12 +105,10 @@
             passwordConfirm: '',
             firstName: '',
             lastName: '',
-            avatar: null,
             phone: '',
             gender: 'Male',
             address: '',
-            dateOfBirth: '',
-            role: 'SALEPERSON'
+            dateOfBirth: ''
         };
         vm.dateStatus = false;
         vm.openPopup = openPopup;
@@ -171,14 +168,12 @@
                         id: vm.entity.id,
                         email: vm.entity.email,
                         password: vm.entity.password,
-                        image: vm.entity.avatar || vm.entity.imgLink,
                         firstName: vm.entity.firstName,
                         lastName: vm.entity.lastName,
                         phone: vm.entity.phone,
                         address: vm.entity.address,
                         gender: vm.entity.gender,
-                        dateOfBirth: vm.entity.dateOfBirth,
-                        role: vm.entity.role
+                        dateOfBirth: vm.entity.dateOfBirth
                     }
                 }).then(function (resp) {
                     logger.success("Update Successful.", resp);
@@ -191,7 +186,7 @@
         }
     }
 
-    angular.module('app').controller('PasswordController', PasswordController);
+    angular.module('myApp').controller('PasswordController', PasswordController);
 
     PasswordController.$inject = ['$q', '$http', 'logger'];
 
@@ -214,7 +209,7 @@
                     method: 'POST',
                     url: baseContext + 'administrator/user/profile/password',
                     data: $.param({newPassword: vm.password}),
-                    headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+                    headers: {'Content-Type': 'myApplication/x-www-form-urlencoded'}
                 }).then(function (resp) {
                     logger.success("Insert Successful.", resp);
                 }, function (resp) {
@@ -226,7 +221,7 @@
         }
     }
 
-    angular.module('app')
+    angular.module('myApp')
             .directive('username', username);
 
     username.$inject = ['$compile', '$http', '$q'];
@@ -246,13 +241,6 @@
 //            setupDom(element, ngForm, scope);
         }
 
-        function setupDom(input, form, scope) {
-            var inputName = input.attr('name');
-            var formName = form.$name;
-            var pending = '<div ng-if="' + formName + '.' + inputName + '.$pending">Checking email ...</div>';
-            input.parent().append($compile(pending)(scope));
-        }
-
         function asyncEmailValidator(value) {
             return $http.get(baseContext + 'accountutil/checkemail/' + encodeURI(value))
                     .then(success);
@@ -267,7 +255,7 @@
         }
     }
 
-    angular.module('app')
+    angular.module('myApp')
             .directive('newpassword', newpassword);
 
     newpassword.$inject = ['$compile', '$http', '$q'];
@@ -287,13 +275,6 @@
 //            setupDom(element, ngForm, scope);
         }
 
-        function setupDom(input, form, scope) {
-            var inputName = input.attr('name');
-            var formName = form.$name;
-            var pending = '<div ng-if="' + formName + '.' + inputName + '.$pending">Checking email ...</div>';
-            input.parent().append($compile(pending)(scope));
-        }
-
         function asyncNewPasswordValidator(value) {
             return $http.get(baseContext + 'accountutil/checknewpassword/' + encodeURI(value))
                     .then(success);
@@ -308,7 +289,7 @@
         }
     }
 
-    angular.module('app')
+    angular.module('myApp')
             .directive('oldpassword', oldpassword);
 
     oldpassword.$inject = ['$compile', '$http', '$q'];
@@ -326,13 +307,6 @@
             var ngForm = controllers[1];
             ngModel.$asyncValidators.oldpassword = asyncOldPasswordValidator;
 //            setupDom(element, ngForm, scope);
-        }
-
-        function setupDom(input, form, scope) {
-            var inputName = input.attr('name');
-            var formName = form.$name;
-            var pending = '<div ng-if="' + formName + '.' + inputName + '.$pending">Checking password ...</div>';
-            input.parent().append($compile(pending)(scope));
         }
 
         function asyncOldPasswordValidator(value) {
@@ -365,7 +339,7 @@
         };
     };
 
-    angular.module('app').directive("emailLength", emailLength);
+    angular.module('myApp').directive("emailLength", emailLength);
 
     var compareTo = function () {
         return {
@@ -386,9 +360,9 @@
         };
     };
 
-    angular.module('app').directive("compareTo", compareTo);
+    angular.module('myApp').directive("compareTo", compareTo);
 
-    angular.module('app').config(toastrConfig);
+    angular.module('myApp').config(toastrConfig);
 
     toastrConfig.$inject = ['toastr'];
     /* @ngInject */
@@ -398,7 +372,7 @@
     }
 
     angular
-            .module('app')
+            .module('myApp')
             .factory('logger', loggerService);
 
     loggerService.$inject = ['$log', 'toastr'];

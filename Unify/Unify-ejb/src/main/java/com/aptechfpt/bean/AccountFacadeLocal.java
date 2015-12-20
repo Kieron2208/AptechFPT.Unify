@@ -31,6 +31,12 @@ public interface AccountFacadeLocal {
 
     boolean isExistedEmail(String email);
 
-    boolean checkPassword(int accountId, String password);
+    boolean comparePassword(int accountId, String password);
+
+    void updateProfile(Account a);
+
+    boolean banAccount(int accountId);
+
+    void editPassword(int accountId, String password);
     
 }

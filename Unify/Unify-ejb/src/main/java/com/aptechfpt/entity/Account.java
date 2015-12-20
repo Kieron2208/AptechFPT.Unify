@@ -35,23 +35,20 @@ public class Account implements Serializable {
     @Column(name = "AccountId", nullable = false)
     private Integer accountId;
 
-    @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="Invalid email format.")//if the field contains email address consider using this annotation to enforce field validation
-    @NotNull(message = "Email cannot null.")
+//    @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="Invalid email format.")//if the field contains email address consider using this annotation to enforce field validation
+//    @NotNull(message = "Email cannot null.")
     @Size(min = 1, max = 100, message = "Email length must between 1 to 100 characters")
     @Column(name = "Email", unique = true, nullable = false, length = 100)
     private String email;
 
-    @NotNull
     @Size(min = 1, max = 128)
     @Column(name = "Password", nullable = false, length = 128)
     private String password;
 
-    @NotNull
     @Size(min = 1, max = 400)
     @Column(name = "ImageLink", nullable = false, length = 400)
     private String imageLink = "/img/user/user.jpg";
 
-    @Pattern(regexp = "")
     @NotNull
     @Size(min = 1, max = 50)
     @Column(name = "FirstName", nullable = false, length = 50)
@@ -83,21 +80,21 @@ public class Account implements Serializable {
     @Convert(converter = JodaDateTimeConverter.class)
     @Column(name = "DayOfBirth", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
-    private DateTime dayOfBirth;
+    private DateTime dayOfBirth = new DateTime();
 
     @Basic(optional = false)
     @Convert(converter = JodaDateTimeConverter.class)
     @Column(name = "CreatedDate", insertable = false, updatable = false)
     @Temporal(TemporalType.TIMESTAMP)
-    private DateTime createdDate;
+    private DateTime createdDate = new DateTime();
 
     @Basic(optional = false)
-    @Column(name = "isAvailable")
+    @Column(name = "isAvailable",insertable = false)
     private boolean available;
 
     @ElementCollection(targetClass = Role.class)
     @CollectionTable(name = "AccountRole",
-            joinColumns = @JoinColumn(name = "Email", nullable = false ,referencedColumnName = "Email"),
+            joinColumns = @JoinColumn(name = "Email", nullable = false ,referencedColumnName = "Email", foreignKey = @ForeignKey(ConstraintMode.CONSTRAINT)),
             uniqueConstraints = @UniqueConstraint(columnNames = {"Email", "Role"}))
     @Enumerated(EnumType.STRING)
     @Column(name = "Role", length = 20, nullable = false)
@@ -118,8 +115,8 @@ public class Account implements Serializable {
     public Account(AccountDTO dto) {
         this.accountId = dto.getAccountId() != 0 ? dto.getAccountId() : null;
         this.email = dto.getEmail();
-        this.password = DigestUtils.sha512Hex(dto.getPassword());
-        this.imageLink = dto.getImageLink();
+        this.password = dto.getPassword() != null? DigestUtils.sha512Hex(dto.getPassword()):null;
+        this.imageLink = dto.getImageLink() != null?dto.getImageLink() : "/img/user/user.jpg";
         this.firstName = dto.getFirstName();
         this.lastName = dto.getLastName();
         this.address = dto.getAddress();
@@ -128,6 +125,58 @@ public class Account implements Serializable {
         this.dayOfBirth = dto.getDateOfBirth();
         this.available = dto.isAvaliable();
         this.roles = dto.getRoles();
+    }
+
+    public void setAccountId(Integer accountId) {
+        this.accountId = accountId;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void setImageLink(String imageLink) {
+        this.imageLink = imageLink;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public void setGender(AccountGender gender) {
+        this.gender = gender;
+    }
+
+    public void setDayOfBirth(DateTime dayOfBirth) {
+        this.dayOfBirth = dayOfBirth;
+    }
+
+    public void setCreatedDate(DateTime createdDate) {
+        this.createdDate = createdDate;
+    }
+
+    public void setAvailable(boolean available) {
+        this.available = available;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
     }
 
     public Integer getAccountId() {

@@ -1,8 +1,11 @@
 package com.aptechfpt.bean;
 
 import com.aptechfpt.entity.Account;
+import com.aptechfpt.enumtype.AccountGender;
+import com.aptechfpt.enumtype.Role;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
@@ -10,7 +13,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import org.apache.commons.codec.digest.DigestUtils;
-import org.eclipse.persistence.jpa.JpaQuery;
+import org.joda.time.format.DateTimeFormat;
 
 /**
  *
@@ -78,13 +81,13 @@ public class AccountFacade extends AbstractFacade<Account> implements AccountFac
     }
 
     @Override
-    public boolean checkPassword(int accountId, String password) {
+    public boolean comparePassword(int accountId, String password) {
         try {
             if (password != null) {
-                Query q = em.createQuery("SELECT a.password FROM Account a WHERE a.accountId = :accountId");
+                TypedQuery<Account> q = em.createQuery("SELECT a FROM Account a WHERE a.accountId = :accountId", Account.class);
                 q.setParameter("accountId", accountId);
-                String dbpass = (String) q.getSingleResult();
-                return dbpass.equals(DigestUtils.sha512Hex(password));
+                Account a = q.getSingleResult();
+                return a.getPassword().equals(DigestUtils.sha512Hex(password));
             } else {
                 return false;
             }
@@ -93,4 +96,102 @@ public class AccountFacade extends AbstractFacade<Account> implements AccountFac
         }
     }
 
+    @Override
+    public void updateProfile(Account a) {
+//        String sql = getRoleQuery(a);
+//        System.out.println("Query 2: " + sql);
+//        Account update = this.findById(a.getAccountId());
+        Query q = em.createNativeQuery("UPDATE Account SET "
+                + "ImageLink = ?1,"
+                + "FirstName = ?2,"
+                + "LastName = ?3,"
+                + "Phone = ?4,"
+                + "Address = ?5,"
+                + "Gender = ?6,"
+                + "DayOfBirth = ?7"
+                + " WHERE AccountId = ?8 ");
+        q.setParameter(1, a.getImageLink());
+        q.setParameter(2, a.getFirstName());
+        q.setParameter(3, a.getLastName());
+        q.setParameter(4, a.getPhone());
+        q.setParameter(5, a.getAddress());
+        q.setParameter(6, convertGender(a.getGender()));
+        q.setParameter(7, a.getDayOfBirth().toString(DateTimeFormat.forPattern("yyyy-MM-dd'T'HH:mm:ss'Z")));
+        q.setParameter(8, a.getAccountId());
+        q.executeUpdate();
+//        if (sql != null) {
+//            System.out.println("Prepare update: " + sql);
+//            Query q2 = em.createNativeQuery(sql);
+//            q2.executeUpdate();
+//        }
+    }
+
+    private String convertGender(AccountGender a) {
+        switch (a) {
+            case Male:
+                return "M";
+            case Female:
+                return "F";
+            default:
+                return null;
+        }
+    }
+
+    private String getRoleQuery(Account a) {
+        Set<Role> roles = this.find(a.getAccountId()).getRoles();
+        long diff = roles.size() - a.getRoles().size();
+        String insertadmin = "INSERT INTO AccountRole (Email,Role) VALUES('" + a.getEmail() + "','" + Role.ADMINISTRATOR.name() + "')";
+        String insertsaleperson = "INSERT INTO AccountRole (Email,Role) VALUES('" + a.getEmail() + "','" + Role.SALEPERSON.name() + "')";
+        String deleteadmin = "  DELETE FROM [Unify].[dbo].[AccountRole] WHERE ( Email = '" + a.getEmail() + "' AND Role = '" + Role.ADMINISTRATOR.name() + "')";
+        String deletesaleperson = "  DELETE FROM [Unify].[dbo].[AccountRole] WHERE ( Email = '" + a.getEmail() + "' AND Role = '" + Role.SALEPERSON.name() + "')";
+        if (diff > 0) {
+            boolean isAdmin = false;
+            for (Role role : roles) {
+                if (role == Role.ADMINISTRATOR) {
+                    isAdmin = true;
+                }
+            }
+            if (diff == 1 && isAdmin) {
+                return deleteadmin;
+            } else if (diff == 1 && !isAdmin) {
+                return deletesaleperson;
+            } else if (diff == 2) {
+                return deleteadmin + " " + deletesaleperson;
+            }
+        } else if (diff < 0) {
+            boolean isAdmin = false;
+            for (Role role :  a.getRoles()) {
+                if (role == Role.ADMINISTRATOR) {
+                    isAdmin = true;
+                }
+            }
+            if (diff == -1 && isAdmin) {
+                return insertadmin;
+            } else if (diff == -1 && !isAdmin) {
+                return insertsaleperson;
+            } else if (diff == -2) {
+                return insertadmin + " " + insertsaleperson;
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public boolean banAccount(int accountId) {
+        Account a = this.findById(accountId);
+        Query q = em.createQuery("UPDATE Account a SET a.available = :available WHERE a.accountId = :accountId");
+        q.setParameter("available", !a.isAvailable());
+        q.setParameter("accountId", a.getAccountId());
+        q.executeUpdate();
+        return !a.isAvailable();
+    }
+
+    @Override
+    public void editPassword(int accountId, String password) {
+        TypedQuery<Account> q = em.createQuery("UPDATE Account a SET a.password = :password WHERE a.accountId = :accountId",Account.class);
+        q.setParameter("password", DigestUtils.sha512Hex(password));
+        q.setParameter("accountId", accountId);
+        q.executeUpdate();
+    }
+    
 }

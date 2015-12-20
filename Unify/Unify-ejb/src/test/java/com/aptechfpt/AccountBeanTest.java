@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.aptechfpt;
 
 import com.aptechfpt.bean.AccountFacadeLocal;
@@ -40,9 +35,8 @@ public class AccountBeanTest {
 
 //    @EJB
 //    private AccountFacadeLocal accountFacadeLocal;
-    @Rule
-    public ExpectedException thrown = ExpectedException.none();
-
+//    @Rule
+//    public ExpectedException thrown = ExpectedException.none();
     @Deployment
     public static Archive<?> deploy() {
         File[] libraries = Maven.resolver().loadPomFromFile("pom.xml")
@@ -111,13 +105,23 @@ public class AccountBeanTest {
     }
 
     @Test
-    public void hello() {
-        thrown.expect(ConstraintViolationException.class);
-        Account a = new AccountDTO.Builder("kieron2208@gmail.com")
+    public void Check_Existed_Password() throws Exception {
+        boolean expected1 = accountFacadeLocal.comparePassword(1, "123456");
+        boolean expected2 = accountFacadeLocal.comparePassword(1, "12345");
+        boolean expected3 = accountFacadeLocal.comparePassword(1, null);
+        assertThat(expected1).isTrue();
+        assertThat(expected2).isFalse();
+        assertThat(expected3).isFalse();
+    }
+
+    @Test
+    public void add_New_User() {
+        Account a = new AccountDTO.Builder("Christopher2208@gmail.com")
                 .Password("123456")
-                .FirstName(null)
-                .LastName(null)
+                .FirstName("Christopher")
+                .LastName("Collins")
                 .Phone("0907701007")
+                .ImageLink("/img/user/img1.jpg")
                 .Address("123 Le Duong. Quan 1. TP HCM")
                 .DateOfBirth(new DateTime("1992-08-22"))
                 .Gender(AccountGender.Male)
@@ -125,6 +129,81 @@ public class AccountBeanTest {
                 .build()
                 .toAccount();
 
+        accountFacadeLocal.create(a);
+        Account expect = accountFacadeLocal.findByEmail(a.getEmail());
+        assertThat(expect).isNotNull();
+    }
+
+    @Test
+    public void Should_Ban_Account() {
+        
+        boolean sut = accountFacadeLocal.banAccount(101);
+        Account expect = accountFacadeLocal.findById(101);
+        assertThat(expect.isAvailable()).isEqualTo(sut);
+    }
+    
+    @Test
+    public void should_edit_password() {
+        
+        accountFacadeLocal.editPassword(101,"1234567");
+        Account expect = accountFacadeLocal.findById(101);
+        assertThat(expect.getPassword()).isEqualTo(DigestUtils.sha512Hex("1234567"));
+    }
+    
+    @Test
+    public void addnewSalePerson() {
+        Account a = new AccountDTO.Builder("Christopher22-08-1992@gmail.com")
+                .Password("123456")
+                .FirstName("Christopher")
+                .LastName("Collins")
+                .Phone("0907701007")
+//                .ImageLink("/img/user/img1.jpg")
+                .Address("123 Le Duong. Quan 1. TP HCM")
+                .DateOfBirth(new DateTime("1992-08-22"))
+                .Gender(AccountGender.Male)
+                .Role(Role.SALEPERSON)
+                .build()
+                .toAccount();
+
+        accountFacadeLocal.create(a);
+        Account expect = accountFacadeLocal.findByEmail(a.getEmail());
+        assertThat(expect).isNotNull();
+    }
+
+    @Test
+    public void edit() {
+        Account a = new AccountDTO.Builder(101, "Christopher2208@gmail.com")
+                //                .Password("123456")
+                .FirstName("Christopher")
+                .LastName("Collins")
+                .Phone("0907701007")
+                .ImageLink("/img/user/img3.jpg")
+                .Address("123 Long Duong. Quan 1. TP HCM")
+                .DateOfBirth(new DateTime("1980-08-22"))
+                .Gender(AccountGender.Male)
+                .Role(Role.SALEPERSON)
+                .build()
+                .toAccount();
+        for (Role role : a.getRoles()) {
+            System.out.println("Roles " + role.name());
+
+        }
+        accountFacadeLocal.updateProfile(a);
+        Account expect = accountFacadeLocal.findByEmail(a.getEmail());
+        boolean expectPassword = accountFacadeLocal.comparePassword(a.getAccountId(), "123456");
+        assertThat(expect).isNotNull();
+        assertThat(expectPassword).isTrue();
+        assertThat(expect.getFirstName()).isEqualTo(a.getFirstName());
+        assertThat(expect.getLastName()).isEqualTo(a.getLastName());
+        assertThat(expect.getImageLink()).isEqualTo(a.getImageLink());
+        assertThat(expect.getAddress()).isEqualTo(a.getAddress());
+        assertThat(expect.getGender()).isEqualTo(a.getGender());
+        assertThat(expect.getPhone()).isEqualTo(a.getPhone());
+        assertThat(expect.getDayOfBirth()).isEqualTo(a.getDayOfBirth());
+        assertThat(expect.getRoles()).isEqualTo(a.getRoles());
+        assertThat(expect.getRoles()).doesNotContain(Role.ADMINISTRATOR);
+        assertThat(expect.getRoles()).contains(Role.SALEPERSON);
+        assertThat(expect.getRoles()).contains(Role.USER);
     }
 
     private void assertAccountListNotNull(List<Account> list) {

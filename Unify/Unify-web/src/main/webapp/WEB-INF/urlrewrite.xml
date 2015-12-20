@@ -31,6 +31,27 @@
     </rule>
     
     <rule>
+        <name>check Email</name>
+        <condition type="method">Get</condition>
+        <from>^/accountutil/checkemail/(.*)$</from>
+        <to last="true">/AcountUtilController?action=checkemail&amp;value=$1</to>
+    </rule>
+    
+    <rule>
+        <name>check same Password</name>
+        <condition type="method">Get</condition>
+        <from>^/accountutil/checkoldpassword/(.*)$</from>
+        <to last="true">/AcountUtilController?action=checkoldpassword&amp;value=$1</to>
+    </rule>
+    
+    <rule>
+        <name>check New Password</name>
+        <condition type="method">Get</condition>
+        <from>^/accountutil/checknewpassword/(.*)$</from>
+        <to last="true">/AcountUtilController?action=checknewpassword&amp;value=$1</to>
+    </rule>
+    
+    <rule>
         <name>User Logout</name>
         <condition type="method">GET</condition>
         <from>^/logout$</from>
@@ -44,8 +65,29 @@
         <to>/WEB-INF/register.jsp</to>
     </rule>
 
+    <rule>
+        <name>to Register Page</name>
+        <condition type="method">POST</condition>
+        <from>^/register$</from>
+        <to>/RegisterController</to>
+    </rule>
+
     <class-rule class="com.aptechfpt.filter.profileRule"/>
 
+    <rule>
+        <name>User password Profile</name>
+        <condition type="method">POST</condition>
+        <from>^/profile/password$</from>
+        <to last="true">/ProfileController?action=password</to>
+    </rule>
+    
+    <rule>
+        <name>User Update Profile</name>
+        <condition type="method">POST</condition>
+        <from>^/profile$</from>
+        <to last="true">/ProfileController?action=profile</to>
+    </rule>
+    
     <rule>
         <name>Profile Page</name>
         <condition type="method">GET</condition>
@@ -115,14 +157,28 @@
         <name>Admin User Management</name>
         <condition type="method">GET</condition>
         <from>^/administrator/user$</from>
-        <to>/AdminUserController</to>
+        <to>/AdminUserController?action=list</to>
     </rule>
 
+    <rule>
+        <name>Admin Ban User Management</name>
+        <condition type="method">GET</condition>
+        <from>^/administrator/user/ban/([0-9]+)$</from>
+        <to>/AdminUserController?action=list&amp;accountI=$1</to>
+    </rule>
+    
     <rule>
         <name>Admin Create New User</name>
         <condition type="method">GET</condition>
         <from>^/administrator/user/new$</from>
         <to>/WEB-INF/admin/createUser.jsp</to>
+    </rule>
+    
+    <rule>
+        <name>Admin Create New User</name>
+        <condition type="method">POST</condition>
+        <from>^/administrator/user/new$</from>
+        <to last="true">/InsertSalePerson?action=register</to>
     </rule>
     
     <rule>
@@ -134,9 +190,23 @@
     
     <rule>
         <name>Admin User Profile</name>
+        <condition type="method">POST</condition>
+        <from>^/administrator/user/profile$</from>
+        <to last="true">/AdminProfileController?action=profile</to>
+    </rule>
+    
+    <rule>
+        <name>Admin User Profile</name>
         <condition type="method">GET</condition>
         <from>^/administrator/user/profile/detail$</from>
         <to last="true">/AdminProfileController?action=detail</to>
+    </rule>
+    
+    <rule>
+        <name>Admin User Profile</name>
+        <condition type="method">POST</condition>
+        <from>^/administrator/user/profile/password$</from>
+        <to last="true">/AdminProfileController?action=password</to>
     </rule>
     
     <rule>
