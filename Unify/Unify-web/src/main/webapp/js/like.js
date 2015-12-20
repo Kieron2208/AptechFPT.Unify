@@ -1,13 +1,13 @@
 (function () {
     $(document).ready(function () {
-        var frm = $("#likeform1");
+        var frm = $("#myform1");
         frm.submit(function () {
             $.ajax({
                 type: frm.attr('method'),
                 url: frm.attr('action'),
                 data: frm.serialize(),
                 success: function (output) {
-                    $("#likecountt1").html(output);
+                    $("#likecount1").html(output);
                 }
             });
             return false;
@@ -16,14 +16,14 @@
 })();
 (function () {
     $(document).ready(function () {
-        var frm = $("#likeform2");
+        var frm = $("#myform2");
         frm.submit(function () {
             $.ajax({
                 type: frm.attr('method'),
                 url: frm.attr('action'),
                 data: frm.serialize(),
                 success: function (output) {
-                    $("#likecountt2").html(output);
+                    $("#likecount2").html(output);
                 }
             });
             return false;
@@ -32,14 +32,14 @@
 })();
 (function () {
     $(document).ready(function () {
-        var frm = $("#likeform3");
+        var frm = $("#myform3");
         frm.submit(function () {
             $.ajax({
                 type: frm.attr('method'),
                 url: frm.attr('action'),
                 data: frm.serialize(),
                 success: function (output) {
-                    $("#likecountt3").html(output);
+                    $("#likecount3").html(output);
                 }
             });
             return false;
@@ -48,14 +48,14 @@
 })();
 (function () {
     $(document).ready(function () {
-        var frm = $("#likeform4");
+        var frm = $("#myform4");
         frm.submit(function () {
             $.ajax({
                 type: frm.attr('method'),
                 url: frm.attr('action'),
                 data: frm.serialize(),
                 success: function (output) {
-                    $("#likecountt4").html(output);
+                    $("#likecount4").html(output);
                 }
             });
             return false;
@@ -64,14 +64,14 @@
 })();
 (function () {
     $(document).ready(function () {
-        var frm = $("#likeform5");
+        var frm = $("#myform5");
         frm.submit(function () {
             $.ajax({
                 type: frm.attr('method'),
                 url: frm.attr('action'),
                 data: frm.serialize(),
                 success: function (output) {
-                    $("#likecountt5").html(output);
+                    $("#likecount5").html(output);
                 }
             });
             return false;
@@ -80,14 +80,14 @@
 })();
 (function () {
     $(document).ready(function () {
-        var frm = $("#likeform6");
+        var frm = $("#myform6");
         frm.submit(function () {
             $.ajax({
                 type: frm.attr('method'),
                 url: frm.attr('action'),
                 data: frm.serialize(),
                 success: function (output) {
-                    $("#likecountt6").html(output);
+                    $("#likecount6").html(output);
                 }
             });
             return false;
@@ -96,14 +96,14 @@
 })();
 (function () {
     $(document).ready(function () {
-        var frm = $("#likeform7");
+        var frm = $("#myform7");
         frm.submit(function () {
             $.ajax({
                 type: frm.attr('method'),
                 url: frm.attr('action'),
                 data: frm.serialize(),
                 success: function (output) {
-                    $("#likecountt7").html(output);
+                    $("#likecount7").html(output);
                 }
             });
             return false;
@@ -112,14 +112,14 @@
 })();
 (function () {
     $(document).ready(function () {
-        var frm = $("#likeform8");
+        var frm = $("#myform8");
         frm.submit(function () {
             $.ajax({
                 type: frm.attr('method'),
                 url: frm.attr('action'),
                 data: frm.serialize(),
                 success: function (output) {
-                    $("#likecountt8").html(output);
+                    $("#likecount8").html(output);
                 }
             });
             return false;
@@ -128,14 +128,14 @@
 })();
 (function () {
     $(document).ready(function () {
-        var frm = $("#likeform9");
+        var frm = $("#myform9");
         frm.submit(function () {
             $.ajax({
                 type: frm.attr('method'),
                 url: frm.attr('action'),
                 data: frm.serialize(),
                 success: function (output) {
-                    $("#likecountt9").html(output);
+                    $("#likecount9").html(output);
                 }
             });
             return false;
@@ -144,14 +144,14 @@
 })();
 (function () {
     $(document).ready(function () {
-        var frm = $("#likeform10");
+        var frm = $("#myform10");
         frm.submit(function () {
             $.ajax({
                 type: frm.attr('method'),
                 url: frm.attr('action'),
                 data: frm.serialize(),
                 success: function (output) {
-                    $("#likecountt10").html(output);
+                    $("#likecount10").html(output);
                 }
             });
             return false;
@@ -160,14 +160,14 @@
 })();
 (function () {
     $(document).ready(function () {
-        var frm = $("#likeform11");
+        var frm = $("#myform11");
         frm.submit(function () {
             $.ajax({
                 type: frm.attr('method'),
                 url: frm.attr('action'),
                 data: frm.serialize(),
                 success: function (output) {
-                    $("#likecountt11").html(output);
+                    $("#likecount11").html(output);
                 }
             });
             return false;
@@ -176,14 +176,14 @@
 })();
 (function () {
     $(document).ready(function () {
-        var frm = $("#likeform12");
+        var frm = $("#myform12");
         frm.submit(function () {
             $.ajax({
                 type: frm.attr('method'),
                 url: frm.attr('action'),
                 data: frm.serialize(),
                 success: function (output) {
-                    $("#likecountt12").html(output);
+                    $("#likecount12").html(output);
                 }
             });
             return false;
@@ -192,14 +192,14 @@
 })();
 (function () {
     $(document).ready(function () {
-        var frm = $("#likeform13");
+        var frm = $("#myform13");
         frm.submit(function () {
             $.ajax({
                 type: frm.attr('method'),
                 url: frm.attr('action'),
                 data: frm.serialize(),
                 success: function (output) {
-                    $("#likecountt13").html(output);
+                    $("#likecount13").html(output);
                 }
             });
             return false;
@@ -208,14 +208,14 @@
 })();
 (function () {
     $(document).ready(function () {
-        var frm = $("#likeform14");
+        var frm = $("#myform14");
         frm.submit(function () {
             $.ajax({
                 type: frm.attr('method'),
                 url: frm.attr('action'),
                 data: frm.serialize(),
                 success: function (output) {
-                    $("#likecountt14").html(output);
+                    $("#likecount14").html(output);
                 }
             });
             return false;
@@ -224,14 +224,14 @@
 })();
 (function () {
     $(document).ready(function () {
-        var frm = $("#likeform15");
+        var frm = $("#myform15");
         frm.submit(function () {
             $.ajax({
                 type: frm.attr('method'),
                 url: frm.attr('action'),
                 data: frm.serialize(),
                 success: function (output) {
-                    $("#likecountt15").html(output);
+                    $("#likecount15").html(output);
                 }
             });
             return false;
@@ -240,14 +240,14 @@
 })();
 (function () {
     $(document).ready(function () {
-        var frm = $("#likeform16");
+        var frm = $("#myform16");
         frm.submit(function () {
             $.ajax({
                 type: frm.attr('method'),
                 url: frm.attr('action'),
                 data: frm.serialize(),
                 success: function (output) {
-                    $("#likecountt16").html(output);
+                    $("#likecount16").html(output);
                 }
             });
             return false;
@@ -256,14 +256,14 @@
 })();
 (function () {
     $(document).ready(function () {
-        var frm = $("#likeform17");
+        var frm = $("#myform17");
         frm.submit(function () {
             $.ajax({
                 type: frm.attr('method'),
                 url: frm.attr('action'),
                 data: frm.serialize(),
                 success: function (output) {
-                    $("#likecountt17").html(output);
+                    $("#likecount17").html(output);
                 }
             });
             return false;
@@ -272,14 +272,14 @@
 })();
 (function () {
     $(document).ready(function () {
-        var frm = $("#likeform18");
+        var frm = $("#myform18");
         frm.submit(function () {
             $.ajax({
                 type: frm.attr('method'),
                 url: frm.attr('action'),
                 data: frm.serialize(),
                 success: function (output) {
-                    $("#likecountt18").html(output);
+                    $("#likecount18").html(output);
                 }
             });
             return false;
@@ -288,14 +288,14 @@
 })();
 (function () {
     $(document).ready(function () {
-        var frm = $("#likeform19");
+        var frm = $("#myform19");
         frm.submit(function () {
             $.ajax({
                 type: frm.attr('method'),
                 url: frm.attr('action'),
                 data: frm.serialize(),
                 success: function (output) {
-                    $("#likecountt19").html(output);
+                    $("#likecount19").html(output);
                 }
             });
             return false;
@@ -304,14 +304,14 @@
 })();
 (function () {
     $(document).ready(function () {
-        var frm = $("#likeform20");
+        var frm = $("#myform20");
         frm.submit(function () {
             $.ajax({
                 type: frm.attr('method'),
                 url: frm.attr('action'),
                 data: frm.serialize(),
                 success: function (output) {
-                    $("#likecountt20").html(output);
+                    $("#likecount20").html(output);
                 }
             });
             return false;
@@ -320,14 +320,14 @@
 })();
 (function () {
     $(document).ready(function () {
-        var frm = $("#likeform21");
+        var frm = $("#myform21");
         frm.submit(function () {
             $.ajax({
                 type: frm.attr('method'),
                 url: frm.attr('action'),
                 data: frm.serialize(),
                 success: function (output) {
-                    $("#likecountt21").html(output);
+                    $("#likecount21").html(output);
                 }
             });
             return false;
@@ -336,14 +336,14 @@
 })();
 (function () {
     $(document).ready(function () {
-        var frm = $("#likeform22");
+        var frm = $("#myform22");
         frm.submit(function () {
             $.ajax({
                 type: frm.attr('method'),
                 url: frm.attr('action'),
                 data: frm.serialize(),
                 success: function (output) {
-                    $("#likecountt22").html(output);
+                    $("#likecount22").html(output);
                 }
             });
             return false;
@@ -352,14 +352,14 @@
 })();
 (function () {
     $(document).ready(function () {
-        var frm = $("#likeform23");
+        var frm = $("#myform23");
         frm.submit(function () {
             $.ajax({
                 type: frm.attr('method'),
                 url: frm.attr('action'),
                 data: frm.serialize(),
                 success: function (output) {
-                    $("#likecountt23").html(output);
+                    $("#likecount23").html(output);
                 }
             });
             return false;
@@ -368,14 +368,14 @@
 })();
 (function () {
     $(document).ready(function () {
-        var frm = $("#likeform24");
+        var frm = $("#myform24");
         frm.submit(function () {
             $.ajax({
                 type: frm.attr('method'),
                 url: frm.attr('action'),
                 data: frm.serialize(),
                 success: function (output) {
-                    $("#likecountt24").html(output);
+                    $("#likecount24").html(output);
                 }
             });
             return false;
@@ -384,14 +384,14 @@
 })();
 (function () {
     $(document).ready(function () {
-        var frm = $("#likeform25");
+        var frm = $("#myform25");
         frm.submit(function () {
             $.ajax({
                 type: frm.attr('method'),
                 url: frm.attr('action'),
                 data: frm.serialize(),
                 success: function (output) {
-                    $("#likecountt25").html(output);
+                    $("#likecount25").html(output);
                 }
             });
             return false;
@@ -400,14 +400,14 @@
 })();
 (function () {
     $(document).ready(function () {
-        var frm = $("#likeform26");
+        var frm = $("#myform26");
         frm.submit(function () {
             $.ajax({
                 type: frm.attr('method'),
                 url: frm.attr('action'),
                 data: frm.serialize(),
                 success: function (output) {
-                    $("#likecountt26").html(output);
+                    $("#likecount26").html(output);
                 }
             });
             return false;
@@ -416,14 +416,14 @@
 })();
 (function () {
     $(document).ready(function () {
-        var frm = $("#likeform27");
+        var frm = $("#myform27");
         frm.submit(function () {
             $.ajax({
                 type: frm.attr('method'),
                 url: frm.attr('action'),
                 data: frm.serialize(),
                 success: function (output) {
-                    $("#likecountt27").html(output);
+                    $("#likecount27").html(output);
                 }
             });
             return false;
@@ -432,14 +432,14 @@
 })();
 (function () {
     $(document).ready(function () {
-        var frm = $("#likeform28");
+        var frm = $("#myform28");
         frm.submit(function () {
             $.ajax({
                 type: frm.attr('method'),
                 url: frm.attr('action'),
                 data: frm.serialize(),
                 success: function (output) {
-                    $("#likecountt28").html(output);
+                    $("#likecount28").html(output);
                 }
             });
             return false;
@@ -448,14 +448,14 @@
 })();
 (function () {
     $(document).ready(function () {
-        var frm = $("#likeform29");
+        var frm = $("#myform29");
         frm.submit(function () {
             $.ajax({
                 type: frm.attr('method'),
                 url: frm.attr('action'),
                 data: frm.serialize(),
                 success: function (output) {
-                    $("#likecountt29").html(output);
+                    $("#likecount29").html(output);
                 }
             });
             return false;
@@ -464,14 +464,14 @@
 })();
 (function () {
     $(document).ready(function () {
-        var frm = $("#likeform30");
+        var frm = $("#myform30");
         frm.submit(function () {
             $.ajax({
                 type: frm.attr('method'),
                 url: frm.attr('action'),
                 data: frm.serialize(),
                 success: function (output) {
-                    $("#likecountt30").html(output);
+                    $("#likecount30").html(output);
                 }
             });
             return false;
@@ -480,14 +480,14 @@
 })();
 (function () {
     $(document).ready(function () {
-        var frm = $("#likeform31");
+        var frm = $("#myform31");
         frm.submit(function () {
             $.ajax({
                 type: frm.attr('method'),
                 url: frm.attr('action'),
                 data: frm.serialize(),
                 success: function (output) {
-                    $("#likecountt31").html(output);
+                    $("#likecount31").html(output);
                 }
             });
             return false;
@@ -496,14 +496,14 @@
 })();
 (function () {
     $(document).ready(function () {
-        var frm = $("#likeform32");
+        var frm = $("#myform32");
         frm.submit(function () {
             $.ajax({
                 type: frm.attr('method'),
                 url: frm.attr('action'),
                 data: frm.serialize(),
                 success: function (output) {
-                    $("#likecountt32").html(output);
+                    $("#likecount32").html(output);
                 }
             });
             return false;
@@ -512,14 +512,14 @@
 })();
 (function () {
     $(document).ready(function () {
-        var frm = $("#likeform33");
+        var frm = $("#myform33");
         frm.submit(function () {
             $.ajax({
                 type: frm.attr('method'),
                 url: frm.attr('action'),
                 data: frm.serialize(),
                 success: function (output) {
-                    $("#likecountt33").html(output);
+                    $("#likecount33").html(output);
                 }
             });
             return false;
@@ -528,14 +528,14 @@
 })();
 (function () {
     $(document).ready(function () {
-        var frm = $("#likeform34");
+        var frm = $("#myform34");
         frm.submit(function () {
             $.ajax({
                 type: frm.attr('method'),
                 url: frm.attr('action'),
                 data: frm.serialize(),
                 success: function (output) {
-                    $("#likecountt34").html(output);
+                    $("#likecount34").html(output);
                 }
             });
             return false;
@@ -544,14 +544,14 @@
 })();
 (function () {
     $(document).ready(function () {
-        var frm = $("#likeform35");
+        var frm = $("#myform35");
         frm.submit(function () {
             $.ajax({
                 type: frm.attr('method'),
                 url: frm.attr('action'),
                 data: frm.serialize(),
                 success: function (output) {
-                    $("#likecountt35").html(output);
+                    $("#likecount35").html(output);
                 }
             });
             return false;
@@ -560,14 +560,14 @@
 })();
 (function () {
     $(document).ready(function () {
-        var frm = $("#likeform36");
+        var frm = $("#myform36");
         frm.submit(function () {
             $.ajax({
                 type: frm.attr('method'),
                 url: frm.attr('action'),
                 data: frm.serialize(),
                 success: function (output) {
-                    $("#likecountt36").html(output);
+                    $("#likecount36").html(output);
                 }
             });
             return false;
@@ -576,14 +576,14 @@
 })();
 (function () {
     $(document).ready(function () {
-        var frm = $("#likeform37");
+        var frm = $("#myform37");
         frm.submit(function () {
             $.ajax({
                 type: frm.attr('method'),
                 url: frm.attr('action'),
                 data: frm.serialize(),
                 success: function (output) {
-                    $("#likecountt37").html(output);
+                    $("#likecount37").html(output);
                 }
             });
             return false;
@@ -592,14 +592,14 @@
 })();
 (function () {
     $(document).ready(function () {
-        var frm = $("#likeform38");
+        var frm = $("#myform38");
         frm.submit(function () {
             $.ajax({
                 type: frm.attr('method'),
                 url: frm.attr('action'),
                 data: frm.serialize(),
                 success: function (output) {
-                    $("#likecountt38").html(output);
+                    $("#likecount38").html(output);
                 }
             });
             return false;
@@ -608,14 +608,14 @@
 })();
 (function () {
     $(document).ready(function () {
-        var frm = $("#likeform39");
+        var frm = $("#myform39");
         frm.submit(function () {
             $.ajax({
                 type: frm.attr('method'),
                 url: frm.attr('action'),
                 data: frm.serialize(),
                 success: function (output) {
-                    $("#likecountt39").html(output);
+                    $("#likecount39").html(output);
                 }
             });
             return false;
@@ -624,14 +624,14 @@
 })();
 (function () {
     $(document).ready(function () {
-        var frm = $("#likeform40");
+        var frm = $("#myform40");
         frm.submit(function () {
             $.ajax({
                 type: frm.attr('method'),
                 url: frm.attr('action'),
                 data: frm.serialize(),
                 success: function (output) {
-                    $("#likecountt40").html(output);
+                    $("#likecount40").html(output);
                 }
             });
             return false;
@@ -640,14 +640,14 @@
 })();
 (function () {
     $(document).ready(function () {
-        var frm = $("#likeform41");
+        var frm = $("#myform41");
         frm.submit(function () {
             $.ajax({
                 type: frm.attr('method'),
                 url: frm.attr('action'),
                 data: frm.serialize(),
                 success: function (output) {
-                    $("#likecountt41").html(output);
+                    $("#likecount41").html(output);
                 }
             });
             return false;
@@ -656,14 +656,14 @@
 })();
 (function () {
     $(document).ready(function () {
-        var frm = $("#likeform42");
+        var frm = $("#myform42");
         frm.submit(function () {
             $.ajax({
                 type: frm.attr('method'),
                 url: frm.attr('action'),
                 data: frm.serialize(),
                 success: function (output) {
-                    $("#likecountt42").html(output);
+                    $("#likecount42").html(output);
                 }
             });
             return false;
@@ -672,14 +672,14 @@
 })();
 (function () {
     $(document).ready(function () {
-        var frm = $("#likeform43");
+        var frm = $("#myform43");
         frm.submit(function () {
             $.ajax({
                 type: frm.attr('method'),
                 url: frm.attr('action'),
                 data: frm.serialize(),
                 success: function (output) {
-                    $("#likecountt43").html(output);
+                    $("#likecount43").html(output);
                 }
             });
             return false;
@@ -688,14 +688,14 @@
 })();
 (function () {
     $(document).ready(function () {
-        var frm = $("#likeform44");
+        var frm = $("#myform44");
         frm.submit(function () {
             $.ajax({
                 type: frm.attr('method'),
                 url: frm.attr('action'),
                 data: frm.serialize(),
                 success: function (output) {
-                    $("#likecountt44").html(output);
+                    $("#likecount44").html(output);
                 }
             });
             return false;
@@ -704,14 +704,14 @@
 })();
 (function () {
     $(document).ready(function () {
-        var frm = $("#likeform45");
+        var frm = $("#myform45");
         frm.submit(function () {
             $.ajax({
                 type: frm.attr('method'),
                 url: frm.attr('action'),
                 data: frm.serialize(),
                 success: function (output) {
-                    $("#likecountt45").html(output);
+                    $("#likecount45").html(output);
                 }
             });
             return false;
@@ -720,14 +720,14 @@
 })();
 (function () {
     $(document).ready(function () {
-        var frm = $("#likeform46");
+        var frm = $("#myform46");
         frm.submit(function () {
             $.ajax({
                 type: frm.attr('method'),
                 url: frm.attr('action'),
                 data: frm.serialize(),
                 success: function (output) {
-                    $("#likecountt46").html(output);
+                    $("#likecount46").html(output);
                 }
             });
             return false;
@@ -736,14 +736,14 @@
 })();
 (function () {
     $(document).ready(function () {
-        var frm = $("#likeform47");
+        var frm = $("#myform47");
         frm.submit(function () {
             $.ajax({
                 type: frm.attr('method'),
                 url: frm.attr('action'),
                 data: frm.serialize(),
                 success: function (output) {
-                    $("#likecountt47").html(output);
+                    $("#likecount47").html(output);
                 }
             });
             return false;
@@ -752,14 +752,14 @@
 })();
 (function () {
     $(document).ready(function () {
-        var frm = $("#likeform48");
+        var frm = $("#myform48");
         frm.submit(function () {
             $.ajax({
                 type: frm.attr('method'),
                 url: frm.attr('action'),
                 data: frm.serialize(),
                 success: function (output) {
-                    $("#likecountt48").html(output);
+                    $("#likecount48").html(output);
                 }
             });
             return false;
@@ -768,14 +768,14 @@
 })();
 (function () {
     $(document).ready(function () {
-        var frm = $("#likeform49");
+        var frm = $("#myform49");
         frm.submit(function () {
             $.ajax({
                 type: frm.attr('method'),
                 url: frm.attr('action'),
                 data: frm.serialize(),
                 success: function (output) {
-                    $("#likecountt49").html(output);
+                    $("#likecount49").html(output);
                 }
             });
             return false;
@@ -784,14 +784,14 @@
 })();
 (function () {
     $(document).ready(function () {
-        var frm = $("#likeform50");
+        var frm = $("#myform50");
         frm.submit(function () {
             $.ajax({
                 type: frm.attr('method'),
                 url: frm.attr('action'),
                 data: frm.serialize(),
                 success: function (output) {
-                    $("#likecountt50").html(output);
+                    $("#likecount50").html(output);
                 }
             });
             return false;
@@ -800,14 +800,14 @@
 })();
 (function () {
     $(document).ready(function () {
-        var frm = $("#likeform51");
+        var frm = $("#myform51");
         frm.submit(function () {
             $.ajax({
                 type: frm.attr('method'),
                 url: frm.attr('action'),
                 data: frm.serialize(),
                 success: function (output) {
-                    $("#likecountt51").html(output);
+                    $("#likecount51").html(output);
                 }
             });
             return false;
@@ -816,14 +816,14 @@
 })();
 (function () {
     $(document).ready(function () {
-        var frm = $("#likeform52");
+        var frm = $("#myform52");
         frm.submit(function () {
             $.ajax({
                 type: frm.attr('method'),
                 url: frm.attr('action'),
                 data: frm.serialize(),
                 success: function (output) {
-                    $("#likecountt52").html(output);
+                    $("#likecount52").html(output);
                 }
             });
             return false;
@@ -832,14 +832,14 @@
 })();
 (function () {
     $(document).ready(function () {
-        var frm = $("#likeform53");
+        var frm = $("#myform53");
         frm.submit(function () {
             $.ajax({
                 type: frm.attr('method'),
                 url: frm.attr('action'),
                 data: frm.serialize(),
                 success: function (output) {
-                    $("#likecountt53").html(output);
+                    $("#likecount53").html(output);
                 }
             });
             return false;
@@ -848,14 +848,14 @@
 })();
 (function () {
     $(document).ready(function () {
-        var frm = $("#likeform54");
+        var frm = $("#myform54");
         frm.submit(function () {
             $.ajax({
                 type: frm.attr('method'),
                 url: frm.attr('action'),
                 data: frm.serialize(),
                 success: function (output) {
-                    $("#likecountt54").html(output);
+                    $("#likecount54").html(output);
                 }
             });
             return false;
@@ -864,14 +864,14 @@
 })();
 (function () {
     $(document).ready(function () {
-        var frm = $("#likeform55");
+        var frm = $("#myform55");
         frm.submit(function () {
             $.ajax({
                 type: frm.attr('method'),
                 url: frm.attr('action'),
                 data: frm.serialize(),
                 success: function (output) {
-                    $("#likecountt55").html(output);
+                    $("#likecount55").html(output);
                 }
             });
             return false;
@@ -880,14 +880,14 @@
 })();
 (function () {
     $(document).ready(function () {
-        var frm = $("#likeform56");
+        var frm = $("#myform56");
         frm.submit(function () {
             $.ajax({
                 type: frm.attr('method'),
                 url: frm.attr('action'),
                 data: frm.serialize(),
                 success: function (output) {
-                    $("#likecountt56").html(output);
+                    $("#likecount56").html(output);
                 }
             });
             return false;
@@ -896,14 +896,14 @@
 })();
 (function () {
     $(document).ready(function () {
-        var frm = $("#likeform57");
+        var frm = $("#myform57");
         frm.submit(function () {
             $.ajax({
                 type: frm.attr('method'),
                 url: frm.attr('action'),
                 data: frm.serialize(),
                 success: function (output) {
-                    $("#likecountt57").html(output);
+                    $("#likecount57").html(output);
                 }
             });
             return false;
@@ -912,14 +912,14 @@
 })();
 (function () {
     $(document).ready(function () {
-        var frm = $("#likeform58");
+        var frm = $("#myform58");
         frm.submit(function () {
             $.ajax({
                 type: frm.attr('method'),
                 url: frm.attr('action'),
                 data: frm.serialize(),
                 success: function (output) {
-                    $("#likecountt58").html(output);
+                    $("#likecount58").html(output);
                 }
             });
             return false;
@@ -928,14 +928,14 @@
 })();
 (function () {
     $(document).ready(function () {
-        var frm = $("#likeform59");
+        var frm = $("#myform59");
         frm.submit(function () {
             $.ajax({
                 type: frm.attr('method'),
                 url: frm.attr('action'),
                 data: frm.serialize(),
                 success: function (output) {
-                    $("#likecountt59").html(output);
+                    $("#likecount59").html(output);
                 }
             });
             return false;
@@ -944,14 +944,14 @@
 })();
 (function () {
     $(document).ready(function () {
-        var frm = $("#likeform60");
+        var frm = $("#myform60");
         frm.submit(function () {
             $.ajax({
                 type: frm.attr('method'),
                 url: frm.attr('action'),
                 data: frm.serialize(),
                 success: function (output) {
-                    $("#likecountt60").html(output);
+                    $("#likecount60").html(output);
                 }
             });
             return false;
@@ -960,14 +960,14 @@
 })();
 (function () {
     $(document).ready(function () {
-        var frm = $("#likeform61");
+        var frm = $("#myform61");
         frm.submit(function () {
             $.ajax({
                 type: frm.attr('method'),
                 url: frm.attr('action'),
                 data: frm.serialize(),
                 success: function (output) {
-                    $("#likecountt61").html(output);
+                    $("#likecount61").html(output);
                 }
             });
             return false;
@@ -976,14 +976,14 @@
 })();
 (function () {
     $(document).ready(function () {
-        var frm = $("#likeform62");
+        var frm = $("#myform62");
         frm.submit(function () {
             $.ajax({
                 type: frm.attr('method'),
                 url: frm.attr('action'),
                 data: frm.serialize(),
                 success: function (output) {
-                    $("#likecountt62").html(output);
+                    $("#likecount62").html(output);
                 }
             });
             return false;
@@ -992,14 +992,14 @@
 })();
 (function () {
     $(document).ready(function () {
-        var frm = $("#likeform63");
+        var frm = $("#myform63");
         frm.submit(function () {
             $.ajax({
                 type: frm.attr('method'),
                 url: frm.attr('action'),
                 data: frm.serialize(),
                 success: function (output) {
-                    $("#likecountt63").html(output);
+                    $("#likecount63").html(output);
                 }
             });
             return false;
@@ -1008,14 +1008,14 @@
 })();
 (function () {
     $(document).ready(function () {
-        var frm = $("#likeform64");
+        var frm = $("#myform64");
         frm.submit(function () {
             $.ajax({
                 type: frm.attr('method'),
                 url: frm.attr('action'),
                 data: frm.serialize(),
                 success: function (output) {
-                    $("#likecountt64").html(output);
+                    $("#likecount64").html(output);
                 }
             });
             return false;
@@ -1024,14 +1024,14 @@
 })();
 (function () {
     $(document).ready(function () {
-        var frm = $("#likeform65");
+        var frm = $("#myform65");
         frm.submit(function () {
             $.ajax({
                 type: frm.attr('method'),
                 url: frm.attr('action'),
                 data: frm.serialize(),
                 success: function (output) {
-                    $("#likecountt65").html(output);
+                    $("#likecount65").html(output);
                 }
             });
             return false;
@@ -1040,14 +1040,14 @@
 })();
 (function () {
     $(document).ready(function () {
-        var frm = $("#likeform66");
+        var frm = $("#myform66");
         frm.submit(function () {
             $.ajax({
                 type: frm.attr('method'),
                 url: frm.attr('action'),
                 data: frm.serialize(),
                 success: function (output) {
-                    $("#likecountt66").html(output);
+                    $("#likecount66").html(output);
                 }
             });
             return false;
@@ -1056,14 +1056,14 @@
 })();
 (function () {
     $(document).ready(function () {
-        var frm = $("#likeform67");
+        var frm = $("#myform67");
         frm.submit(function () {
             $.ajax({
                 type: frm.attr('method'),
                 url: frm.attr('action'),
                 data: frm.serialize(),
                 success: function (output) {
-                    $("#likecountt67").html(output);
+                    $("#likecount67").html(output);
                 }
             });
             return false;
@@ -1072,14 +1072,14 @@
 })();
 (function () {
     $(document).ready(function () {
-        var frm = $("#likeform68");
+        var frm = $("#myform68");
         frm.submit(function () {
             $.ajax({
                 type: frm.attr('method'),
                 url: frm.attr('action'),
                 data: frm.serialize(),
                 success: function (output) {
-                    $("#likecountt68").html(output);
+                    $("#likecount68").html(output);
                 }
             });
             return false;
@@ -1088,14 +1088,14 @@
 })();
 (function () {
     $(document).ready(function () {
-        var frm = $("#likeform69");
+        var frm = $("#myform69");
         frm.submit(function () {
             $.ajax({
                 type: frm.attr('method'),
                 url: frm.attr('action'),
                 data: frm.serialize(),
                 success: function (output) {
-                    $("#likecountt69").html(output);
+                    $("#likecount69").html(output);
                 }
             });
             return false;
@@ -1104,14 +1104,14 @@
 })();
 (function () {
     $(document).ready(function () {
-        var frm = $("#likeform70");
+        var frm = $("#myform70");
         frm.submit(function () {
             $.ajax({
                 type: frm.attr('method'),
                 url: frm.attr('action'),
                 data: frm.serialize(),
                 success: function (output) {
-                    $("#likecountt70").html(output);
+                    $("#likecount70").html(output);
                 }
             });
             return false;
@@ -1120,14 +1120,14 @@
 })();
 (function () {
     $(document).ready(function () {
-        var frm = $("#likeform71");
+        var frm = $("#myform71");
         frm.submit(function () {
             $.ajax({
                 type: frm.attr('method'),
                 url: frm.attr('action'),
                 data: frm.serialize(),
                 success: function (output) {
-                    $("#likecountt71").html(output);
+                    $("#likecount71").html(output);
                 }
             });
             return false;
@@ -1136,14 +1136,14 @@
 })();
 (function () {
     $(document).ready(function () {
-        var frm = $("#likeform72");
+        var frm = $("#myform72");
         frm.submit(function () {
             $.ajax({
                 type: frm.attr('method'),
                 url: frm.attr('action'),
                 data: frm.serialize(),
                 success: function (output) {
-                    $("#likecountt72").html(output);
+                    $("#likecount72").html(output);
                 }
             });
             return false;
@@ -1152,14 +1152,14 @@
 })();
 (function () {
     $(document).ready(function () {
-        var frm = $("#likeform73");
+        var frm = $("#myform73");
         frm.submit(function () {
             $.ajax({
                 type: frm.attr('method'),
                 url: frm.attr('action'),
                 data: frm.serialize(),
                 success: function (output) {
-                    $("#likecountt73").html(output);
+                    $("#likecount73").html(output);
                 }
             });
             return false;
@@ -1168,14 +1168,14 @@
 })();
 (function () {
     $(document).ready(function () {
-        var frm = $("#likeform74");
+        var frm = $("#myform74");
         frm.submit(function () {
             $.ajax({
                 type: frm.attr('method'),
                 url: frm.attr('action'),
                 data: frm.serialize(),
                 success: function (output) {
-                    $("#likecountt74").html(output);
+                    $("#likecount74").html(output);
                 }
             });
             return false;
@@ -1184,14 +1184,14 @@
 })();
 (function () {
     $(document).ready(function () {
-        var frm = $("#likeform75");
+        var frm = $("#myform75");
         frm.submit(function () {
             $.ajax({
                 type: frm.attr('method'),
                 url: frm.attr('action'),
                 data: frm.serialize(),
                 success: function (output) {
-                    $("#likecountt75").html(output);
+                    $("#likecount75").html(output);
                 }
             });
             return false;
@@ -1200,14 +1200,14 @@
 })();
 (function () {
     $(document).ready(function () {
-        var frm = $("#likeform76");
+        var frm = $("#myform76");
         frm.submit(function () {
             $.ajax({
                 type: frm.attr('method'),
                 url: frm.attr('action'),
                 data: frm.serialize(),
                 success: function (output) {
-                    $("#likecountt76").html(output);
+                    $("#likecount76").html(output);
                 }
             });
             return false;
@@ -1216,14 +1216,14 @@
 })();
 (function () {
     $(document).ready(function () {
-        var frm = $("#likeform77");
+        var frm = $("#myform77");
         frm.submit(function () {
             $.ajax({
                 type: frm.attr('method'),
                 url: frm.attr('action'),
                 data: frm.serialize(),
                 success: function (output) {
-                    $("#likecountt77").html(output);
+                    $("#likecount77").html(output);
                 }
             });
             return false;
@@ -1232,14 +1232,14 @@
 })();
 (function () {
     $(document).ready(function () {
-        var frm = $("#likeform78");
+        var frm = $("#myform78");
         frm.submit(function () {
             $.ajax({
                 type: frm.attr('method'),
                 url: frm.attr('action'),
                 data: frm.serialize(),
                 success: function (output) {
-                    $("#likecountt78").html(output);
+                    $("#likecount78").html(output);
                 }
             });
             return false;
@@ -1248,14 +1248,14 @@
 })();
 (function () {
     $(document).ready(function () {
-        var frm = $("#likeform79");
+        var frm = $("#myform79");
         frm.submit(function () {
             $.ajax({
                 type: frm.attr('method'),
                 url: frm.attr('action'),
                 data: frm.serialize(),
                 success: function (output) {
-                    $("#likecountt79").html(output);
+                    $("#likecount79").html(output);
                 }
             });
             return false;
@@ -1264,14 +1264,14 @@
 })();
 (function () {
     $(document).ready(function () {
-        var frm = $("#likeform90");
+        var frm = $("#myform90");
         frm.submit(function () {
             $.ajax({
                 type: frm.attr('method'),
                 url: frm.attr('action'),
                 data: frm.serialize(),
                 success: function (output) {
-                    $("#likecountt90").html(output);
+                    $("#likecount90").html(output);
                 }
             });
             return false;
@@ -1280,14 +1280,14 @@
 })();
 (function () {
     $(document).ready(function () {
-        var frm = $("#likeform91");
+        var frm = $("#myform91");
         frm.submit(function () {
             $.ajax({
                 type: frm.attr('method'),
                 url: frm.attr('action'),
                 data: frm.serialize(),
                 success: function (output) {
-                    $("#likecountt91").html(output);
+                    $("#likecount91").html(output);
                 }
             });
             return false;
@@ -1296,14 +1296,14 @@
 })();
 (function () {
     $(document).ready(function () {
-        var frm = $("#likeform92");
+        var frm = $("#myform92");
         frm.submit(function () {
             $.ajax({
                 type: frm.attr('method'),
                 url: frm.attr('action'),
                 data: frm.serialize(),
                 success: function (output) {
-                    $("#likecountt92").html(output);
+                    $("#likecount92").html(output);
                 }
             });
             return false;
@@ -1312,14 +1312,14 @@
 })();
 (function () {
     $(document).ready(function () {
-        var frm = $("#likeform93");
+        var frm = $("#myform93");
         frm.submit(function () {
             $.ajax({
                 type: frm.attr('method'),
                 url: frm.attr('action'),
                 data: frm.serialize(),
                 success: function (output) {
-                    $("#likecountt93").html(output);
+                    $("#likecount93").html(output);
                 }
             });
             return false;
@@ -1328,14 +1328,14 @@
 })();
 (function () {
     $(document).ready(function () {
-        var frm = $("#likeform94");
+        var frm = $("#myform94");
         frm.submit(function () {
             $.ajax({
                 type: frm.attr('method'),
                 url: frm.attr('action'),
                 data: frm.serialize(),
                 success: function (output) {
-                    $("#likecountt94").html(output);
+                    $("#likecount94").html(output);
                 }
             });
             return false;
@@ -1344,14 +1344,14 @@
 })();
 (function () {
     $(document).ready(function () {
-        var frm = $("#likeform95");
+        var frm = $("#myform95");
         frm.submit(function () {
             $.ajax({
                 type: frm.attr('method'),
                 url: frm.attr('action'),
                 data: frm.serialize(),
                 success: function (output) {
-                    $("#likecountt95").html(output);
+                    $("#likecount95").html(output);
                 }
             });
             return false;
@@ -1360,14 +1360,14 @@
 })();
 (function () {
     $(document).ready(function () {
-        var frm = $("#likeform96");
+        var frm = $("#myform96");
         frm.submit(function () {
             $.ajax({
                 type: frm.attr('method'),
                 url: frm.attr('action'),
                 data: frm.serialize(),
                 success: function (output) {
-                    $("#likecountt96").html(output);
+                    $("#likecount96").html(output);
                 }
             });
             return false;
@@ -1376,14 +1376,14 @@
 })();
 (function () {
     $(document).ready(function () {
-        var frm = $("#likeform97");
+        var frm = $("#myform97");
         frm.submit(function () {
             $.ajax({
                 type: frm.attr('method'),
                 url: frm.attr('action'),
                 data: frm.serialize(),
                 success: function (output) {
-                    $("#likecountt97").html(output);
+                    $("#likecount97").html(output);
                 }
             });
             return false;
@@ -1392,14 +1392,14 @@
 })();
 (function () {
     $(document).ready(function () {
-        var frm = $("#likeform98");
+        var frm = $("#myform98");
         frm.submit(function () {
             $.ajax({
                 type: frm.attr('method'),
                 url: frm.attr('action'),
                 data: frm.serialize(),
                 success: function (output) {
-                    $("#likecountt98").html(output);
+                    $("#likecount98").html(output);
                 }
             });
             return false;
@@ -1408,14 +1408,14 @@
 })();
 (function () {
     $(document).ready(function () {
-        var frm = $("#likeform99");
+        var frm = $("#myform99");
         frm.submit(function () {
             $.ajax({
                 type: frm.attr('method'),
                 url: frm.attr('action'),
                 data: frm.serialize(),
                 success: function (output) {
-                    $("#likecountt99").html(output);
+                    $("#likecount99").html(output);
                 }
             });
             return false;
@@ -1424,14 +1424,14 @@
 })();
 (function () {
     $(document).ready(function () {
-        var frm = $("#likeform100");
+        var frm = $("#myform100");
         frm.submit(function () {
             $.ajax({
                 type: frm.attr('method'),
                 url: frm.attr('action'),
                 data: frm.serialize(),
                 success: function (output) {
-                    $("#likecountt100").html(output);
+                    $("#likecount100").html(output);
                 }
             });
             return false;
@@ -1440,14 +1440,14 @@
 })();
 (function () {
     $(document).ready(function () {
-        var frm = $("#likeform81");
+        var frm = $("#myform81");
         frm.submit(function () {
             $.ajax({
                 type: frm.attr('method'),
                 url: frm.attr('action'),
                 data: frm.serialize(),
                 success: function (output) {
-                    $("#likecountt81").html(output);
+                    $("#likecount81").html(output);
                 }
             });
             return false;
@@ -1456,14 +1456,14 @@
 })();
 (function () {
     $(document).ready(function () {
-        var frm = $("#likeform82");
+        var frm = $("#myform82");
         frm.submit(function () {
             $.ajax({
                 type: frm.attr('method'),
                 url: frm.attr('action'),
                 data: frm.serialize(),
                 success: function (output) {
-                    $("#likecountt82").html(output);
+                    $("#likecount82").html(output);
                 }
             });
             return false;
@@ -1472,14 +1472,14 @@
 })();
 (function () {
     $(document).ready(function () {
-        var frm = $("#likeform83");
+        var frm = $("#myform83");
         frm.submit(function () {
             $.ajax({
                 type: frm.attr('method'),
                 url: frm.attr('action'),
                 data: frm.serialize(),
                 success: function (output) {
-                    $("#likecountt83").html(output);
+                    $("#likecount83").html(output);
                 }
             });
             return false;
@@ -1488,14 +1488,14 @@
 })();
 (function () {
     $(document).ready(function () {
-        var frm = $("#likeform84");
+        var frm = $("#myform84");
         frm.submit(function () {
             $.ajax({
                 type: frm.attr('method'),
                 url: frm.attr('action'),
                 data: frm.serialize(),
                 success: function (output) {
-                    $("#likecountt84").html(output);
+                    $("#likecount84").html(output);
                 }
             });
             return false;
@@ -1504,14 +1504,14 @@
 })();
 (function () {
     $(document).ready(function () {
-        var frm = $("#likeform85");
+        var frm = $("#myform85");
         frm.submit(function () {
             $.ajax({
                 type: frm.attr('method'),
                 url: frm.attr('action'),
                 data: frm.serialize(),
                 success: function (output) {
-                    $("#likecountt85").html(output);
+                    $("#likecount85").html(output);
                 }
             });
             return false;
@@ -1520,14 +1520,14 @@
 })();
 (function () {
     $(document).ready(function () {
-        var frm = $("#likeform86");
+        var frm = $("#myform86");
         frm.submit(function () {
             $.ajax({
                 type: frm.attr('method'),
                 url: frm.attr('action'),
                 data: frm.serialize(),
                 success: function (output) {
-                    $("#likecountt86").html(output);
+                    $("#likecount86").html(output);
                 }
             });
             return false;
@@ -1536,14 +1536,14 @@
 })();
 (function () {
     $(document).ready(function () {
-        var frm = $("#likeform87");
+        var frm = $("#myform87");
         frm.submit(function () {
             $.ajax({
                 type: frm.attr('method'),
                 url: frm.attr('action'),
                 data: frm.serialize(),
                 success: function (output) {
-                    $("#likecountt87").html(output);
+                    $("#likecount87").html(output);
                 }
             });
             return false;
@@ -1552,14 +1552,14 @@
 })();
 (function () {
     $(document).ready(function () {
-        var frm = $("#likeform88");
+        var frm = $("#myform88");
         frm.submit(function () {
             $.ajax({
                 type: frm.attr('method'),
                 url: frm.attr('action'),
                 data: frm.serialize(),
                 success: function (output) {
-                    $("#likecountt88").html(output);
+                    $("#likecount88").html(output);
                 }
             });
             return false;
@@ -1568,14 +1568,14 @@
 })();
 (function () {
     $(document).ready(function () {
-        var frm = $("#likeform89");
+        var frm = $("#myform89");
         frm.submit(function () {
             $.ajax({
                 type: frm.attr('method'),
                 url: frm.attr('action'),
                 data: frm.serialize(),
                 success: function (output) {
-                    $("#likecountt89").html(output);
+                    $("#likecount89").html(output);
                 }
             });
             return false;
@@ -1584,14 +1584,14 @@
 })();
 (function () {
     $(document).ready(function () {
-        var frm = $("#likeform90");
+        var frm = $("#myform90");
         frm.submit(function () {
             $.ajax({
                 type: frm.attr('method'),
                 url: frm.attr('action'),
                 data: frm.serialize(),
                 success: function (output) {
-                    $("#likecountt90").html(output);
+                    $("#likecount90").html(output);
                 }
             });
             return false;
