@@ -53,6 +53,11 @@
             <div class="collapse navbar-collapse navbar-responsive-collapse">
                 <div class="menu-container">
                     <ul class="nav navbar-nav">
+                        <li class="dropdown">
+                            <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">
+                                ${initMsg}
+                            </a>
+                        </li>
                         <!-- Men Shop -->
                         <li class="dropdown">
                             <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">
@@ -206,19 +211,19 @@
                                             historyProfile = "active";
                                         }
                                     %>
-                                    <li class="<%= homeProfile %>">
+                                    <li class="<%= homeProfile%>">
                                         <c:url value="/profile" var="profilePageLink"/>
                                         <a href="${profilePageLink}"><i class="fa fa-user"></i> Profile</a>
                                     </li>
-                                    <li class="<%= orderProfile %>">
+                                    <li class="<%= orderProfile%>">
                                         <c:url value="/profile/currentorder" var="profileOrderPageLink"/>
                                         <a href="${profileOrderPageLink}"><i class="fa fa-shopping-cart"></i> My Current Order</a>
                                     </li>
-                                    <li class="<%= commentProfile %>">
+                                    <li class="<%= commentProfile%>">
                                         <c:url value="/profile/mycomment" var="profileCommentPageLink"/>
                                         <a href="${profileCommentPageLink}"><i class="fa fa-comment"></i> My Comments</a>
                                     </li>
-                                    <li class="<%= historyProfile %>">
+                                    <li class="<%= historyProfile%>">
                                         <c:url value="/profile/orderhistory" var="profileHistoryPageLink"/>
                                         <a href="${profileHistoryPageLink}"><i class="fa fa-history"></i> Order History</a>
                                     </li>
