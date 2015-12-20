@@ -1,58 +1,58 @@
 (function () {
     'use strict';
 
-    angular.module('myApp', ['ui.bootstrap']).controller('MyController', MyController);
-    MyController.$inject = ['$scope', '$http', '$window','$modal'];
+    angular.module('myApp', ['ui.bootstrap', 'ngFileUpload']).controller('MyController', MyController);
+    MyController.$inject = ['$scope', '$http', '$window', '$modal'];
     function MyController($scope, $http, w, $modal) {
-        
+
         var x = w.localStorage.getItem("shoppingcart");
 
         $scope.cart = JSON.parse(x) || [];
-        
-        $scope.open = function (size) {
-            $scope.animationsEnabled=true;
-          var modalInstance = $modal.open({
-            animation: $scope.animationsEnabled,
-            templateUrl: 'myModalContent.html',
-            controller: myModalController,
-            size: size
 
-          });        
+        $scope.open = function (size) {
+            $scope.animationsEnabled = true;
+            var modalInstance = $modal.open({
+                animation: $scope.animationsEnabled,
+                templateUrl: 'myModalContent.html',
+                controller: myModalController,
+                size: size
+
+            });
             $scope.toggleAnimation = function () {
                 $scope.animationsEnabled = !$scope.animationsEnabled;
-              };
+            };
         };
         $scope.openconfirm = function (size) {
-            $scope.animationsEnabled=true;
+            $scope.animationsEnabled = true;
             var modalInstance = $modal.open({
-            animation: $scope.animationsEnabled,
-            templateUrl: 'myModalConfirm.html',
-            controller: myModalConfirmController,
-            size: size
-          });
-            modalInstance.result.then(function () {      
-            }, function () {      
-            });    
+                animation: $scope.animationsEnabled,
+                templateUrl: 'myModalConfirm.html',
+                controller: myModalConfirmController,
+                size: size
+            });
+            modalInstance.result.then(function () {
+            }, function () {
+            });
             $scope.toggleAnimation = function () {
                 $scope.animationsEnabled = !$scope.animationsEnabled;
-              };
+            };
         };
         $scope.opencancel = function (size) {
-            $scope.animationsEnabled=true;
+            $scope.animationsEnabled = true;
             var modalInstance = $modal.open({
-            animation: $scope.animationsEnabled,
-            templateUrl: 'myModalCancel.html',
-            controller: myModalCancelController,
-            size: size
-          });
-            modalInstance.result.then(function () {      
-            }, function () {      
-            });    
+                animation: $scope.animationsEnabled,
+                templateUrl: 'myModalCancel.html',
+                controller: myModalCancelController,
+                size: size
+            });
+            modalInstance.result.then(function () {
+            }, function () {
+            });
             $scope.toggleAnimation = function () {
                 $scope.animationsEnabled = !$scope.animationsEnabled;
-              };
+            };
         };
-      
+
         $scope.put = function (id, n, pic, p, q) {
 
             //kiem tra 
@@ -109,14 +109,14 @@
             phone: null,
             address: '',
             subTotal: 0,
-            comment:''
+            comment: ''
         };
         $scope.formsubmit = function () {
             $scope.openconfirm();
-            
+
         };
         $scope.clearcart = function () {
-            $scope.opencancel();            
+            $scope.opencancel();
         };
         $scope.qu = 1;
         //return so
@@ -152,11 +152,10 @@
             $uibModalInstance.dismiss('cancel');
         };
     }
-    
-    
+
+
     angular.module('myApp').controller('myModalConfirmController', myModalConfirmController);
-    myModalConfirmController.$inject = ['$scope', '$http', '$window','$uibModalInstance']; 
-    function myModalConfirmController($scope,$http,$window, $uibModalInstance) {
+    function myModalConfirmController($scope, $http, $window, $uibModalInstance) {
         var form = document.getElementById("myForm");
         $scope.ok = function () {
             form.submit();
@@ -170,16 +169,16 @@
             $uibModalInstance.dismiss();
         };
     }
-    
-    
+
+
     angular.module('myApp').controller('myModalCancelController', myModalCancelController);
-    myModalCancelController.$inject = ['$scope', '$http', '$window','$uibModalInstance']; 
-    function myModalCancelController($scope,$http,$window, $uibModalInstance) {
-        
-        $scope.ok = function () {            
+    function myModalCancelController($scope, $http, $window, $uibModalInstance) {
+
+        $scope.ok = function () {
             $scope.cart = [];
             var jsonStr = JSON.stringify($scope.cart);
             $window.localStorage.setItem("shoppingcart", jsonStr);
+            location.reload();
             $uibModalInstance.close();
         };
 

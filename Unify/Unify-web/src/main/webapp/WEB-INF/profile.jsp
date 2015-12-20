@@ -7,6 +7,35 @@
         <link href="<c:url value="/css/pages/profile.css"/>" rel="stylesheet" type="text/css"/>
         <link href="<c:url value="/plugins/sky-forms-pro/skyforms/css/sky-forms.css"/>" rel="stylesheet" type="text/css"/>
         <link href="<c:url value="/plugins/sky-forms-pro/skyforms/custom/custom-sky-forms.css"/>" rel="stylesheet" type="text/css"/>
+        <style>
+            .btn-file {
+                position: relative;
+                overflow: hidden;
+            }
+            .btn-file input[type=file] {
+                position: absolute;
+                top: 0;
+                right: 0;
+                min-width: 100%;
+                min-height: 100%;
+                font-size: 100px;
+                text-align: right;
+                filter: alpha(opacity=0);
+                opacity: 0;
+                outline: none;
+                background: white;
+                cursor: inherit;
+                display: block;
+            }
+            .drop-box {
+                background: #F8F8F8;
+                border: 5px dashed #DDD;
+                width: 170px;
+                text-align: center;
+                padding: 50px 10px;
+                margin-left: 10px;
+            }
+        </style>
     </jsp:attribute>
     <jsp:body>
         <!--=== Breadcrumbs v4 ===-->

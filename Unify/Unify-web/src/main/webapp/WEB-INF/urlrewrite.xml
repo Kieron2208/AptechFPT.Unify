@@ -119,6 +119,12 @@
     </rule>
     
     <rule>
+        <name> Purchase  Print Page</name>
+        <from>^/purchaseprint$</from>
+        <to>/WEB-INF/purchaseprint.jsp</to>
+    </rule>
+    
+    <rule>
         <name>Admin Login Page</name>
         <condition type="method">GET</condition>
         <from>^/administrator/login$</from>
@@ -164,7 +170,7 @@
         <name>Admin Ban User Management</name>
         <condition type="method">GET</condition>
         <from>^/administrator/user/ban/([0-9]+)$</from>
-        <to>/AdminUserController?action=list&amp;accountI=$1</to>
+        <to>/AdminUserController?action=ban&amp;accountId=$1</to>
     </rule>
     
     <rule>

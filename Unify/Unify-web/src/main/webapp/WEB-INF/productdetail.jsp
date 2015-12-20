@@ -101,7 +101,11 @@
                                 <fmt:formatNumber value="${price}" type="currency"/></li></li>
                         </ul><!--/end shop product prices-->
                         <div class="margin-bottom-40">
-                            <button type="button" class="btn-u btn-u-sea-shop btn-u-lg">Add to Cart</button>
+                            <c:forEach var="img" items="${pro.imageCollection}">
+                                <c:if test="${img.displayOrder==1}">
+                                    <button type="button" ng-click="put(${pro.productId}, '${pro.name}', '${img.imagePath}',${pro.unitPrice}, 1)" class="btn-u btn-u-sea-shop btn-u-lg">Add to Cart</button>
+                                </c:if>
+                            </c:forEach>
                         </div><!--/end product quantity-->    
                         <p class="wishlist-category"><strong>Categories:</strong> <a href="#">${pro.subCategoryId.name}</a> <a href="#">${pro.subCategoryId.categoryId.name}</a></p>
                     </div>

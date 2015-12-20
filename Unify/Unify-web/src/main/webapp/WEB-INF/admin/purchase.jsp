@@ -14,7 +14,12 @@
         <script src="<c:url value="/plugins/slimScroll/jquery.slimscroll.min.js"/>" type="text/javascript"></script>
         <script>
             $(function () {
-                $('#example1').DataTable();
+                $(document).ready(function () {
+            <c:forEach items="${list}" varStatus="loop">
+                    $('[data-toggle="popover${loop.index}"]').popover();
+            </c:forEach>
+                    $('#example1').DataTable();
+                });
             });
         </script>
     </jsp:attribute>
@@ -41,7 +46,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <c:forEach var="p" items="${list}">
+                                <c:forEach var="p" items="${list}" varStatus="loop">
                                     <tr>
                                         <td>${p.purchaseOrderId}</td>
 
@@ -51,20 +56,20 @@
                                         <td style="alignment-adjust: central">
                                             <c:if test="${p.status.equals(true)}">
                                                 <strong><i class="fa fa-check margin-r-5"></i>  Finish</strong>
-                                            </a>
+                                                </a>
                                             </c:if>
-                                                
+
                                             <c:if test="${p.status.equals(false)}">
                                                 <form method="post" action="../POUpdate">
                                                     <input type="hidden" name="id" value="${p.purchaseOrderId}"/>
                                                     <strong><i class="fa fa-location-arrow margin-r-5"></i></strong>                                                    
-                                                    <input type="submit" class="btn btn-link" value="Approve">
+                                                    <input type="submit" title="Warning" data-toggle="popover${loop.index}" data-trigger="hover" data-content="This will approve purchase" class="btn btn-link" value="Approve">
                                                 </form>
                                                 <form method="post" action="../POCancel">
                                                     <input type="hidden" name="id" value="${p.purchaseOrderId}"/> 
                                                     <strong><i class="fa fa-close margin-r-5"></i></strong>
-                                                    <input type="submit" class="btn btn-link" value="Cancel">
-                                                </form>    
+                                                    <input type="submit" title="Warning" data-toggle="popover${loop.index}" data-trigger="hover" data-content="This will remove purchase forever" class="btn btn-link" value="Cancel">
+                                                </form>
                                             </c:if>                                           
                                         </td>
                                         <td>
@@ -149,15 +154,15 @@
                                     </div><!-- /.col -->
                                     <div class="col-sm-4 invoice-col">
                                         <b>Invoice: #${p.purchaseOrderId}</b><br>
-                                        
+
                                         <b>Status:</b>
-                                            <c:if test="${p.status.equals(true)}">
-                                                Done
-                                            </c:if>
-                                            <c:if test="${p.status.equals(false)}">
-                                                On Progress
-                                            </c:if>                                        
-                                        
+                                        <c:if test="${p.status.equals(true)}">
+                                            Done
+                                        </c:if>
+                                        <c:if test="${p.status.equals(false)}">
+                                            On Progress
+                                        </c:if>                                        
+
                                         <br>
                                         <b>Payment Due:</b>
                                         <c:set var="string1" value="${p.createdDate}"/>
@@ -183,7 +188,7 @@
                                                     <th>Product</th>
                                                     <th>Quantity</th>
                                                     <th>Price</th>
-                                                    
+
                                                     <th>Subtotal</th>
                                                 </tr>
                                             </thead>
@@ -194,17 +199,17 @@
                                                         <td>${item.productId.name}</td>
                                                         <td>${item.quantity}</td>
                                                         <td>
-                                                        <c:set var="price" value="${item.unitPrice}"/>
-                                                        <fmt:setLocale value="en-US"/>
+                                                            <c:set var="price" value="${item.unitPrice}"/>
+                                                            <fmt:setLocale value="en-US"/>
                                                             <fmt:formatNumber value="${price}" 
-                                                              type="currency"/>
+                                                                              type="currency"/>
                                                         </td>
-                                                        
+
                                                         <td>
                                                             <c:set var="subtotal" value="${item.subtotal}"/>
                                                             <fmt:setLocale value="en-US"/>
                                                             <fmt:formatNumber value="${subtotal}" 
-                                                              type="currency"/>
+                                                                              type="currency"/>
                                                         </td>
                                                     </tr>
                                                 </c:forEach>
@@ -230,7 +235,7 @@
                                                         <c:set var="xtotal" value="${p.subTotal/1.12}"/>
                                                         <fmt:setLocale value="en-US"/>
                                                         <fmt:formatNumber value="${xtotal}" maxFractionDigits="0"
-                                                              type="currency"/>.00                                                        
+                                                                          type="currency"/>.00                                                        
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -239,7 +244,7 @@
                                                         <c:set var="tax" value="${(p.subTotal/1.12)*0.1}"/>
                                                         <fmt:setLocale value="en-US"/>
                                                         <fmt:formatNumber value="${tax}"  maxFractionDigits="2"
-                                                              type="currency"/>
+                                                                          type="currency"/>
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -248,17 +253,17 @@
                                                         <c:set var="ship" value="${(p.subTotal/1.12)*0.02}"/>
                                                         <fmt:setLocale value="en-US"/>
                                                         <fmt:formatNumber value="${ship}"  maxFractionDigits="2"
-                                                              type="currency"/>
+                                                                          type="currency"/>
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <th>Total:</th>
                                                     <td>
                                                         <strong>
-                                                        <c:set var="total" value="${p.subTotal}"/>
-                                                        <fmt:setLocale value="en-US"/>
-                                                        <fmt:formatNumber value="${total}"  maxFractionDigits="2"
-                                                              type="currency"/>
+                                                            <c:set var="total" value="${p.subTotal}"/>
+                                                            <fmt:setLocale value="en-US"/>
+                                                            <fmt:formatNumber value="${total}"  maxFractionDigits="2"
+                                                                              type="currency"/>
                                                         </strong>
                                                     </td>
                                                 </tr>

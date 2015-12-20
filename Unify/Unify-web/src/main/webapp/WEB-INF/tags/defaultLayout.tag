@@ -62,8 +62,8 @@
         <script src="<c:url value="/js/shop.app.js"/>"></script>
         <script src="<c:url value="/js/plugins/owl-carousel.js"/>"></script>
         <script src="<c:url value="/plugins/angular/angular.min.js"/>"></script>
-        <script src="<c:url value="/plugins/ng-file-upload/ng-file-upload.min.js"/>" type="text/javascript"></script>
         <script src="<c:url value="/plugins/angular-bootstrap/ui-bootstrap-tpls.min.js"/>"></script>
+        <script src="<c:url value="/plugins/ng-file-upload/ng-file-upload.min.js"/>" type="text/javascript"></script>
         <script src="<c:url value="/js/shoppingcart.js"/>"></script>
         <script src="<c:url value="/js/clientuser.controller.js"/>"></script>
         <jsp:invoke fragment="pagejs"/>

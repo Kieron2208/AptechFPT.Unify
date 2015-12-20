@@ -4,28 +4,27 @@
 <t:defaultLayout title="Shop UI - Checkout">
     <jsp:attribute name="pagecss">
         <link rel="stylesheet" href="<c:url value="/css/pages/log-reg-v3.css"/>">
-        <link rel="stylesheet" href="<c:url value="/plugins/jquery-steps/css/custom-jquery.steps.css"/>">
+        <!--<link rel="stylesheet" href="<c:url value="/plugins/jquery-steps/css/custom-jquery.steps.css"/>">-->
     </jsp:attribute>
     <jsp:attribute name="pagejs">
-        <script src="<c:url value="/plugins/sky-forms-pro/skyforms/js/jquery.validate.min.js"/>"></script>
-        <!--<script src="<c:url value="/plugins/jquery-steps/build/jquery.steps.js"/>"></script>-->
-        <script src="<c:url value="/plugins/jquery-steps/build/jquery.steps.min.js"/>" type="text/javascript"></script>
-        <script src="<c:url value="/js/forms/page_login.js"/>"></script>
-        <script src="<c:url value="/js/plugins/stepWizard.js"/>"></script>
-        <script src="<c:url value="/js/forms/product-quantity.js"/>"></script>
+        <!--<script src="<c:url value="/plugins/sky-forms-pro/skyforms/js/jquery.validate.min.js"/>"></script>-->
+        <!--<script src="<c:url value="/plugins/jquery-steps/build/jquery.steps.min.js"/>" type="text/javascript"></script>-->
+        <!--<script src="<c:url value="/js/forms/page_login.js"/>"></script>-->
+        <!--<script src="<c:url value="/js/plugins/stepWizard.js"/>"></script>-->
+        <!--<script src="<c:url value="/js/forms/product-quantity.js"/>"></script>-->
         <script src="<c:url value="/plugins/angular.min.js"/>"></script>
         <script src="<c:url value="/js/shoppingcart.js"/>"></script>
-        <script src="<c:url value="/plugins/jquery/jquery.min.js"/>"></script>
-
+        <!--<script src="<c:url value="/plugins/jquery/jquery.min.js"/>"></script>-->
+<!--
         <script>
-            jQuery(document).ready(function () {
-                App.init();
-                Login.initLogin();
-                App.initScrollBar();
-                StepWizard.initStepWizard();
+//            jQuery(document).ready(function () {
+//                App.init();
+//                Login.initLogin();
+//                App.initScrollBar();
+//                StepWizard.initStepWizard();
                 //        StyleSwitcher.initStyleSwitcher();      
-            });
-        </script>
+//            });
+        </script>-->
     </jsp:attribute>
     <jsp:body>
         <script type="text/ng-template" id="myModalContent.html">
@@ -70,6 +69,7 @@
             <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
             </div>
         </script>
+        
         <!--=== Breadcrumbs v4 ===-->
         <div class="breadcrumbs-v4">
             <div class="container">
@@ -154,12 +154,10 @@
                         <div class="overflow-h">
                             <h2><i class="rounded-x fa fa-home"></i>PURCHASE INFORMATION</h2>
                             <p>Please enter your information</p>
-
                         </div>    
                     </div>
                     <form id="myForm" method="post" action="POInsert"  class="shopping-cart" name="myForm" novalidate="novalidate">                         
-
-                        <section >
+                        <section>
                             <div class="row">
                                 <div class="col-md-6">
                                     <h2 class="title-type">Shipping Address</h2>
@@ -223,11 +221,9 @@
                                                 <input type="hidden"  value="{{cart}}" name="cart"/>
                                             </div>
                                         </li>
-
                                     </ul>
                                     <br/>
                                     <input type="button" class="btn-u btn-u-lg" 
-                                           
                                            ng-click="clearcart()" value="CANCEL"/>
                                     <input type="button" ng-click="formsubmit()"
                                            ng-disabled="myForm.$invalid ||
@@ -237,17 +233,12 @@
                                                        hide()"
                                            style="float: right" class="btn-u btn-u-lg" value="CHECK OUT"/>
                                 </div>
-                                
-
                             </div>       
                         </section>
                     </form>
                 </div>
-
-
-
             </div><!--/end container-->
-            <!--=== End Content Medium Part ===-->     
-
+            <!--=== End Content Medium Part ===-->   
+        </div>
         </jsp:body>
     </t:defaultLayout>
