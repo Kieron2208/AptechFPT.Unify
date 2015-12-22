@@ -6,9 +6,21 @@
 <%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <t:defaultLayout title="Shop UI - Profile">
     <jsp:attribute name="pagecss">
+        <link href="<c:url value="/plugins/datatables/dataTables.bootstrap.css"/>" type="text/css"  rel="stylesheet"/>
         <link href="<c:url value="/css/pages/profile.css"/>" rel="stylesheet" type="text/css"/>
         <link href="<c:url value="/plugins/sky-forms-pro/skyforms/css/sky-forms.css"/>" rel="stylesheet" type="text/css"/>
         <link href="<c:url value="/plugins/sky-forms-pro/skyforms/custom/custom-sky-forms.css"/>" rel="stylesheet" type="text/css"/>
+    </jsp:attribute>
+    <jsp:attribute name="pagejs">
+        <script src="<c:url value="/plugins/datatables/jquery.dataTables.min.js"/>" type="text/javascript"></script>
+        <script src="<c:url value="/plugins/datatables/dataTables.bootstrap.min.js"/>" type="text/javascript"></script>
+        <script>
+            $(function () {
+                $(document).ready(function () {
+                    $('#example1').DataTable();
+                });
+            });
+        </script>
     </jsp:attribute>
     <jsp:body>
         <!--=== Breadcrumbs v4 ===-->

@@ -1,4 +1,4 @@
-/*
+u/*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -7,6 +7,7 @@ package com.aptechfpt.controller;
 
 import com.aptechfpt.bean.AccountFacadeLocal;
 import com.aptechfpt.dto.AccountDTO;
+import com.aptechfpt.entity.Account;
 import com.aptechfpt.enumtype.AccountGender;
 import com.aptechfpt.enumtype.Role;
 import java.io.File;
@@ -108,7 +109,8 @@ public class RegisterController extends HttpServlet {
 //            out.close();
             request.login(dto.getEmail(), dto.getPassword());
             HttpSession session = request.getSession();
-            session.setAttribute("Account", dto);
+            AccountDTO getDTO = setDTO(dto.getEmail());
+            session.setAttribute("Account", getDTO);
             String home = request.getContextPath() + "/";
             response.sendRedirect(home);
         } catch (FileUploadException ex) {
@@ -118,6 +120,18 @@ public class RegisterController extends HttpServlet {
             String home = request.getContextPath() + "/";
             response.sendRedirect(home);
         }
+    }
+    
+    private AccountDTO setDTO(String email) {
+        Account account = accountFacade.findByEmail(email);
+        AccountDTO dto = new AccountDTO.Builder(account.getAccountId(), account.getEmail())
+                .FirstName(account.getFirstName())
+                .LastName(account.getLastName())
+                .ImageLink(account.getImageLink())
+                .isAvalaible(account.isAvailable())
+                .Gender(account.getGender())
+                .build();
+        return dto;
     }
 
     private String writeFile(FileItem fileItem) {

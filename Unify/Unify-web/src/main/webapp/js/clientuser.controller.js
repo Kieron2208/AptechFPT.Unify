@@ -87,7 +87,7 @@
                 }).then(function (resp) {
                     vm.message = 'Create new Account Successful.';
                     logger.success("Insert Successful.", resp);
-                    window.location = "/Unify-web/";
+                    window.location = baseContext;
                 }, function (resp) {
                     vm.message = 'Create new Account Failed.';
                     logger.error("Insert Failed.", resp);

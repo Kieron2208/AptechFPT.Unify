@@ -224,7 +224,7 @@
                                        name="txtPhone"
                                        ng-minlength="10"
                                        ng-maxlength="20"
-                                       ng-pattern="/^[0-9\-\(\)\+]+$/"
+                                       ng-pattern="/^[0-9]+$/"
                                        required
                                        placeholder="Input your phone number"
                                        ng-model="vm.entity.phone"/>

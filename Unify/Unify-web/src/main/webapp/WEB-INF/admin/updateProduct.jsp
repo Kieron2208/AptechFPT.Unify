@@ -26,6 +26,7 @@
                 $scope.txtPrice = "${pro.unitPrice}";
                 $scope.txtDes = "${pro.description}";
             });
+            
         </script>
     </jsp:attribute>
     <jsp:body>
