@@ -105,10 +105,12 @@ public class RegisterController extends HttpServlet {
             PrintWriter out = response.getWriter();
             out.print(jsonRes.toString());
             out.close();
+            String home = request.getContextPath() + "/";
+            response.sendRedirect(home);
         } catch (FileUploadException ex) {
             ex.printStackTrace();
             Logger.getLogger(InsertSalePerson.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        } 
     }
 
     private String writeFile(FileItem fileItem) {
@@ -179,7 +181,7 @@ public class RegisterController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        Register(request, response);
     }
 
     /**

@@ -33,5 +33,12 @@ public class PriceHistoryFacade extends AbstractFacade<PriceHistory> implements 
         PriceHistory ph=(PriceHistory) q.setMaxResults(1).getSingleResult();
         return ph.getCost();
     }
-    
+
+    @Override
+    public PriceHistory getNew(Product product) {
+        Query q = em.createNamedQuery("PriceHistory.findByCost");
+        q.setParameter("productId", product);
+        PriceHistory ph=(PriceHistory) q.setMaxResults(1).getSingleResult();
+        return ph;
+    }
 }

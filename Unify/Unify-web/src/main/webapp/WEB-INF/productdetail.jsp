@@ -4,13 +4,13 @@
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <t:defaultLayout title="Shop UI - Product Detail">
     <jsp:attribute name="pagecss">
-        <link rel="stylesheet" href="<c:url value="/plugins/sky-forms-pro/skyforms/css/sky-forms.css"/>"/>
+           <link rel="stylesheet" href="<c:url value="/plugins/sky-forms-pro/skyforms/css/sky-forms.css"/>"/>
         <link rel="stylesheet" href="<c:url value="/plugins/sky-forms-pro/skyforms/custom/custom-sky-forms.css"/>"/>
         <link rel="stylesheet" href="<c:url value="/plugins/master-slider/quick-start/masterslider/style/masterslider.css"/>"/>
         <link rel='stylesheet' href="<c:url value="/plugins/master-slider/quick-start/masterslider/skins/default/style.css"/>"/>
     </jsp:attribute>
     <jsp:attribute name="pagejs">
-        <!-- Master Slider -->
+        <script src="<c:url value="/js/like1.js"/>"></script>
         <script src="<c:url value="/plugins/master-slider/quick-start/masterslider/masterslider.min.js"/>"></script>
         <script src="<c:url value="/plugins/master-slider/quick-start/masterslider/jquery.easing.min.js"/>"></script>
         <!-- JS Page Level -->
@@ -24,6 +24,20 @@
                 MasterSliderShowcase2.initMasterSliderShowcase2();
             });
         </script>
+        <script type="text/ng-template" id="myModalContent.html">
+        <div class="modal-header">
+        <strong>
+            <h3 class="modal-title" style="color:red"><i style="color:red" class="fa fa-exclamation-triangle"></i>WARNING!</h3>
+        </strong>
+        </div>
+        <div class="modal-body">
+        <h3> <strong class="item-name">You shopping cart only can add 30 products once!</strong></h3>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-warning" type="button" ng-click="cancel()">OK</button>
+            
+        </div>
+    </script>
     </jsp:attribute>
     <jsp:body>
         <!--=== Shop Product ===-->
@@ -88,7 +102,17 @@
                         </div><!--/end shop product social-->
 
                         <ul class="list-inline product-ratings margin-bottom-30">
-                            <li>${pro.like} Like</li>
+                            <li>
+                                <div id="likecountt${pro.productId}">${pro.like} Like</div>
+
+                            </li>
+                            <li>
+                                <form id="likeform${pro.productId}" method="post" action="../ProductLike">
+                                    <input type="hidden" name="pid" value="${pro.productId}"/>
+                                    <button type="submit" class="btn btn-link"><i class="fa fa-heart"> </i></button>
+                                </form>
+                            </li>
+
                             <li class="product-review-list">
                                 <span>(1) <a href="#">Review</a> | <a href="#"> Add Review</a></span>
                             </li>
@@ -101,9 +125,13 @@
                                 <fmt:formatNumber value="${price}" type="currency"/></li></li>
                         </ul><!--/end shop product prices-->
                         <div class="margin-bottom-40">
-                            <button type="button" class="btn-u btn-u-sea-shop btn-u-lg">Add to Cart</button>
+                            <c:forEach var="img" items="${pro.imageCollection}">
+                                <c:if test="${img.displayOrder==1}">
+                                    <button type="button" ng-click="put(${pro.productId}, '${pro.name}', '${img.imagePath}',${pro.unitPrice}, 1)" class="btn-u btn-u-sea-shop btn-u-lg">Add to Cart</button>
+                                </c:if>
+                            </c:forEach>
                         </div><!--/end product quantity-->    
-                        <p class="wishlist-category"><strong>Categories:</strong> <a href="#">${pro.subCategoryId.name}</a> <a href="#">${pro.subCategoryId.categoryId.name}</a></p>
+                        <p class="wishlist-category"><strong>Categories:</strong> ${pro.subCategoryId.name}${pro.subCategoryId.categoryId.name}</p>
                     </div>
                 </div><!--/end row-->
             </div>    

@@ -254,7 +254,7 @@
                                     </label>
                                 </section>                                  
                             </div>
-                            <button class="btn-u btn-u-sea-shop btn-block margin-bottom-20" type="submit">Create Account</button>
+                            <button class="btn-u btn-u-sea-shop btn-block margin-bottom-20" ng-click="vm.submit()">Create Account</button>
                         </form>
 
                         <div class="margin-bottom-20"></div>

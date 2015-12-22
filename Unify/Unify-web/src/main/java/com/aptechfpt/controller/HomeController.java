@@ -1,10 +1,13 @@
 package com.aptechfpt.controller;
 
+import com.aptechfpt.bean.CategoryFacadeLocal;
 import com.aptechfpt.bean.ProductFacadeLocal;
 import com.aptechfpt.bean.PurchaseOrderDetailFacadeLocal;
+import com.aptechfpt.entity.Category;
 import com.aptechfpt.entity.Product;
 import com.aptechfpt.entity.PurchaseOrderDetail;
 import java.io.IOException;
+import java.util.AbstractList;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -25,6 +28,9 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class HomeController extends HttpServlet {
 
+    @EJB
+    private CategoryFacadeLocal categoryFacade;
+
     @Inject
     private PurchaseOrderDetailFacadeLocal purchaseOrderDetailFacade;
 
@@ -40,6 +46,10 @@ public class HomeController extends HttpServlet {
 //        } catch (NamingException ex) {
 //            Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
 //        }
+        List<Category> listcategory = categoryFacade.findAll();
+        Logger.getLogger(HomeController.class.getName()).log(Level.INFO,"category list size: {0}",new Object[]{listcategory.size()});
+        getServletContext().setAttribute("listcategory", listcategory);
+
         List<Product> listNew = productFacade.findLatest();
         request.setAttribute("Listnew", listNew);
         
@@ -63,7 +73,9 @@ public class HomeController extends HttpServlet {
         }
         request.setAttribute("Listbuy", listMostBuy);
         
+        List<Product> most = purchaseOrderDetailFacade.findMost();
         
+        request.setAttribute("listb", most);
         
         request.getRequestDispatcher("WEB-INF/index.jsp").forward(request, response);
     }

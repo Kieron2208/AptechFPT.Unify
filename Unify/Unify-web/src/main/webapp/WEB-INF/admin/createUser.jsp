@@ -43,10 +43,7 @@
         <script>window.baseContext = '<c:url value="/"/>';</script>
 <!--        <script src="<c:url value="/plugins/bootstrap-fileinput/js/fileinput.min.js"/>" type="text/javascript"></script>
         <script src="<c:url value="/plugins/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"/>" type="text/javascript"></script>-->
-        <script src="<c:url value="/plugins/angular/angular.min.js"/>" type="text/javascript"></script>
-        <script src="<c:url value="/plugins/ng-file-upload/ng-file-upload.min.js"/>" type="text/javascript"></script>
-        <script src="<c:url value="/plugins/angular-bootstrap/ui-bootstrap-tpls.min.js"/>" type="text/javascript"></script>
-        <script src="<c:url value="/js/user.controller.js"/>" type="text/javascript"></script>
+        
         <script>
                     (function ($) {
                     'use strict';

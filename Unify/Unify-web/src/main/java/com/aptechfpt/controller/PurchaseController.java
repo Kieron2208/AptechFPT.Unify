@@ -33,6 +33,7 @@ public class PurchaseController extends HttpServlet {
         }
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
+            request.setCharacterEncoding("UTF-8");
             List<PurchaseOrder> list = purchaseOrderFacade.findAll();
             MaHoa mh = new MaHoa();
 

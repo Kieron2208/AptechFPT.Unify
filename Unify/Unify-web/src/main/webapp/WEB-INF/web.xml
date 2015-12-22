@@ -91,6 +91,10 @@
         <servlet-class>com.aptechfpt.controller.ProductLikeController</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>ProductReport</servlet-name>
+        <servlet-class>com.aptechfpt.controller.ProductReportController</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>ProfileController</servlet-name>
         <servlet-class>com.aptechfpt.controller.ProfileController</servlet-class>
         <load-on-startup>1</load-on-startup>
@@ -138,6 +142,10 @@
     <servlet-mapping>
         <servlet-name>AdminSubCategory</servlet-name>
         <url-pattern>/AdminSubCategory</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ProductReport</servlet-name>
+        <url-pattern>/ProductReport</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>POInsert</servlet-name>

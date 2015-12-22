@@ -55,6 +55,10 @@
                         <c:url value="/administrator/addProduct" var="addProduct"/>
                         <a href="${addProduct}"><i class="fa fa-circle-o"></i> Add New Product</a>
                     </li>
+                    <li>
+                        <c:url value="/administrator/productreport" var="productreport"/>
+                        <a href="${productreport}"><i class="fa fa-circle-o"></i> Report</a>
+                    </li>
                 </ul>
             </li>
             <li>

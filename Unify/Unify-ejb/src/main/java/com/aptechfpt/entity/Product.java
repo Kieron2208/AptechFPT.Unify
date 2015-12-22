@@ -49,7 +49,6 @@ public class Product implements Serializable {
     
     @Id
     @Basic(optional = false)
-    @NotNull
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ProductId", nullable = false)
     private Integer productId;

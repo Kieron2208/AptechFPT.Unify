@@ -37,11 +37,8 @@
                                         <td>${s.name}</td>
                                         <td>${s.categoryId.name}</td>
                                         <td>
-                                            <a class="btn btn-success" href="#">
-                                                <i class="glyphicon glyphicon-zoom-in icon-white"></i>
-                                                View
-                                            </a>
-                                            <a class="btn btn-info" href="#">
+                                            <c:url value="/administrator/updateSub/${s.subCategoryId}" var="updateSub"/>
+                                            <a class="btn btn-info" href="${updateSub}">
                                                 <i class="glyphicon glyphicon-edit icon-white"></i>
                                                 Edit
                                             </a>

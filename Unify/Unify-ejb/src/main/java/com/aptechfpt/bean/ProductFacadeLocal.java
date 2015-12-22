@@ -6,6 +6,7 @@
 package com.aptechfpt.bean;
 
 import com.aptechfpt.entity.Product;
+import com.aptechfpt.entity.SubCategory;
 import java.util.List;
 import javax.ejb.Local;
 
@@ -34,4 +35,11 @@ public interface ProductFacadeLocal {
 
     List<Product> findMostLike();
 
+    List<Product> getTop10Like();
+    
+    Product findByID(int id);
+            
+    List<Product> findBySub(SubCategory id);
+    
+    List<Product> findBySubGen(SubCategory id, int gender);
 }

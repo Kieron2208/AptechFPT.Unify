@@ -1,3 +1,5 @@
+/* global angular */
+/* global baseContext */
 (function () {
     'use strict';
 
@@ -69,7 +71,7 @@
         function submit() {
             if (vm.userForm.$valid) {
                 Upload.upload({
-                    url: baseContext + 'administrator/user/new',
+                    url: baseContext + 'register',
                     data: {
                         email: vm.entity.email,
                         password: vm.entity.password,
@@ -130,7 +132,7 @@
         }
 
         function fetchData() {
-            return $http.get(baseContext + 'administrator/user/profile/detail')
+            return $http.get(baseContext + 'profile/detail')
                     .then(function (response) {
                         vm.entity = response.data;
                         vm.entity.dateOfBirth = new Date(response.data.dateOfBirth);
@@ -162,13 +164,16 @@
 
         function submit() {
             if (vm.userForm.$valid) {
+                var arrayOfString = vm.entity.imgLink.split(baseContext);
+                var imgPath ='/'+ arrayOfString[1];
                 Upload.upload({
-                    url: baseContext + 'administrator/user/profile',
+                    url: baseContext + 'profile',
                     data: {
                         id: vm.entity.id,
                         email: vm.entity.email,
                         password: vm.entity.password,
                         firstName: vm.entity.firstName,
+                        image: vm.entity.avatar || imgPath,
                         lastName: vm.entity.lastName,
                         phone: vm.entity.phone,
                         address: vm.entity.address,
@@ -177,6 +182,7 @@
                     }
                 }).then(function (resp) {
                     logger.success("Update Successful.", resp);
+                    location.reload();
                 }, function (resp) {
                     logger.error("Update Failed.", resp);
                 });
@@ -207,7 +213,7 @@
             if (vm.userForm.$valid) {
                 $http({
                     method: 'POST',
-                    url: baseContext + 'administrator/user/profile/password',
+                    url: baseContext + 'profile/password',
                     data: $.param({newPassword: vm.password}),
                     headers: {'Content-Type': 'myApplication/x-www-form-urlencoded'}
                 }).then(function (resp) {

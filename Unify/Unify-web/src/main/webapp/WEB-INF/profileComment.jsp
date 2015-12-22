@@ -46,45 +46,31 @@
                                         <table id="example1" class="table table-bordered table-striped">
                                             <thead>
                                                 <tr>
-                                                    <th>Name</th>
-                                                    <th>Address</th>
-                                                    <th>Phone</th>
-                                                    <th>Status</th>
-                                                    <th>Date</th>
-                                                    <th>Subtotal</th>
+                                                    <th></th>
+                                                    <th>Product Name</th>
+                                                    <th>Like</th>
+                                                    <th>Content</th>
+                                                    <th>Created Date</th>
                                                     <th></th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <c:forEach var="p" items="${list}">
+                                                <c:forEach var="p" items="${list.commentCollection}" varStatus="loop">
                                                     <tr>
-                                                        <td>${p.name}</td>
-                                                        <td>${p.address}</td>
-                                                        <td>${p.phone}</td>
-                                                        <td style="alignment-adjust: central">
-                                                            <c:if test="${p.status.equals(true)}">
-                                                                <strong><i class="fa fa-check margin-r-5"></i>  Finish</strong>
-                                                            </c:if>
-
-                                                            <c:if test="${p.status.equals(false)}">
-                                                                <strong><i class="fa fa-truck margin-r-5"></i>  Delivering</strong>
-                                                            </c:if>                                           
+                                                        <td>${loop.index + 1}</td>
+                                                        <td>${p.productId.name}</td>
+                                                        <td>${p.like}</td>
+                                                        <td>${p.comment}</td>
+                                                        <td>${p.createdDate.toString('MMMM-dd-yyyy')}                                        
                                                         </td>
-                                                        <td>
-                                                            ${p.createdDate}
+                                                        <td>${p.modifiedDate.toString('MMMM-dd-yyyy')}                                        
                                                         </td>
-                                                        <td>
-                                                            <c:set var="total" value="${p.subTotal}"/>
-                                                <fmt:setLocale value="en-US"/>
-                                                <fmt:formatNumber value="${total}" 
-                                                                  type="currency"/>
-                                                </td>
-                                                <td>
+<!--                                                <td>
 
-                                                    <a class="btn btn-success" href data-toggle="modal" data-target="#myModal${p.purchaseOrderId}">
+                                                    <a class="btn btn-success" href data-toggle="modal" data-target="#myModal${loop.index}">
                                                         <i class="glyphicon glyphicon-zoom-in icon-white"></i>
                                                     </a>
-                                                </td>
+                                                </td>-->
                                                 </tr>
                                             </c:forEach>
                                             </tbody>
@@ -93,10 +79,10 @@
                                 </div>
                             </div>
                         </div>
-
-                        <!--Modal-->
-                        <c:forEach var="p" items="${list}">
-                            <div class="modal fade" id="myModal${p.purchaseOrderId}" role="dialog">
+<!--
+                        Modal
+                        <c:forEach var="p" items="${list}" varStatus="loop">
+                            <div class="modal fade" id="myModal${loop.index}" role="dialog">
                                 <div class="modal-dialog modal-lg">
                                     <div class="modal-content">
                                         <div class="modal-header">
@@ -105,7 +91,7 @@
                                         </div>
                                         <div class="modal-body">
                                             <section class="invoice">
-                                                <!-- title row -->
+                                                 title row 
                                                 <div class="row">
                                                     <div class="col-xs-12">
                                                         <h2 class="page-header">
@@ -115,9 +101,9 @@
                                                                                                             value="${now}" />
                                                             </small>
                                                         </h2>
-                                                    </div><!-- /.col -->
+                                                    </div> /.col 
                                                 </div>
-                                                <!-- info row -->
+                                                 info row 
                                                 <div class="row invoice-info">
                                                     <div class="col-sm-4 invoice-col">
                                                         Customer infomation
@@ -127,10 +113,10 @@
                                                             Phone: ${p.phone}<br>
 
                                                         </address>
-                                                    </div><!-- /.col -->
+                                                    </div> /.col 
                                                     <div class="col-sm-4 invoice-col">
 
-                                                    </div><!-- /.col -->
+                                                    </div> /.col 
                                                     <div class="col-sm-4 invoice-col">
                                                         <b>Invoice #${p.purchaseOrderId}</b><br>
 
@@ -145,10 +131,10 @@
                                                         <br>
                                                         <b>Payment Due:</b>${p.createdDate}<br>
                                                         <b>Account:</b> #${p.accountId.accountId}
-                                                    </div><!-- /.col -->
-                                                </div><!-- /.row -->
+                                                    </div> /.col 
+                                                </div> /.row 
 
-                                                <!-- Table row -->
+                                                 Table row 
                                                 <div class="row">
                                                     <div class="col-xs-12 table-responsive">
                                                         <table class="table table-striped">
@@ -185,8 +171,8 @@
                                                             </c:forEach>
                                                             </tbody>
                                                         </table>
-                                                    </div><!-- /.col -->
-                                                </div><!-- /.row -->
+                                                    </div> /.col 
+                                                </div> /.row 
 
                                                 <div class="row">
                                                     <div class="col-xs-6">
@@ -246,7 +232,7 @@
                                 </div>
                             </div>
                         </c:forEach>
-                        <!--End Modal-->
+                        End Modal-->
                     </div>
                 </div>
                 <!-- End Profile Content -->

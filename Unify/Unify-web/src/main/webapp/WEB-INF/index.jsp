@@ -9,6 +9,7 @@
     </jsp:attribute>
     <jsp:attribute name="pagejs">
         <script src="<c:url value="/js/plugins/revolution-slider.js"/>"></script>
+        <script src="<c:url value="/js/like.js"/>"></script>
         <script type="text/javascript">
             jQuery(document).ready(function () {
                 App.initScrollBar();
@@ -17,39 +18,23 @@
                 RevolutionSlider.initRSfullWidth();
             });
         </script>
-
-
-        <script type="text/javascript">
-
-            (function () {
-                $(document).ready(function () {
-                    var frm = $('#myform55');
-                    frm.submit(function () {
-
-                        $.ajax({
-                            type: frm.attr('method'),
-                            url: frm.attr('action'),
-                            data: frm.serialize(),
-                            success: function (output) {
-                                $("#likecount55").html(output);
-
-                            }
-                        });
-                        return false;
-
-                    });
-                    
-
-                    
-                });
-            })();
-
-        </script>
-
-
-
+        
     </jsp:attribute>
     <jsp:body>
+        <script type="text/ng-template" id="myModalContent.html">
+        <div class="modal-header">
+        <strong>
+            <h3 class="modal-title" style="color:red"><i style="color:red" class="fa fa-exclamation-triangle"></i>WARNING!</h3>
+        </strong>
+        </div>
+        <div class="modal-body">
+        <h3> <strong class="item-name">You shopping cart only can add 30 products once!</strong></h3>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-warning" type="button" ng-click="cancel()">OK</button>
+            
+        </div>
+    </script>
         <!--=== Slider ===-->
         <div class="tp-banner-container">
             <div class="tp-banner">
@@ -344,24 +329,26 @@
                                 <c:forEach var="img" items="${p.imageCollection}">
                                     <c:if test="${img.displayOrder==1}">
                                         <c:url value="/product/${p.productId}" var="productdetail"/>
-                                        <a href="${productdetail}"><img class="full-width img-responsive" src="${img.imagePath}" alt=""></a>
-                                    </c:if>
-                                </c:forEach>
-                                <c:url value="/product/${p.productId}" var="productdetail"/>
-                                        <a class="product-review" href="${productdetail}">Quick review</a>
-                                <a class="add-to-cart" ng-click="put(${p.productId},'${p.name}','${img.imagePath}',${p.unitPrice},1)" href><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                                        <c:url value="${img.imagePath}" var="imageLink"/>
+                                        <a href="${productdetail}"><img class="full-width img-responsive" src="${imageLink}" alt=""></a>
+                                        </c:if>
+                                    </c:forEach>
+                                    <c:url value="/product/${p.productId}" var="productdetail"/>
+                                <a class="product-review" href="${productdetail}">Quick review</a>
+                                <a class="add-to-cart" ng-click="put(${p.productId}, '${p.name}', '${img.imagePath}',${p.unitPrice}, 1)" href><i class="fa fa-shopping-cart"></i>Add to cart</a>
                                 <div class="shop-rgba-dark-green rgba-banner">New</div>
                             </div>
                             <div class="product-description product-description-brd">
                                 <div class="overflow-h margin-bottom-5">
                                     <div class="pull-left">
-                                        <h4 class="title-price"><a href="shop-ui-inner.html">${p.name}</a></h4>
+                                        <c:url value="/product/${p.productId}" var="productdetail"/>
+                                        <h4 class="title-price"><a href="${productdetail}">${p.name}</a></h4>
                                         <span class="gender text-uppercase">
                                             <c:if test="${p.gender==0}">Men</c:if>
                                             <c:if test="${p.gender==1}">Women</c:if>
                                             <c:if test="${p.gender==2}">Kid</c:if>
                                         </span>
-                                        <span class="gender">${p.subCategoryId.name}</span>
+                                            <span class="gender">${p.subCategoryId.name}</span>
                                     </div>    
                                     <div class="product-price">
                                         <span class="title-price">
@@ -372,8 +359,9 @@
                                     </div>
                                 </div>    
                                 <ul class="list-inline product-ratings">
+
                                     <li>
-                                        <div id="likecount${p.productId}">${p.like}</div>
+                                        <div id="likecount${p.productId}">${p.like} Like</div>
                                     </li>
                                     <li class="like-icon">
                                         <form id="myform${p.productId}" method="post" action="ProductLike">
@@ -394,7 +382,6 @@
         <!--=== End Product Content ===-->
 
         <div class="container">
-
             <!--=== Illustration v4 ===-->
             <div class="row illustration-v4 margin-bottom-40">
                 <div class="col-md-4">
@@ -410,24 +397,29 @@
                             </c:forEach>
                             <div class="thumb-product-in">
                                 <h4><c:url value="/product/${p.productId}" var="productdetail"/>
-                                        <a href="${productdetail}">${p.name}</a> – <a href="shop-ui-inner.html">${p.subCategoryId.name}</a></h4>
-                                <span class="thumb-product-type"><c:if test="${p.gender==0}">Men</c:if>
+                                    <c:url value="/productgrid/${p.subCategoryId.subCategoryId}" var="productgrid"/>
+                                    <a href="${productdetail}">${p.name}</a> – <a href="${productgrid}">${p.subCategoryId.name}</a></h4>
+                                <span class="thumb-product-type">
+                                    <c:if test="${p.gender==0}">Men</c:if>
                                     <c:if test="${p.gender==1}">Women</c:if>
-                                    <c:if test="${p.gender==2}">Kid</c:if></span>
-                                </div>
+                                    <c:if test="${p.gender==2}">Kid</c:if>
+                                </span>
+                            </div>
                                 <ul class="list-inline overflow-h">
                                     <li class="thumb-product-price">
-                                    <c:set var="price" value="${p.unitPrice}"/>
-                                    <fmt:setLocale value="en_US"/>
-                                    <fmt:formatNumber value="${price}" type="currency"/></li>
+                                        <c:set var="price" value="${p.unitPrice}"/>
+                                        <fmt:setLocale value="en_US"/>
+                                        <fmt:formatNumber value="${price}" type="currency"/>
+                                    </li><br/>
                                 <li class="thumb-product-purchase">
-                                    <c:forEach var="img" items="${p.imageCollection}">
+                                    <div>
+                                        <c:forEach var="img" items="${p.imageCollection}">
                                         <c:if test="${img.displayOrder==1}">
                                             <a  ng-click="put(${p.productId}, '${p.name}', '${img.imagePath}',${p.unitPrice}, 1)" href><i class="fa fa-shopping-cart"></i></a>
                                             </c:if>
                                         </c:forEach>
-
-                                    | <a href="#"><i class="fa fa-heart"></i></a></li>
+                                    </div>
+                                </li>
                             </ul>    
                         </div>
                     </c:forEach>
@@ -437,7 +429,7 @@
                     <div class="heading heading-v1 margin-bottom-20">
                         <h2>Best Sellers</h2>
                     </div>
-                    <c:forEach var="p" items="${Listbuy}">
+                    <c:forEach var="p" items="${listb}">
                         <div class="thumb-product">
                             <c:forEach var="img" items="${p.imageCollection}">
                                 <c:if test="${img.displayOrder==1}">
@@ -446,24 +438,25 @@
                             </c:forEach>
                             <div class="thumb-product-in">
                                 <h4><c:url value="/product/${p.productId}" var="productdetail"/>
-                                        <a href="${productdetail}">${p.name}</a> – <a href="shop-ui-inner.html">${p.subCategoryId.name}</a></h4>
+                                    <c:url value="/productgrid/${p.subCategoryId.subCategoryId}" var="productgrid"/>
+                                    <a href="${productdetail}">${p.name}</a> – <a href="${productgrid}">${p.subCategoryId.name}</a></h4>
                                 <span class="thumb-product-type"><c:if test="${p.gender==0}">Men</c:if>
                                     <c:if test="${p.gender==1}">Women</c:if>
                                     <c:if test="${p.gender==2}">Kid</c:if></span>
                                 </div>
                                 <ul class="list-inline overflow-h">
                                     <li class="thumb-product-price">
-                                    <c:set var="price" value="${p.unitPrice}"/>
-                                    <fmt:setLocale value="en_US"/>
-                                    <fmt:formatNumber value="${price}" type="currency"/></li>
+                                        <c:set var="price" value="${p.unitPrice}"/>
+                                        <fmt:setLocale value="en_US"/>
+                                        <fmt:formatNumber value="${price}" type="currency"/>
+                                    </li><br/>
                                 <li class="thumb-product-purchase">
                                     <c:forEach var="img" items="${p.imageCollection}">
                                         <c:if test="${img.displayOrder==1}">
                                             <a  ng-click="put(${p.productId}, '${p.name}', '${img.imagePath}',${p.unitPrice}, 1)" href><i class="fa fa-shopping-cart"></i></a>
                                             </c:if>
                                         </c:forEach>
-
-                                    | <a href="#"><i class="fa fa-heart"></i></a></li>
+                                </li>
                             </ul>    
                         </div>
                     </c:forEach>
@@ -481,7 +474,8 @@
                             </c:forEach>
                             <div class="thumb-product-in">
                                 <h4><c:url value="/product/${p.productId}" var="productdetail"/>
-                                        <a href="${productdetail}">${p.name}</a> – <a href="shop-ui-inner.html">${p.subCategoryId.name}</a></h4>
+                                    <c:url value="/productgrid/${p.subCategoryId.subCategoryId}" var="productgrid"/>
+                                    <a href="${productdetail}">${p.name}</a> – <a href="${productgrid}">${p.subCategoryId.name}</a></h4>
                                 <span class="thumb-product-type"><c:if test="${p.gender==0}">Men</c:if>
                                     <c:if test="${p.gender==1}">Women</c:if>
                                     <c:if test="${p.gender==2}">Kid</c:if>
@@ -489,19 +483,17 @@
                                 </div>
                                 <ul class="list-inline overflow-h">
                                     <li class="thumb-product-price">
-                                    <c:set var="price" value="${p.unitPrice}"/>
-                                    <fmt:setLocale value="en_US"/>
-                                    <fmt:formatNumber value="${price}" type="currency"/></li>
+                                        <c:set var="price" value="${p.unitPrice}"/>
+                                        <fmt:setLocale value="en_US"/>
+                                        <fmt:formatNumber value="${price}" type="currency"/>
+                                    </li><br/>
                                 <li class="thumb-product-purchase">
-
                                     <c:forEach var="img" items="${p.imageCollection}">
                                         <c:if test="${img.displayOrder==1}">
                                             <a  ng-click="put(${p.productId}, '${p.name}', '${img.imagePath}',${p.unitPrice}, 1)" href><i class="fa fa-shopping-cart"></i></a>
                                             </c:if>
-                                        </c:forEach>
-
-
-                                    | <a href="#"><i class="fa fa-heart"></i></a></li>
+                                    </c:forEach>
+                                </li>
                             </ul>    
                         </div>
                     </c:forEach>

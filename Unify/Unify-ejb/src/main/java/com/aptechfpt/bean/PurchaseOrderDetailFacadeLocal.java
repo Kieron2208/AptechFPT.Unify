@@ -5,7 +5,10 @@
  */
 package com.aptechfpt.bean;
 
+import com.aptechfpt.dto.HighSale;
+import com.aptechfpt.entity.Product;
 import com.aptechfpt.entity.PurchaseOrderDetail;
+import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.Local;
 
@@ -30,5 +33,11 @@ public interface PurchaseOrderDetailFacadeLocal {
 
     int count();
     
+    List<HighSale> getTop10Buy(String f, String t);
+    
     List<PurchaseOrderDetail> findMostBuy();
+
+    List<Product> findMost();
+
+
 }

@@ -98,9 +98,15 @@
     <rule>
         <name>to Product Grid Page</name>
         <condition type="method">GET</condition>
-        <from>^/product$</from>
-        <set type="parameter" name="testvalue">Hello World</set>
-        <to>/ProductController?action=grid</to>
+        <from>^/productgrid/([0-9]+)$</from>
+        <to last="true">/ProductController?action=grid&amp;id=$1</to>
+    </rule>
+    
+    <rule>
+        <name>to Product Grid Page Gender</name>
+        <condition type="method">GET</condition>
+        <from>^/productgrid/([0-9]+)/([0-9]+)$</from>
+        <to last="true">/ProductController?action=gridgender&amp;id=$1&amp;gender=$2</to>
     </rule>
 
     <rule>
@@ -116,6 +122,12 @@
         <condition type="method">GET</condition>
         <from>^/shoppingcart$</from>
         <to>/WEB-INF/shoppingcart.jsp</to>
+    </rule>
+    
+    <rule>
+        <name> Purchase  Print Page</name>
+        <from>^/purchaseprint$</from>
+        <to>/WEB-INF/purchaseprint.jsp</to>
     </rule>
     
     <rule>
@@ -164,7 +176,7 @@
         <name>Admin Ban User Management</name>
         <condition type="method">GET</condition>
         <from>^/administrator/user/ban/([0-9]+)$</from>
-        <to>/AdminUserController?action=list&amp;accountI=$1</to>
+        <to>/AdminUserController?action=ban&amp;accountId=$1</to>
     </rule>
     
     <rule>
@@ -224,6 +236,62 @@
     </rule>
     
     <rule>
+        <name>to Crate Product Admin Page</name>
+        <condition type="method">POST</condition>
+        <from>^/administrator/addProduct/add$</from>
+        <to>/AdminProduct?action=add</to>
+    </rule>
+    
+    <rule>
+        <name>to Update Product Admin Page</name>
+        <condition type="method">GET</condition>
+        <from>^/administrator/updateProduct/([0-9]+)$</from>
+        <to>/AdminProduct?action=reUpdate&amp;id=$1</to>
+    </rule>
+    
+    <rule>
+        <name>to Update Product Admin Page</name>
+        <condition type="method">POST</condition>
+        <from>^/administrator/updateProduct/update$</from>
+        <to>/AdminProduct?action=update</to>
+    </rule>
+    
+    <rule>
+        <name>to Disable Product Admin Page</name>
+        <condition type="method">GET</condition>
+        <from>^/administrator/disProduct/([0-9]+)$</from>
+        <to>/AdminProduct?action=disProduct&amp;id=$1</to>
+    </rule>
+    
+    <rule>
+        <name>to Enable Product Admin Page</name>
+        <condition type="method">GET</condition>
+        <from>^/administrator/enProduct/([0-9]+)$</from>
+        <to>/AdminProduct?action=enProduct&amp;id=$1</to>
+    </rule>
+    
+    <rule>
+        <name>to Update Sub Category Admin Page</name>
+        <condition type="method">GET</condition>
+        <from>^/administrator/updateSub/([0-9]+)$</from>
+        <to>/AdminSubCategory?action=reUpdate&amp;id=$1</to>
+    </rule>
+    
+    <rule>
+        <name>to Crate Product Admin Page</name>
+        <condition type="method">POST</condition>
+        <from>^/administrator/addSubCategory/add$</from>
+        <to>/AdminSubCategory?action=add</to>
+    </rule>
+    
+    <rule>
+        <name>to Update Product Admin Page</name>
+        <condition type="method">POST</condition>
+        <from>^/administrator/updateSubCategory/update$</from>
+        <to>/AdminSubCategory?action=update</to>
+    </rule>
+    
+    <rule>
         <name>to View Sub Category Admin Page</name>
         <condition type="method">GET</condition>
         <from>^/administrator/viewSubCategory$</from>
@@ -255,4 +323,22 @@
         <to>/WEB-INF/admin/report.jsp</to>
     </rule>
 
+    <rule>
+        <name> Product Report Print Page</name>
+        <from>^/administrator/productreportprint$</from>
+        <to>/WEB-INF/admin/productreportprint.jsp</to>
+    </rule>
+    
+    <rule>
+        <name> Purchase  Print Page</name>
+        <from>^/purchaseprint$</from>
+        <to>/WEB-INF/purchaseprint.jsp</to>
+    </rule>
+    
+    
+    <rule>
+        <name> Product Report Page</name>
+        <from>^/administrator/productreport$</from>
+        <to>/WEB-INF/admin/productreport.jsp</to>
+    </rule>
 </urlrewrite>

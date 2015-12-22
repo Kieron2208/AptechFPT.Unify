@@ -26,8 +26,9 @@
                 $('#demo').daterangepicker({
                         "showDropdowns": true,
                         "autoApply": true
+                        
+                       
                     }, function(start, end, label) {
-                      console.log("New date range selected: ' + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD') + ' (predefined range: ' + label + ')");
                     });
                     
                 });
@@ -62,7 +63,7 @@
                                 <label>Date range:</label>
                                 <form id="myform" method="post" action="../PurchaseReport">
                                 <div class="input-group col-md-4">                                    
-                                    <input type="text" class="form-control" id="demo" name="daterange" value="" />                                  
+                                    <input readonly="true" type="text" class="form-control" id="demo" name="daterange" value="12/01/2015 - 12/31/2015 " />                                  
                                     <span class="input-group-btn">
                                         <button type="submit" class="btn btn-success ">Go!</button>
                                     </span>

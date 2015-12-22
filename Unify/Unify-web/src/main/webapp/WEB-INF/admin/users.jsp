@@ -16,7 +16,7 @@
         <script src="<c:url value="/plugins/slimScroll/jquery.slimscroll.min.js"/>" type="text/javascript"></script>
         <script src="<c:url value="/plugins/bootstrap/js/tab.js"/>" type="text/javascript"></script>
         <script type="text/javascript">
-            $(function () {
+            (function () {
                 jQuery(document).ready(function ($) {
                     $('#example1').DataTable();
             <c:forEach begin="0" end="${list.size()}" varStatus="loop">
@@ -80,8 +80,8 @@
                                                 View Detail
                                             </a>
                                             <c:if test="${pageContext.request.isUserInRole('ADMINISTRATOR')}">
-                                                <c:if test="${a.available}">
                                                     <c:url value="/administrator/user/ban/${a.accountId}" var="banLink"/>
+                                                <c:if test="${a.available}">
                                                     <a class="btn btn-danger" href="${banLink}" rel="Ban this User">
                                                         <i class="fa fa-lock icon-white"></i>
                                                     </a>

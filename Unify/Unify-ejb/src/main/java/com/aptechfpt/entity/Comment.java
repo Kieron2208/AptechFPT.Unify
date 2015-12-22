@@ -37,6 +37,7 @@ import org.joda.time.DateTime;
     @NamedQuery(name = "Comment.findAll", query = "SELECT c FROM Comment c"),
     @NamedQuery(name = "Comment.findByCommentId", query = "SELECT c FROM Comment c WHERE c.commentId = :commentId"),
     @NamedQuery(name = "Comment.findByLike", query = "SELECT c FROM Comment c WHERE c.like = :like"),
+    @NamedQuery(name = "Comment.findByProductID", query = "SELECT c FROM Comment c WHERE c.productId = :productId"),
     @NamedQuery(name = "Comment.findByComments", query = "SELECT c FROM Comment c WHERE c.comments = :comments"),
     @NamedQuery(name = "Comment.findByModifiedDate", query = "SELECT c FROM Comment c WHERE c.modifiedDate = :modifiedDate"),
     @NamedQuery(name = "Comment.findByCreatedDate", query = "SELECT c FROM Comment c WHERE c.createdDate = :createdDate")})
@@ -63,7 +64,7 @@ public class Comment implements Serializable {
     
     @Basic(optional = false)
     @Convert(converter = JodaDateTimeConverter.class)
-    @Column(name = "CreatedDate", nullable = false)
+    @Column(name = "CreatedDate", insertable = false, updatable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private DateTime createdDate;
 
