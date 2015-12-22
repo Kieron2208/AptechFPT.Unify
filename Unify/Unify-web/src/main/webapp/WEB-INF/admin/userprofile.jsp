@@ -222,7 +222,7 @@
                                                    name="txtPhone"
                                                    ng-minlength="10"
                                                    ng-maxlength="20"
-                                                   ng-pattern="/^[0-9]+$/"
+                                                   ng-pattern="/^[0-9\-\(\)\+]+$/"
                                                    required
                                                    placeholder="Input your phone number"
                                                    ng-model="vm.entity.phone"/>
@@ -230,7 +230,7 @@
                                         <span style="color:red" ng-show="vm.userForm.txtPhone.$invalid
                                                                     && vm.userForm.txtPhone.$dirty">
                                             <span ng-show="vm.userForm.txtPhone.$error.required">Phone Number need to be provided</span><br/>
-                                            <span ng-show="vm.userForm.txtPhone.$error.pattern">Doesn't look like Phone number.</span><br/>
+                                            <span ng-show="vm.userForm.txtPhone.$error.pattern">Only allow number(0-9), dash(-), plus+, brackets( ) </span><br/>
                                             <span ng-show="vm.userForm.txtPhone.$error.minlength">Phone Number too short</span><br/>
                                             <span ng-show="vm.userForm.txtPhone.$error.maxlength">Phone Number too long</span>
                                         </span>

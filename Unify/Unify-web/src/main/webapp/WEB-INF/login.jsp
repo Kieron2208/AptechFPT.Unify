@@ -107,7 +107,7 @@
                                 </label>
                             </section>
                             <p>${msg}</p>
-                            <button class="btn-u btn-u-sea-shop btn-block margin-bottom-20" ng-disabled="LoginFrom.$vaid" type="submit">Log in</button>
+                            <button class="btn-u btn-u-sea-shop btn-block margin-bottom-20" ng-disabled="LoginFrom.$invalid" type="submit">Log in</button>
 
                         </form>
 

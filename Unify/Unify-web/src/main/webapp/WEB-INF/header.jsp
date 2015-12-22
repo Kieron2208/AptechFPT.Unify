@@ -35,7 +35,7 @@
                                 <span class="shc-title" ng-show="hide()">No products in the Cart</span>
                                 <span class="shc-title" ng-show="show()">There are <b style="color: red">{{cart.sum("quantity")}}</b> items in your Cart</span>
                                 <a href="${shoppingcart}" ng-show="show()" class="btn-u"><i class="fa fa-shopping-cart"></i> Cart</a>
-                                <span class="shc-total" ng-show="show()">Total: <strong>{{cart.sum("total") | currency:"$":0}}</strong></span>
+                                <span class="shc-total" ng-show="show()">Total: <strong>{{cart.sum("total") | currency}}</strong></span>
                             </div>
                         </li>
                         

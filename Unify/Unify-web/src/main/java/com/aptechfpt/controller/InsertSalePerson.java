@@ -12,6 +12,7 @@ import com.aptechfpt.enumtype.Role;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Iterator;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -43,7 +44,9 @@ public class InsertSalePerson extends HttpServlet {
             ServletFileUpload upload = new ServletFileUpload(factory);
             List<FileItem> fields = upload.parseRequest(request);
             AccountDTO.Builder builder = new AccountDTO.Builder();
-            for (FileItem fileItem : fields) {
+            
+            for (Iterator<FileItem> it = fields.iterator();it.hasNext();) {
+                FileItem fileItem = it.next();
                 switch (fileItem.getFieldName()) {
                     case "email":
                         System.out.println("email: " + fileItem.getString());
@@ -77,14 +80,15 @@ public class InsertSalePerson extends HttpServlet {
                         System.out.println("gender: " + fileItem.getString());
                         builder.Gender(AccountGender.valueOf(fileItem.getString()));
                         continue;
+//                    case "role":
+//                        System.out.println("role: " + fileItem.getString());
+//                        builder.Role(Role.valueOf(fileItem.getString()));
                     case "dateOfBirth":
                         System.out.println("dateOfBirth: " + fileItem.getString());
                         builder.DateOfBirth(new DateTime(fileItem.getString()));
-                    case "role":
-                        System.out.println("role: " + fileItem.getString());
-                        builder.Role(Role.valueOf(fileItem.getString()));
                 }
             }
+            builder.Role(Role.SALEPERSON);
             AccountDTO dto = builder.build();
             System.out.println("Email: " + dto.getEmail());
             System.out.println("Password: " + dto.getPassword());

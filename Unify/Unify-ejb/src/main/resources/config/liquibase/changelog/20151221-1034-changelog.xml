@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+    <changeSet author="Kiero (generated)" id="1450668856537-1">
+        
+        <createTable tableName="Account">
+            <column autoIncrement="true" name="AccountId" type="int">
+                <constraints primaryKey="true" primaryKeyName="PK_ACCOUNT"/>
+            </column>
+            <column name="Email" type="varchar(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="Password" type="varchar(200)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ImageLink" type="varchar(400)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="FirstName" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="LastName" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="Phone" type="varchar(20)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="Address" type="varchar(200)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="Gender" type="varchar(1)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="DayOfBirth" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="getdate()" name="CreatedDate" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="1" name="isAvailable" type="bit">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <loadData encoding="UTF-8"
+                  file="src/main/resources/config/liquibase/changelog/00000000000000_initial_schema/account.csv"
+                  separator=","
+                  tableName="Account"/>
+    </changeSet>
+</databaseChangeLog>

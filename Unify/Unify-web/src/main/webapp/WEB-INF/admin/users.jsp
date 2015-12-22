@@ -35,7 +35,7 @@
                             <h3 class="box-title">Data Table With Full Features</h3>
                             <c:url value="/administrator/user/new" var="userCreateLink"/>
                             <a href="${userCreateLink}" class="btn btn-success pull-right">
-                                <i class="fa fa-save"></i> Created
+                                <i class="fa fa-save"></i> Created New Sale Person
                             </a>
                         </div><!-- /.box-header -->
                     </c:if>

@@ -20,6 +20,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileItemFactory;
 import org.apache.commons.fileupload.FileUploadException;
@@ -96,21 +97,27 @@ public class RegisterController extends HttpServlet {
             System.out.println("Address: " + dto.getAddress());
             System.out.println("Date Of Birth: " + dto.getDateOfBirth());
             accountFacade.create(dto.toAccount());
-            StringBuilder jsonRes = new StringBuilder();
-            jsonRes.append("{\"message\":")
-                    .append("\"Account ").append(dto.getEmail()).append(" create successfull.")
-                    .append("\"}");
-
-            response.setContentType("application/json");
-            PrintWriter out = response.getWriter();
-            out.print(jsonRes.toString());
-            out.close();
+//            StringBuilder jsonRes = new StringBuilder();
+//            jsonRes.append("{\"message\":")
+//                    .append("\"Account ").append(dto.getEmail()).append(" create successfull.")
+//                    .append("\"}");
+//
+//            response.setContentType("application/json");
+//            PrintWriter out = response.getWriter();
+//            out.print(jsonRes.toString());
+//            out.close();
+            request.login(dto.getEmail(), dto.getPassword());
+            HttpSession session = request.getSession();
+            session.setAttribute("Account", dto);
             String home = request.getContextPath() + "/";
             response.sendRedirect(home);
         } catch (FileUploadException ex) {
             ex.printStackTrace();
             Logger.getLogger(InsertSalePerson.class.getName()).log(Level.SEVERE, null, ex);
-        } 
+        } catch (Exception ex){
+            String home = request.getContextPath() + "/";
+            response.sendRedirect(home);
+        }
     }
 
     private String writeFile(FileItem fileItem) {
