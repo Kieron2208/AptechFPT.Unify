@@ -11,7 +11,12 @@
         </script>
         <script>
             angular.module('app').controller('validateCtrl', function ($scope) {
+                
             });
+        
+
+   
+
         </script>
     </jsp:attribute>
     <jsp:body>
@@ -47,7 +52,7 @@
                             <div class="form-group">
                                 <label for="">Unit Price</label>
                                 <input type="text" class="form-control" name="txtPrice" ng-model="txtPrice" required
-                                       placeholder="Product Prcie" ng-trim="true" ng-pattern="/^\d{1,5}\.{0,1}\d{0,2}$/"/>
+                                      placeholder="Product Prcie" ng-trim="true" ng-pattern="/^\d{1,4}\.{0,1}\d{0,2}$/"/>
                                 <span style="color: red" ng-show="myForm.txtPrice.$dirty && myForm.txtPrice.$invalid">
                                     <span ng-show="myForm.txtPrice.$error.required">Product Price cant be blank</span>
                                     <span ng-show="myForm.txtPrice.$error.pattern">The value is not a valid Price!</span>
@@ -64,9 +69,11 @@
                             <div class="form-group">
                                 <label>Description</label>
                                 <textarea rows="3" class="form-control" name="txtDes" ng-model="txtDes" required 
-                                          placeholder="Description"></textarea>
+                                          minlength="10" maxlength="50" placeholder="Description"></textarea>
                                 <span style="color: red" ng-show="myForm.txtDes.$dirty && myForm.txtDes.$invalid">
                                     <span ng-show="myForm.txtDes.$error.required">Description cant be blank</span>
+                                    <span ng-show="myForm.txtDes.$error.minlength">Length must at least 10</span>
+                                    <span ng-show="myForm.txtDes.$error.required">Length must only 50</span>
                                 </span>
                             </div>
                             <div class="form-group">
@@ -88,7 +95,7 @@
                             </div>
                             
                         </div><!-- /.box-body -->
-
+                        <pre>{{myForm|json}}</pre>
                         <div class="box-footer">
                             <button type="submit" class="btn btn-primary" value="add"
                                     ng-disabled="myForm.$invalid">Add</button>

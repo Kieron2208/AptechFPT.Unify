@@ -460,10 +460,12 @@
             </section>
         </div>
         <script type="text/javascript">
-            $(window).load(function() {
-                window.print();
-                init();
-            });
+            document.onreadystatechange=function(){
+                    if(document.readyState=="complete"){
+                        setTimeout(function(){ window.print(); }, 3000);
+                        
+                    }                    
+                };
         </script>
     </body>
 </html>

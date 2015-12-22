@@ -82,7 +82,7 @@
                 </a>
 
                 <ul class="treeview-menu">
-                    <li class="active">
+                    <li>
                         <c:url value="/administrator/purchaselist" var="purchaseLink"/>
                         <a href="${purchaseLink}"><i class="fa fa-circle-o"></i> Purchase List</a>
                     </li>

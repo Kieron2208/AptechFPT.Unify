@@ -216,7 +216,9 @@ public class AdminProductController extends HttpServlet {
                         continue;
                     case "txtImg":
                         System.out.println("txtImg: " + fileItem.getString());
-                        imglist = ImageGet(fileItem);
+                        if (ImageGet(fileItem)!=null) {
+                            imglist = ImageGetUpdate(fileItem);
+                        }
                 }
             }
             SubCategory sub = subCategoryFacade.find(subID);
@@ -227,11 +229,14 @@ public class AdminProductController extends HttpServlet {
             pro.setDescription(des);
             pro.setSubCategoryId(sub);
             productFacade.edit(pro);
-            Image img = new Image();
-            img.setDisplayOrder(0);
-            img.setProductId(pro);
-            img.setImagePath(imglist);
-            imageFacade.create(img);
+            if (imglist!=null) {
+                Image img = new Image();
+                img.setDisplayOrder(0);
+                img.setProductId(pro);
+                img.setImagePath(imglist);
+                imageFacade.create(img);
+            }
+            
             PriceHistory priceHistory = priceHistoryFacade.getNew(pro);
             if (importPrice != priceHistory.getCost() || price != priceHistory.getPrice()) {
                 priceHistory.setProductId(pro);
@@ -324,6 +329,21 @@ public class AdminProductController extends HttpServlet {
             return "/img/product/" + fileItem.getName();
         } else {
             return "/img/product/img32-md.jpg";
+        }
+    }
+    private String ImageGetUpdate(FileItem fileItem) {
+        if (fileItem.getName() != null) {
+            String realPath = getServletContext().getRealPath("/");
+            File uploadDir = new File(realPath + "img/product/" + fileItem.getName());
+//                    File file = File.createTempFile("img", ".jpg", uploadDir);
+            try {
+                fileItem.write(uploadDir);
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+            return "/img/product/" + fileItem.getName();
+        } else {
+            return null;
         }
     }
 

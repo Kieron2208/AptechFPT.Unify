@@ -78,8 +78,11 @@
                                     </c:forEach>
                                         <c:url value="/product/${p.productId}" var="productdetail"/>
                                     <a class="product-review" href="${productdetail}">Quick review</a>
-                                    <a class="add-to-cart" ng-click="put(${p.productId}, '${p.name}',
-                                                '${img.imagePath}',${p.unitPrice}, 1)" href><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                                    <c:forEach var="img" items="${p.imageCollection}">
+                                    <c:if test="${img.displayOrder==1}">
+                                        <a class="add-to-cart" ng-click="put(${p.productId},'${p.name}','${img.imagePath}',${p.unitPrice},1)" href><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                                    </c:if>
+                                </c:forEach>  
                                 </div> 
                                 <div class="product-description product-description-brd margin-bottom-30">
                                     <div class="overflow-h margin-bottom-5">

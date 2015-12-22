@@ -127,19 +127,19 @@
                                     <tbody>
                                         <tr ng-repeat="e in cart track by $index">
                                             <td class="product-in-table">
-                                                <img class="img-responsive" src="{{e.pic}}" alt="">
+                                                <img class="img-responsive" src="<c:url value="/{{e.pic}}"/>" alt="">
                                                 <div class="product-it-in">
                                                     <h3>{{e.name}}</h3>
 
                                                 </div>    
                                             </td>
-                                            <td>{{e.price|currency:"$":0}}</td>
+                                            <td>{{e.price|currency}}</td>
                                             <td>
                                                 <input type='button' class="quantity-button"  ng-click="put(e.id, e.name, e.pic, e.price, -1)"  value='-'/>
                                                 <input type='text' class="quantity-field"  readonly="true" value="{{e.quantity}}" />
                                                 <input type='button' class="quantity-button"  ng-click="put(e.id, e.name, e.pic, e.price, 1)"  value='+'/>
                                             </td>
-                                            <td class="shop-red">{{e.total|currency:"$":0}}</td>
+                                            <td class="shop-red">{{e.total|currency}}</td>
                                             <td>
                                                 <button type="button" class="close" ng-click="put(e.id, e.name, e.pic, e.price, -999999)"><span>&times;</span><span class="sr-only">Close</span></button>
                                             </td>

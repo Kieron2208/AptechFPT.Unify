@@ -75,7 +75,8 @@
 
                                             <c:forEach items="${p.productId.imageCollection}" var="i">
                                                 <c:if test="${i.displayOrder==1}">
-                                                    <img class="rounded-x" src="${i.imagePath}" width="70" height="70" alt="">
+                                                    <img class="rounded-x" src="<c:url value="/${i.imagePath}"/>"
+                                                         width="70" height="70" alt="">
                                                 </c:if>
                                             </c:forEach>
 

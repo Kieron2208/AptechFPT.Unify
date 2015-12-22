@@ -26,6 +26,7 @@
             address: '',
             dateOfBirth: ''
         };
+        vm.message = '';
         vm.dateStatus = false;
         vm.openPopup = openPopup;
         vm.submit = submit;
@@ -35,7 +36,7 @@
         vm.date = {
             minDate: null,
             maxDate: null
-        }
+        };
 
         activate();
 
@@ -84,11 +85,15 @@
                         dateOfBirth: vm.entity.dateOfBirth
                     }
                 }).then(function (resp) {
+                    vm.message = 'Create new Account Successful.';
                     logger.success("Insert Successful.", resp);
+                    window.location = baseContext;
                 }, function (resp) {
+                    vm.message = 'Create new Account Failed.';
                     logger.error("Insert Failed.", resp);
                 });
             } else {
+                vm.message = 'Form is not valid.';
                 logger.warning("Form is not valid.");
             }
         }
@@ -116,6 +121,7 @@
         vm.openPopup = openPopup;
         vm.submit = submit;
         vm.disabled = disabled;
+        vm.message = '';
         vm.emailPattern = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         vm.date = {
             minDate: null,
@@ -165,7 +171,7 @@
         function submit() {
             if (vm.userForm.$valid) {
                 var arrayOfString = vm.entity.imgLink.split(baseContext);
-                var imgPath ='/'+ arrayOfString[1];
+                var imgPath = '/' + arrayOfString[1];
                 Upload.upload({
                     url: baseContext + 'profile',
                     data: {
@@ -181,12 +187,15 @@
                         dateOfBirth: vm.entity.dateOfBirth
                     }
                 }).then(function (resp) {
+                    vm.message = 'Update Successful.';
                     logger.success("Update Successful.", resp);
                     location.reload();
                 }, function (resp) {
+                    vm.message = 'Update profile failed.';
                     logger.error("Update Failed.", resp);
                 });
             } else {
+                vm.message = "Form is not valid.";
                 logger.warning("Form is not valid.");
             }
         }
@@ -199,7 +208,7 @@
     function PasswordController($q, $http, logger) {
         var vm = this;
         vm.submit = submit;
-
+        vm.message = '';
         activate();
 
         function activate() {
@@ -213,15 +222,24 @@
             if (vm.userForm.$valid) {
                 $http({
                     method: 'POST',
-                    url: baseContext + 'profile/password',
-                    data: $.param({newPassword: vm.password}),
-                    headers: {'Content-Type': 'myApplication/x-www-form-urlencoded'}
+                    url: baseContext + 'AdminProfileController?action=password',
+                    transformRequest: function (obj) {
+                        var str = [];
+                        for (var p in obj)
+                            str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+                        return str.join("&");
+                    },
+                    data: {newPassword: vm.password},
+                    headers: {'Content-Type': 'application/x-www-form-urlencoded'}
                 }).then(function (resp) {
+                    vm.message = 'Change Password Successful.';
                     logger.success("Insert Successful.", resp);
                 }, function (resp) {
+                    vm.message = 'Change Password failed.';
                     logger.error("Insert Failed.", resp);
                 });
             } else {
+                vm.message = 'Form is not valid.';
                 logger.warning("Form is not valid.");
             }
         }

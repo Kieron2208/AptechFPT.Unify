@@ -230,7 +230,7 @@
                                         <span style="color:red" ng-show="vm.userForm.txtPhone.$invalid
                                                                     && vm.userForm.txtPhone.$dirty">
                                             <span ng-show="vm.userForm.txtPhone.$error.required">Phone Number need to be provided</span><br/>
-                                            <span ng-show="vm.userForm.txtPhone.$error.pattern">Doesn't look like Phone number.</span><br/>
+                                            <span ng-show="vm.userForm.txtPhone.$error.pattern">Only allow number(0-9), dash(-), plus+, brackets( ) </span><br/>
                                             <span ng-show="vm.userForm.txtPhone.$error.minlength">Phone Number too short</span><br/>
                                             <span ng-show="vm.userForm.txtPhone.$error.maxlength">Phone Number too long</span>
                                         </span>
